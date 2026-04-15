@@ -9,7 +9,6 @@
   <style>
     .zion-page { position: relative; z-index: 1; }
 
-    /* Hero */
     .z-hero { text-align: center; padding: 8rem 2rem 2rem; }
     .z-hero-icon { font-size: 3.5rem; }
     .z-hero-title {
@@ -20,139 +19,35 @@
     .z-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
     .z-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
 
-    /* ═══ SOLAR SYSTEM DIAGRAM ═══ */
-    .solar-section { padding: 4rem 1rem 2rem; text-align: center; }
+    /* ═══ THE DIAGRAM ═══ */
+    .diagram-section { padding: 3rem 1rem 2rem; text-align: center; overflow: hidden; }
 
-    .solar-container {
-      position: relative;
-      width: 100%; max-width: 900px; height: 900px;
-      margin: 2rem auto 0;
-    }
-
-    /* The message flow line from phone to Zion */
-    .msg-flow {
-      position: absolute; left: 0; top: 50%;
-      display: flex; align-items: center; gap: 0;
-      transform: translateY(-50%);
-      z-index: 10;
-    }
-    .msg-phone {
-      background: var(--matrix-bg-card-hover); border: 2px solid var(--matrix-green);
-      border-radius: 12px; padding: 0.75rem 1rem; text-align: center;
-      box-shadow: 0 0 20px rgba(0,255,65,0.15);
-    }
-    .msg-phone-icon { font-size: 2rem; }
-    .msg-phone-label { font-family: var(--font-display); font-size: 0.6rem; color: var(--matrix-green); letter-spacing: 1px; margin-top: 0.25rem; }
-    .msg-bubble {
-      background: rgba(0,255,65,0.08); border: 1px solid rgba(0,255,65,0.3);
-      border-radius: 8px; padding: 0.4rem 0.75rem; margin-left: 0.5rem;
-      font-family: var(--font-mono); font-size: 0.65rem; color: var(--matrix-green);
-      white-space: nowrap; animation: pulse-glow 2s infinite;
-    }
-    @keyframes pulse-glow { 0%,100% { box-shadow: none; } 50% { box-shadow: 0 0 12px rgba(0,255,65,0.2); } }
-    .msg-line {
-      width: 60px; height: 2px;
-      background: linear-gradient(90deg, var(--matrix-green), rgba(0,255,65,0.1));
-      margin-left: 0.25rem;
-      animation: flow-pulse 1.5s infinite;
-    }
-    @keyframes flow-pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
-
-    /* ZION — The Sun */
-    .zion-sun {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%, -50%);
-      width: 160px; height: 160px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,255,65,0.15) 0%, rgba(0,255,65,0.02) 70%, transparent 100%);
-      border: 2px solid var(--matrix-green);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      z-index: 5;
-      box-shadow: 0 0 40px rgba(0,255,65,0.2), 0 0 80px rgba(0,255,65,0.05);
-      animation: sun-pulse 3s infinite;
-    }
-    @keyframes sun-pulse {
-      0%,100% { box-shadow: 0 0 40px rgba(0,255,65,0.2), 0 0 80px rgba(0,255,65,0.05); }
-      50% { box-shadow: 0 0 60px rgba(0,255,65,0.3), 0 0 120px rgba(0,255,65,0.1); }
-    }
-    .zion-sun-icon { font-size: 2.5rem; }
-    .zion-sun-title { font-family: var(--font-display); font-size: 1.2rem; color: var(--matrix-green); letter-spacing: 3px; margin-top: 0.25rem; }
-    .zion-sun-sub { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-dim); }
-
-    /* Orbit rings */
-    .orbit {
-      position: absolute; left: 50%; top: 50%;
-      border-radius: 50%;
-      border: 1px solid rgba(0,255,65,0.08);
-      transform: translate(-50%, -50%);
-    }
-    .orbit-1 { width: 360px; height: 360px; }
-    .orbit-2 { width: 560px; height: 560px; }
-    .orbit-3 { width: 760px; height: 760px; }
-
-    /* Planet nodes orbiting Zion */
-    .planet {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 3;
-      transition: all 0.3s;
-    }
-    .planet:hover { z-index: 20; transform: translate(-50%, -50%) scale(1.15); }
-
-    .planet-circle {
-      width: 70px; height: 70px; border-radius: 50%;
-      background: var(--matrix-bg-card-hover);
-      border: 1px solid rgba(0,255,65,0.25);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      margin: 0 auto;
-      transition: all 0.3s;
-    }
-    .planet:hover .planet-circle {
-      border-color: var(--matrix-green);
-      box-shadow: 0 0 20px rgba(0,255,65,0.2);
-    }
-    .planet-icon { font-size: 1.4rem; }
-    .planet-label {
-      font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-dim);
-      margin-top: 0.3rem; white-space: nowrap; letter-spacing: 0.5px;
-    }
-    .planet:hover .planet-label { color: var(--matrix-green); }
-
-    /* Connection lines from sun to planets */
-    .conn-line {
-      position: absolute; left: 50%; top: 50%;
-      height: 1px; transform-origin: 0 0;
-      background: rgba(0,255,65,0.08);
-      z-index: 1;
+    .diagram-svg {
+      width: 100%; max-width: 1000px; height: auto;
+      margin: 2rem auto 0; display: block;
     }
 
-    /* API nodes (outer ring — different color) */
-    .planet.api .planet-circle { border-color: rgba(255,215,0,0.25); }
-    .planet.api:hover .planet-circle { border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(255,215,0,0.2); }
-    .planet.api .planet-label { color: var(--accent-gold); opacity: 0.7; }
-    .planet.api:hover .planet-label { color: var(--accent-gold); opacity: 1; }
+    /* Glow animations */
+    @keyframes pulse-ring { 0%,100% { opacity: 0.06; } 50% { opacity: 0.15; } }
+    @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+    @keyframes node-pulse { 0%,100% { filter: drop-shadow(0 0 4px rgba(0,255,65,0.2)); } 50% { filter: drop-shadow(0 0 12px rgba(0,255,65,0.4)); } }
+
+    .orbit-ring { animation: pulse-ring 3s ease-in-out infinite; }
+    .flow-line { animation: dash-flow 1s linear infinite; }
+    .sun-glow { animation: node-pulse 3s ease-in-out infinite; }
+
+    /* SVG text styling */
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
 
     /* ═══ Tech Stack ═══ */
     .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
-    .stack-table { width: 100%; }
     .stack-row { display: flex; border-bottom: 1px solid rgba(0,255,65,0.08); padding: 0.6rem 0; }
     .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: var(--matrix-green); letter-spacing: 1px; min-width: 110px; }
     .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .solar-container { height: 700px; max-width: 700px; }
-      .orbit-1 { width: 280px; height: 280px; }
-      .orbit-2 { width: 430px; height: 430px; }
-      .orbit-3 { width: 600px; height: 600px; }
-      .zion-sun { width: 120px; height: 120px; }
-      .planet-circle { width: 55px; height: 55px; }
-      .planet-icon { font-size: 1.1rem; }
-      .msg-flow { display: none; }
+    @media (max-width: 600px) {
+      .diagram-svg { max-width: 100%; }
     }
   </style>
 </head>
@@ -174,172 +69,267 @@
 
 <div class="zion-page">
 
-  <!-- Hero -->
   <div class="z-hero">
     <div class="z-hero-icon">🏛️</div>
     <h1 class="z-hero-title">ZION</h1>
     <p class="z-hero-sub">The Last Human City — WhatsApp AI Bot</p>
-    <p class="z-hero-desc">The central brain of The Matrix. Every message from Neo's phone flows into Zion, gets routed to the right handler, and a response flows back — all in seconds.</p>
+    <p class="z-hero-desc">Every message from Neo's phone flows into Zion. It routes, processes, calls APIs, and replies — all in seconds. Here's how it all connects.</p>
   </div>
 
-  <!-- Solar System -->
-  <div class="solar-section">
-    <h2 class="section-title">How It Works</h2>
-    <p class="section-desc">Zion sits at the center. Everything connects to it.</p>
+  <div class="diagram-section">
+    <h2 class="section-title">The Architecture</h2>
 
-    <div class="solar-container" id="solar">
+    <svg class="diagram-svg" viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="sun-grad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#00ff41" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#00ff41" stop-opacity="0.02"/>
+        </radialGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6" fill="#00ff41" opacity="0.6"/>
+        </marker>
+        <marker id="arrow-gold" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6" fill="#ffd740" opacity="0.6"/>
+        </marker>
+      </defs>
 
       <!-- Orbit rings -->
-      <div class="orbit orbit-1"></div>
-      <div class="orbit orbit-2"></div>
-      <div class="orbit orbit-3"></div>
+      <circle cx="540" cy="400" r="150" fill="none" stroke="#00ff41" stroke-opacity="0.06" stroke-width="1" class="orbit-ring"/>
+      <circle cx="540" cy="400" r="260" fill="none" stroke="#00ff41" stroke-opacity="0.04" stroke-width="1" class="orbit-ring" style="animation-delay:0.5s"/>
+      <circle cx="540" cy="400" r="360" fill="none" stroke="#ffd740" stroke-opacity="0.03" stroke-width="1" class="orbit-ring" style="animation-delay:1s"/>
 
-      <!-- Neo's phone + message flow -->
-      <div class="msg-flow">
-        <div class="msg-phone">
-          <div class="msg-phone-icon">📱</div>
-          <div class="msg-phone-label">NEO</div>
-        </div>
-        <div class="msg-bubble">@zion weather in Pune</div>
-        <div class="msg-line"></div>
-      </div>
+      <!-- ═══ NEO'S PHONE (left side) ═══ -->
+      <g transform="translate(60, 340)">
+        <!-- Phone body -->
+        <rect x="0" y="0" width="70" height="120" rx="10" fill="#0a1628" stroke="#00ff41" stroke-width="1.5" stroke-opacity="0.5"/>
+        <rect x="8" y="15" width="54" height="80" rx="3" fill="#0d2137" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.3"/>
+        <circle cx="35" cy="108" r="5" fill="none" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.3"/>
+        <!-- Screen content -->
+        <text x="12" y="35" class="svg-label" fill="#00ff41" font-size="5.5" opacity="0.9">@zion weather</text>
+        <text x="12" y="45" class="svg-label" fill="#00ff41" font-size="5.5" opacity="0.9">in Pune</text>
+        <rect x="10" y="55" width="50" height="18" rx="3" fill="#00ff41" fill-opacity="0.05" stroke="#00ff41" stroke-width="0.3" stroke-opacity="0.3"/>
+        <text x="14" y="64" class="svg-label" fill="#00ff41" font-size="4.5" opacity="0.6">[Zion] Pune:</text>
+        <text x="14" y="70" class="svg-label" fill="#00ff41" font-size="4.5" opacity="0.6">28°C, Sunny ☀️</text>
+        <!-- Label -->
+        <text x="35" y="-12" class="svg-title" fill="#00ff41" font-size="12" text-anchor="middle" letter-spacing="3" filter="url(#glow)">NEO</text>
+        <text x="35" y="140" class="svg-label" fill="#8b949e" font-size="7" text-anchor="middle">📱 WhatsApp</text>
+      </g>
 
-      <!-- ZION — The Sun -->
-      <div class="zion-sun">
-        <div class="zion-sun-icon">🏛️</div>
-        <div class="zion-sun-title">ZION</div>
-        <div class="zion-sun-sub">AI Brain</div>
-      </div>
+      <!-- ═══ FLOW LINE: Phone → Zion ═══ -->
+      <line x1="145" y1="400" x2="475" y2="400" stroke="#00ff41" stroke-width="1.5" stroke-dasharray="8,4" class="flow-line" marker-end="url(#arrow)"/>
+      <text x="300" y="390" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle" opacity="0.6">@zion messages</text>
 
-      <!-- Inner ring: Core features -->
-      <div class="planet" style="left:50%; top:10%;">
-        <div class="planet-circle"><div class="planet-icon">🌤️</div></div>
-        <div class="planet-label">Weather</div>
-      </div>
-      <div class="planet" style="left:82%; top:20%;">
-        <div class="planet-circle"><div class="planet-icon">🖼️</div></div>
-        <div class="planet-label">Image Vision</div>
-      </div>
-      <div class="planet" style="left:93%; top:50%;">
-        <div class="planet-circle"><div class="planet-icon">🎤</div></div>
-        <div class="planet-label">Voice Notes</div>
-      </div>
-      <div class="planet" style="left:82%; top:80%;">
-        <div class="planet-circle"><div class="planet-icon">🔗</div></div>
-        <div class="planet-label">Link Summary</div>
-      </div>
-      <div class="planet" style="left:50%; top:90%;">
-        <div class="planet-circle"><div class="planet-icon">📄</div></div>
-        <div class="planet-label">Documents</div>
-      </div>
-      <div class="planet" style="left:18%; top:80%;">
-        <div class="planet-circle"><div class="planet-icon">🎯</div></div>
-        <div class="planet-label">Trivia</div>
-      </div>
-      <div class="planet" style="left:18%; top:20%;">
-        <div class="planet-circle"><div class="planet-icon">👥</div></div>
-        <div class="planet-label">Contacts</div>
-      </div>
+      <!-- ═══ REPLY LINE: Zion → Phone ═══ -->
+      <line x1="475" y1="420" x2="145" y2="420" stroke="#00ff41" stroke-width="1" stroke-dasharray="4,6" opacity="0.3" marker-end="url(#arrow)"/>
+      <text x="300" y="436" class="svg-label" fill="#00ff41" font-size="7" text-anchor="middle" opacity="0.4">[Zion] replies</text>
 
-      <!-- Middle ring: TheBoss constructs -->
-      <div class="planet" style="left:50%; top:2%;">
-        <div class="planet-circle"><div class="planet-icon">📰</div></div>
-        <div class="planet-label">AI News</div>
-      </div>
-      <div class="planet" style="left:75%; top:5%;">
-        <div class="planet-circle"><div class="planet-icon">📈</div></div>
-        <div class="planet-label">Stocks</div>
-      </div>
-      <div class="planet" style="left:97%; top:35%;">
-        <div class="planet-circle"><div class="planet-icon">✈️</div></div>
-        <div class="planet-label">Vacation</div>
-      </div>
-      <div class="planet" style="left:97%; top:65%;">
-        <div class="planet-circle"><div class="planet-icon">💊</div></div>
-        <div class="planet-label">MedTracker</div>
-      </div>
-      <div class="planet" style="left:75%; top:95%;">
-        <div class="planet-circle"><div class="planet-icon">🏃</div></div>
-        <div class="planet-label">Fitbit</div>
-      </div>
-      <div class="planet" style="left:25%; top:95%;">
-        <div class="planet-circle"><div class="planet-icon">👨‍👦</div></div>
-        <div class="planet-label">Dad Reply</div>
-      </div>
-      <div class="planet" style="left:3%; top:65%;">
-        <div class="planet-circle"><div class="planet-icon">📅</div></div>
-        <div class="planet-label">Calendar</div>
-      </div>
-      <div class="planet" style="left:3%; top:35%;">
-        <div class="planet-circle"><div class="planet-icon">📖</div></div>
-        <div class="planet-label">Word Daily</div>
-      </div>
-      <div class="planet" style="left:25%; top:5%;">
-        <div class="planet-circle"><div class="planet-icon">🏋️</div></div>
-        <div class="planet-label">Strava</div>
-      </div>
+      <!-- ═══ ZION — THE SUN ═══ -->
+      <circle cx="540" cy="400" r="65" fill="url(#sun-grad)" stroke="#00ff41" stroke-width="2" class="sun-glow"/>
+      <text x="540" y="390" class="svg-title" fill="#00ff41" font-size="18" text-anchor="middle" letter-spacing="4" filter="url(#glow)">ZION</text>
+      <text x="540" y="408" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">AI Brain</text>
+      <text x="540" y="420" class="svg-label" fill="#8b949e" font-size="6.5" text-anchor="middle">Routes • Processes • Replies</text>
 
-      <!-- Outer ring: External APIs -->
-      <div class="planet api" style="left:50%; top:-4%;">
-        <div class="planet-circle"><div class="planet-icon">⚡</div></div>
-        <div class="planet-label">Groq API</div>
-      </div>
-      <div class="planet api" style="left:104%; top:50%;">
-        <div class="planet-circle"><div class="planet-icon">💎</div></div>
-        <div class="planet-label">Gemini API</div>
-      </div>
-      <div class="planet api" style="left:50%; top:104%;">
-        <div class="planet-circle"><div class="planet-icon">🔍</div></div>
-        <div class="planet-label">Web Search</div>
-      </div>
-      <div class="planet api" style="left:-4%; top:50%;">
-        <div class="planet-circle"><div class="planet-icon">📡</div></div>
-        <div class="planet-label">WA Bridge</div>
-      </div>
+      <!-- ═══ INNER RING — Interactive Features (r=150) ═══ -->
+      <!-- Weather (top) -->
+      <g transform="translate(540, 250)">
+        <circle r="28" fill="#0a1628" stroke="#00ff41" stroke-width="1" stroke-opacity="0.4"/>
+        <text y="-5" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">🌤️</text>
+        <text y="12" class="svg-label" fill="#c9d1d9" font-size="7" text-anchor="middle">Weather</text>
+      </g>
+      <line x1="540" y1="335" x2="540" y2="280" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.15"/>
 
-    </div>
+      <!-- Image Vision (top-right) -->
+      <g transform="translate(646, 294)">
+        <circle r="28" fill="#0a1628" stroke="#00ff41" stroke-width="1" stroke-opacity="0.4"/>
+        <text y="-5" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">🖼️</text>
+        <text y="12" class="svg-label" fill="#c9d1d9" font-size="7" text-anchor="middle">Vision</text>
+      </g>
+      <line x1="590" y1="360" x2="620" y2="320" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.15"/>
+
+      <!-- Voice Notes (right) -->
+      <g transform="translate(690, 400)">
+        <circle r="28" fill="#0a1628" stroke="#00ff41" stroke-width="1" stroke-opacity="0.4"/>
+        <text y="-5" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">🎤</text>
+        <text y="12" class="svg-label" fill="#c9d1d9" font-size="7" text-anchor="middle">Voice</text>
+      </g>
+      <line x1="605" y1="400" x2="662" y2="400" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.15"/>
+
+      <!-- Link Summary (bottom-right) -->
+      <g transform="translate(646, 506)">
+        <circle r="28" fill="#0a1628" stroke="#00ff41" stroke-width="1" stroke-opacity="0.4"/>
+        <text y="-5" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">🔗</text>
+        <text y="12" class="svg-label" fill="#c9d1d9" font-size="6" text-anchor="middle">Links</text>
+      </g>
+      <line x1="590" y1="440" x2="620" y2="480" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.15"/>
+
+      <!-- Documents (bottom) -->
+      <g transform="translate(540, 550)">
+        <circle r="28" fill="#0a1628" stroke="#00ff41" stroke-width="1" stroke-opacity="0.4"/>
+        <text y="-5" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">📄</text>
+        <text y="12" class="svg-label" fill="#c9d1d9" font-size="7" text-anchor="middle">Docs</text>
+      </g>
+      <line x1="540" y1="465" x2="540" y2="522" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.15"/>
+
+      <!-- Trivia (bottom-left) -->
+      <g transform="translate(434, 506)">
+        <circle r="28" fill="#0a1628" stroke="#00ff41" stroke-width="1" stroke-opacity="0.4"/>
+        <text y="-5" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">🎯</text>
+        <text y="12" class="svg-label" fill="#c9d1d9" font-size="7" text-anchor="middle">Trivia</text>
+      </g>
+      <line x1="500" y1="440" x2="460" y2="480" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.15"/>
+
+      <!-- Contacts (top-left) -->
+      <g transform="translate(434, 294)">
+        <circle r="28" fill="#0a1628" stroke="#00ff41" stroke-width="1" stroke-opacity="0.4"/>
+        <text y="-5" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">👥</text>
+        <text y="12" class="svg-label" fill="#c9d1d9" font-size="7" text-anchor="middle">Contacts</text>
+      </g>
+      <line x1="500" y1="360" x2="460" y2="320" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.15"/>
+
+      <!-- ═══ OUTER RING — Daily Constructs (r=260) ═══ -->
+      <!-- AI News -->
+      <g transform="translate(540, 140)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">📰</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">AI News</text>
+      </g>
+      <line x1="540" y1="222" x2="540" y2="166" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- Stocks -->
+      <g transform="translate(700, 180)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">📈</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">Stocks</text>
+      </g>
+      <line x1="620" y1="268" x2="678" y2="204" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- Vacation -->
+      <g transform="translate(800, 310)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">✈️</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">Vacation</text>
+      </g>
+      <line x1="680" y1="360" x2="776" y2="315" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- MedTracker -->
+      <g transform="translate(800, 490)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">💊</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">Medicine</text>
+      </g>
+      <line x1="680" y1="440" x2="776" y2="485" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- Fitbit -->
+      <g transform="translate(700, 620)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">🏃</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">Fitbit</text>
+      </g>
+      <line x1="620" y1="532" x2="678" y2="596" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- Dad Reply -->
+      <g transform="translate(540, 660)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">👨‍👦</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">Dad Reply</text>
+      </g>
+      <line x1="540" y1="578" x2="540" y2="636" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- Calendar -->
+      <g transform="translate(380, 620)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">📅</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">Calendar</text>
+      </g>
+      <line x1="462" y1="530" x2="404" y2="596" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- Word Daily -->
+      <g transform="translate(320, 490)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">📖</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">Word</text>
+      </g>
+      <line x1="408" y1="460" x2="344" y2="488" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- Strava -->
+      <g transform="translate(320, 310)">
+        <circle r="24" fill="#0a1628" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.35"/>
+        <text y="-4" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">🏋️</text>
+        <text y="10" class="svg-label" fill="#ffd740" font-size="6" text-anchor="middle" opacity="0.7">Strava</text>
+      </g>
+      <line x1="408" y1="348" x2="344" y2="316" stroke="#ffd740" stroke-width="0.4" stroke-opacity="0.1"/>
+
+      <!-- ═══ API NODES (far corners) ═══ -->
+      <!-- Groq API -->
+      <g transform="translate(860, 140)">
+        <rect x="-35" y="-18" width="70" height="36" rx="6" fill="#0a1628" stroke="#58a6ff" stroke-width="0.8" stroke-opacity="0.4"/>
+        <text y="-3" class="svg-label" fill="#58a6ff" font-size="7" text-anchor="middle">⚡ Groq API</text>
+        <text y="9" class="svg-label" fill="#8b949e" font-size="5.5" text-anchor="middle">Llama 3.3 70B</text>
+      </g>
+      <line x1="780" y1="180" x2="825" y2="155" stroke="#58a6ff" stroke-width="0.5" stroke-dasharray="4,4" stroke-opacity="0.2" marker-end="url(#arrow-gold)"/>
+
+      <!-- Gemini API -->
+      <g transform="translate(920, 400)">
+        <rect x="-38" y="-18" width="76" height="36" rx="6" fill="#0a1628" stroke="#58a6ff" stroke-width="0.8" stroke-opacity="0.4"/>
+        <text y="-3" class="svg-label" fill="#58a6ff" font-size="7" text-anchor="middle">💎 Gemini</text>
+        <text y="9" class="svg-label" fill="#8b949e" font-size="5.5" text-anchor="middle">Vision + STT</text>
+      </g>
+      <line x1="830" y1="400" x2="882" y2="400" stroke="#58a6ff" stroke-width="0.5" stroke-dasharray="4,4" stroke-opacity="0.2"/>
+
+      <!-- Web Search -->
+      <g transform="translate(860, 660)">
+        <rect x="-35" y="-18" width="70" height="36" rx="6" fill="#0a1628" stroke="#58a6ff" stroke-width="0.8" stroke-opacity="0.4"/>
+        <text y="-3" class="svg-label" fill="#58a6ff" font-size="7" text-anchor="middle">🔍 Search</text>
+        <text y="9" class="svg-label" fill="#8b949e" font-size="5.5" text-anchor="middle">DDG + News</text>
+      </g>
+      <line x1="780" y1="620" x2="825" y2="645" stroke="#58a6ff" stroke-width="0.5" stroke-dasharray="4,4" stroke-opacity="0.2"/>
+
+      <!-- WhatsApp Bridge -->
+      <g transform="translate(200, 560)">
+        <rect x="-40" y="-18" width="80" height="36" rx="6" fill="#0a1628" stroke="#58a6ff" stroke-width="0.8" stroke-opacity="0.4"/>
+        <text y="-3" class="svg-label" fill="#58a6ff" font-size="7" text-anchor="middle">📡 WA Bridge</text>
+        <text y="9" class="svg-label" fill="#8b949e" font-size="5.5" text-anchor="middle">Go :8080</text>
+      </g>
+      <line x1="240" y1="542" x2="410" y2="480" stroke="#58a6ff" stroke-width="0.5" stroke-dasharray="4,4" stroke-opacity="0.2"/>
+
+      <!-- Open-Meteo -->
+      <g transform="translate(200, 200)">
+        <rect x="-40" y="-18" width="80" height="36" rx="6" fill="#0a1628" stroke="#58a6ff" stroke-width="0.8" stroke-opacity="0.4"/>
+        <text y="-3" class="svg-label" fill="#58a6ff" font-size="7" text-anchor="middle">🌡️ Open-Meteo</text>
+        <text y="9" class="svg-label" fill="#8b949e" font-size="5.5" text-anchor="middle">Weather API</text>
+      </g>
+      <line x1="250" y1="218" x2="410" y2="280" stroke="#58a6ff" stroke-width="0.5" stroke-dasharray="4,4" stroke-opacity="0.2"/>
+
+      <!-- ═══ LEGEND ═══ -->
+      <g transform="translate(30, 720)">
+        <circle cx="8" cy="0" r="5" fill="none" stroke="#00ff41" stroke-width="1"/>
+        <text x="20" y="4" class="svg-label" fill="#8b949e" font-size="7">Interactive Features</text>
+        <circle cx="148" cy="0" r="5" fill="none" stroke="#ffd740" stroke-width="0.8"/>
+        <text x="160" y="4" class="svg-label" fill="#8b949e" font-size="7">Daily Constructs (TheBoss)</text>
+        <rect x="295" y="-5" width="10" height="10" rx="2" fill="none" stroke="#58a6ff" stroke-width="0.8"/>
+        <text x="312" y="4" class="svg-label" fill="#8b949e" font-size="7">External APIs</text>
+      </g>
+
+    </svg>
   </div>
 
   <!-- Tech Stack -->
   <div class="stack-section">
     <h2 class="section-title">Tech Stack</h2>
-    <div class="stack-table">
-      <div class="stack-row">
-        <span class="stack-label">Runtime</span>
-        <span class="stack-value">Python 3 — systemd (always on)</span>
-      </div>
-      <div class="stack-row">
-        <span class="stack-label">LLM</span>
-        <span class="stack-value">Groq — Llama 3.3 70B (free)</span>
-      </div>
-      <div class="stack-row">
-        <span class="stack-label">Vision</span>
-        <span class="stack-value">Gemini Flash + Groq (fallback)</span>
-      </div>
-      <div class="stack-row">
-        <span class="stack-label">Speech</span>
-        <span class="stack-value">Gemini STT + Whisper (fallback)</span>
-      </div>
-      <div class="stack-row">
-        <span class="stack-label">Weather</span>
-        <span class="stack-value">Open-Meteo + wttr.in (direct API, no LLM)</span>
-      </div>
-      <div class="stack-row">
-        <span class="stack-label">Search</span>
-        <span class="stack-value">Google News RSS + DuckDuckGo</span>
-      </div>
-      <div class="stack-row">
-        <span class="stack-label">Flights</span>
-        <span class="stack-value">Playwright + fast-flights (headless scraping)</span>
-      </div>
-      <div class="stack-row">
-        <span class="stack-label">Database</span>
-        <span class="stack-value">SQLite (messages, contacts, cache, subscriptions)</span>
-      </div>
-      <div class="stack-row">
-        <span class="stack-label">Cost</span>
-        <span class="stack-value">$0 — all free tier</span>
-      </div>
+    <div>
+      <div class="stack-row"><span class="stack-label">Runtime</span><span class="stack-value">Python 3 — systemd (always on)</span></div>
+      <div class="stack-row"><span class="stack-label">LLM</span><span class="stack-value">Groq — Llama 3.3 70B (free)</span></div>
+      <div class="stack-row"><span class="stack-label">Vision</span><span class="stack-value">Gemini Flash + Groq (fallback)</span></div>
+      <div class="stack-row"><span class="stack-label">Speech</span><span class="stack-value">Gemini STT + Whisper (fallback)</span></div>
+      <div class="stack-row"><span class="stack-label">Weather</span><span class="stack-value">Open-Meteo + wttr.in (direct, no LLM)</span></div>
+      <div class="stack-row"><span class="stack-label">Search</span><span class="stack-value">Google News RSS + DuckDuckGo</span></div>
+      <div class="stack-row"><span class="stack-label">Flights</span><span class="stack-value">Playwright headless + fast-flights</span></div>
+      <div class="stack-row"><span class="stack-label">Database</span><span class="stack-value">SQLite (messages, contacts, cache)</span></div>
+      <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">$0 — all free tier</span></div>
     </div>
   </div>
 
@@ -353,27 +343,5 @@
 </div>
 
 <script src="../script.js"></script>
-<script>
-// Draw connection lines from sun to each planet
-(function drawLines() {
-  const container = document.getElementById('solar');
-  if (!container) return;
-  const cx = container.offsetWidth / 2;
-  const cy = container.offsetHeight / 2;
-  document.querySelectorAll('.planet').forEach(p => {
-    const px = p.offsetLeft + 35;
-    const py = p.offsetTop + 35;
-    const dx = px - cx;
-    const dy = py - cy;
-    const len = Math.sqrt(dx*dx + dy*dy) - 80;
-    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-    const line = document.createElement('div');
-    line.className = 'conn-line';
-    line.style.width = Math.max(0, len) + 'px';
-    line.style.transform = `rotate(${angle}deg)`;
-    container.appendChild(line);
-  });
-})();
-</script>
 </body>
 </html>
