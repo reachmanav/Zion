@@ -11,7 +11,7 @@
     .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
     .d-hero-icon { font-size: 3.5rem; }
     .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #4ecdc4; letter-spacing: 5px; text-shadow: 0 0 20px rgba(78,205,196,0.4); }
-    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: #4ecdc4; margin-top: 0.5rem; opacity: 0.9; }
     .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
     .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
     .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
@@ -23,7 +23,7 @@
     .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
     .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
     .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
-    .stack-row { display: flex; border-bottom: 1px solid rgba(78,205,196,0.08); padding: 0.6rem 0; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(78,205,196,0.1); padding: 0.6rem 0; }
     .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #4ecdc4; letter-spacing: 1px; min-width: 110px; }
     .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
   </style>
@@ -44,157 +44,180 @@
   <div class="d-hero">
     <div class="d-hero-icon">🏃</div>
     <h1 class="d-hero-title">FITBIT BRIEF</h1>
-    <p class="d-hero-sub">Weekly fitness — Sunday 8:00 AM</p>
-    <p class="d-hero-desc">Weekly fitness summary from Fitbit — steps, sleep quality, heart rate trends. Delivered to WhatsApp every Sunday</p>
+    <p class="d-hero-sub">Weekly Health Summary — Sunday 8 AM IST</p>
+    <p class="d-hero-desc">Every Sunday, <strong>fitbrief.py</strong> refreshes the Fitbit OAuth token, pulls steps, sleep, resting HR, and active minutes, then WhatsApps <strong>Puja</strong> (not Neo) with a friendly weekly recap.</p>
   </div>
 
   <div class="diagram-wrap">
     <h2 class="section-title">A Real Conversation</h2>
-    <p class="section-desc">Sunday cron refreshes OAuth — weekly rollup for Puja</p>
+    <p class="section-desc">Puja's phone — Sunday morning automatic brief</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 470" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="far" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#4ecdc4" opacity="0.85"/></marker>
-        <marker id="fag" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.85"/></marker>
-        <marker id="fao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.85"/></marker>
-        <filter id="fgl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="afc" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#4ecdc4" opacity="0.85"/></marker>
+        <marker id="ao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.8"/></marker>
+        <marker id="ab" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#58a6ff" opacity="0.8"/></marker>
+        <filter id="gl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
 
-      <g transform="translate(18, 105)">
-        <rect width="135" height="100" rx="12" fill="#0a1628" stroke="#4ecdc4" stroke-width="2"/>
-        <text x="67" y="26" class="svg-title" fill="#4ecdc4" font-size="21" text-anchor="middle" letter-spacing="2" filter="url(#fgl)">CRON</text>
-        <text x="67" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Sunday 8 AM IST</text>
-        <text x="67" y="76" class="svg-label" fill="#4ecdc4" font-size="17" text-anchor="middle">Weekly job</text>
-        <text x="67" y="98" class="svg-label" fill="#4ecdc4" font-size="16" text-anchor="middle">02:30 UTC</text>
-      </g>
-      <line x1="158" y1="155" x2="185" y2="155" stroke="#4ecdc4" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#far)"/>
-
-      <g transform="translate(192, 100)">
-        <rect width="145" height="110" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
-        <text x="72" y="26" class="svg-title" fill="#00ff41" font-size="20" text-anchor="middle">fitbrief.py</text>
-        <text x="72" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">TheBoss</text>
-        <text x="72" y="76" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Load OAuth token</text>
-        <text x="72" y="100" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Aggregate week</text>
-        <text x="72" y="124" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">Format summary</text>
-      </g>
-      <line x1="342" y1="155" x2="370" y2="155" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#fag)"/>
-
-      <g transform="translate(377, 92)">
-        <rect width="175" height="125" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
-        <text x="87" y="26" class="svg-title" fill="#ffd740" font-size="21" text-anchor="middle">OAUTH2</text>
-        <text x="87" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">fitbit_token.json</text>
-        <text x="87" y="76" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Refresh token flow</text>
-        <text x="87" y="100" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Auto-rotate secrets</text>
-        <text x="87" y="124" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">Scope: activity sleep HR</text>
-      </g>
-      <line x1="557" y1="155" x2="585" y2="155" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#fao)"/>
-
-      <g transform="translate(592, 88)">
-        <rect width="195" height="130" rx="12" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
-        <text x="97" y="26" class="svg-title" fill="#58a6ff" font-size="21" text-anchor="middle">FITBIT API</text>
-        <text x="97" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Web API v1</text>
-        <text x="97" y="76" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Steps + distance</text>
-        <text x="97" y="100" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Sleep stages</text>
-        <text x="97" y="124" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">Heart rate zones</text>
-      </g>
-      <line x1="792" y1="155" x2="820" y2="155" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#far)"/>
-
-      <g transform="translate(827, 100)">
-        <rect width="125" height="110" rx="12" fill="#0a1628" stroke="#4ecdc4" stroke-width="2"/>
-        <text x="62" y="26" class="svg-title" fill="#4ecdc4" font-size="20" text-anchor="middle">WHATSAPP</text>
-        <text x="62" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Weekly card</text>
-        <text x="62" y="76" class="svg-label" fill="#4ecdc4" font-size="17" text-anchor="middle">For Puja</text>
-        <text x="62" y="100" class="svg-label" fill="#4ecdc4" font-size="17" text-anchor="middle">Sunday delivery</text>
+      <g transform="translate(15, 40)">
+        <rect width="155" height="350" rx="20" fill="#0a1628" stroke="#4ecdc4" stroke-width="2.5" stroke-opacity="0.6"/>
+        <rect x="12" y="35" width="131" height="270" rx="6" fill="#0d2137" stroke="#4ecdc4" stroke-width="0.8" stroke-opacity="0.3"/>
+        <circle cx="77" cy="330" r="10" fill="none" stroke="#4ecdc4" stroke-width="0.8" stroke-opacity="0.3"/>
+        <rect x="50" y="14" width="55" height="5" rx="2.5" fill="#4ecdc4" fill-opacity="0.15"/>
+        <rect x="18" y="44" width="121" height="168" rx="8" fill="#4ecdc4" fill-opacity="0.05" stroke="#4ecdc4" stroke-width="0.6" stroke-opacity="0.35"/>
+        <text x="24" y="62" class="svg-label" fill="#4ecdc4" font-size="7.5" font-weight="bold">[Zion] 🏃 Weekly Fitbit</text>
+        <text x="24" y="80" class="svg-label" fill="#8b949e" font-size="6.5">Steps: 52,340</text>
+        <text x="24" y="96" class="svg-label" fill="#8b949e" font-size="6.5">(avg 7,477/day)</text>
+        <text x="24" y="114" class="svg-label" fill="#4ecdc4" font-size="6.5">Sleep: avg 7.2h (good)</text>
+        <text x="24" y="132" class="svg-label" fill="#4ecdc4" font-size="6.5">Resting HR: 68 bpm</text>
+        <text x="24" y="150" class="svg-label" fill="#4ecdc4" font-size="6.5">Active min: 185</text>
+        <text x="24" y="174" class="svg-label" fill="#58a6ff" font-size="6.5" opacity="0.9">Sunday 8 AM — auto</text>
+        <text x="77" y="-8" class="svg-title" fill="#4ecdc4" font-size="16" text-anchor="middle" letter-spacing="2" filter="url(#gl)">PUJA</text>
+        <text x="77" y="378" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">📱 Sunday lock screen</text>
       </g>
 
-      <g transform="translate(15, 255)">
-        <rect width="1070" height="195" rx="14" fill="#0a1628" stroke="#4ecdc4" stroke-width="1.5" stroke-opacity="0.35"/>
-        <text x="535" y="34" class="svg-title" fill="#4ecdc4" font-size="22" text-anchor="middle" letter-spacing="3">PUJA SEES</text>
-        <text x="535" y="62" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">One scrollable message — trends, not raw JSON</text>
-        <text x="535" y="94" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">🏃 Weekly: 52,340 steps · avg sleep 7.2h · HR zones summary</text>
-        <text x="535" y="124" class="svg-label" fill="#4ecdc4" font-size="17" text-anchor="middle">Flow: Cron Sunday 8 AM → fitbrief.py → OAuth token → Fitbit Web API → format → WhatsApp Bridge</text>
-        <text x="535" y="154" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Compares goals vs actual when targets configured in sheet/config</text>
+      <g transform="translate(280, 40)">
+        <rect width="160" height="70" rx="10" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="80" y="24" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">⏰</text>
+        <text x="80" y="44" class="svg-title" fill="#ffd740" font-size="11" text-anchor="middle">CRON SUN 8 AM</text>
+        <text x="80" y="60" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">fitbrief.py</text>
       </g>
-      <path d="M890,210 L890,248" fill="none" stroke="#4ecdc4" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#far)"/>
+
+      <path d="M445,75 Q505,78 555,105" fill="none" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
+
+      <g transform="translate(555, 90)">
+        <rect width="150" height="58" rx="10" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="75" y="22" class="svg-title" fill="#ffd740" font-size="11" text-anchor="middle">fitbrief.py</text>
+        <text x="75" y="40" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">token refresh + pull</text>
+      </g>
+
+      <path d="M710,118 Q770,140 820,175" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ab)"/>
+      <text x="770" y="132" class="svg-label" fill="#58a6ff" font-size="10" text-anchor="middle">OAuth2 + REST</text>
+
+      <g transform="translate(820, 155)">
+        <rect width="210" height="110" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="105" y="24" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle">FITBIT WEB API</text>
+        <text x="105" y="44" class="svg-label" fill="#58a6ff" font-size="10" text-anchor="middle">Activities + steps series</text>
+        <text x="105" y="62" class="svg-label" fill="#58a6ff" font-size="10" text-anchor="middle">Sleep stages + score</text>
+        <text x="105" y="80" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Heart rate + zones</text>
+        <text x="105" y="98" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">Active minutes rollup</text>
+      </g>
+
+      <path d="M925,265 Q940,310 880,335" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.2s" marker-end="url(#ab)"/>
+
+      <circle cx="830" cy="340" r="68" fill="#0a1628" stroke="#4ecdc4" stroke-width="2.5"/>
+      <text x="830" y="318" class="svg-label" fill="#4ecdc4" font-size="14" text-anchor="middle">📊</text>
+      <text x="830" y="338" class="svg-title" fill="#4ecdc4" font-size="11" text-anchor="middle">FORMAT</text>
+      <text x="830" y="356" class="svg-label" fill="#8b949e" font-size="8.5" text-anchor="middle">week vs week-1</text>
+      <text x="830" y="370" class="svg-label" fill="#4ecdc4" font-size="8.5" text-anchor="middle">emoji + insights</text>
+
+      <path d="M780,360 Q680,410 615,405" fill="none" stroke="#4ecdc4" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.35s" marker-end="url(#afc)"/>
+
+      <g transform="translate(470, 372)">
+        <rect width="140" height="56" rx="8" fill="#0a1628" stroke="#4ecdc4" stroke-width="1.5"/>
+        <text x="70" y="22" class="svg-label" fill="#4ecdc4" font-size="14" text-anchor="middle">📡 Bridge</text>
+        <text x="70" y="40" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">POST /api/send</text>
+        <text x="70" y="52" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">→ Puja JID</text>
+      </g>
+
+      <path d="M465,402 Q320,455 175,378" fill="none" stroke="#4ecdc4" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.5s" marker-end="url(#afc)"/>
+      <text x="300" y="452" class="svg-label" fill="#4ecdc4" font-size="11" text-anchor="middle" font-weight="bold">← 🏃 Weekly recap delivered</text>
+
+      <g transform="translate(280, 168)" opacity="0.45">
+        <text x="0" y="0" class="svg-label" fill="#ffd740" font-size="11">Recipient note:</text>
+        <text x="0" y="18" class="svg-label" fill="#4ecdc4" font-size="11">Puja's WhatsApp — not Neo</text>
+      </g>
+
+      <rect x="260" y="25" width="780" height="420" rx="14" fill="none" stroke="#4ecdc4" stroke-width="0.6" stroke-opacity="0.06" stroke-dasharray="12,6"/>
+      <text x="650" y="490" class="svg-label" fill="#4ecdc4" font-size="9" text-anchor="middle" opacity="0.14">☁️ Oracle Cloud VM — weekly cron</text>
     </svg>
   </div>
 
   <div class="diagram-wrap">
-    <h2 class="section-title">How It Works</h2>
-    <p class="section-desc">Data plane, auth, analysis, Sunday delivery</p>
+    <h2 class="section-title">Everything Inside Fitbit Brief</h2>
+    <p class="section-desc">Weekly wellness is the sun — components radiate out</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 820" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 800" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="fsg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4ecdc4" stop-opacity="0.22"/><stop offset="100%" stop-color="#4ecdc4" stop-opacity="0.02"/></radialGradient>
-        <filter id="fgl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <radialGradient id="sgf" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4ecdc4" stop-opacity="0.22"/><stop offset="100%" stop-color="#4ecdc4" stop-opacity="0.01"/></radialGradient>
+        <filter id="gl2f"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
-      <line x1="550" y1="360" x2="550" y2="125" stroke="#4ecdc4" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="605" y1="380" x2="895" y2="195" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="605" y1="420" x2="895" y2="600" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="495" y1="420" x2="205" y2="600" stroke="#00ff41" stroke-width="1.5" stroke-opacity="0.12"/>
 
-      <circle cx="550" cy="400" r="58" fill="url(#fsg)" stroke="#4ecdc4" stroke-width="3" class="anim-sun"/>
-      <text x="550" y="392" class="svg-label" fill="#4ecdc4" font-size="22" text-anchor="middle">🏃</text>
-      <text x="550" y="422" class="svg-title" fill="#4ecdc4" font-size="21" text-anchor="middle" letter-spacing="3" filter="url(#fgl2)">FIT</text>
+      <line x1="550" y1="340" x2="550" y2="140" stroke="#4ecdc4" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="620" y1="370" x2="880" y2="180" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="620" y1="410" x2="880" y2="560" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="480" y1="370" x2="220" y2="180" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="480" y1="410" x2="220" y2="560" stroke="#c084fc" stroke-width="1.5" stroke-opacity="0.1"/>
 
-      <circle cx="550" cy="120" r="118" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="550" y="48" class="svg-title" fill="#58a6ff" font-size="22" text-anchor="middle" letter-spacing="2">DATA</text>
-      <text x="550" y="76" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Fitbit Web API payloads</text>
-      <text x="550" y="108" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">Steps + floors + distance</text>
-      <text x="550" y="134" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">Sleep stages + efficiency</text>
-      <text x="550" y="160" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">Heart rate zones + resting HR</text>
-      <text x="550" y="186" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Active minutes + calories</text>
+      <circle cx="550" cy="390" r="55" fill="url(#sgf)" stroke="#4ecdc4" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="382" class="svg-label" fill="#4ecdc4" font-size="22" text-anchor="middle">🏃</text>
+      <text x="550" y="406" class="svg-title" fill="#4ecdc4" font-size="14" text-anchor="middle" letter-spacing="3" filter="url(#gl2f)">FITBIT</text>
 
-      <circle cx="900" cy="200" r="115" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="900" y="128" class="svg-title" fill="#ffd740" font-size="22" text-anchor="middle" letter-spacing="2">AUTH</text>
-      <text x="900" y="156" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Token lifecycle</text>
-      <text x="900" y="188" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">OAuth2 authorization</text>
-      <text x="900" y="214" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">fitbit_token.json disk cache</text>
-      <text x="900" y="240" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Auto-refresh before expiry</text>
-      <text x="900" y="266" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Least-privilege scopes</text>
+      <circle cx="550" cy="110" r="110" fill="#0a1628" stroke="#4ecdc4" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="40" class="svg-title" fill="#4ecdc4" font-size="20" text-anchor="middle" letter-spacing="2">DATA</text>
+      <text x="550" y="68" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">what we ingest</text>
+      <text x="550" y="98" class="svg-label" fill="#4ecdc4" font-size="15" text-anchor="middle">Fitbit Web API JSON</text>
+      <text x="550" y="122" class="svg-label" fill="#4ecdc4" font-size="15" text-anchor="middle">Steps + distance trends</text>
+      <text x="550" y="146" class="svg-label" fill="#4ecdc4" font-size="15" text-anchor="middle">Sleep stages + duration</text>
+      <text x="550" y="170" class="svg-label" fill="#4ecdc4" font-size="15" text-anchor="middle">HR zones + active minutes</text>
+      <text x="550" y="194" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">7-day rolling window</text>
 
-      <circle cx="900" cy="600" r="118" fill="#0a1628" stroke="#4ecdc4" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="900" y="528" class="svg-title" fill="#4ecdc4" font-size="22" text-anchor="middle" letter-spacing="2">ANALYSIS</text>
-      <text x="900" y="556" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Weekly rollup layer</text>
-      <text x="900" y="588" class="svg-label" fill="#4ecdc4" font-size="18" text-anchor="middle">Totals vs prior week</text>
-      <text x="900" y="614" class="svg-label" fill="#4ecdc4" font-size="18" text-anchor="middle">Trend arrows (↑↓)</text>
-      <text x="900" y="640" class="svg-label" fill="#4ecdc4" font-size="18" text-anchor="middle">Goals vs actual table</text>
-      <text x="900" y="666" class="svg-label" fill="#4ecdc4" font-size="17" text-anchor="middle">Highlight best day</text>
+      <circle cx="890" cy="170" r="115" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="890" y="95" class="svg-title" fill="#ffd740" font-size="20" text-anchor="middle" letter-spacing="2">AUTH</text>
+      <text x="890" y="123" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">token lifecycle</text>
+      <text x="890" y="154" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">OAuth2 authorization</text>
+      <text x="890" y="176" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">fitbit_token.json cache</text>
+      <text x="890" y="198" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">Auto refresh before pull</text>
+      <text x="890" y="220" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">Scopes: activity+heartrate</text>
+      <text x="890" y="242" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Secrets on VM only</text>
 
-      <circle cx="200" cy="600" r="118" fill="#0a1628" stroke="#00ff41" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="200" y="528" class="svg-title" fill="#00ff41" font-size="22" text-anchor="middle" letter-spacing="2">DELIVERY</text>
-      <text x="200" y="556" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Audience-specific</text>
-      <text x="200" y="588" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">WhatsApp Sunday 8 AM</text>
-      <text x="200" y="614" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Recipient: Puja</text>
-      <text x="200" y="640" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Emoji section headers</text>
-      <text x="200" y="666" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">No PII in logs</text>
+      <circle cx="880" cy="570" r="110" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="880" y="500" class="svg-title" fill="#58a6ff" font-size="20" text-anchor="middle" letter-spacing="2">WEEKLY</text>
+      <text x="880" y="528" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">cadence + compare</text>
+      <text x="880" y="558" class="svg-label" fill="#58a6ff" font-size="15" text-anchor="middle">Sunday 8 AM IST cron</text>
+      <text x="880" y="580" class="svg-label" fill="#58a6ff" font-size="15" text-anchor="middle">Trend vs last Sunday</text>
+      <text x="880" y="602" class="svg-label" fill="#58a6ff" font-size="15" text-anchor="middle">Emoji-rich summary</text>
+      <text x="880" y="624" class="svg-label" fill="#58a6ff" font-size="15" text-anchor="middle">Highlights anomalies</text>
+      <text x="880" y="646" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Non-blocking on API errors</text>
 
-      <circle cx="200" cy="200" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="200" y="138" class="svg-title" fill="#fb923c" font-size="21" text-anchor="middle" letter-spacing="2">KEY FILE</text>
-      <text x="200" y="166" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Entrypoint</text>
-      <text x="200" y="198" class="svg-label" fill="#fb923c" font-size="18" text-anchor="middle">TheBoss/fitbrief.py</text>
-      <text x="200" y="224" class="svg-label" fill="#fb923c" font-size="17" text-anchor="middle">Cron Sunday 02:30 UTC</text>
-      <text x="200" y="250" class="svg-label" fill="#fb923c" font-size="17" text-anchor="middle">VM time → IST Sunday AM</text>
+      <circle cx="210" cy="170" r="115" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="210" y="95" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle" letter-spacing="2">RECIPIENT</text>
+      <text x="210" y="123" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">who gets the ping</text>
+      <text x="210" y="154" class="svg-label" fill="#fb923c" font-size="15" text-anchor="middle">Puja's WhatsApp JID</text>
+      <text x="210" y="176" class="svg-label" fill="#fb923c" font-size="15" text-anchor="middle">Hard-coded routing OK</text>
+      <text x="210" y="198" class="svg-label" fill="#fb923c" font-size="15" text-anchor="middle">Not Neo's inbox</text>
+      <text x="210" y="220" class="svg-label" fill="#fb923c" font-size="15" text-anchor="middle">Privacy: health data</text>
+      <text x="210" y="242" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Bridge enforces TLS</text>
+
+      <circle cx="220" cy="570" r="110" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="220" y="500" class="svg-title" fill="#c084fc" font-size="20" text-anchor="middle" letter-spacing="2">KEY FILE</text>
+      <text x="220" y="528" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">implementation</text>
+      <text x="220" y="558" class="svg-label" fill="#c084fc" font-size="15" text-anchor="middle">TheBoss/fitbrief.py</text>
+      <text x="220" y="580" class="svg-label" fill="#c084fc" font-size="15" text-anchor="middle">requests + pandas helpers</text>
+      <text x="220" y="602" class="svg-label" fill="#c084fc" font-size="15" text-anchor="middle">Cron entry Sunday 08:00</text>
+      <text x="220" y="624" class="svg-label" fill="#c084fc" font-size="15" text-anchor="middle">Logs + retry backoff</text>
+      <text x="220" y="646" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Ampere VM timezone IST</text>
     </svg>
   </div>
 
   <div class="stack-section">
     <h2 class="section-title">Tech Stack</h2>
     <div>
-      <div class="stack-row"><span class="stack-label">Language</span><span class="stack-value">Python</span></div>
-      <div class="stack-row"><span class="stack-label">API</span><span class="stack-value">Fitbit Web API (activity, sleep, heart rate)</span></div>
-      <div class="stack-row"><span class="stack-label">Auth</span><span class="stack-value">OAuth2 + fitbit_token.json + auto-refresh</span></div>
-      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Cron Sunday 02:30 UTC</span></div>
-      <div class="stack-row"><span class="stack-label">Delivery</span><span class="stack-value">WhatsApp Bridge — for Puja</span></div>
-      <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">$0 — within Fitbit dev quotas</span></div>
-      <div class="stack-row"><span class="stack-label">Key file</span><span class="stack-value">TheBoss/fitbrief.py</span></div>
+      <div class="stack-row"><span class="stack-label">Runtime</span><span class="stack-value">Python 3 — weekly cron</span></div>
+      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Sunday 8:00 AM IST</span></div>
+      <div class="stack-row"><span class="stack-label">API</span><span class="stack-value">Fitbit Web API — OAuth2 + REST resources</span></div>
+      <div class="stack-row"><span class="stack-label">Metrics</span><span class="stack-value">Steps, sleep, resting HR, active minutes</span></div>
+      <div class="stack-row"><span class="stack-label">Auth</span><span class="stack-value">fitbit_token.json — refresh before each run</span></div>
+      <div class="stack-row"><span class="stack-label">Recipient</span><span class="stack-value">Puja's WhatsApp (not Neo)</span></div>
+      <div class="stack-row"><span class="stack-label">Key File</span><span class="stack-value">TheBoss/fitbrief.py</span></div>
     </div>
   </div>
 
   <footer>
     <div class="footer-content">
       <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a></p>
-      <p class="footer-small">FITBIT BRIEF — Sunday fitness digest</p>
+      <p class="footer-small">FITBIT BRIEF — Weekly wellness for Puja</p>
     </div>
   </footer>
 </div>

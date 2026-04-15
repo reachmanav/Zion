@@ -10,8 +10,8 @@
     .detail-page { position: relative; z-index: 1; }
     .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
     .d-hero-icon { font-size: 3.5rem; }
-    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #f472b6; letter-spacing: 5px; text-shadow: 0 0 20px rgba(244,114,182,0.4); }
-    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #f472b6; letter-spacing: 5px; text-shadow: 0 0 20px rgba(244,114,182,0.35); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: #f472b6; margin-top: 0.5rem; opacity: 0.9; }
     .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
     .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
     .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
@@ -23,7 +23,7 @@
     .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
     .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
     .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
-    .stack-row { display: flex; border-bottom: 1px solid rgba(244,114,182,0.08); padding: 0.6rem 0; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(244,114,182,0.1); padding: 0.6rem 0; }
     .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #f472b6; letter-spacing: 1px; min-width: 110px; }
     .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
   </style>
@@ -44,173 +44,180 @@
   <div class="d-hero">
     <div class="d-hero-icon">💊</div>
     <h1 class="d-hero-title">MEDTRACKER</h1>
-    <p class="d-hero-sub">Reminders + refills — dual channel</p>
-    <p class="d-hero-desc">Medicine reminders and refill tracking — never miss a dose. WhatsApp + Email alerts</p>
+    <p class="d-hero-sub">Medicine Reminders — 8:30 AM IST</p>
+    <p class="d-hero-desc">Zion reads <strong>medicines.xlsx</strong>, checks today's schedule and refill windows, pings Neo on WhatsApp with an SMTP backup, and understands confirmations like <strong>done</strong> or <strong>took it</strong> via Gemini/Groq.</p>
   </div>
 
   <div class="diagram-wrap">
     <h2 class="section-title">A Real Conversation</h2>
-    <p class="section-desc">Morning cron reads the spreadsheet — doses and refills become push alerts</p>
+    <p class="section-desc">Automatic reminder — Neo replies in plain language</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="mar" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#f472b6" opacity="0.85"/></marker>
-        <marker id="mag" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.85"/></marker>
-        <marker id="mao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.85"/></marker>
-        <filter id="mgl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="am" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#f472b6" opacity="0.85"/></marker>
+        <marker id="ao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.8"/></marker>
+        <marker id="ab" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#58a6ff" opacity="0.8"/></marker>
+        <marker id="ag" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.8"/></marker>
+        <filter id="gl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
 
-      <g transform="translate(12, 100)">
-        <rect width="120" height="100" rx="12" fill="#0a1628" stroke="#f472b6" stroke-width="2"/>
-        <text x="60" y="26" class="svg-title" fill="#f472b6" font-size="21" text-anchor="middle" letter-spacing="2" filter="url(#mgl)">CRON</text>
-        <text x="60" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">8:30 AM IST</text>
-        <text x="60" y="76" class="svg-label" fill="#f472b6" font-size="17" text-anchor="middle">Daily check</text>
-        <text x="60" y="98" class="svg-label" fill="#f472b6" font-size="16" text-anchor="middle">Also per-dose</text>
-      </g>
-      <line x1="137" y1="150" x2="165" y2="150" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mar)"/>
-
-      <g transform="translate(172, 95)">
-        <rect width="150" height="110" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
-        <text x="75" y="26" class="svg-title" fill="#00ff41" font-size="20" text-anchor="middle">MEDTRACKER</text>
-        <text x="75" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">TheBoss/medtracker/</text>
-        <text x="75" y="76" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Scheduler core</text>
-        <text x="75" y="100" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Rules engine</text>
-        <text x="75" y="124" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">medtracker.db</text>
-      </g>
-      <line x1="327" y1="150" x2="355" y2="150" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mag)"/>
-
-      <g transform="translate(362, 88)">
-        <rect width="175" height="125" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
-        <text x="87" y="26" class="svg-title" fill="#ffd740" font-size="21" text-anchor="middle">XLSX</text>
-        <text x="87" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">medicines.xlsx</text>
-        <text x="87" y="76" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Medicine list</text>
-        <text x="87" y="100" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Dose schedule</text>
-        <text x="87" y="124" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">Refill cycles</text>
-      </g>
-      <line x1="542" y1="150" x2="570" y2="150" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mao)"/>
-
-      <g transform="translate(577, 95)">
-        <rect width="165" height="110" rx="12" fill="#0a1628" stroke="#f472b6" stroke-width="2"/>
-        <text x="82" y="26" class="svg-title" fill="#f472b6" font-size="21" text-anchor="middle">CHECK</text>
-        <text x="82" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Due doses today</text>
-        <text x="82" y="76" class="svg-label" fill="#f472b6" font-size="17" text-anchor="middle">Refill thresholds</text>
-        <text x="82" y="100" class="svg-label" fill="#f472b6" font-size="17" text-anchor="middle">Inventory math</text>
-        <text x="82" y="124" class="svg-label" fill="#f472b6" font-size="16" text-anchor="middle">Quiet hours</text>
-      </g>
-      <line x1="742" y1="150" x2="782" y2="118" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mar)"/>
-      <line x1="742" y1="150" x2="782" y2="188" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mar)"/>
-
-      <g transform="translate(782, 88)">
-        <rect width="148" height="60" rx="10" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
-        <text x="74" y="28" class="svg-title" fill="#00ff41" font-size="18" text-anchor="middle">WHATSAPP</text>
-        <text x="74" y="48" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Instant push</text>
-      </g>
-      <g transform="translate(782, 158)">
-        <rect width="148" height="60" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
-        <text x="74" y="28" class="svg-title" fill="#58a6ff" font-size="18" text-anchor="middle">SMTP EMAIL</text>
-        <text x="74" y="48" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Backup channel</text>
+      <g transform="translate(15, 40)">
+        <rect width="155" height="350" rx="20" fill="#0a1628" stroke="#f472b6" stroke-width="2.5" stroke-opacity="0.6"/>
+        <rect x="12" y="35" width="131" height="270" rx="6" fill="#0d2137" stroke="#f472b6" stroke-width="0.8" stroke-opacity="0.3"/>
+        <circle cx="77" cy="330" r="10" fill="none" stroke="#f472b6" stroke-width="0.8" stroke-opacity="0.3"/>
+        <rect x="50" y="14" width="55" height="5" rx="2.5" fill="#f472b6" fill-opacity="0.15"/>
+        <rect x="18" y="44" width="121" height="92" rx="8" fill="#f472b6" fill-opacity="0.06" stroke="#f472b6" stroke-width="0.6" stroke-opacity="0.35"/>
+        <text x="24" y="60" class="svg-label" fill="#f472b6" font-size="7.5" font-weight="bold">[Zion] 💊 Medicine Reminder</text>
+        <text x="24" y="76" class="svg-label" fill="#8b949e" font-size="6.5">Time for Vitamin D</text>
+        <text x="24" y="90" class="svg-label" fill="#8b949e" font-size="6.5">(1 tablet).</text>
+        <text x="24" y="106" class="svg-label" fill="#ffd740" font-size="6.5">Omeprazole refill by Apr 10!</text>
+        <rect x="18" y="148" width="121" height="22" rx="8" fill="#00ff41" fill-opacity="0.06" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.25"/>
+        <text x="24" y="164" class="svg-label" fill="#00ff41" font-size="7.5" font-weight="bold">done</text>
+        <rect x="18" y="178" width="121" height="24" rx="8" fill="#f472b6" fill-opacity="0.05" stroke="#f472b6" stroke-width="0.5" stroke-opacity="0.25"/>
+        <text x="24" y="194" class="svg-label" fill="#f472b6" font-size="7.5">[Zion] ✅ Marked as taken</text>
+        <text x="77" y="-8" class="svg-title" fill="#f472b6" font-size="18" text-anchor="middle" letter-spacing="3" filter="url(#gl)">NEO</text>
+        <text x="77" y="378" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">📱 WhatsApp + email backup</text>
       </g>
 
-      <g transform="translate(950, 100)">
-        <rect width="135" height="100" rx="12" fill="#0a1628" stroke="#f472b6" stroke-width="2"/>
-        <text x="67" y="26" class="svg-title" fill="#f472b6" font-size="20" text-anchor="middle">NEO</text>
-        <text x="67" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Phone + inbox</text>
-        <text x="67" y="76" class="svg-label" fill="#f472b6" font-size="16" text-anchor="middle">💊 Vitamin D</text>
-        <text x="67" y="96" class="svg-label" fill="#f472b6" font-size="16" text-anchor="middle">Refill alerts</text>
-      </g>
-      <line x1="930" y1="118" x2="948" y2="135" stroke="#00ff41" stroke-width="2" stroke-dasharray="6,4" class="anim-dash" marker-end="url(#mag)"/>
-      <line x1="930" y1="188" x2="948" y2="165" stroke="#58a6ff" stroke-width="2" stroke-dasharray="6,4" class="anim-dash" marker-end="url(#mar)"/>
+      <path d="M175,200 Q260,120 340,95" fill="none" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#am)"/>
+      <text x="248" y="108" class="svg-label" fill="#f472b6" font-size="10" text-anchor="middle">inbound text</text>
 
-      <g transform="translate(15, 245)">
-        <rect width="1070" height="230" rx="14" fill="#0a1628" stroke="#f472b6" stroke-width="1.5" stroke-opacity="0.35"/>
-        <text x="535" y="34" class="svg-title" fill="#f472b6" font-size="22" text-anchor="middle" letter-spacing="3">NATURAL LANGUAGE</text>
-        <text x="535" y="62" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Optional chat commands — parsed when Neo types ad-hoc instructions</text>
-        <text x="535" y="94" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Gemini / Groq disambiguate fuzzy times ("after dinner") → concrete schedule rows</text>
-        <text x="535" y="124" class="svg-label" fill="#f472b6" font-size="17" text-anchor="middle">Writes back to medicines.xlsx or SQLite depending on mode — audit trail in medtracker.db</text>
-        <text x="535" y="154" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Primary path remains cron + spreadsheet — AI is assist, not single source of truth</text>
-        <text x="535" y="184" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">Dual channel: WhatsApp for immediacy, SMTP for compliance / archive</text>
+      <g transform="translate(340, 55)">
+        <circle cx="70" cy="70" r="62" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5"/>
+        <text x="70" y="58" class="svg-label" fill="#58a6ff" font-size="14" text-anchor="middle">🧠</text>
+        <text x="70" y="78" class="svg-title" fill="#58a6ff" font-size="10" text-anchor="middle">NLU</text>
+        <text x="70" y="94" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">Gemini / Groq</text>
+        <text x="70" y="108" class="svg-label" fill="#58a6ff" font-size="8" text-anchor="middle">"done" → taken</text>
       </g>
-      <path d="M640,205 L640,238" fill="none" stroke="#f472b6" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#mar)"/>
+
+      <path d="M485,125 Q560,90 640,85" fill="none" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.15s" marker-end="url(#ao)"/>
+
+      <g transform="translate(640, 40)">
+        <rect width="150" height="70" rx="10" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="75" y="24" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">⏰</text>
+        <text x="75" y="44" class="svg-title" fill="#ffd740" font-size="12" text-anchor="middle">CRON 8:30 AM</text>
+        <text x="75" y="60" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">medtracker job</text>
+      </g>
+
+      <path d="M795,75 Q850,95 880,130" fill="none" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
+
+      <g transform="translate(875, 125)">
+        <rect width="195" height="100" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="97" y="24" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle">medicines.xlsx</text>
+        <text x="97" y="44" class="svg-label" fill="#58a6ff" font-size="10" text-anchor="middle">dosage rows + schedules</text>
+        <text x="97" y="62" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">refill dates + inventory</text>
+        <text x="97" y="80" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">taken / missed flags</text>
+        <text x="97" y="98" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">Medtracker reads + writes</text>
+      </g>
+
+      <path d="M970,225 Q980,280 900,320" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.2s" marker-end="url(#ab)"/>
+
+      <g transform="translate(720, 300)">
+        <rect width="200" height="70" rx="10" fill="#0a1628" stroke="#f472b6" stroke-width="2"/>
+        <text x="100" y="26" class="svg-title" fill="#f472b6" font-size="11" text-anchor="middle">DUAL CHANNEL</text>
+        <text x="100" y="46" class="svg-label" fill="#f472b6" font-size="10" text-anchor="middle">WhatsApp reminder</text>
+        <text x="100" y="62" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">+ SMTP email backup log</text>
+      </g>
+
+      <path d="M720,335 Q520,380 175,340" fill="none" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.35s" marker-end="url(#am)"/>
+      <text x="430" y="400" class="svg-label" fill="#f472b6" font-size="11" text-anchor="middle" font-weight="bold">← 💊 Reminder + confirmations</text>
+
+      <g transform="translate(470, 175)">
+        <rect width="140" height="52" rx="8" fill="#0a1628" stroke="#00ff41" stroke-width="1.5"/>
+        <text x="70" y="22" class="svg-label" fill="#00ff41" font-size="12" text-anchor="middle">📡 Bridge</text>
+        <text x="70" y="40" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">in + out messages</text>
+      </g>
+
+      <path d="M540,200 Q420,240 175,220" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.45s" marker-end="url(#ag)"/>
+
+      <rect x="260" y="25" width="780" height="420" rx="14" fill="none" stroke="#f472b6" stroke-width="0.6" stroke-opacity="0.06" stroke-dasharray="12,6"/>
+      <text x="650" y="490" class="svg-label" fill="#f472b6" font-size="9" text-anchor="middle" opacity="0.14">☁️ Oracle Cloud VM — TheBoss/medtracker/</text>
     </svg>
   </div>
 
   <div class="diagram-wrap">
-    <h2 class="section-title">How It Works</h2>
-    <p class="section-desc">Tracking, reminders, notifications, AI assist</p>
+    <h2 class="section-title">Everything Inside MedTracker</h2>
+    <p class="section-desc">Compliance is the sun — components radiate out</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 880" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 800" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="msg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f472b6" stop-opacity="0.22"/><stop offset="100%" stop-color="#f472b6" stop-opacity="0.02"/></radialGradient>
-        <filter id="mgl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <radialGradient id="sgm" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f472b6" stop-opacity="0.2"/><stop offset="100%" stop-color="#f472b6" stop-opacity="0.01"/></radialGradient>
+        <filter id="gl2m"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
-      <line x1="550" y1="380" x2="550" y2="130" stroke="#f472b6" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="610" y1="400" x2="900" y2="200" stroke="#00ff41" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="610" y1="440" x2="900" y2="640" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="490" y1="440" x2="200" y2="640" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.12"/>
 
-      <circle cx="550" cy="420" r="58" fill="url(#msg)" stroke="#f472b6" stroke-width="3" class="anim-sun"/>
-      <text x="550" y="412" class="svg-label" fill="#f472b6" font-size="22" text-anchor="middle">💊</text>
-      <text x="550" y="442" class="svg-title" fill="#f472b6" font-size="21" text-anchor="middle" letter-spacing="3" filter="url(#mgl2)">MED</text>
+      <line x1="550" y1="340" x2="550" y2="140" stroke="#f472b6" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="620" y1="370" x2="880" y2="180" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="620" y1="410" x2="880" y2="560" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="480" y1="370" x2="220" y2="180" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="480" y1="410" x2="220" y2="560" stroke="#c084fc" stroke-width="1.5" stroke-opacity="0.1"/>
 
-      <circle cx="550" cy="125" r="118" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="550" y="52" class="svg-title" fill="#ffd740" font-size="22" text-anchor="middle" letter-spacing="2">TRACKING</text>
-      <text x="550" y="80" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Structured source of truth</text>
-      <text x="550" y="112" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">medicines.xlsx rows</text>
-      <text x="550" y="138" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Dosage schedule grid</text>
-      <text x="550" y="164" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Refill cycle dates</text>
-      <text x="550" y="190" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">medtracker.db state mirror</text>
+      <circle cx="550" cy="390" r="55" fill="url(#sgm)" stroke="#f472b6" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="382" class="svg-label" fill="#f472b6" font-size="22" text-anchor="middle">💊</text>
+      <text x="550" y="406" class="svg-title" fill="#f472b6" font-size="15" text-anchor="middle" letter-spacing="3" filter="url(#gl2m)">MEDTRACKER</text>
 
-      <circle cx="905" cy="210" r="118" fill="#0a1628" stroke="#f472b6" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="905" y="138" class="svg-title" fill="#f472b6" font-size="22" text-anchor="middle" letter-spacing="2">REMINDERS</text>
-      <text x="905" y="166" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">When alerts fire</text>
-      <text x="905" y="198" class="svg-label" fill="#f472b6" font-size="18" text-anchor="middle">Daily 8:30 AM pass</text>
-      <text x="905" y="224" class="svg-label" fill="#f472b6" font-size="18" text-anchor="middle">Multiple doses / day</text>
-      <text x="905" y="250" class="svg-label" fill="#f472b6" font-size="18" text-anchor="middle">Refill countdown alerts</text>
-      <text x="905" y="276" class="svg-label" fill="#f472b6" font-size="17" text-anchor="middle">Snooze + ack tracking</text>
+      <circle cx="550" cy="110" r="110" fill="#0a1628" stroke="#f472b6" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="40" class="svg-title" fill="#f472b6" font-size="20" text-anchor="middle" letter-spacing="2">TRACKING</text>
+      <text x="550" y="68" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">single spreadsheet truth</text>
+      <text x="550" y="98" class="svg-label" fill="#f472b6" font-size="15" text-anchor="middle">medicines.xlsx</text>
+      <text x="550" y="122" class="svg-label" fill="#f472b6" font-size="15" text-anchor="middle">Dosage + time-of-day rows</text>
+      <text x="550" y="146" class="svg-label" fill="#f472b6" font-size="15" text-anchor="middle">Refill cycles + alerts</text>
+      <text x="550" y="170" class="svg-label" fill="#f472b6" font-size="15" text-anchor="middle">Taken / missed audit trail</text>
+      <text x="550" y="194" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Synced after each confirmation</text>
 
-      <circle cx="905" cy="640" r="118" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="905" y="568" class="svg-title" fill="#58a6ff" font-size="22" text-anchor="middle" letter-spacing="2">NOTIFICATIONS</text>
-      <text x="905" y="596" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Dual channel reliability</text>
-      <text x="905" y="628" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">WhatsApp push</text>
-      <text x="905" y="654" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">SMTP email backup</text>
-      <text x="905" y="680" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">Template per medicine</text>
-      <text x="905" y="706" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Delivery receipts logged</text>
+      <circle cx="890" cy="170" r="115" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="890" y="95" class="svg-title" fill="#ffd740" font-size="20" text-anchor="middle" letter-spacing="2">REMINDERS</text>
+      <text x="890" y="123" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">when Zion nudges</text>
+      <text x="890" y="154" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">Daily 8:30 AM IST</text>
+      <text x="890" y="176" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">Multiple doses / day</text>
+      <text x="890" y="198" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">Refill countdown copy</text>
+      <text x="890" y="220" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">Escalation if missed</text>
+      <text x="890" y="242" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Cron + queue aware</text>
 
-      <circle cx="195" cy="640" r="118" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="195" y="568" class="svg-title" fill="#c084fc" font-size="22" text-anchor="middle" letter-spacing="2">AI</text>
-      <text x="195" y="596" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Ambiguous commands</text>
-      <text x="195" y="628" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">Gemini + Groq</text>
-      <text x="195" y="654" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">Natural language → rows</text>
-      <text x="195" y="680" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">Safety guardrails</text>
-      <text x="195" y="706" class="svg-label" fill="#c084fc" font-size="17" text-anchor="middle">Human confirmation path</text>
+      <circle cx="880" cy="570" r="110" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="880" y="500" class="svg-title" fill="#58a6ff" font-size="20" text-anchor="middle" letter-spacing="2">DUAL CHANNEL</text>
+      <text x="880" y="528" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">belt + suspenders</text>
+      <text x="880" y="558" class="svg-label" fill="#58a6ff" font-size="15" text-anchor="middle">WhatsApp DM to Neo</text>
+      <text x="880" y="580" class="svg-label" fill="#58a6ff" font-size="15" text-anchor="middle">SMTP email backup</text>
+      <text x="880" y="602" class="svg-label" fill="#58a6ff" font-size="15" text-anchor="middle">Audit trail in inbox</text>
+      <text x="880" y="624" class="svg-label" fill="#58a6ff" font-size="15" text-anchor="middle">Bridge echo for receipts</text>
+      <text x="880" y="646" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">TLS + app passwords</text>
 
-      <circle cx="195" cy="210" r="105" fill="#0a1628" stroke="#00ff41" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="195" y="148" class="svg-title" fill="#00ff41" font-size="21" text-anchor="middle" letter-spacing="2">KEY PATH</text>
-      <text x="195" y="176" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Package root</text>
-      <text x="195" y="208" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">TheBoss/medtracker/</text>
-      <text x="195" y="234" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Cron 03:00 UTC slice</text>
-      <text x="195" y="260" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">IST-aligned reminders</text>
+      <circle cx="210" cy="170" r="115" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="210" y="95" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle" letter-spacing="2">AI</text>
+      <text x="210" y="123" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">natural confirmations</text>
+      <text x="210" y="154" class="svg-label" fill="#fb923c" font-size="15" text-anchor="middle">Gemini Flash primary</text>
+      <text x="210" y="176" class="svg-label" fill="#fb923c" font-size="15" text-anchor="middle">Groq fallback</text>
+      <text x="210" y="198" class="svg-label" fill="#fb923c" font-size="15" text-anchor="middle">Parses "done" / "took it"</text>
+      <text x="210" y="220" class="svg-label" fill="#fb923c" font-size="15" text-anchor="middle">Updates spreadsheet state</text>
+      <text x="210" y="242" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Safety prompts if unclear</text>
+
+      <circle cx="220" cy="570" r="110" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="220" y="500" class="svg-title" fill="#c084fc" font-size="20" text-anchor="middle" letter-spacing="2">KEY PATH</text>
+      <text x="220" y="528" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">implementation folder</text>
+      <text x="220" y="558" class="svg-label" fill="#c084fc" font-size="15" text-anchor="middle">TheBoss/medtracker/</text>
+      <text x="220" y="580" class="svg-label" fill="#c084fc" font-size="15" text-anchor="middle">Shared utils + parsers</text>
+      <text x="220" y="602" class="svg-label" fill="#c084fc" font-size="15" text-anchor="middle">openpyxl / pandas</text>
+      <text x="220" y="624" class="svg-label" fill="#c084fc" font-size="15" text-anchor="middle">VM cron orchestration</text>
+      <text x="220" y="646" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Logs under ~/PROJECT/logs</text>
     </svg>
   </div>
 
   <div class="stack-section">
     <h2 class="section-title">Tech Stack</h2>
     <div>
-      <div class="stack-row"><span class="stack-label">Language</span><span class="stack-value">Python</span></div>
-      <div class="stack-row"><span class="stack-label">Spreadsheet</span><span class="stack-value">openpyxl — medicines.xlsx</span></div>
-      <div class="stack-row"><span class="stack-label">Email</span><span class="stack-value">SMTP for refill + backup alerts</span></div>
-      <div class="stack-row"><span class="stack-label">Chat</span><span class="stack-value">WhatsApp Bridge</span></div>
-      <div class="stack-row"><span class="stack-label">AI</span><span class="stack-value">Gemini + Groq for NL commands</span></div>
-      <div class="stack-row"><span class="stack-label">State</span><span class="stack-value">medtracker.db (SQLite)</span></div>
-      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Cron 03:00 UTC (IST windows)</span></div>
-      <div class="stack-row"><span class="stack-label">Key path</span><span class="stack-value">TheBoss/medtracker/</span></div>
+      <div class="stack-row"><span class="stack-label">Runtime</span><span class="stack-value">Python 3 — cron + event hooks</span></div>
+      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Daily 8:30 AM IST (multi-slot capable)</span></div>
+      <div class="stack-row"><span class="stack-label">Data</span><span class="stack-value">medicines.xlsx — doses, refills, status</span></div>
+      <div class="stack-row"><span class="stack-label">Channels</span><span class="stack-value">WhatsApp via Bridge + SMTP email backup</span></div>
+      <div class="stack-row"><span class="stack-label">AI</span><span class="stack-value">Gemini / Groq — NL commands ("done", "took it")</span></div>
+      <div class="stack-row"><span class="stack-label">Key Path</span><span class="stack-value">TheBoss/medtracker/</span></div>
     </div>
   </div>
 
   <footer>
     <div class="footer-content">
       <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a></p>
-      <p class="footer-small">MEDTRACKER — Doses + refills on autopilot</p>
+      <p class="footer-small">MEDTRACKER — Never miss a dose</p>
     </div>
   </footer>
 </div>

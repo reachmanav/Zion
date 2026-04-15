@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEVOPS SECURITY BRIEF — Construct | The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 3.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 900; color: #ff4444; letter-spacing: 4px; text-shadow: 0 0 22px rgba(255,68,68,0.5); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: #ff4444; margin-top: 0.5rem; opacity:0.95; }
+    .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 720px; margin: 1rem auto 0; line-height: 1.8; }
+    .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
+    .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .d-svg { width: 100%; max-width: 1100px; height: auto; margin: 0 auto; display: block; }
+    @keyframes dash-flow-dv { to { stroke-dashoffset: -20; } }
+    @keyframes sun-breathe-dv { 0%,100% { filter: drop-shadow(0 0 8px rgba(255,68,68,0.2)); } 50% { filter: drop-shadow(0 0 26px rgba(255,68,68,0.55)); } }
+    .anim-dash { animation: dash-flow-dv 1s linear infinite; }
+    .anim-sun { animation: sun-breathe-dv 3s ease-in-out infinite; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+    .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(255,68,68,0.16); padding: 0.6rem 0; }
+    .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #ff4444; letter-spacing: 1px; min-width: 110px; }
+    .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<nav id="navbar">
+  <div class="nav-brand"><a href="../index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a></div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#architecture">Architecture</a>
+    <a href="../index.html#agents">Agents</a>
+    <a href="../index.html#projects">Projects</a>
+  </div>
+</nav>
+
+<div class="detail-page">
+  <div class="d-hero">
+    <div class="d-hero-icon">🛡️</div>
+    <h1 class="d-hero-title">DEVOPS SECURITY BRIEF</h1>
+    <p class="d-hero-sub">Morning CVE radar — CISA, NVD, GitHub, Snyk, news — then Groq</p>
+    <p class="d-hero-desc">At <strong>6:45 AM</strong> local delivery, <code>TheBoss/devops_brief.py</code> wakes on cron, aggregates CISA KEV, NVD CVE feeds, GitHub security advisories, Snyk RSS, and Google News security headlines, asks Groq 70B to rank and summarize, then pushes a tight brief through the WhatsApp bridge to Neo—optionally with gTTS voice after the AI news block.</p>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">A Real Conversation</h2>
+    <p class="section-desc">Proactive DM — no @zion needed; severity-first copy for mobile</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="dv1g" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.88"/></marker>
+        <marker id="dv1r" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ff4444" opacity="0.88"/></marker>
+        <marker id="dv1b" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#58a6ff" opacity="0.88"/></marker>
+        <marker id="dv1y" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd700" opacity="0.88"/></marker>
+        <filter id="dvgl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <g transform="translate(15, 40)">
+        <rect width="155" height="350" rx="20" fill="#0a1628" stroke="#00ff41" stroke-width="2.5" stroke-opacity="0.6"/>
+        <rect x="12" y="35" width="131" height="270" rx="6" fill="#0d2137" stroke="#00ff41" stroke-width="0.8" stroke-opacity="0.3"/>
+        <circle cx="77" cy="330" r="10" fill="none" stroke="#00ff41" stroke-width="0.8" stroke-opacity="0.3"/>
+        <rect x="50" y="14" width="55" height="5" rx="2.5" fill="#00ff41" fill-opacity="0.15"/>
+        <rect x="16" y="44" width="123" height="150" rx="8" fill="#ff4444" fill-opacity="0.07" stroke="#ff4444" stroke-width="0.55" stroke-opacity="0.4"/>
+        <text x="22" y="62" class="svg-label" fill="#ff4444" font-size="7.1" font-weight="bold">[Zion] 🛡️ DevOps Security</text>
+        <text x="22" y="76" class="svg-label" fill="#ff4444" font-size="7.1" font-weight="bold">Brief — 6:45 AM</text>
+        <text x="22" y="94" class="svg-label" fill="#ff8888" font-size="6.6">2 Critical CVEs:</text>
+        <text x="22" y="108" class="svg-label" fill="#8b949e" font-size="6.4">CVE-2026-1234 (Apache)</text>
+        <text x="22" y="122" class="svg-label" fill="#8b949e" font-size="6.4">CVSS 9.8</text>
+        <text x="22" y="138" class="svg-label" fill="#8b949e" font-size="6.4">CVE-2026-5678 (Node.js)</text>
+        <text x="22" y="152" class="svg-label" fill="#8b949e" font-size="6.4">CVSS 8.4</text>
+        <text x="22" y="170" class="svg-label" fill="#ffd700" font-size="6.5">3 GitHub advisories</text>
+        <text x="22" y="186" class="svg-label" fill="#8b949e" font-size="6.3">Full details: …</text>
+        <text x="77" y="-8" class="svg-title" fill="#00ff41" font-size="18" text-anchor="middle" letter-spacing="3" filter="url(#dvgl)">NEO</text>
+        <text x="77" y="378" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">lock-screen priority</text>
+      </g>
+
+      <g transform="translate(200, 70)">
+        <rect width="150" height="76" rx="10" fill="#0a1628" stroke="#ff4444" stroke-width="2"/>
+        <text x="75" y="28" class="svg-title" fill="#ff4444" font-size="13" text-anchor="middle">CRON 6:45</text>
+        <text x="75" y="50" class="svg-label" fill="#8b949e" font-size="9.5" text-anchor="middle">IST delivery window</text>
+        <text x="75" y="66" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">after AI news block</text>
+      </g>
+      <path d="M175,215 Q215,170 275,108" fill="none" stroke="#ff4444" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#dv1r)"/>
+
+      <g transform="translate(385, 48)">
+        <rect width="210" height="100" rx="10" fill="#0a1628" stroke="#ff4444" stroke-width="2"/>
+        <text x="105" y="26" class="svg-title" fill="#ff4444" font-size="12" text-anchor="middle">devops_brief.py</text>
+        <text x="105" y="46" class="svg-label" fill="#ff8888" font-size="10" text-anchor="middle">fetch + normalize feeds</text>
+        <text x="105" y="64" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">dedupe + severity sort</text>
+        <text x="105" y="80" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">prep Groq payload</text>
+      </g>
+      <path d="M353,108 Q365,95 420,95" fill="none" stroke="#ff4444" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#dv1r)"/>
+
+      <g transform="translate(630, 58)">
+        <rect width="210" height="108" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="105" y="26" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle">INTEL SOURCES</text>
+        <text x="105" y="46" class="svg-label" fill="#58a6ff" font-size="9.5" text-anchor="middle">CISA KEV · NVD CVE</text>
+        <text x="105" y="62" class="svg-label" fill="#58a6ff" font-size="9.5" text-anchor="middle">GitHub advisories</text>
+        <text x="105" y="78" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Snyk RSS · Google News</text>
+        <text x="105" y="94" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">security topic filters</text>
+      </g>
+      <path d="M598,100 Q615,85 650,95" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#dv1b)"/>
+
+      <g transform="translate(380, 260)">
+        <circle cx="90" cy="70" r="68" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="90" y="58" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">⚡</text>
+        <text x="90" y="78" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle">GROQ 70B</text>
+        <text x="90" y="96" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">CVSS ranking</text>
+        <text x="90" y="110" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">severity narrative</text>
+      </g>
+      <path d="M735,170 Q560,220 470,270" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#dv1b)"/>
+
+      <g transform="translate(560, 360)">
+        <rect width="155" height="64" rx="8" fill="#0a1628" stroke="#00ff41" stroke-width="1.8"/>
+        <text x="77" y="26" class="svg-label" fill="#00ff41" font-size="12" text-anchor="middle">WhatsApp Bridge</text>
+        <text x="77" y="44" class="svg-label" fill="#8b949e" font-size="9.5" text-anchor="middle">POST /api/send</text>
+        <text x="77" y="58" class="svg-label" fill="#8b949e" font-size="8.5" text-anchor="middle">[Zion] 🛡️ prefix</text>
+      </g>
+      <path d="M470,330 Q420,360 560,390" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#dv1g)"/>
+      <path d="M560,392 Q360,430 175,320" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.25s" marker-end="url(#dv1g)"/>
+      <text x="340" y="430" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">brief hits phone first thing</text>
+
+      <g transform="translate(820, 300)">
+        <rect width="255" height="88" rx="10" fill="#0a1628" stroke="#ffd700" stroke-width="1.5" stroke-opacity="0.75"/>
+        <text x="127" y="26" class="svg-title" fill="#ffd700" font-size="11" text-anchor="middle">VOICE (OPTIONAL)</text>
+        <text x="127" y="46" class="svg-label" fill="#8b949e" font-size="9.5" text-anchor="middle">gTTS clip after digest</text>
+        <text x="127" y="62" class="svg-label" fill="#ffd700" font-size="9" text-anchor="middle">same cron pipeline</text>
+        <text x="127" y="78" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">feature-flagged</text>
+      </g>
+      <path d="M520,300 Q700,260 880,320" fill="none" stroke="#ffd700" stroke-width="2" stroke-dasharray="9,5" class="anim-dash" marker-end="url(#dv1y)"/>
+
+      <rect x="188" y="22" width="900" height="410" rx="14" fill="none" stroke="#ff4444" stroke-width="0.45" stroke-opacity="0.1" stroke-dasharray="12,6"/>
+      <text x="630" y="498" class="svg-label" fill="#ff4444" font-size="9" text-anchor="middle" opacity="0.25">Cron anchor: 01:15 UTC (adjust for IST 6:45 delivery)</text>
+    </svg>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">Capability Map</h2>
+    <p class="section-desc">DevOps brief — ingest, analyze, deliver, optional voice</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 800" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="dvsg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff4444" stop-opacity="0.25"/><stop offset="100%" stop-color="#ff4444" stop-opacity="0.02"/></radialGradient>
+        <filter id="dvgl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <line x1="550" y1="390" x2="550" y2="125" stroke="#ff4444" stroke-width="1.2" stroke-opacity="0.14"/>
+      <line x1="585" y1="415" x2="865" y2="415" stroke="#58a6ff" stroke-width="1.2" stroke-opacity="0.1"/>
+      <line x1="550" y1="435" x2="550" y2="655" stroke="#00ff41" stroke-width="1.2" stroke-opacity="0.1"/>
+      <line x1="515" y1="415" x2="235" y2="415" stroke="#ffd700" stroke-width="1.2" stroke-opacity="0.1"/>
+
+      <circle cx="550" cy="390" r="58" fill="url(#dvsg)" stroke="#ff4444" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="378" class="svg-label" fill="#ff4444" font-size="22" text-anchor="middle">🛡️</text>
+      <text x="550" y="404" class="svg-title" fill="#ff4444" font-size="18" text-anchor="middle" letter-spacing="2" filter="url(#dvgl2)">DEVOPS BRIEF</text>
+
+      <circle cx="550" cy="118" r="108" fill="#0a1628" stroke="#ff4444" stroke-width="2.4" stroke-opacity="0.55"/>
+      <text x="550" y="52" class="svg-title" fill="#ff4444" font-size="20" text-anchor="middle" letter-spacing="2">SOURCES</text>
+      <text x="550" y="82" class="svg-label" fill="#8b949e" font-size="16" text-anchor="middle">CISA KEV catalog</text>
+      <text x="550" y="108" class="svg-label" fill="#ff4444" font-size="17" text-anchor="middle">NVD CVE database</text>
+      <text x="550" y="134" class="svg-label" fill="#ff4444" font-size="17" text-anchor="middle">GitHub security advisories</text>
+      <text x="550" y="160" class="svg-label" fill="#8b949e" font-size="16" text-anchor="middle">Snyk RSS + Google News security</text>
+
+      <circle cx="880" cy="390" r="108" fill="#0a1628" stroke="#58a6ff" stroke-width="2.4" stroke-opacity="0.5"/>
+      <text x="880" y="318" class="svg-title" fill="#58a6ff" font-size="20" text-anchor="middle" letter-spacing="2">ANALYSIS</text>
+      <text x="880" y="348" class="svg-label" fill="#8b949e" font-size="16" text-anchor="middle">Groq 70B summarizer</text>
+      <text x="880" y="374" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">CVSS scoring context</text>
+      <text x="880" y="400" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">severity-ranked bullet list</text>
+      <text x="880" y="426" class="svg-label" fill="#8b949e" font-size="16" text-anchor="middle">noise removal + dedupe</text>
+
+      <circle cx="550" cy="665" r="108" fill="#0a1628" stroke="#00ff41" stroke-width="2.4" stroke-opacity="0.5"/>
+      <text x="550" y="593" class="svg-title" fill="#00ff41" font-size="20" text-anchor="middle" letter-spacing="2">DELIVERY</text>
+      <text x="550" y="623" class="svg-label" fill="#8b949e" font-size="16" text-anchor="middle">WhatsApp @ 6:45 AM</text>
+      <text x="550" y="649" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">runs after AI news</text>
+      <text x="550" y="675" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Bridge /api/send</text>
+      <text x="550" y="701" class="svg-label" fill="#8b949e" font-size="16" text-anchor="middle">Neo-only recipient list</text>
+
+      <circle cx="220" cy="390" r="108" fill="#0a1628" stroke="#ffd700" stroke-width="2.4" stroke-opacity="0.5"/>
+      <text x="220" y="318" class="svg-title" fill="#ffd700" font-size="20" text-anchor="middle" letter-spacing="2">TECH</text>
+      <text x="220" y="348" class="svg-label" fill="#ffd700" font-size="17" text-anchor="middle">TheBoss/devops_brief.py</text>
+      <text x="220" y="374" class="svg-label" fill="#8b949e" font-size="16" text-anchor="middle">optional gTTS voice</text>
+      <text x="220" y="400" class="svg-label" fill="#ffd700" font-size="17" text-anchor="middle">cron 01:15 UTC anchor</text>
+      <text x="220" y="426" class="svg-label" fill="#8b949e" font-size="16" text-anchor="middle">systemd/cron on VM</text>
+    </svg>
+  </div>
+
+  <div class="stack-section">
+    <h2 class="section-title">Tech Stack</h2>
+    <div>
+      <div class="stack-row"><span class="stack-label">Runtime</span><span class="stack-value">Python 3 — scheduled worker on Oracle VM</span></div>
+      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Cron 01:15 UTC (tune for 6:45 AM IST push)</span></div>
+      <div class="stack-row"><span class="stack-label">Feeds</span><span class="stack-value">CISA KEV, NVD, GitHub Advisories, Snyk RSS, Google News</span></div>
+      <div class="stack-row"><span class="stack-label">LLM</span><span class="stack-value">Groq Llama 3.3 70B — severity narrative + TL;DR</span></div>
+      <div class="stack-row"><span class="stack-label">Delivery</span><span class="stack-value">WhatsApp Bridge /api/send — [Zion] 🛡️ branding</span></div>
+      <div class="stack-row"><span class="stack-label">Voice</span><span class="stack-value">Optional gTTS audio attachment post-summary</span></div>
+      <div class="stack-row"><span class="stack-label">Key File</span><span class="stack-value">TheBoss/devops_brief.py</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a></p>
+      <p class="footer-small">DEVOPS SECURITY BRIEF — wake up to CVE reality</p>
+    </div>
+  </footer>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

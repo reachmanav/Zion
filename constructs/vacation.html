@@ -10,8 +10,8 @@
     .detail-page { position: relative; z-index: 1; }
     .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
     .d-hero-icon { font-size: 3.5rem; }
-    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #ff6b6b; letter-spacing: 5px; text-shadow: 0 0 20px rgba(255,107,107,0.4); }
-    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #ff6b6b; letter-spacing: 5px; text-shadow: 0 0 20px rgba(255,107,107,0.35); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: #ff6b6b; margin-top: 0.5rem; opacity: 0.9; }
     .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
     .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
     .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
@@ -23,7 +23,7 @@
     .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
     .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
     .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
-    .stack-row { display: flex; border-bottom: 1px solid rgba(255,107,107,0.08); padding: 0.6rem 0; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(255,107,107,0.1); padding: 0.6rem 0; }
     .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #ff6b6b; letter-spacing: 1px; min-width: 110px; }
     .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
   </style>
@@ -44,165 +44,182 @@
   <div class="d-hero">
     <div class="d-hero-icon">✈️</div>
     <h1 class="d-hero-title">VACATION DEALS</h1>
-    <p class="d-hero-sub">Flight scrape — 10:00 PM IST</p>
-    <p class="d-hero-desc">Cheapest international flights from India — real prices scraped from Google Flights every night at 10 PM</p>
+    <p class="d-hero-sub">Cheapest Flights — 10:00 PM IST</p>
+    <p class="d-hero-desc">No subscription command needed for the nightly ping: Zion scrapes <strong>13 routes</strong> on Google Flights with a headless Playwright browser, ranks real INR prices, and WhatsApps Neo + Puja every evening at 10 PM.</p>
   </div>
 
   <div class="diagram-wrap">
     <h2 class="section-title">A Real Conversation</h2>
-    <p class="section-desc">Nightly cron launches headless Chrome — deals land before you sleep</p>
+    <p class="section-desc">Automatic message — Neo wakes up to tonight's cheapest fares</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 490" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="var" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ff6b6b" opacity="0.85"/></marker>
-        <marker id="vag" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.85"/></marker>
-        <filter id="vgl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="ar" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ff6b6b" opacity="0.85"/></marker>
+        <marker id="ao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.8"/></marker>
+        <marker id="ab" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#58a6ff" opacity="0.8"/></marker>
+        <filter id="gl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
 
-      <g transform="translate(18, 105)">
-        <rect width="125" height="100" rx="12" fill="#0a1628" stroke="#ff6b6b" stroke-width="2"/>
-        <text x="62" y="26" class="svg-title" fill="#ff6b6b" font-size="21" text-anchor="middle" letter-spacing="2" filter="url(#vgl)">CRON</text>
-        <text x="62" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">10:00 PM IST</text>
-        <text x="62" y="76" class="svg-label" fill="#ff6b6b" font-size="17" text-anchor="middle">Nightly job</text>
-        <text x="62" y="98" class="svg-label" fill="#ff6b6b" font-size="16" text-anchor="middle">TheBoss</text>
-      </g>
-      <line x1="148" y1="155" x2="175" y2="155" stroke="#ff6b6b" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#var)"/>
-
-      <g transform="translate(182, 100)">
-        <rect width="160" height="110" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
-        <text x="80" y="26" class="svg-title" fill="#ffd740" font-size="20" text-anchor="middle">VACATION JOB</text>
-        <text x="80" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">TheBoss/ script</text>
-        <text x="80" y="76" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">13 routes batch</text>
-        <text x="80" y="100" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Playwright driver</text>
-        <text x="80" y="124" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">Retry + timeout</text>
-      </g>
-      <line x1="347" y1="155" x2="375" y2="155" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#var)"/>
-
-      <g transform="translate(382, 90)">
-        <rect width="195" height="130" rx="12" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
-        <text x="97" y="26" class="svg-title" fill="#58a6ff" font-size="21" text-anchor="middle">PLAYWRIGHT</text>
-        <text x="97" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Headless browser</text>
-        <text x="97" y="76" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Google Flights UI</text>
-        <text x="97" y="100" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">fast-flights helpers</text>
-        <text x="97" y="124" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">DOM stable waits</text>
-      </g>
-      <line x1="582" y1="155" x2="610" y2="155" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#var)"/>
-
-      <g transform="translate(617, 95)">
-        <rect width="175" height="120" rx="12" fill="#0a1628" stroke="#ff6b6b" stroke-width="2"/>
-        <text x="87" y="26" class="svg-title" fill="#ff6b6b" font-size="21" text-anchor="middle">SCRAPE</text>
-        <text x="87" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">13 destinations</text>
-        <text x="87" y="76" class="svg-label" fill="#ff6b6b" font-size="17" text-anchor="middle">Lowest cash price</text>
-        <text x="87" y="100" class="svg-label" fill="#ff6b6b" font-size="17" text-anchor="middle">Date-flex heuristics</text>
-        <text x="87" y="124" class="svg-label" fill="#ff6b6b" font-size="16" text-anchor="middle">INR formatting</text>
-      </g>
-      <line x1="797" y1="155" x2="825" y2="155" stroke="#ff6b6b" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#var)"/>
-
-      <g transform="translate(832, 100)">
-        <rect width="125" height="110" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
-        <text x="62" y="26" class="svg-title" fill="#00ff41" font-size="20" text-anchor="middle">FORMAT</text>
-        <text x="62" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Table layout</text>
-        <text x="62" y="76" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Deals ranked</text>
-        <text x="62" y="100" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">WhatsApp-safe</text>
-      </g>
-      <line x1="962" y1="155" x2="990" y2="155" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#vag)"/>
-
-      <g transform="translate(998, 105)">
-        <rect width="82" height="100" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
-        <text x="41" y="28" class="svg-title" fill="#00ff41" font-size="18" text-anchor="middle">WA</text>
-        <text x="41" y="54" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">send</text>
-        <text x="41" y="80" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">10 PM</text>
+      <g transform="translate(15, 40)">
+        <rect width="155" height="350" rx="20" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5" stroke-opacity="0.6"/>
+        <rect x="12" y="35" width="131" height="270" rx="6" fill="#0d2137" stroke="#ff6b6b" stroke-width="0.8" stroke-opacity="0.3"/>
+        <circle cx="77" cy="330" r="10" fill="none" stroke="#ff6b6b" stroke-width="0.8" stroke-opacity="0.3"/>
+        <rect x="50" y="14" width="55" height="5" rx="2.5" fill="#ff6b6b" fill-opacity="0.15"/>
+        <rect x="18" y="44" width="121" height="200" rx="8" fill="#ff6b6b" fill-opacity="0.05" stroke="#ff6b6b" stroke-width="0.6" stroke-opacity="0.35"/>
+        <text x="24" y="62" class="svg-label" fill="#ff6b6b" font-size="7.5" font-weight="bold">[Zion] ✈️ Tonight's Cheapest</text>
+        <text x="24" y="78" class="svg-label" fill="#ff6b6b" font-size="7.5" font-weight="bold">Flights</text>
+        <text x="24" y="96" class="svg-label" fill="#8b949e" font-size="6.5">BOM→BKK ₹12,450 (Apr 15)</text>
+        <text x="24" y="112" class="svg-label" fill="#8b949e" font-size="6.5">BOM→DXB ₹8,900 (Apr 22)</text>
+        <text x="24" y="128" class="svg-label" fill="#8b949e" font-size="6.5">DEL→SIN ₹15,200 (May 3)</text>
+        <text x="24" y="144" class="svg-label" fill="#8b949e" font-size="6.5">+ 10 more routes ranked…</text>
+        <text x="24" y="168" class="svg-label" fill="#58a6ff" font-size="6.5" opacity="0.85">Auto 10 PM — no @zion</text>
+        <text x="24" y="186" class="svg-label" fill="#58a6ff" font-size="6.5" opacity="0.85">needed to receive</text>
+        <text x="77" y="-8" class="svg-title" fill="#ff6b6b" font-size="18" text-anchor="middle" letter-spacing="3" filter="url(#gl)">NEO</text>
+        <text x="77" y="378" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">📱 10 PM daily</text>
       </g>
 
-      <g transform="translate(15, 250)">
-        <rect width="1070" height="210" rx="14" fill="#0a1628" stroke="#ff6b6b" stroke-width="1.5" stroke-opacity="0.35"/>
-        <text x="535" y="36" class="svg-title" fill="#ff6b6b" font-size="22" text-anchor="middle" letter-spacing="3">NEO SEES</text>
-        <text x="535" y="64" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Real Google Flights numbers — not static marketing copy</text>
-        <text x="535" y="98" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Example: Mumbai → Bangkok ₹12,000 (lowest found tonight)</text>
-        <text x="535" y="128" class="svg-label" fill="#ff6b6b" font-size="17" text-anchor="middle">13 cities: Bangkok, Bali, Dubai, Singapore, and more — tabular WhatsApp message</text>
-        <text x="535" y="158" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Flow: Cron 22:00 IST → vacation script → Playwright → Google Flights → format → Bridge</text>
-        <text x="535" y="188" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">Headless keeps cost at $0 beyond VM electricity</text>
+      <g transform="translate(280, 40)">
+        <rect width="150" height="70" rx="10" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="75" y="24" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">⏰</text>
+        <text x="75" y="44" class="svg-title" fill="#ffd740" font-size="12" text-anchor="middle">CRON 10 PM IST</text>
+        <text x="75" y="60" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">vacation job</text>
       </g>
-      <path d="M1039,205 L1039,245" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#var)"/>
+
+      <path d="M435,75 Q490,72 540,100" fill="none" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
+
+      <g transform="translate(535, 88)">
+        <rect width="155" height="64" rx="10" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="77" y="22" class="svg-title" fill="#ffd740" font-size="11" text-anchor="middle">TheBoss vacation</text>
+        <text x="77" y="40" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Playwright driver</text>
+        <text x="77" y="54" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">13 routes loop</text>
+      </g>
+
+      <path d="M695,118 Q760,140 810,170" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ab)"/>
+      <text x="760" y="132" class="svg-label" fill="#58a6ff" font-size="10" text-anchor="middle">headless Chromium</text>
+
+      <g transform="translate(805, 155)">
+        <rect width="210" height="110" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="105" y="24" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle">GOOGLE FLIGHTS</text>
+        <text x="105" y="44" class="svg-label" fill="#58a6ff" font-size="10" text-anchor="middle">Playwright + DOM scrape</text>
+        <text x="105" y="62" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">fast-flights helpers</text>
+        <text x="105" y="80" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">BKK · DXB · SIN · DPS…</text>
+        <text x="105" y="98" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">real INR + cheapest date</text>
+      </g>
+
+      <path d="M910,265 Q920,300 860,320" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.2s" marker-end="url(#ab)"/>
+
+      <circle cx="830" cy="330" r="68" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
+      <text x="830" y="308" class="svg-label" fill="#ff6b6b" font-size="14" text-anchor="middle">📊</text>
+      <text x="830" y="328" class="svg-title" fill="#ff6b6b" font-size="11" text-anchor="middle">RANK</text>
+      <text x="830" y="346" class="svg-label" fill="#8b949e" font-size="8.5" text-anchor="middle">sort by price</text>
+      <text x="830" y="360" class="svg-label" fill="#ff6b6b" font-size="8.5" text-anchor="middle">WhatsApp table</text>
+
+      <path d="M780,350 Q700,405 615,400" fill="none" stroke="#ff6b6b" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.35s" marker-end="url(#ar)"/>
+
+      <g transform="translate(470, 368)">
+        <rect width="140" height="58" rx="8" fill="#0a1628" stroke="#ff6b6b" stroke-width="1.5"/>
+        <text x="70" y="22" class="svg-label" fill="#ff6b6b" font-size="14" text-anchor="middle">📡 Bridge</text>
+        <text x="70" y="40" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">POST /api/send</text>
+        <text x="70" y="52" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Neo + Puja</text>
+      </g>
+
+      <path d="M465,398 Q320,460 175,378" fill="none" stroke="#ff6b6b" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.5s" marker-end="url(#ar)"/>
+      <text x="300" y="452" class="svg-label" fill="#ff6b6b" font-size="11" text-anchor="middle" font-weight="bold">← ✈️ Deals delivered nightly</text>
+
+      <g transform="translate(280, 168)" opacity="0.45">
+        <text x="0" y="0" class="svg-label" fill="#ffd740" font-size="11">Fully automatic</text>
+        <text x="0" y="18" class="svg-label" fill="#ff6b6b" font-size="11">10 PM IST · 13 cities</text>
+      </g>
+
+      <rect x="260" y="25" width="780" height="420" rx="14" fill="none" stroke="#ff6b6b" stroke-width="0.6" stroke-opacity="0.06" stroke-dasharray="12,6"/>
+      <text x="650" y="490" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle" opacity="0.14">☁️ Oracle Cloud VM — headless scrape</text>
     </svg>
   </div>
 
   <div class="diagram-wrap">
-    <h2 class="section-title">How It Works</h2>
-    <p class="section-desc">Destinations, scraping engine, analysis, delivery</p>
+    <h2 class="section-title">Everything Inside Vacation Deals</h2>
+    <p class="section-desc">The deal table is the sun — components radiate out</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 840" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 800" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="vsg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.22"/><stop offset="100%" stop-color="#ff6b6b" stop-opacity="0.02"/></radialGradient>
-        <filter id="vgl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <radialGradient id="sgv" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.2"/><stop offset="100%" stop-color="#ff6b6b" stop-opacity="0.01"/></radialGradient>
+        <filter id="gl2v"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
-      <line x1="550" y1="370" x2="550" y2="125" stroke="#ff6b6b" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="605" y1="390" x2="895" y2="205" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="605" y1="430" x2="895" y2="620" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.12"/>
-      <line x1="495" y1="430" x2="205" y2="620" stroke="#00ff41" stroke-width="1.5" stroke-opacity="0.12"/>
 
-      <circle cx="550" cy="410" r="60" fill="url(#vsg)" stroke="#ff6b6b" stroke-width="3" class="anim-sun"/>
-      <text x="550" y="402" class="svg-label" fill="#ff6b6b" font-size="22" text-anchor="middle">✈️</text>
-      <text x="550" y="432" class="svg-title" fill="#ff6b6b" font-size="21" text-anchor="middle" letter-spacing="3" filter="url(#vgl2)">DEALS</text>
+      <line x1="550" y1="340" x2="550" y2="140" stroke="#ff6b6b" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="620" y1="370" x2="880" y2="180" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="620" y1="410" x2="880" y2="560" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="480" y1="370" x2="220" y2="180" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="480" y1="410" x2="220" y2="560" stroke="#c084fc" stroke-width="1.5" stroke-opacity="0.1"/>
 
-      <circle cx="550" cy="120" r="118" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="550" y="48" class="svg-title" fill="#ffd740" font-size="22" text-anchor="middle" letter-spacing="2">DESTINATIONS</text>
-      <text x="550" y="76" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">13 international cities</text>
-      <text x="550" y="108" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Bangkok · Bali · Dubai</text>
-      <text x="550" y="134" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Singapore · Europe hops</text>
-      <text x="550" y="160" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Beach + business mix</text>
-      <text x="550" y="186" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Ex-India origin filters</text>
+      <circle cx="550" cy="390" r="55" fill="url(#sgv)" stroke="#ff6b6b" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="382" class="svg-label" fill="#ff6b6b" font-size="22" text-anchor="middle">✈️</text>
+      <text x="550" y="406" class="svg-title" fill="#ff6b6b" font-size="14" text-anchor="middle" letter-spacing="3" filter="url(#gl2v)">VACATION</text>
 
-      <circle cx="905" cy="215" r="120" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="905" y="142" class="svg-title" fill="#58a6ff" font-size="22" text-anchor="middle" letter-spacing="2">SCRAPING</text>
-      <text x="905" y="170" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Browser automation</text>
-      <text x="905" y="202" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">Playwright headless</text>
-      <text x="905" y="228" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">fast-flights library</text>
-      <text x="905" y="254" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">Live Google Flights DOM</text>
-      <text x="905" y="280" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Anti-flake waits + screenshots</text>
+      <circle cx="550" cy="110" r="110" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="40" class="svg-title" fill="#ff6b6b" font-size="20" text-anchor="middle" letter-spacing="2">DESTINATIONS</text>
+      <text x="550" y="68" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">13 monitored routes</text>
+      <text x="550" y="96" class="svg-label" fill="#ff6b6b" font-size="14" text-anchor="middle">Bangkok · Bali · Dubai</text>
+      <text x="550" y="118" class="svg-label" fill="#ff6b6b" font-size="14" text-anchor="middle">Singapore · Europe hops</text>
+      <text x="550" y="140" class="svg-label" fill="#ff6b6b" font-size="14" text-anchor="middle">Indian metro origins</text>
+      <text x="550" y="162" class="svg-label" fill="#ff6b6b" font-size="14" text-anchor="middle">Leisure + long-weekend</text>
+      <text x="550" y="184" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">BOM/DEL + more as configured</text>
 
-      <circle cx="905" cy="615" r="118" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="905" y="542" class="svg-title" fill="#ff6b6b" font-size="22" text-anchor="middle" letter-spacing="2">ANALYSIS</text>
-      <text x="905" y="570" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Deal intelligence</text>
-      <text x="905" y="602" class="svg-label" fill="#ff6b6b" font-size="18" text-anchor="middle">Price comparison matrix</text>
-      <text x="905" y="628" class="svg-label" fill="#ff6b6b" font-size="18" text-anchor="middle">Cheapest date windows</text>
-      <text x="905" y="654" class="svg-label" fill="#ff6b6b" font-size="18" text-anchor="middle">Highlight under median</text>
-      <text x="905" y="680" class="svg-label" fill="#ff6b6b" font-size="17" text-anchor="middle">Stale-run detection</text>
+      <circle cx="890" cy="170" r="115" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="890" y="95" class="svg-title" fill="#ffd740" font-size="20" text-anchor="middle" letter-spacing="2">SCRAPING</text>
+      <text x="890" y="123" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">browser automation</text>
+      <text x="890" y="152" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">Playwright headless</text>
+      <text x="890" y="174" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">fast-flights lib glue</text>
+      <text x="890" y="196" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">Google Flights DOM</text>
+      <text x="890" y="218" class="svg-label" fill="#ffd740" font-size="14" text-anchor="middle">Anti-bot pacing + retries</text>
+      <text x="890" y="240" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Chromium on Ampere ARM</text>
 
-      <circle cx="195" cy="615" r="118" fill="#0a1628" stroke="#00ff41" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="195" y="542" class="svg-title" fill="#00ff41" font-size="22" text-anchor="middle" letter-spacing="2">DELIVERY</text>
-      <text x="195" y="570" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Human-readable table</text>
-      <text x="195" y="602" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">WhatsApp 10 PM</text>
-      <text x="195" y="628" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Monospace columns</text>
-      <text x="195" y="654" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Emoji route headers</text>
-      <text x="195" y="680" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Tap-to-forward friendly</text>
+      <circle cx="880" cy="570" r="110" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="880" y="500" class="svg-title" fill="#58a6ff" font-size="20" text-anchor="middle" letter-spacing="2">PRICING</text>
+      <text x="880" y="528" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">what you see in DM</text>
+      <text x="880" y="556" class="svg-label" fill="#58a6ff" font-size="14" text-anchor="middle">Real INR totals</text>
+      <text x="880" y="578" class="svg-label" fill="#58a6ff" font-size="14" text-anchor="middle">Cheapest date per route</text>
+      <text x="880" y="600" class="svg-label" fill="#58a6ff" font-size="14" text-anchor="middle">Sorted deal table</text>
+      <text x="880" y="622" class="svg-label" fill="#58a6ff" font-size="14" text-anchor="middle">Highlights + footnotes</text>
+      <text x="880" y="644" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Subject to airline change</text>
 
-      <circle cx="195" cy="215" r="105" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" stroke-opacity="0.55"/>
-      <text x="195" y="152" class="svg-title" fill="#c084fc" font-size="21" text-anchor="middle" letter-spacing="2">KEY PATH</text>
-      <text x="195" y="180" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">TheBoss vacation script</text>
-      <text x="195" y="212" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">TheBoss/ (vacation)</text>
-      <text x="195" y="238" class="svg-label" fill="#c084fc" font-size="17" text-anchor="middle">Cron 22:00 IST</text>
-      <text x="195" y="264" class="svg-label" fill="#c084fc" font-size="17" text-anchor="middle">Chromium cache on VM</text>
+      <circle cx="210" cy="170" r="115" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="210" y="95" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle" letter-spacing="2">DELIVERY</text>
+      <text x="210" y="123" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">who + when</text>
+      <text x="210" y="152" class="svg-label" fill="#fb923c" font-size="14" text-anchor="middle">WhatsApp 10 PM daily</text>
+      <text x="210" y="174" class="svg-label" fill="#fb923c" font-size="14" text-anchor="middle">Neo + Puja recipients</text>
+      <text x="210" y="196" class="svg-label" fill="#fb923c" font-size="14" text-anchor="middle">[Zion] ✈️ prefix</text>
+      <text x="210" y="218" class="svg-label" fill="#fb923c" font-size="14" text-anchor="middle">No manual @zion trigger</text>
+      <text x="210" y="240" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Bridge /api/send</text>
+
+      <circle cx="220" cy="570" r="110" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="220" y="500" class="svg-title" fill="#c084fc" font-size="20" text-anchor="middle" letter-spacing="2">KEY FILE</text>
+      <text x="220" y="528" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">TheBoss/ vacation script</text>
+      <text x="220" y="556" class="svg-label" fill="#c084fc" font-size="14" text-anchor="middle">Cron + logs on VM</text>
+      <text x="220" y="578" class="svg-label" fill="#c084fc" font-size="14" text-anchor="middle">Playwright deps pinned</text>
+      <text x="220" y="600" class="svg-label" fill="#c084fc" font-size="14" text-anchor="middle">Route config JSON / py</text>
+      <text x="220" y="622" class="svg-label" fill="#c084fc" font-size="14" text-anchor="middle">Screenshots on failure</text>
+      <text x="220" y="644" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">Ampere A1 headless</text>
     </svg>
   </div>
 
   <div class="stack-section">
     <h2 class="section-title">Tech Stack</h2>
     <div>
-      <div class="stack-row"><span class="stack-label">Language</span><span class="stack-value">Python</span></div>
-      <div class="stack-row"><span class="stack-label">Browser</span><span class="stack-value">Playwright (headless Chromium)</span></div>
-      <div class="stack-row"><span class="stack-label">Flights</span><span class="stack-value">fast-flights + Google Flights UI</span></div>
-      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Cron 22:00 IST</span></div>
-      <div class="stack-row"><span class="stack-label">Delivery</span><span class="stack-value">WhatsApp Bridge</span></div>
-      <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">$0 — self-hosted scrape</span></div>
-      <div class="stack-row"><span class="stack-label">Key path</span><span class="stack-value">TheBoss/ (vacation script)</span></div>
+      <div class="stack-row"><span class="stack-label">Runtime</span><span class="stack-value">Python 3 + Playwright (Chromium)</span></div>
+      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Cron 10:00 PM IST nightly</span></div>
+      <div class="stack-row"><span class="stack-label">Target</span><span class="stack-value">Google Flights — 13 configured routes</span></div>
+      <div class="stack-row"><span class="stack-label">Scrape</span><span class="stack-value">Headless browser DOM + fast-flights helpers</span></div>
+      <div class="stack-row"><span class="stack-label">Output</span><span class="stack-value">Ranked INR table — cheapest dates highlighted</span></div>
+      <div class="stack-row"><span class="stack-label">Delivery</span><span class="stack-value">WhatsApp Bridge — Neo + Puja</span></div>
+      <div class="stack-row"><span class="stack-label">Key Path</span><span class="stack-value">TheBoss/ (vacation flight script)</span></div>
     </div>
   </div>
 
   <footer>
     <div class="footer-content">
       <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a></p>
-      <p class="footer-small">VACATION DEALS — Nightly flight intel</p>
+      <p class="footer-small">VACATION DEALS — Nightly flight scan</p>
     </div>
   </footer>
 </div>
