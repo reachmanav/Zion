@@ -64,139 +64,124 @@
   <p class="section-desc">"You've been living in a dream world, Neo. This is the world as it is."</p>
   
   <div class="diagram-container">
-    <div class="arch-diagram">
+    <div class="arch-split">
 
-      <!-- Layer 1: Neo -->
-      <div class="arch-layer">
-        <div class="arch-layer-label">THE ONE</div>
-        <div class="arch-nodes">
-          <div class="arch-node neo-node">
-            <div class="arch-node-icon">🧑</div>
-            <div class="arch-node-title">NEO</div>
-            <div class="arch-node-sub">Manav Shah</div>
+      <!-- LEFT SIDE: Neo's World -->
+      <div class="arch-side left-side">
+        <div class="arch-side-label">NEO'S WORLD</div>
+
+        <div class="arch-box neo-box">
+          <div class="arch-box-icon">🧑</div>
+          <div class="arch-box-title">NEO</div>
+          <div class="arch-box-sub">The One — Manav Shah</div>
+        </div>
+
+        <div class="arch-box device-box">
+          <div class="arch-box-icon">📱</div>
+          <div class="arch-box-title">Phone</div>
+          <div class="arch-box-sub">WhatsApp • Email</div>
+          <div class="arch-box-flows">
+            <span class="flow-tag">@zion → WhatsApp</span>
+            <span class="flow-tag">@morpheus → Email</span>
+            <span class="flow-tag">@trinity → WhatsApp</span>
+          </div>
+        </div>
+
+        <div class="arch-box device-box blue-box">
+          <div class="arch-box-icon">💻</div>
+          <div class="arch-box-title">Laptop</div>
+          <div class="arch-box-sub">Cursor IDE</div>
+          <div class="arch-box-flows">
+            <span class="flow-tag blue">Trinity (Opus 4.6)</span>
+            <span class="flow-tag blue">Cortex (@neo)</span>
+          </div>
+        </div>
+
+        <div class="arch-box api-box">
+          <div class="arch-side-label" style="margin-bottom:0.75rem">🌐 EXTERNAL APIs</div>
+          <div class="api-tags">
+            <span class="flow-tag gold">⚡ Groq (Llama 3.3 70B)</span>
+            <span class="flow-tag gold">💎 Gemini Flash</span>
+            <span class="flow-tag gold">🐺 Lobo (Architect)</span>
           </div>
         </div>
       </div>
 
-      <!-- Connectors -->
-      <div class="arch-connectors">
-        <div class="arch-line-group">
-          <div class="arch-line-label">📱 WhatsApp</div>
-          <div class="arch-arrow">▼</div>
+      <!-- CENTER: Connection Arrows -->
+      <div class="arch-center">
+        <div class="arch-arrow-row">
+          <span class="arrow-label">@zion messages</span>
+          <span class="arrow-line">━━━━━━►</span>
         </div>
-        <div class="arch-line-group">
-          <div class="arch-line-label">📧 Email</div>
-          <div class="arch-arrow">▼</div>
+        <div class="arch-arrow-row reverse">
+          <span class="arrow-line">◄━━━━━━</span>
+          <span class="arrow-label">[Zion] replies</span>
         </div>
-        <div class="arch-line-group">
-          <div class="arch-line-label">💻 Cursor IDE</div>
-          <div class="arch-arrow">▼</div>
+        <div class="arch-arrow-row">
+          <span class="arrow-label">@morpheus email</span>
+          <span class="arrow-line">━━━━━━►</span>
         </div>
-      </div>
-
-      <!-- Layer 2: Interfaces -->
-      <div class="arch-layer">
-        <div class="arch-layer-label">INTERFACES</div>
-        <div class="arch-nodes">
-          <div class="arch-node bridge-node">
-            <div class="arch-node-icon">📡</div>
-            <div class="arch-node-title">WhatsApp Bridge</div>
-            <div class="arch-node-sub">Go Service</div>
-          </div>
-          <div class="arch-node bridge-node">
-            <div class="arch-node-icon">📧</div>
-            <div class="arch-node-title">Gmail</div>
-            <div class="arch-node-sub">IMAP / SMTP</div>
-          </div>
-          <div class="arch-node bridge-node blue">
-            <div class="arch-node-icon">🔺</div>
-            <div class="arch-node-title">TRINITY</div>
-            <div class="arch-node-sub">Cursor + Claude Opus</div>
-          </div>
+        <div class="arch-arrow-row reverse">
+          <span class="arrow-line">◄━━━━━━</span>
+          <span class="arrow-label">email reply</span>
+        </div>
+        <div class="arch-arrow-row">
+          <span class="arrow-label">SSH deploy</span>
+          <span class="arrow-line blue-line">━━━━━━►</span>
+        </div>
+        <div class="arch-arrow-row reverse">
+          <span class="arrow-line">◄━━━━━━</span>
+          <span class="arrow-label">🚨 alerts</span>
         </div>
       </div>
 
-      <div class="arch-connectors">
-        <div class="arch-line-group"><div class="arch-arrow">▼</div></div>
-        <div class="arch-line-group"><div class="arch-arrow">▼</div></div>
-        <div class="arch-line-group"><div class="arch-arrow-label">SSH deploy</div><div class="arch-arrow">▼</div></div>
-      </div>
+      <!-- RIGHT SIDE: Oracle Cloud -->
+      <div class="arch-side right-side">
+        <div class="arch-side-label">☁️ ORACLE CLOUD VM</div>
+        <div class="arch-side-sublabel">Free Tier — 4 CPU, 24GB RAM — Always On</div>
 
-      <!-- Layer 3: Core Agents (Cloud VM) -->
-      <div class="arch-layer cloud-layer">
-        <div class="arch-layer-label">☁️ ORACLE CLOUD VM — Free Tier (4 CPU, 24GB RAM)</div>
-        <div class="arch-nodes">
-          <div class="arch-node agent-node">
-            <div class="arch-node-icon">🏛️</div>
-            <div class="arch-node-title">ZION</div>
-            <div class="arch-node-sub">WhatsApp AI Bot</div>
-            <div class="arch-node-tech">Groq • Llama 3.3 70B</div>
+        <div class="arch-box agent-box">
+          <div class="arch-box-icon">📡</div>
+          <div class="arch-box-title">WhatsApp Bridge</div>
+          <div class="arch-box-sub">Go Service — connects to WhatsApp</div>
+        </div>
+
+        <div class="cloud-agents">
+          <div class="arch-box agent-box">
+            <div class="arch-box-icon">🏛️</div>
+            <div class="arch-box-title">ZION</div>
+            <div class="arch-box-sub">WhatsApp AI Bot</div>
+            <div class="arch-box-tech">Chat • Vision • Voice • Search • Weather</div>
           </div>
-          <div class="arch-node agent-node">
-            <div class="arch-node-icon">📧</div>
-            <div class="arch-node-title">MORPHEUS</div>
-            <div class="arch-node-sub">Email Bot</div>
-            <div class="arch-node-tech">Cron: every 2 min</div>
+          <div class="arch-box agent-box">
+            <div class="arch-box-icon">📧</div>
+            <div class="arch-box-title">MORPHEUS</div>
+            <div class="arch-box-sub">Email Bot</div>
+            <div class="arch-box-tech">Cron: every 2 min</div>
           </div>
-          <div class="arch-node agent-node">
-            <div class="arch-node-icon">🕵️</div>
-            <div class="arch-node-title">ANDERSON</div>
-            <div class="arch-node-sub">SRE Health Monitor</div>
-            <div class="arch-node-tech">Cron: every 5 min</div>
+          <div class="arch-box agent-box">
+            <div class="arch-box-icon">🕵️</div>
+            <div class="arch-box-title">ANDERSON</div>
+            <div class="arch-box-sub">SRE Health Monitor</div>
+            <div class="arch-box-tech">Auto-restart • Alerts</div>
           </div>
         </div>
-      </div>
 
-      <div class="arch-connectors">
-        <div class="arch-line-group"><div class="arch-arrow">▼</div></div>
-      </div>
-
-      <!-- Layer 4: Constructs -->
-      <div class="arch-layer">
-        <div class="arch-layer-label">CONSTRUCTS (Sub-Projects)</div>
-        <div class="arch-nodes constructs-row">
-          <div class="arch-node-mini">📰 AI News</div>
-          <div class="arch-node-mini">📈 Stocks</div>
-          <div class="arch-node-mini">📖 Word Daily</div>
-          <div class="arch-node-mini">✈️ Vacation</div>
-          <div class="arch-node-mini">💊 MedTracker</div>
-          <div class="arch-node-mini">🏃 Fitbit</div>
-          <div class="arch-node-mini">👨‍👦 Dad Reply</div>
-          <div class="arch-node-mini">📅 Calendar</div>
-          <div class="arch-node-mini">👥 Contacts</div>
-          <div class="arch-node-mini">🌤️ Weather</div>
-          <div class="arch-node-mini">🎯 Trivia</div>
-          <div class="arch-node-mini">🏋️ Strava</div>
-        </div>
-      </div>
-
-      <div class="arch-connectors">
-        <div class="arch-line-group"><div class="arch-arrow-label">API calls</div><div class="arch-arrow">▼</div></div>
-      </div>
-
-      <!-- Layer 5: External APIs -->
-      <div class="arch-layer">
-        <div class="arch-layer-label">🌐 EXTERNAL APIs</div>
-        <div class="arch-nodes">
-          <div class="arch-node api-node">
-            <div class="arch-node-icon">⚡</div>
-            <div class="arch-node-title">Groq</div>
-            <div class="arch-node-sub">Llama 3.3 70B</div>
-          </div>
-          <div class="arch-node api-node">
-            <div class="arch-node-icon">💎</div>
-            <div class="arch-node-title">Gemini</div>
-            <div class="arch-node-sub">Flash + Grounding</div>
-          </div>
-          <div class="arch-node api-node">
-            <div class="arch-node-icon">🐺</div>
-            <div class="arch-node-title">LOBO</div>
-            <div class="arch-node-sub">Architecture Advisor</div>
-          </div>
-          <div class="arch-node api-node">
-            <div class="arch-node-icon">🧠</div>
-            <div class="arch-node-title">CORTEX</div>
-            <div class="arch-node-sub">Corporate AI (Teams)</div>
+        <div class="arch-box constructs-box">
+          <div class="arch-side-label" style="margin-bottom:0.75rem">CONSTRUCTS</div>
+          <div class="constructs-grid">
+            <span class="construct-tag">📰 AI News</span>
+            <span class="construct-tag">📈 Stocks</span>
+            <span class="construct-tag">📖 Word Daily</span>
+            <span class="construct-tag">✈️ Vacation</span>
+            <span class="construct-tag">💊 MedTracker</span>
+            <span class="construct-tag">🏃 Fitbit</span>
+            <span class="construct-tag">👨‍👦 Dad Reply</span>
+            <span class="construct-tag">📅 Calendar</span>
+            <span class="construct-tag">👥 Contacts</span>
+            <span class="construct-tag">🌤️ Weather</span>
+            <span class="construct-tag">🎯 Trivia</span>
+            <span class="construct-tag">🏋️ Strava</span>
           </div>
         </div>
       </div>
