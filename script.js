@@ -3,28 +3,7 @@
    Matrix rain, scroll animations, Mermaid init
    ═══════════════════════════════════════════════════════════════ */
 
-// Mermaid config — Matrix theme
-mermaid.initialize({
-  startOnLoad: true,
-  theme: 'dark',
-  themeVariables: {
-    darkMode: true,
-    background: '#0d1117',
-    primaryColor: '#161b22',
-    primaryTextColor: '#c9d1d9',
-    primaryBorderColor: '#00ff41',
-    lineColor: '#00ff41',
-    secondaryColor: '#161b22',
-    tertiaryColor: '#0d1117',
-    fontFamily: 'Share Tech Mono, monospace',
-    fontSize: '13px',
-  },
-  flowchart: {
-    htmlLabels: true,
-    curve: 'basis',
-    padding: 15,
-  },
-});
+// No external diagram library needed — pure CSS architecture diagram
 
 // Matrix Rain
 (function matrixRain() {
@@ -71,7 +50,7 @@ mermaid.initialize({
 // Scroll fade-in animations
 (function scrollAnimations() {
   const targets = document.querySelectorAll(
-    '.agent-card, .project-card, .stack-item, .diagram-container'
+    '.agent-card, .project-card, .stack-item, .diagram-container, .arch-layer'
   );
   targets.forEach(el => el.classList.add('fade-in'));
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Matrix — KeyMaker Project</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -64,64 +64,143 @@
   <p class="section-desc">"You've been living in a dream world, Neo. This is the world as it is."</p>
   
   <div class="diagram-container">
-    <div class="mermaid">
-graph TB
-    subgraph HUMAN["🧑 NEO — The One"]
-        PHONE["📱 Phone<br/><small>WhatsApp • Email</small>"]
-        LAPTOP["💻 Laptop<br/><small>Cursor IDE</small>"]
-    end
+    <div class="arch-diagram">
 
-    subgraph CLOUD["☁️ ORACLE CLOUD VM — Free Tier"]
-        ZION["🏛️ ZION<br/><small>WhatsApp AI Bot</small><br/><small>Groq • Llama 3.3 70B</small>"]
-        BRIDGE["📡 WhatsApp Bridge<br/><small>Go Service</small>"]
-        ANDERSON["🕵️ ANDERSON<br/><small>SRE Health Monitor</small><br/><small>Cron: every 5 min</small>"]
-        MORPHEUS["📧 MORPHEUS<br/><small>Email Bot</small><br/><small>Cron: every 2 min</small>"]
-        BOSS["📋 TheBoss<br/><small>Daily Briefs Engine</small>"]
-        DAD["👨‍👦 Dad Auto-Reply<br/><small>Smart Gujarati Replies</small>"]
-    end
+      <!-- Layer 1: Neo -->
+      <div class="arch-layer">
+        <div class="arch-layer-label">THE ONE</div>
+        <div class="arch-nodes">
+          <div class="arch-node neo-node">
+            <div class="arch-node-icon">🧑</div>
+            <div class="arch-node-title">NEO</div>
+            <div class="arch-node-sub">Manav Shah</div>
+          </div>
+        </div>
+      </div>
 
-    subgraph LOCAL["🖥️ NEO'S LAPTOP"]
-        TRINITY["🔺 TRINITY<br/><small>Cursor + Claude Opus</small><br/><small>Code • Deploy • Debug</small>"]
-        CORTEX["🧠 CORTEX (@neo)<br/><small>Corporate AI</small><br/><small>MS Teams • RAG</small>"]
-    end
+      <!-- Connectors -->
+      <div class="arch-connectors">
+        <div class="arch-line-group">
+          <div class="arch-line-label">📱 WhatsApp</div>
+          <div class="arch-arrow">▼</div>
+        </div>
+        <div class="arch-line-group">
+          <div class="arch-line-label">📧 Email</div>
+          <div class="arch-arrow">▼</div>
+        </div>
+        <div class="arch-line-group">
+          <div class="arch-line-label">💻 Cursor IDE</div>
+          <div class="arch-arrow">▼</div>
+        </div>
+      </div>
 
-    subgraph EXTERNAL["🌐 EXTERNAL APIs"]
-        GROQ["⚡ Groq API"]
-        GEMINI["💎 Gemini API"]
-        LOBO["🐺 LOBO<br/><small>Architecture Advisor</small>"]
-    end
+      <!-- Layer 2: Interfaces -->
+      <div class="arch-layer">
+        <div class="arch-layer-label">INTERFACES</div>
+        <div class="arch-nodes">
+          <div class="arch-node bridge-node">
+            <div class="arch-node-icon">📡</div>
+            <div class="arch-node-title">WhatsApp Bridge</div>
+            <div class="arch-node-sub">Go Service</div>
+          </div>
+          <div class="arch-node bridge-node">
+            <div class="arch-node-icon">📧</div>
+            <div class="arch-node-title">Gmail</div>
+            <div class="arch-node-sub">IMAP / SMTP</div>
+          </div>
+          <div class="arch-node bridge-node blue">
+            <div class="arch-node-icon">🔺</div>
+            <div class="arch-node-title">TRINITY</div>
+            <div class="arch-node-sub">Cursor + Claude Opus</div>
+          </div>
+        </div>
+      </div>
 
-    PHONE -->|"@zion ..."| BRIDGE
-    BRIDGE -->|messages| ZION
-    ZION -->|replies| BRIDGE
-    BRIDGE -->|"[Zion] ..."| PHONE
-    
-    PHONE -->|"@morpheus ..."| MORPHEUS
-    MORPHEUS -->|email reply| PHONE
-    
-    ANDERSON -->|"🚨 alerts"| BRIDGE
-    ANDERSON -->|"auto-fix"| ZION
-    
-    LAPTOP -->|code & deploy| TRINITY
-    TRINITY -->|SSH| CLOUD
-    TRINITY -->|"consult"| LOBO
-    
-    ZION --> GROQ
-    ZION --> GEMINI
-    ZION --> BOSS
-    MORPHEUS --> GROQ
+      <div class="arch-connectors">
+        <div class="arch-line-group"><div class="arch-arrow">▼</div></div>
+        <div class="arch-line-group"><div class="arch-arrow">▼</div></div>
+        <div class="arch-line-group"><div class="arch-arrow-label">SSH deploy</div><div class="arch-arrow">▼</div></div>
+      </div>
 
-    classDef human fill:#1a1a2e,stroke:#00ff41,stroke-width:2px,color:#00ff41
-    classDef cloud fill:#0d1117,stroke:#00ff41,stroke-width:2px,color:#00ff41
-    classDef local fill:#0d1117,stroke:#58a6ff,stroke-width:2px,color:#58a6ff
-    classDef external fill:#0d1117,stroke:#ffd700,stroke-width:2px,color:#ffd700
-    classDef agent fill:#161b22,stroke:#00ff41,stroke-width:1px,color:#c9d1d9
+      <!-- Layer 3: Core Agents (Cloud VM) -->
+      <div class="arch-layer cloud-layer">
+        <div class="arch-layer-label">☁️ ORACLE CLOUD VM — Free Tier (4 CPU, 24GB RAM)</div>
+        <div class="arch-nodes">
+          <div class="arch-node agent-node">
+            <div class="arch-node-icon">🏛️</div>
+            <div class="arch-node-title">ZION</div>
+            <div class="arch-node-sub">WhatsApp AI Bot</div>
+            <div class="arch-node-tech">Groq • Llama 3.3 70B</div>
+          </div>
+          <div class="arch-node agent-node">
+            <div class="arch-node-icon">📧</div>
+            <div class="arch-node-title">MORPHEUS</div>
+            <div class="arch-node-sub">Email Bot</div>
+            <div class="arch-node-tech">Cron: every 2 min</div>
+          </div>
+          <div class="arch-node agent-node">
+            <div class="arch-node-icon">🕵️</div>
+            <div class="arch-node-title">ANDERSON</div>
+            <div class="arch-node-sub">SRE Health Monitor</div>
+            <div class="arch-node-tech">Cron: every 5 min</div>
+          </div>
+        </div>
+      </div>
 
-    class HUMAN human
-    class CLOUD cloud
-    class LOCAL local
-    class EXTERNAL external
-    class ZION,BRIDGE,ANDERSON,MORPHEUS,BOSS,DAD,TRINITY,CORTEX,GROQ,GEMINI,LOBO,PHONE,LAPTOP agent
+      <div class="arch-connectors">
+        <div class="arch-line-group"><div class="arch-arrow">▼</div></div>
+      </div>
+
+      <!-- Layer 4: Constructs -->
+      <div class="arch-layer">
+        <div class="arch-layer-label">CONSTRUCTS (Sub-Projects)</div>
+        <div class="arch-nodes constructs-row">
+          <div class="arch-node-mini">📰 AI News</div>
+          <div class="arch-node-mini">📈 Stocks</div>
+          <div class="arch-node-mini">📖 Word Daily</div>
+          <div class="arch-node-mini">✈️ Vacation</div>
+          <div class="arch-node-mini">💊 MedTracker</div>
+          <div class="arch-node-mini">🏃 Fitbit</div>
+          <div class="arch-node-mini">👨‍👦 Dad Reply</div>
+          <div class="arch-node-mini">📅 Calendar</div>
+          <div class="arch-node-mini">👥 Contacts</div>
+          <div class="arch-node-mini">🌤️ Weather</div>
+          <div class="arch-node-mini">🎯 Trivia</div>
+          <div class="arch-node-mini">🏋️ Strava</div>
+        </div>
+      </div>
+
+      <div class="arch-connectors">
+        <div class="arch-line-group"><div class="arch-arrow-label">API calls</div><div class="arch-arrow">▼</div></div>
+      </div>
+
+      <!-- Layer 5: External APIs -->
+      <div class="arch-layer">
+        <div class="arch-layer-label">🌐 EXTERNAL APIs</div>
+        <div class="arch-nodes">
+          <div class="arch-node api-node">
+            <div class="arch-node-icon">⚡</div>
+            <div class="arch-node-title">Groq</div>
+            <div class="arch-node-sub">Llama 3.3 70B</div>
+          </div>
+          <div class="arch-node api-node">
+            <div class="arch-node-icon">💎</div>
+            <div class="arch-node-title">Gemini</div>
+            <div class="arch-node-sub">Flash + Grounding</div>
+          </div>
+          <div class="arch-node api-node">
+            <div class="arch-node-icon">🐺</div>
+            <div class="arch-node-title">LOBO</div>
+            <div class="arch-node-sub">Architecture Advisor</div>
+          </div>
+          <div class="arch-node api-node">
+            <div class="arch-node-icon">🧠</div>
+            <div class="arch-node-title">CORTEX</div>
+            <div class="arch-node-sub">Corporate AI (Teams)</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
