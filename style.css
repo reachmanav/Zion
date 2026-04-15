@@ -425,6 +425,34 @@ section {
   color: var(--matrix-green);
 }
 
+/* Clickable boxes/cards */
+.clickable-box, .clickable-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+}
+
+.click-hint {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--matrix-green);
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.clickable-box:hover .click-hint,
+.clickable-card:hover .click-hint {
+  opacity: 0.7;
+}
+
+.clickable-box:hover, .clickable-card:hover {
+  border-color: var(--matrix-green) !important;
+  box-shadow: 0 0 25px rgba(0, 255, 65, 0.15) !important;
+}
+
 /* Responsive: stack on mobile */
 @media (max-width: 900px) {
   .arch-split {

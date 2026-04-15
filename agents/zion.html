@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZION — WhatsApp AI Bot | The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="agent-detail.css">
+</head>
+<body>
+
+<canvas id="matrix-rain"></canvas>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <a href="../index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a>
+  </div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#architecture">Architecture</a>
+    <a href="../index.html#agents">Agents</a>
+    <a href="../index.html#projects">Projects</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="agent-hero">
+  <div class="agent-hero-icon">🏛️</div>
+  <h1 class="agent-hero-title">ZION</h1>
+  <p class="agent-hero-role">The Last Human City — WhatsApp AI Bot</p>
+  <p class="agent-hero-desc">The central intelligence of The Matrix. Zion receives messages from Neo and friends via WhatsApp, processes them through a sophisticated routing pipeline, and responds using AI, web search, real-time APIs, and 12+ sub-constructs.</p>
+</section>
+
+<!-- Internal Architecture -->
+<section>
+  <h2 class="section-title">Internal Architecture</h2>
+  <p class="section-desc">How a WhatsApp message flows through Zion</p>
+
+  <div class="flow-diagram">
+
+    <!-- Step 1: Message In -->
+    <div class="flow-step">
+      <div class="flow-step-num">1</div>
+      <div class="flow-step-content">
+        <div class="flow-step-title">MESSAGE ARRIVES</div>
+        <div class="flow-step-desc">User sends <code>@zion weather in Pune</code> on WhatsApp</div>
+        <div class="flow-step-tech">WhatsApp Bridge (Go) → SQLite messages.db → Zion polls every 2s</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">▼</div>
+
+    <!-- Step 2: Parse -->
+    <div class="flow-step">
+      <div class="flow-step-num">2</div>
+      <div class="flow-step-content">
+        <div class="flow-step-title">PARSE & CLASSIFY</div>
+        <div class="flow-step-desc">Strip <code>@zion</code> tag, detect media type (text/image/voice/document), check permissions</div>
+        <div class="flow-step-tech">Group approval gate • Owner check • Context window • Follow-up detection</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">▼</div>
+
+    <!-- Step 3: Route -->
+    <div class="flow-step highlight-step">
+      <div class="flow-step-num">3</div>
+      <div class="flow-step-content">
+        <div class="flow-step-title">SMART ROUTER</div>
+        <div class="flow-step-desc">Priority-ordered handler chain — first match wins</div>
+        <div class="handler-chain">
+          <div class="handler">🔺 @trinity → Trinity Queue</div>
+          <div class="handler">🖼️ Image → Gemini Vision</div>
+          <div class="handler">🎤 Voice → STT → Text pipeline</div>
+          <div class="handler">📄 Document → Summary/Review</div>
+          <div class="handler">🔗 Link → Auto-summarize</div>
+          <div class="handler">🏋️ Strava → Fitness data</div>
+          <div class="handler">🎯 Trivia → Game engine</div>
+          <div class="handler">📅 Reminder → Calendar</div>
+          <div class="handler">📝 Summarize → LLM summary</div>
+          <div class="handler">✉️ Send → Message relay</div>
+          <div class="handler">👥 Contact → Google Contacts</div>
+          <div class="handler">🌤️ Weather → Open-Meteo API (direct, no LLM)</div>
+          <div class="handler fallback">🤖 Default → Groq LLM (Llama 3.3 70B)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">▼</div>
+
+    <!-- Step 4: Process -->
+    <div class="flow-step">
+      <div class="flow-step-num">4</div>
+      <div class="flow-step-content">
+        <div class="flow-step-title">PROCESS & ENRICH</div>
+        <div class="flow-step-desc">Handler fetches data, calls APIs, generates response</div>
+        <div class="flow-step-tech">Web search (DDG + Google News) • Weather API • LLM with chat history • Image analysis</div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">▼</div>
+
+    <!-- Step 5: Reply -->
+    <div class="flow-step">
+      <div class="flow-step-num">5</div>
+      <div class="flow-step-content">
+        <div class="flow-step-title">REPLY</div>
+        <div class="flow-step-desc">Formatted response sent back via WhatsApp Bridge</div>
+        <div class="flow-step-tech">send_reply() → Bridge API :8080 → WhatsApp → User's phone</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TheBoss Constructs -->
+<section>
+  <h2 class="section-title">TheBoss — Daily Briefs Engine</h2>
+  <p class="section-desc">Scheduled constructs that deliver daily updates to subscribers</p>
+
+  <div class="boss-grid">
+    <div class="boss-card">
+      <div class="boss-icon">📰</div>
+      <h3>AI News Brief</h3>
+      <p>Daily AI/tech news digest curated from multiple sources. Delivered every morning.</p>
+      <div class="boss-meta">
+        <span class="boss-schedule">⏰ Daily 7:00 AM</span>
+        <span class="boss-api">Gemini + Google Search</span>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-icon">📈</div>
+      <h3>Stock Brief</h3>
+      <p>Indian & US market summary — Nifty, Sensex, S&P 500, top movers, analysis.</p>
+      <div class="boss-meta">
+        <span class="boss-schedule">⏰ Daily 7:30 AM</span>
+        <span class="boss-api">Gemini + Market APIs</span>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-icon">📖</div>
+      <h3>Word Daily</h3>
+      <p>Learn a new English word every day — definition, usage, etymology.</p>
+      <div class="boss-meta">
+        <span class="boss-schedule">⏰ Daily 8:00 AM</span>
+        <span class="boss-api">Groq LLM</span>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-icon">✈️</div>
+      <h3>Vacation Deals</h3>
+      <p>Cheapest international flights from Mumbai/Pune. Real prices scraped from Google Flights via headless Chromium (Playwright).</p>
+      <div class="boss-meta">
+        <span class="boss-schedule">⏰ Daily 10:00 PM</span>
+        <span class="boss-api">Playwright + fast-flights + TinyURL</span>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-icon">💊</div>
+      <h3>MedTracker</h3>
+      <p>Medicine reminders and dose tracking. Email polling for pharmacy notifications.</p>
+      <div class="boss-meta">
+        <span class="boss-schedule">⏰ Multiple daily</span>
+        <span class="boss-api">Cron + Email IMAP</span>
+      </div>
+    </div>
+
+    <div class="boss-card">
+      <div class="boss-icon">🏃</div>
+      <h3>Fitbit Brief</h3>
+      <p>Daily fitness summary — steps, sleep quality, heart rate, activity minutes.</p>
+      <div class="boss-meta">
+        <span class="boss-schedule">⏰ Daily 9:00 AM</span>
+        <span class="boss-api">Fitbit OAuth API</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Features -->
+<section>
+  <h2 class="section-title">Interactive Features</h2>
+  <p class="section-desc">Real-time capabilities beyond daily briefs</p>
+
+  <div class="features-grid">
+    <div class="feature-item">
+      <span class="feature-icon">🌤️</span>
+      <div>
+        <strong>Weather</strong>
+        <p>Real-time weather from Open-Meteo API. Direct data — no LLM hallucination. wttr.in fallback.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">🖼️</span>
+      <div>
+        <strong>Image Vision</strong>
+        <p>Send a photo → Gemini Flash analyzes it → describes content, reads text, answers questions.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">🎤</span>
+      <div>
+        <strong>Voice Notes</strong>
+        <p>Send a voice note → Gemini/Whisper transcribes → processes as text command.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">🔗</span>
+      <div>
+        <strong>Link Summary</strong>
+        <p>Drop a URL → Zion fetches and summarizes the article in 3-4 bullet points.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">📄</span>
+      <div>
+        <strong>Document Analysis</strong>
+        <p>Send a PDF/document → extracts text → summarizes or reviews code.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">🎯</span>
+      <div>
+        <strong>Trivia Games</strong>
+        <p>Multi-player trivia in group chats. Scores, leaderboards, topic selection.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">👥</span>
+      <div>
+        <strong>Contacts</strong>
+        <p>Search Google Contacts by name. Smart relevance scoring, clean formatting.</p>
+      </div>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">📅</span>
+      <div>
+        <strong>Calendar</strong>
+        <p>Create Google Calendar events and get daily reminders via WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack -->
+<section>
+  <h2 class="section-title">Tech Stack</h2>
+  <div class="zion-stack">
+    <div class="stack-row">
+      <span class="stack-label">Runtime</span>
+      <span class="stack-value">Python 3 — systemd service (always on)</span>
+    </div>
+    <div class="stack-row">
+      <span class="stack-label">Primary LLM</span>
+      <span class="stack-value">Groq — Llama 3.3 70B (free tier)</span>
+    </div>
+    <div class="stack-row">
+      <span class="stack-label">Vision / STT</span>
+      <span class="stack-value">Gemini Flash (primary) + Groq Whisper (fallback)</span>
+    </div>
+    <div class="stack-row">
+      <span class="stack-label">Search</span>
+      <span class="stack-value">Weather: Open-Meteo + wttr.in | News: Google RSS | Web: DuckDuckGo</span>
+    </div>
+    <div class="stack-row">
+      <span class="stack-label">Messaging</span>
+      <span class="stack-value">WhatsApp Bridge (Go, whatsmeow) on port 8080</span>
+    </div>
+    <div class="stack-row">
+      <span class="stack-label">Database</span>
+      <span class="stack-value">SQLite — messages.db, zion_data.db, contacts.db, search_cache.db</span>
+    </div>
+    <div class="stack-row">
+      <span class="stack-label">Scraping</span>
+      <span class="stack-value">Playwright (headless Chromium) for Google Flights</span>
+    </div>
+    <div class="stack-row">
+      <span class="stack-label">Cost</span>
+      <span class="stack-value">$0 — all free tier APIs + Oracle Cloud Free Tier</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a></p>
+    <p class="footer-small">ZION — The heart of The Matrix</p>
+  </div>
+</footer>
+
+<script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+/* Agent Detail Page Styles */
+
+.agent-hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 8rem 2rem 4rem;
+}
+
+.agent-hero-icon { font-size: 4rem; margin-bottom: 1rem; }
+
+.agent-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  color: var(--matrix-green);
+  letter-spacing: 5px;
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+}
+
+.agent-hero-role {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--accent-gold);
+  margin-top: 0.5rem;
+}
+
+.agent-hero-desc {
+  font-size: 1rem;
+  color: var(--text-dim);
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+  line-height: 1.8;
+}
+
+/* Flow Diagram — Message Pipeline */
+.flow-diagram {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.flow-step {
+  display: flex;
+  gap: 1.25rem;
+  width: 100%;
+  background: var(--matrix-bg-card);
+  border: 1px solid rgba(0, 255, 65, 0.15);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  transition: all 0.3s;
+}
+
+.flow-step:hover {
+  border-color: var(--matrix-green);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.08);
+}
+
+.flow-step.highlight-step {
+  border-color: rgba(0, 255, 65, 0.35);
+  background: rgba(0, 255, 65, 0.02);
+}
+
+.flow-step-num {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--matrix-green);
+  min-width: 2.5rem;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.flow-step-content { flex: 1; }
+
+.flow-step-title {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  color: var(--matrix-green);
+  letter-spacing: 2px;
+  margin-bottom: 0.4rem;
+}
+
+.flow-step-desc {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.flow-step-desc code {
+  background: rgba(0, 255, 65, 0.1);
+  color: var(--matrix-green);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.flow-step-tech {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 0.4rem;
+}
+
+.flow-arrow {
+  color: var(--matrix-green);
+  font-size: 1.2rem;
+  opacity: 0.4;
+  padding: 0.25rem 0;
+  text-align: center;
+}
+
+/* Handler chain inside router step */
+.handler-chain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.handler {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  background: rgba(0, 255, 65, 0.04);
+  border: 1px solid rgba(0, 255, 65, 0.1);
+  border-radius: 4px;
+  padding: 0.25rem 0.6rem;
+  transition: all 0.3s;
+}
+
+.handler:hover {
+  border-color: var(--matrix-green);
+  color: var(--matrix-green);
+}
+
+.handler.fallback {
+  border-color: rgba(88, 166, 255, 0.2);
+  color: var(--accent-blue);
+  background: rgba(88, 166, 255, 0.04);
+}
+
+/* TheBoss Grid */
+.boss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.boss-card {
+  background: var(--matrix-bg-card);
+  border: 1px solid rgba(0, 255, 65, 0.12);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s;
+}
+
+.boss-card:hover {
+  border-color: var(--matrix-green);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(0, 255, 65, 0.08);
+}
+
+.boss-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+
+.boss-card h3 {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--matrix-green);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.boss-card p {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+.boss-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.boss-schedule, .boss-api {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+}
+
+.boss-schedule {
+  color: var(--accent-gold);
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.boss-api {
+  color: var(--accent-blue);
+  background: rgba(88, 166, 255, 0.06);
+  border: 1px solid rgba(88, 166, 255, 0.15);
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: var(--matrix-bg-card);
+  border: 1px solid rgba(0, 255, 65, 0.08);
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: all 0.3s;
+}
+
+.feature-item:hover {
+  border-color: rgba(0, 255, 65, 0.25);
+}
+
+.feature-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+.feature-item strong {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--matrix-green);
+  letter-spacing: 1px;
+}
+
+.feature-item p {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-top: 0.25rem;
+}
+
+/* Zion Tech Stack */
+.zion-stack {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stack-row {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.08);
+  padding: 0.75rem 0;
+}
+
+.stack-row:last-child { border-bottom: none; }
+
+.stack-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  color: var(--matrix-green);
+  letter-spacing: 1px;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.stack-value {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
