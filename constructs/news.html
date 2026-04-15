@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI NEWS BRIEF — Construct | The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📰</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 3.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #ffd740; letter-spacing: 5px; text-shadow: 0 0 20px rgba(255,215,64,0.4); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
+    .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
+    .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .d-svg { width: 100%; max-width: 1100px; height: auto; margin: 0 auto; display: block; }
+    @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+    @keyframes sun-breathe { 0%,100% { filter: drop-shadow(0 0 8px rgba(255,215,64,0.15)); } 50% { filter: drop-shadow(0 0 20px rgba(255,215,64,0.35)); } }
+    .anim-dash { animation: dash-flow 1s linear infinite; }
+    .anim-sun { animation: sun-breathe 3s ease-in-out infinite; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+    .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(255,215,64,0.08); padding: 0.6rem 0; }
+    .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #ffd740; letter-spacing: 1px; min-width: 110px; }
+    .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<nav id="navbar">
+  <div class="nav-brand"><a href="../index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a></div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#architecture">Architecture</a>
+    <a href="../index.html#agents">Agents</a>
+    <a href="../index.html#projects">Projects</a>
+  </div>
+</nav>
+
+<div class="detail-page">
+  <div class="d-hero">
+    <div class="d-hero-icon">📰</div>
+    <h1 class="d-hero-title">AI NEWS BRIEF</h1>
+    <p class="d-hero-sub">Daily digest — 7:00 AM IST</p>
+    <p class="d-hero-desc">Daily AI/tech news digest delivered to WhatsApp every morning at 7:00 AM</p>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">A Real Conversation</h2>
+    <p class="section-desc">Cron fires at 7 AM — trace the path from RSS to your lock screen</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="nar" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.85"/></marker>
+        <marker id="nag" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.85"/></marker>
+        <filter id="ngl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <g transform="translate(20, 120)">
+        <rect width="140" height="110" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="70" y="28" class="svg-title" fill="#ffd740" font-size="21" text-anchor="middle" letter-spacing="2" filter="url(#ngl)">CRON</text>
+        <text x="70" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">7:00 AM IST</text>
+        <text x="70" y="78" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Daily trigger</text>
+        <text x="70" y="102" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">TheBoss crontab</text>
+      </g>
+      <line x1="165" y1="175" x2="198" y2="175" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#nar)"/>
+
+      <g transform="translate(205, 120)">
+        <rect width="150" height="110" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="75" y="28" class="svg-title" fill="#00ff41" font-size="21" text-anchor="middle" letter-spacing="1">ai_brief.py</text>
+        <text x="75" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">TheBoss</text>
+        <text x="75" y="78" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Orchestrate</text>
+        <text x="75" y="102" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">fetch + summarize</text>
+      </g>
+      <line x1="360" y1="175" x2="393" y2="175" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#nag)"/>
+
+      <g transform="translate(400, 105)">
+        <rect width="170" height="140" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="85" y="28" class="svg-title" fill="#ffd740" font-size="21" text-anchor="middle">GOOGLE NEWS</text>
+        <text x="85" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">RSS feed</text>
+        <text x="85" y="78" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Top 5 AI stories</text>
+        <text x="85" y="102" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Headlines + links</text>
+        <text x="85" y="126" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">De-dup + rank</text>
+      </g>
+      <line x1="575" y1="175" x2="608" y2="175" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#nar)"/>
+
+      <g transform="translate(615, 110)">
+        <rect width="185" height="130" rx="12" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="92" y="28" class="svg-title" fill="#58a6ff" font-size="21" text-anchor="middle">GROQ 70B</text>
+        <text x="92" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Llama 3.3 70B</text>
+        <text x="92" y="78" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Summarize bullets</text>
+        <text x="92" y="102" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Emoji + tone</text>
+        <text x="92" y="126" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">Free tier</text>
+      </g>
+      <line x1="805" y1="175" x2="838" y2="175" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#nar)"/>
+
+      <g transform="translate(845, 120)">
+        <rect width="125" height="110" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="62" y="28" class="svg-title" fill="#00ff41" font-size="20" text-anchor="middle">BRIDGE</text>
+        <text x="62" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">WhatsApp API</text>
+        <text x="62" y="78" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">localhost:8080</text>
+        <text x="62" y="102" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">/api/send</text>
+      </g>
+      <line x1="975" y1="175" x2="1005" y2="175" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#nag)"/>
+
+      <g transform="translate(15, 280)">
+        <rect width="1070" height="170" rx="14" fill="#0a1628" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.4"/>
+        <text x="535" y="32" class="svg-title" fill="#ffd740" font-size="22" text-anchor="middle" letter-spacing="3">NEO'S PHONE</text>
+        <text x="535" y="58" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">WhatsApp message preview</text>
+        <text x="535" y="92" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">[Zion] 📰 AI News Brief — top stories, TL;DR, links</text>
+        <text x="535" y="122" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Readable on lock screen · same chat_jid routing as Zion</text>
+        <text x="535" y="152" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Construct: automated · no @trinity required for daily send</text>
+      </g>
+      <path d="M550,230 L550,268" fill="none" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#nar)"/>
+    </svg>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-desc">Sources, processing, delivery, and stack — radiating from the brief</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 820" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="nsg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ffd740" stop-opacity="0.22"/><stop offset="100%" stop-color="#ffd740" stop-opacity="0.02"/></radialGradient>
+        <filter id="ngl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <line x1="550" y1="360" x2="550" y2="140" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="600" y1="380" x2="880" y2="200" stroke="#00ff41" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="600" y1="420" x2="880" y2="580" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="500" y1="420" x2="220" y2="580" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="500" y1="380" x2="220" y2="200" stroke="#c084fc" stroke-width="1.5" stroke-opacity="0.12"/>
+
+      <circle cx="550" cy="400" r="58" fill="url(#nsg)" stroke="#ffd740" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="392" class="svg-label" fill="#ffd740" font-size="22" text-anchor="middle">📰</text>
+      <text x="550" y="422" class="svg-title" fill="#ffd740" font-size="21" text-anchor="middle" letter-spacing="3" filter="url(#ngl2)">BRIEF</text>
+
+      <circle cx="550" cy="130" r="118" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="550" y="58" class="svg-title" fill="#ffd740" font-size="22" text-anchor="middle" letter-spacing="2">SOURCES</text>
+      <text x="550" y="86" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Where headlines come from</text>
+      <text x="550" y="118" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Google News RSS</text>
+      <text x="550" y="144" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">HackerNews front page</text>
+      <text x="550" y="170" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">TechCrunch + AI blogs</text>
+      <text x="550" y="196" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Optional: merge + cap at 5</text>
+
+      <circle cx="900" cy="210" r="112" fill="#0a1628" stroke="#00ff41" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="900" y="138" class="svg-title" fill="#00ff41" font-size="22" text-anchor="middle" letter-spacing="2">PROCESSING</text>
+      <text x="900" y="166" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Groq + formatting</text>
+      <text x="900" y="198" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Groq 70B summarize</text>
+      <text x="900" y="224" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Top-5 story filter</text>
+      <text x="900" y="250" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Emoji bullet layout</text>
+      <text x="900" y="276" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Char-safe for WhatsApp</text>
+
+      <circle cx="900" cy="600" r="118" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="900" y="528" class="svg-title" fill="#58a6ff" font-size="22" text-anchor="middle" letter-spacing="2">DELIVERY</text>
+      <text x="900" y="556" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">When + where it lands</text>
+      <text x="900" y="588" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">WhatsApp outbound</text>
+      <text x="900" y="614" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">7:00 AM IST window</text>
+      <text x="900" y="640" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">Subscriber allow-list</text>
+      <text x="900" y="666" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">[Zion] prefix branding</text>
+
+      <circle cx="200" cy="600" r="118" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="200" y="528" class="svg-title" fill="#c084fc" font-size="22" text-anchor="middle" letter-spacing="2">TECH</text>
+      <text x="200" y="556" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Runtime + cost</text>
+      <text x="200" y="588" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">Python 3 on VM</text>
+      <text x="200" y="614" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">cron scheduler</text>
+      <text x="200" y="640" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">Groq free tier</text>
+      <text x="200" y="666" class="svg-label" fill="#c084fc" font-size="17" text-anchor="middle">$0 marginal cost</text>
+
+      <circle cx="200" cy="210" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="200" y="148" class="svg-title" fill="#fb923c" font-size="21" text-anchor="middle" letter-spacing="2">KEY FILE</text>
+      <text x="200" y="176" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Ship path</text>
+      <text x="200" y="208" class="svg-label" fill="#fb923c" font-size="18" text-anchor="middle">TheBoss/ai_brief.py</text>
+      <text x="200" y="234" class="svg-label" fill="#fb923c" font-size="17" text-anchor="middle">VM: Oracle Ampere</text>
+      <text x="200" y="260" class="svg-label" fill="#fb923c" font-size="17" text-anchor="middle">Logs + retries</text>
+    </svg>
+  </div>
+
+  <div class="stack-section">
+    <h2 class="section-title">Tech Stack</h2>
+    <div>
+      <div class="stack-row"><span class="stack-label">Language</span><span class="stack-value">Python</span></div>
+      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Cron 01:00 UTC (6:30 IST) — digest targets ~7:00 AM per your crontab</span></div>
+      <div class="stack-row"><span class="stack-label">Sources</span><span class="stack-value">Google News RSS (AI/tech topics)</span></div>
+      <div class="stack-row"><span class="stack-label">LLM</span><span class="stack-value">Groq Llama 3.3 70B — summarize + format</span></div>
+      <div class="stack-row"><span class="stack-label">Delivery</span><span class="stack-value">WhatsApp Bridge (VM localhost:8080)</span></div>
+      <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">$0 — RSS + Groq free tier + self-hosted bridge</span></div>
+      <div class="stack-row"><span class="stack-label">Key file</span><span class="stack-value">TheBoss/ai_brief.py</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a></p>
+      <p class="footer-small">AI NEWS BRIEF — Morning construct on WhatsApp</p>
+    </div>
+  </footer>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

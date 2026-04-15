@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STOCK BRIEF — Construct | The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 3.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #00ff41; letter-spacing: 5px; text-shadow: 0 0 20px rgba(0,255,65,0.4); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
+    .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
+    .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .d-svg { width: 100%; max-width: 1100px; height: auto; margin: 0 auto; display: block; }
+    @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+    @keyframes sun-breathe { 0%,100% { filter: drop-shadow(0 0 8px rgba(0,255,65,0.15)); } 50% { filter: drop-shadow(0 0 20px rgba(0,255,65,0.35)); } }
+    .anim-dash { animation: dash-flow 1s linear infinite; }
+    .anim-sun { animation: sun-breathe 3s ease-in-out infinite; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+    .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(0,255,65,0.08); padding: 0.6rem 0; }
+    .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #00ff41; letter-spacing: 1px; min-width: 110px; }
+    .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<nav id="navbar">
+  <div class="nav-brand"><a href="../index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a></div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#architecture">Architecture</a>
+    <a href="../index.html#agents">Agents</a>
+    <a href="../index.html#projects">Projects</a>
+  </div>
+</nav>
+
+<div class="detail-page">
+  <div class="d-hero">
+    <div class="d-hero-icon">📈</div>
+    <h1 class="d-hero-title">STOCK BRIEF</h1>
+    <p class="d-hero-sub">Markets digest — 7:30 AM IST</p>
+    <p class="d-hero-desc">Daily stock market summary — India + US markets, top movers, news analysis at 7:30 AM</p>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">A Real Conversation</h2>
+    <p class="section-desc">Cron at 6:15 IST pulls prices + headlines — Groq narrates the tape</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="sar" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.85"/></marker>
+        <marker id="sao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.85"/></marker>
+        <filter id="sgl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <g transform="translate(12, 95)">
+        <rect width="125" height="100" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="62" y="26" class="svg-title" fill="#00ff41" font-size="21" text-anchor="middle" letter-spacing="2" filter="url(#sgl)">CRON</text>
+        <text x="62" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">6:15 AM IST</text>
+        <text x="62" y="76" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Daily job</text>
+        <text x="62" y="98" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">TheBoss</text>
+      </g>
+      <line x1="142" y1="145" x2="168" y2="145" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#sar)"/>
+
+      <g transform="translate(175, 95)">
+        <rect width="145" height="100" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="72" y="26" class="svg-title" fill="#ffd740" font-size="20" text-anchor="middle">stock_brief.py</text>
+        <text x="72" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">TheBoss</text>
+        <text x="72" y="76" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Merge APIs</text>
+        <text x="72" y="98" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">Build prompt</text>
+      </g>
+      <line x1="325" y1="145" x2="350" y2="145" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#sao)"/>
+
+      <g transform="translate(358, 80)">
+        <rect width="155" height="130" rx="12" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="77" y="26" class="svg-title" fill="#58a6ff" font-size="21" text-anchor="middle">YAHOO v8</text>
+        <text x="77" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Chart API</text>
+        <text x="77" y="76" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Indices + OHLC</text>
+        <text x="77" y="100" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">Top movers</text>
+        <text x="77" y="124" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">Sparkline data</text>
+      </g>
+      <line x1="518" y1="145" x2="545" y2="145" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#sar)"/>
+
+      <g transform="translate(553, 80)">
+        <rect width="165" height="130" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="82" y="26" class="svg-title" fill="#00ff41" font-size="21" text-anchor="middle">GOOGLE RSS</text>
+        <text x="82" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Market news</text>
+        <text x="82" y="76" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Macro + stocks</text>
+        <text x="82" y="100" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Headlines feed</text>
+        <text x="82" y="124" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">Context for LLM</text>
+      </g>
+      <line x1="723" y1="145" x2="750" y2="145" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#sar)"/>
+
+      <g transform="translate(758, 85)">
+        <rect width="155" height="120" rx="12" fill="#0a1628" stroke="#c084fc" stroke-width="2"/>
+        <text x="77" y="26" class="svg-title" fill="#c084fc" font-size="21" text-anchor="middle">GROQ 70B</text>
+        <text x="77" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Analyze + summarize</text>
+        <text x="77" y="76" class="svg-label" fill="#c084fc" font-size="17" text-anchor="middle">Sentiment pass</text>
+        <text x="77" y="100" class="svg-label" fill="#c084fc" font-size="17" text-anchor="middle">Key movers callout</text>
+        <text x="77" y="124" class="svg-label" fill="#c084fc" font-size="16" text-anchor="middle">India + US wrap</text>
+      </g>
+      <line x1="918" y1="145" x2="945" y2="145" stroke="#c084fc" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#sar)"/>
+
+      <g transform="translate(952, 95)">
+        <rect width="130" height="100" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="65" y="26" class="svg-title" fill="#00ff41" font-size="20" text-anchor="middle">WHATSAPP</text>
+        <text x="65" y="50" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Bridge send</text>
+        <text x="65" y="76" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">7:30 AM slot</text>
+        <text x="65" y="98" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">Subscribers</text>
+      </g>
+
+      <g transform="translate(15, 255)">
+        <rect width="1070" height="210" rx="14" fill="#0a1628" stroke="#00ff41" stroke-width="1.5" stroke-opacity="0.35"/>
+        <text x="535" y="36" class="svg-title" fill="#00ff41" font-size="22" text-anchor="middle" letter-spacing="3">NEO SEES</text>
+        <text x="535" y="64" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">One message — indices, movers, and overnight context</text>
+        <text x="535" y="98" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">[Zion] 📈 Stock Brief — Nifty, Sensex, S&amp;P, NASDAQ, gainers/losers</text>
+        <text x="535" y="128" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">RSS headlines folded into narrative · no manual refresh</text>
+        <text x="535" y="158" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Flow: Cron 6:15 IST → stock_brief.py → Yahoo + Google News → Groq → WhatsApp</text>
+        <text x="535" y="188" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">UTC note: cron 00:45 UTC aligns with morning IST window</text>
+      </g>
+      <path d="M1017,195 L1017,248" fill="none" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#sar)"/>
+    </svg>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-desc">Markets, sources, analysis, delivery — the sun view</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 860" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ssg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00ff41" stop-opacity="0.2"/><stop offset="100%" stop-color="#00ff41" stop-opacity="0.02"/></radialGradient>
+        <filter id="sgl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <line x1="550" y1="380" x2="550" y2="130" stroke="#00ff41" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="610" y1="400" x2="900" y2="200" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="610" y1="440" x2="900" y2="640" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="490" y1="440" x2="200" y2="640" stroke="#c084fc" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="490" y1="400" x2="200" y2="200" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.1"/>
+
+      <circle cx="550" cy="420" r="60" fill="url(#ssg)" stroke="#00ff41" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="412" class="svg-label" fill="#00ff41" font-size="22" text-anchor="middle">📈</text>
+      <text x="550" y="442" class="svg-title" fill="#00ff41" font-size="21" text-anchor="middle" letter-spacing="3" filter="url(#sgl2)">BRIEF</text>
+
+      <circle cx="550" cy="125" r="120" fill="#0a1628" stroke="#00ff41" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="550" y="52" class="svg-title" fill="#00ff41" font-size="22" text-anchor="middle" letter-spacing="2">MARKETS</text>
+      <text x="550" y="80" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">What gets quoted</text>
+      <text x="550" y="112" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Nifty 50 · Sensex</text>
+      <text x="550" y="138" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">S&amp;P 500 · NASDAQ</text>
+      <text x="550" y="164" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">Top gainers / losers</text>
+      <text x="550" y="190" class="svg-label" fill="#00ff41" font-size="17" text-anchor="middle">Volatility + breadth hints</text>
+
+      <circle cx="910" cy="210" r="118" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="910" y="138" class="svg-title" fill="#ffd740" font-size="22" text-anchor="middle" letter-spacing="2">SOURCES</text>
+      <text x="910" y="166" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Data plane</text>
+      <text x="910" y="198" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Yahoo Finance v8</text>
+      <text x="910" y="224" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">Google News RSS</text>
+      <text x="910" y="250" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Chart JSON + headlines</text>
+      <text x="910" y="276" class="svg-label" fill="#ffd740" font-size="17" text-anchor="middle">Cached per run</text>
+
+      <circle cx="910" cy="640" r="120" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="910" y="568" class="svg-title" fill="#c084fc" font-size="22" text-anchor="middle" letter-spacing="2">ANALYSIS</text>
+      <text x="910" y="596" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">LLM layer</text>
+      <text x="910" y="628" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">Groq 70B narrative</text>
+      <text x="910" y="654" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">Sentiment + drivers</text>
+      <text x="910" y="680" class="svg-label" fill="#c084fc" font-size="18" text-anchor="middle">Key movers explained</text>
+      <text x="910" y="706" class="svg-label" fill="#c084fc" font-size="17" text-anchor="middle">Risk disclaimers inline</text>
+
+      <circle cx="190" cy="640" r="118" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="190" y="568" class="svg-title" fill="#58a6ff" font-size="22" text-anchor="middle" letter-spacing="2">DELIVERY</text>
+      <text x="190" y="596" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Last mile</text>
+      <text x="190" y="628" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">WhatsApp message</text>
+      <text x="190" y="654" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">7:30 AM IST</text>
+      <text x="190" y="680" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">Subscriber list</text>
+      <text x="190" y="706" class="svg-label" fill="#58a6ff" font-size="17" text-anchor="middle">[Zion] branded header</text>
+
+      <circle cx="190" cy="210" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.55"/>
+      <text x="190" y="148" class="svg-title" fill="#fb923c" font-size="21" text-anchor="middle" letter-spacing="2">KEY FILE</text>
+      <text x="190" y="176" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Entrypoint</text>
+      <text x="190" y="208" class="svg-label" fill="#fb923c" font-size="18" text-anchor="middle">TheBoss/stock_brief.py</text>
+      <text x="190" y="234" class="svg-label" fill="#fb923c" font-size="17" text-anchor="middle">Cron 00:45 UTC</text>
+      <text x="190" y="260" class="svg-label" fill="#fb923c" font-size="17" text-anchor="middle">VM scheduled task</text>
+    </svg>
+  </div>
+
+  <div class="stack-section">
+    <h2 class="section-title">Tech Stack</h2>
+    <div>
+      <div class="stack-row"><span class="stack-label">Language</span><span class="stack-value">Python</span></div>
+      <div class="stack-row"><span class="stack-label">Market data</span><span class="stack-value">Yahoo Finance v8 Chart API</span></div>
+      <div class="stack-row"><span class="stack-label">News</span><span class="stack-value">Google News RSS</span></div>
+      <div class="stack-row"><span class="stack-label">LLM</span><span class="stack-value">Groq Llama 3.3 70B</span></div>
+      <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Cron 00:45 UTC (morning IST)</span></div>
+      <div class="stack-row"><span class="stack-label">Delivery</span><span class="stack-value">WhatsApp Bridge</span></div>
+      <div class="stack-row"><span class="stack-label">Key file</span><span class="stack-value">TheBoss/stock_brief.py</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a></p>
+      <p class="footer-small">STOCK BRIEF — Morning markets on WhatsApp</p>
+    </div>
+  </footer>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STRAVA — Construct | The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏋️</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 3.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #fb923c; letter-spacing: 5px; text-shadow: 0 0 20px rgba(251,146,60,0.4); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
+    .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
+    .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .d-svg { width: 100%; max-width: 1100px; height: auto; margin: 0 auto; display: block; }
+    @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+    @keyframes sun-breathe { 0%,100% { filter: drop-shadow(0 0 8px rgba(251,146,60,0.15)); } 50% { filter: drop-shadow(0 0 20px rgba(251,146,60,0.35)); } }
+    .anim-dash { animation: dash-flow 1s linear infinite; }
+    .anim-sun { animation: sun-breathe 3s ease-in-out infinite; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+    .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(251,146,60,0.08); padding: 0.6rem 0; }
+    .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #fb923c; letter-spacing: 1px; min-width: 110px; }
+    .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-rain"></canvas>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <a href="../index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a>
+  </div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#architecture">Architecture</a>
+    <a href="../index.html#agents">Agents</a>
+    <a href="../index.html#projects">Projects</a>
+  </div>
+</nav>
+
+<div class="detail-page">
+
+  <div class="d-hero">
+    <div class="d-hero-icon">🏋️</div>
+    <h1 class="d-hero-title">STRAVA</h1>
+    <p class="d-hero-sub">Fitness API · WhatsApp cards</p>
+    <p class="d-hero-desc">Strava fitness integration — workout tracking and activity data via WhatsApp.</p>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">A Real Conversation</h2>
+    <p class="section-desc">@zion strava → API pull → formatted stats → reply</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="mst" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#fb923c" opacity="0.85"/></marker>
+        <filter id="glow-st"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <g transform="translate(20, 95)">
+        <rect width="132" height="130" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="66" y="30" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle" filter="url(#glow-st)">NEO</text>
+        <text x="66" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">WhatsApp</text>
+        <text x="66" y="82" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">@zion strava</text>
+        <text x="66" y="106" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">or named query</text>
+        <text x="66" y="128" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">on demand</text>
+      </g>
+      <line x1="152" y1="160" x2="172" y2="160" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mst)"/>
+
+      <g transform="translate(174, 100)">
+        <rect width="118" height="120" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2" stroke-opacity="0.45"/>
+        <text x="59" y="32" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle">ZION</text>
+        <text x="59" y="54" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">router</text>
+        <text x="59" y="84" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">strava</text>
+        <text x="59" y="106" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">handler</text>
+      </g>
+      <line x1="292" y1="160" x2="312" y2="160" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mst)"/>
+
+      <g transform="translate(314, 88)">
+        <rect width="168" height="144" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="84" y="30" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle">STRAVA API</text>
+        <text x="84" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">OAuth token</text>
+        <text x="84" y="78" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">GET activities</text>
+        <text x="84" y="100" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">runs · rides · walks</text>
+        <text x="84" y="122" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">recent window</text>
+      </g>
+      <line x1="482" y1="160" x2="502" y2="160" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mst)"/>
+
+      <g transform="translate(504, 95)">
+        <rect width="188" height="130" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="94" y="30" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle">AGGREGATE</text>
+        <text x="94" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">normalize JSON</text>
+        <text x="94" y="80" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">distance · time</text>
+        <text x="94" y="102" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">pace · elevation</text>
+        <text x="94" y="124" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">units + emojis</text>
+      </g>
+      <line x1="692" y1="160" x2="712" y2="160" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mst)"/>
+
+      <g transform="translate(714, 95)">
+        <rect width="178" height="130" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="89" y="30" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle">FORMAT</text>
+        <text x="89" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">workout card</text>
+        <text x="89" y="80" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">summary lines</text>
+        <text x="89" y="102" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">stats + icons</text>
+        <text x="89" y="124" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">mobile-first</text>
+      </g>
+      <line x1="892" y1="160" x2="912" y2="160" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mst)"/>
+
+      <g transform="translate(914, 95)">
+        <rect width="166" height="130" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="83" y="30" class="svg-title" fill="#fb923c" font-size="22" text-anchor="middle">WHATSAPP</text>
+        <text x="83" y="54" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Bridge send</text>
+        <text x="83" y="82" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">[Zion] last run</text>
+        <text x="83" y="104" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">5.2 km · 32 min</text>
+        <text x="83" y="128" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">pace shown</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-desc">Data, commands, display, and zion.py wiring</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="rad-st" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fb923c" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#fb923c" stop-opacity="0.02"/>
+        </radialGradient>
+        <filter id="gl-st2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <line x1="550" y1="350" x2="550" y2="225" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="550" y1="350" x2="755" y2="350" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="550" y1="350" x2="550" y2="475" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="550" y1="350" x2="345" y2="350" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.12"/>
+
+      <circle cx="550" cy="130" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="72" class="svg-title" fill="#fb923c" font-size="22" text-anchor="middle" letter-spacing="2">DATA</text>
+      <text x="550" y="96" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Strava fields</text>
+      <text x="550" y="128" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">activities stream</text>
+      <text x="550" y="154" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">distance · elev · pace</text>
+
+      <circle cx="880" cy="350" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="880" y="292" class="svg-title" fill="#fb923c" font-size="22" text-anchor="middle" letter-spacing="2">COMMANDS</text>
+      <text x="880" y="316" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">triggers</text>
+      <text x="880" y="348" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">@zion strava</text>
+      <text x="880" y="372" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">@zion strava &lt;name&gt;</text>
+
+      <circle cx="550" cy="570" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="512" class="svg-title" fill="#fb923c" font-size="22" text-anchor="middle" letter-spacing="2">DISPLAY</text>
+      <text x="550" y="536" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">presentation</text>
+      <text x="550" y="568" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">workout cards</text>
+      <text x="550" y="594" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">emojis + stats</text>
+
+      <circle cx="220" cy="350" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="220" y="292" class="svg-title" fill="#fb923c" font-size="22" text-anchor="middle" letter-spacing="2">INTEGRATION</text>
+      <text x="220" y="316" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">codepath</text>
+      <text x="220" y="348" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">inside zion.py</text>
+      <text x="220" y="372" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">Strava OAuth</text>
+
+      <circle cx="550" cy="350" r="72" fill="url(#rad-st)" stroke="#fb923c" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="332" class="svg-label" fill="#fb923c" font-size="20" text-anchor="middle">🏋️</text>
+      <text x="550" y="362" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle" letter-spacing="3" filter="url(#gl-st2)">STRAVA</text>
+      <text x="550" y="384" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">construct core</text>
+    </svg>
+  </div>
+
+  <div class="stack-section">
+    <h2 class="section-title">Tech Stack</h2>
+    <div>
+      <div class="stack-row"><span class="stack-label">Language</span><span class="stack-value">Python</span></div>
+      <div class="stack-row"><span class="stack-label">API</span><span class="stack-value">Strava REST + OAuth</span></div>
+      <div class="stack-row"><span class="stack-label">Host</span><span class="stack-value">zion.py handler</span></div>
+      <div class="stack-row"><span class="stack-label">Delivery</span><span class="stack-value">WhatsApp Bridge</span></div>
+      <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">$0</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><a href="../index.html" style="color:#fb923c;text-decoration:none">← Back to The Matrix</a></p>
+      <p class="footer-small">STRAVA — Construct</p>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>

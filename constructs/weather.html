@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WEATHER — Construct | The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 3.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #22d3ee; letter-spacing: 5px; text-shadow: 0 0 20px rgba(34,211,238,0.4); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
+    .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
+    .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .d-svg { width: 100%; max-width: 1100px; height: auto; margin: 0 auto; display: block; }
+    @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+    @keyframes sun-breathe { 0%,100% { filter: drop-shadow(0 0 8px rgba(34,211,238,0.15)); } 50% { filter: drop-shadow(0 0 20px rgba(34,211,238,0.35)); } }
+    .anim-dash { animation: dash-flow 1s linear infinite; }
+    .anim-sun { animation: sun-breathe 3s ease-in-out infinite; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+    .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(34,211,238,0.08); padding: 0.6rem 0; }
+    .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #22d3ee; letter-spacing: 1px; min-width: 110px; }
+    .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-rain"></canvas>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <a href="../index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a>
+  </div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#architecture">Architecture</a>
+    <a href="../index.html#agents">Agents</a>
+    <a href="../index.html#projects">Projects</a>
+  </div>
+</nav>
+
+<div class="detail-page">
+
+  <div class="d-hero">
+    <div class="d-hero-icon">🌤️</div>
+    <h1 class="d-hero-title">WEATHER</h1>
+    <p class="d-hero-sub">Direct APIs · Zero hallucination</p>
+    <p class="d-hero-desc">Real-time weather — no LLM hallucination. Direct API data from Open-Meteo + wttr.in.</p>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">A Real Conversation</h2>
+    <p class="section-desc">Keyword fast-path: geocode → forecast JSON → WhatsApp string</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="mw" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#22d3ee" opacity="0.85"/></marker>
+        <filter id="glow-w"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <g transform="translate(16, 95)">
+        <rect width="148" height="130" rx="12" fill="#0a1628" stroke="#22d3ee" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="74" y="30" class="svg-title" fill="#22d3ee" font-size="20" text-anchor="middle" filter="url(#glow-w)">NEO</text>
+        <text x="74" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">WhatsApp</text>
+        <text x="74" y="82" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">@zion weather</text>
+        <text x="74" y="104" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">in Pune</text>
+        <text x="74" y="128" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">plain text</text>
+      </g>
+      <line x1="164" y1="160" x2="184" y2="160" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mw)"/>
+
+      <g transform="translate(186, 95)">
+        <rect width="128" height="130" rx="12" fill="#0a1628" stroke="#22d3ee" stroke-width="2" stroke-opacity="0.45"/>
+        <text x="64" y="30" class="svg-title" fill="#22d3ee" font-size="20" text-anchor="middle">ZION</text>
+        <text x="64" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">keyword</text>
+        <text x="64" y="80" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">detects</text>
+        <text x="64" y="102" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">weather</text>
+        <text x="64" y="126" class="svg-label" fill="#ffd700" font-size="14" text-anchor="middle">SKIP LLM</text>
+      </g>
+      <line x1="314" y1="160" x2="334" y2="160" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mw)"/>
+
+      <g transform="translate(336, 95)">
+        <rect width="168" height="130" rx="12" fill="#0a1628" stroke="#22d3ee" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="84" y="30" class="svg-title" fill="#22d3ee" font-size="20" text-anchor="middle">OPEN-METEO</text>
+        <text x="84" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">geocode</text>
+        <text x="84" y="80" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">"Pune" → lat/lon</text>
+        <text x="84" y="102" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">forecast endpoint</text>
+        <text x="84" y="124" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">no API key</text>
+      </g>
+      <line x1="504" y1="160" x2="524" y2="160" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mw)"/>
+
+      <g transform="translate(526, 95)">
+        <rect width="178" height="130" rx="12" fill="#0a1628" stroke="#22d3ee" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="89" y="30" class="svg-title" fill="#22d3ee" font-size="20" text-anchor="middle">DATA PULL</text>
+        <text x="89" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">JSON facts</text>
+        <text x="89" y="80" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">temp · humidity</text>
+        <text x="89" y="102" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">wind · conditions</text>
+        <text x="89" y="124" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">wttr.in fallback</text>
+      </g>
+      <line x1="704" y1="160" x2="724" y2="160" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mw)"/>
+
+      <g transform="translate(726, 95)">
+        <rect width="168" height="130" rx="12" fill="#0a1628" stroke="#22d3ee" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="84" y="30" class="svg-title" fill="#22d3ee" font-size="20" text-anchor="middle">FORMAT</text>
+        <text x="84" y="52" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">string builder</text>
+        <text x="84" y="80" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">emoji + city</text>
+        <text x="84" y="102" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">units consistent</text>
+        <text x="84" y="124" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">deterministic</text>
+      </g>
+      <line x1="894" y1="160" x2="914" y2="160" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#mw)"/>
+
+      <g transform="translate(916, 95)">
+        <rect width="168" height="130" rx="12" fill="#0a1628" stroke="#22d3ee" stroke-width="2" stroke-opacity="0.55"/>
+        <text x="84" y="30" class="svg-title" fill="#22d3ee" font-size="22" text-anchor="middle">WHATSAPP</text>
+        <text x="84" y="54" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Bridge reply</text>
+        <text x="84" y="82" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">☀️ Pune: 32°C</text>
+        <text x="84" y="104" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">Clear · Humidity 45%</text>
+        <text x="84" y="126" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">real numbers</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="diagram-wrap">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-desc">APIs, routing, data fields, and short-lived cache</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="rad-w" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.02"/>
+        </radialGradient>
+        <filter id="gl-w2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <line x1="550" y1="350" x2="550" y2="225" stroke="#22d3ee" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="550" y1="350" x2="755" y2="350" stroke="#22d3ee" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="550" y1="350" x2="550" y2="475" stroke="#22d3ee" stroke-width="1.5" stroke-opacity="0.12"/>
+      <line x1="550" y1="350" x2="345" y2="350" stroke="#22d3ee" stroke-width="1.5" stroke-opacity="0.12"/>
+
+      <circle cx="550" cy="130" r="105" fill="#0a1628" stroke="#22d3ee" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="72" class="svg-title" fill="#22d3ee" font-size="22" text-anchor="middle" letter-spacing="2">APIs</text>
+      <text x="550" y="96" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">sources</text>
+      <text x="550" y="128" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">Open-Meteo geocode</text>
+      <text x="550" y="154" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">Open-Meteo forecast</text>
+      <text x="550" y="180" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">wttr.in fallback · no key</text>
+
+      <circle cx="880" cy="350" r="105" fill="#0a1628" stroke="#22d3ee" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="880" y="284" class="svg-title" fill="#22d3ee" font-size="20" text-anchor="middle" letter-spacing="1">SMART ROUTING</text>
+      <text x="880" y="308" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">latency + truth</text>
+      <text x="880" y="336" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">keyword detect</text>
+      <text x="880" y="362" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">skip LLM</text>
+      <text x="880" y="388" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">direct API = accurate</text>
+
+      <circle cx="550" cy="570" r="105" fill="#0a1628" stroke="#22d3ee" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="512" class="svg-title" fill="#22d3ee" font-size="22" text-anchor="middle" letter-spacing="2">DATA</text>
+      <text x="550" y="536" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">payload</text>
+      <text x="550" y="568" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">temp · humidity · wind</text>
+      <text x="550" y="594" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">conditions · UV · forecast</text>
+
+      <circle cx="220" cy="350" r="105" fill="#0a1628" stroke="#22d3ee" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="220" y="292" class="svg-title" fill="#22d3ee" font-size="22" text-anchor="middle" letter-spacing="2">CACHE</text>
+      <text x="220" y="316" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">dedupe + rate</text>
+      <text x="220" y="348" class="svg-label" fill="#c9d1d9" font-size="16" text-anchor="middle">search_cache.db</text>
+      <text x="220" y="372" class="svg-label" fill="#c9d1d9" font-size="18" text-anchor="middle">15 min TTL</text>
+
+      <circle cx="550" cy="350" r="72" fill="url(#rad-w)" stroke="#22d3ee" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="332" class="svg-label" fill="#22d3ee" font-size="20" text-anchor="middle">🌤️</text>
+      <text x="550" y="362" class="svg-title" fill="#22d3ee" font-size="20" text-anchor="middle" letter-spacing="3" filter="url(#gl-w2)">WEATHER</text>
+      <text x="550" y="384" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">construct core</text>
+    </svg>
+  </div>
+
+  <div class="stack-section">
+    <h2 class="section-title">Tech Stack</h2>
+    <div>
+      <div class="stack-row"><span class="stack-label">Language</span><span class="stack-value">Python</span></div>
+      <div class="stack-row"><span class="stack-label">Primary API</span><span class="stack-value">Open-Meteo (geocode + forecast)</span></div>
+      <div class="stack-row"><span class="stack-label">Fallback</span><span class="stack-value">wttr.in</span></div>
+      <div class="stack-row"><span class="stack-label">Cache</span><span class="stack-value">search_cache.db (15 min TTL)</span></div>
+      <div class="stack-row"><span class="stack-label">LLM</span><span class="stack-value">Not required — deterministic path</span></div>
+      <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">$0</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><a href="../index.html" style="color:#22d3ee;text-decoration:none">← Back to The Matrix</a></p>
+      <p class="footer-small">WEATHER — Construct</p>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MORPHEUS — Email Bot | The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📧</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 3.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #fb923c; letter-spacing: 5px; text-shadow: 0 0 20px rgba(251,146,60,0.4); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
+    .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
+    .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
+    .d-svg { width: 100%; max-width: 1100px; height: auto; margin: 0 auto; display: block; }
+    @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+    @keyframes sun-breathe { 0%,100% { filter: drop-shadow(0 0 8px rgba(251,146,60,0.15)); } 50% { filter: drop-shadow(0 0 20px rgba(251,146,60,0.35)); } }
+    .anim-dash { animation: dash-flow 1s linear infinite; }
+    .anim-sun { animation: sun-breathe 3s ease-in-out infinite; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+    .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(251,146,60,0.08); padding: 0.6rem 0; }
+    .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: #fb923c; letter-spacing: 1px; min-width: 110px; }
+    .stack-value { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<nav id="navbar">
+  <div class="nav-brand"><a href="../index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a></div>
+  <div class="nav-links"><a href="../index.html">Home</a><a href="../index.html#architecture">Architecture</a><a href="../index.html#agents">Agents</a><a href="../index.html#projects">Projects</a></div>
+</nav>
+
+<div class="detail-page">
+  <div class="d-hero">
+    <div class="d-hero-icon">📧</div>
+    <h1 class="d-hero-title">MORPHEUS</h1>
+    <p class="d-hero-sub">The Guide — Email Bot</p>
+    <p class="d-hero-desc">Neo's remote control when away from the laptop. Send an email to @morpheus — restart services, ask questions, get system status. It polls Gmail every 2 minutes.</p>
+  </div>
+
+  <!-- SECTION 1: Real Conversation -->
+  <div class="diagram-wrap">
+    <h2 class="section-title">A Real Conversation</h2>
+    <p class="section-desc">Neo emails "@morpheus restart zion" — Morpheus executes and replies</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 400" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#fb923c" opacity="0.8"/></marker>
+        <marker id="ag" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.8"/></marker>
+        <filter id="gl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <!-- Neo's Email -->
+      <g transform="translate(20, 110)">
+        <rect width="150" height="120" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2.5"/>
+        <text x="75" y="28" class="svg-label" fill="#fb923c" font-size="18" text-anchor="middle">📧</text>
+        <text x="75" y="50" class="svg-title" fill="#fb923c" font-size="13" text-anchor="middle">NEO'S EMAIL</text>
+        <text x="75" y="70" class="svg-label" fill="#fb923c" font-size="11" text-anchor="middle">To: reachmanav</text>
+        <text x="75" y="86" class="svg-label" fill="#fb923c" font-size="11" text-anchor="middle">Subject: @morpheus</text>
+        <text x="75" y="106" class="svg-label" fill="#ffd740" font-size="11" text-anchor="middle">"restart zion"</text>
+      </g>
+
+      <!-- Arrow: Email → Gmail -->
+      <line x1="180" y1="170" x2="280" y2="170" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
+
+      <!-- Gmail IMAP -->
+      <g transform="translate(288, 140)">
+        <rect width="120" height="60" rx="8" fill="#0a1628" stroke="#ff4444" stroke-width="1.5"/>
+        <text x="60" y="22" class="svg-label" fill="#ff4444" font-size="14" text-anchor="middle">📬 Gmail</text>
+        <text x="60" y="40" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">IMAP poll 2 min</text>
+        <text x="60" y="52" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">looks for @morpheus</text>
+      </g>
+
+      <!-- Arrow: Gmail → Morpheus -->
+      <line x1="418" y1="170" x2="520" y2="170" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
+
+      <!-- MORPHEUS (center) -->
+      <circle cx="640" cy="180" r="95" fill="#0a1628" stroke="#fb923c" stroke-width="3" class="anim-sun"/>
+      <text x="640" y="152" class="svg-label" fill="#fb923c" font-size="22" text-anchor="middle">📧</text>
+      <text x="640" y="182" class="svg-title" fill="#fb923c" font-size="16" text-anchor="middle" letter-spacing="3" filter="url(#gl)">MORPHEUS</text>
+      <text x="640" y="206" class="svg-label" fill="#8b949e" font-size="11" text-anchor="middle">parse command</text>
+      <text x="640" y="224" class="svg-label" fill="#00ff41" font-size="11" text-anchor="middle">→ systemctl restart zion</text>
+      <text x="640" y="242" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">✓ verify is-active</text>
+
+      <!-- Arrow: Morpheus → Reply -->
+      <path d="M640,280 Q640,340 450,340 L180,280" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.5s" marker-end="url(#ag)"/>
+      <text x="400" y="360" class="svg-label" fill="#00ff41" font-size="12" text-anchor="middle">← SMTP reply: "Zion restarted — ACTIVE ✓"</text>
+
+      <!-- Also: WhatsApp -->
+      <g transform="translate(800, 120)">
+        <rect width="170" height="60" rx="8" fill="#0a1628" stroke="#00ff41" stroke-width="1.5"/>
+        <text x="85" y="22" class="svg-label" fill="#00ff41" font-size="12" text-anchor="middle">💬 Also WhatsApp</text>
+        <text x="85" y="42" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">"[Morpheus] Restarted</text>
+        <text x="85" y="54" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">zion.service — ACTIVE"</text>
+      </g>
+      <line x1="740" y1="160" x2="800" y2="150" stroke="#00ff41" stroke-width="1.5" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.3s"/>
+    </svg>
+  </div>
+
+  <!-- SECTION 2: Internals -->
+  <div class="diagram-wrap">
+    <h2 class="section-title">Everything Inside Morpheus</h2>
+    <p class="section-desc">Morpheus is the sun — capabilities radiate out</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 700" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="sg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fb923c" stop-opacity="0.2"/><stop offset="100%" stop-color="#fb923c" stop-opacity="0.01"/></radialGradient>
+        <filter id="gl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <line x1="550" y1="290" x2="550" y2="130" stroke="#ff4444" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="620" y1="340" x2="880" y2="170" stroke="#ffd740" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="620" y1="370" x2="880" y2="460" stroke="#00ff41" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="480" y1="340" x2="220" y2="170" stroke="#fb923c" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="480" y1="400" x2="220" y2="530" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.1"/>
+      <line x1="550" y1="420" x2="550" y2="570" stroke="#c084fc" stroke-width="1.5" stroke-opacity="0.1"/>
+
+      <!-- MORPHEUS SUN -->
+      <circle cx="550" cy="355" r="55" fill="url(#sg)" stroke="#fb923c" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="345" class="svg-label" fill="#fb923c" font-size="22" text-anchor="middle">📧</text>
+      <text x="550" y="372" class="svg-title" fill="#fb923c" font-size="15" text-anchor="middle" letter-spacing="3" filter="url(#gl2)">MORPHEUS</text>
+
+      <!-- 1. EMAIL INPUT -->
+      <circle cx="550" cy="100" r="100" fill="#0a1628" stroke="#ff4444" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="38" class="svg-title" fill="#ff4444" font-size="20" text-anchor="middle" letter-spacing="2">EMAIL IN</text>
+      <text x="550" y="68" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">Gmail IMAP</text>
+      <text x="550" y="98" class="svg-label" fill="#ff4444" font-size="16" text-anchor="middle">📬 Poll every 2 min</text>
+      <text x="550" y="122" class="svg-label" fill="#ff4444" font-size="16" text-anchor="middle">🔍 Filter @morpheus</text>
+      <text x="550" y="146" class="svg-label" fill="#ff4444" font-size="16" text-anchor="middle">📋 Parse body → command</text>
+
+      <!-- 2. COMMANDS -->
+      <circle cx="890" cy="160" r="115" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="890" y="85" class="svg-title" fill="#ffd740" font-size="20" text-anchor="middle" letter-spacing="2">COMMANDS</text>
+      <text x="890" y="115" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">what Neo can order</text>
+      <text x="890" y="148" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">🔄 Restart services</text>
+      <text x="890" y="172" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">📊 System status</text>
+      <text x="890" y="196" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">❓ Ask AI (Groq/Gemini)</text>
+      <text x="890" y="220" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">📝 Run health check</text>
+
+      <!-- 3. REPLY -->
+      <circle cx="890" cy="460" r="100" fill="#0a1628" stroke="#00ff41" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="890" y="400" class="svg-title" fill="#00ff41" font-size="20" text-anchor="middle" letter-spacing="2">REPLY</text>
+      <text x="890" y="428" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">dual notification</text>
+      <text x="890" y="458" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">📧 SMTP email reply</text>
+      <text x="890" y="482" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">💬 WhatsApp message</text>
+      <text x="890" y="506" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">✅ Execution result</text>
+
+      <!-- 4. TRIGGERS -->
+      <circle cx="210" cy="160" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="210" y="95" class="svg-title" fill="#fb923c" font-size="20" text-anchor="middle" letter-spacing="2">TRIGGERS</text>
+      <text x="210" y="123" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">activation method</text>
+      <text x="210" y="155" class="svg-label" fill="#fb923c" font-size="16" text-anchor="middle">📧 Email @morpheus</text>
+      <text x="210" y="179" class="svg-label" fill="#fb923c" font-size="16" text-anchor="middle">⏰ Cron every 2 min</text>
+      <text x="210" y="203" class="svg-label" fill="#fb923c" font-size="16" text-anchor="middle">🔐 Owner-only (Neo)</text>
+
+      <!-- 5. AI BRAIN -->
+      <circle cx="210" cy="530" r="100" fill="#0a1628" stroke="#58a6ff" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="210" y="470" class="svg-title" fill="#58a6ff" font-size="20" text-anchor="middle" letter-spacing="2">AI BRAIN</text>
+      <text x="210" y="498" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">intelligent replies</text>
+      <text x="210" y="528" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">💎 Gemini (primary)</text>
+      <text x="210" y="552" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">⚡ Groq (fallback)</text>
+      <text x="210" y="576" class="svg-label" fill="#58a6ff" font-size="16" text-anchor="middle">🧠 Context-aware</text>
+
+      <!-- 6. USE CASES -->
+      <circle cx="550" cy="610" r="95" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" stroke-opacity="0.5"/>
+      <text x="550" y="555" class="svg-title" fill="#c084fc" font-size="20" text-anchor="middle" letter-spacing="2">USE CASES</text>
+      <text x="550" y="583" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">when Neo uses Morpheus</text>
+      <text x="550" y="612" class="svg-label" fill="#c084fc" font-size="16" text-anchor="middle">🏖️ On vacation — no laptop</text>
+      <text x="550" y="636" class="svg-label" fill="#c084fc" font-size="16" text-anchor="middle">🚨 Emergency restart</text>
+      <text x="550" y="660" class="svg-label" fill="#c084fc" font-size="16" text-anchor="middle">🔍 Quick status check</text>
+    </svg>
+  </div>
+
+  <div class="stack-section">
+    <h2 class="section-title">Tech Stack</h2>
+    <div>
+      <div class="stack-row"><span class="stack-label">Runtime</span><span class="stack-value">Python 3 — cron every 2 min</span></div>
+      <div class="stack-row"><span class="stack-label">Email In</span><span class="stack-value">Gmail IMAP (reachmanav@gmail.com)</span></div>
+      <div class="stack-row"><span class="stack-label">Email Out</span><span class="stack-value">Gmail SMTP — auto-reply</span></div>
+      <div class="stack-row"><span class="stack-label">AI</span><span class="stack-value">Gemini Flash + Groq (fallback)</span></div>
+      <div class="stack-row"><span class="stack-label">WhatsApp</span><span class="stack-value">Bridge API for dual notification</span></div>
+      <div class="stack-row"><span class="stack-label">Key File</span><span class="stack-value">Morpheus/morpheus_vm.py</span></div>
+      <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">$0 — Gmail free + free AI tiers</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a></p>
+      <p class="footer-small">MORPHEUS — The guide who reaches Neo anywhere</p>
+    </div>
+  </footer>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

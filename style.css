@@ -425,6 +425,18 @@ section {
   color: var(--matrix-green);
 }
 
+a.construct-tag {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.project-card.clickable-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+}
+
 /* Clickable boxes/cards */
 .clickable-box, .clickable-card {
   text-decoration: none;
