@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The KeyMaker — Now You Know</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .live-page { position: relative; z-index: 1; }
+
+    .live-hero { text-align: center; padding: 8rem 2rem 3rem; }
+    .live-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 900; color: var(--matrix-green); letter-spacing: 6px; text-shadow: 0 0 40px rgba(0,255,65,0.4); margin: 0; }
+    .live-hero .byline { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.8rem; letter-spacing: 2px; }
+    .live-hero .desc { font-size: 1rem; color: var(--text-dim); max-width: 700px; margin: 1.5rem auto 0; line-height: 1.9; }
+
+    .live-section { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+
+    .timeline { position: relative; padding-left: 2.5rem; }
+    .timeline::before { content: ''; position: absolute; left: 0.6rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, #00ff41, #ffd740, #ff6b6b, #00ff41); }
+    .tl-step { position: relative; margin-bottom: 2rem; opacity: 0; animation: fadeSlideIn 0.6s ease forwards; }
+    .tl-step:nth-child(1) { animation-delay: 0.1s; }
+    .tl-step:nth-child(2) { animation-delay: 0.3s; }
+    .tl-step:nth-child(3) { animation-delay: 0.5s; }
+    .tl-step:nth-child(4) { animation-delay: 0.7s; }
+    .tl-step:nth-child(5) { animation-delay: 0.9s; }
+    .tl-dot { position: absolute; left: -2.1rem; top: 0.3rem; width: 12px; height: 12px; border-radius: 50%; border: 2px solid; }
+    .tl-num { font-family: var(--font-display); font-size: 0.7rem; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 0.3rem; }
+    .tl-text { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); line-height: 1.7; }
+    .tl-text strong { color: var(--matrix-green); font-weight: normal; }
+    .tl-text em { color: var(--accent-gold); font-style: normal; }
+
+    @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .cta-section { text-align: center; padding: 3rem 2rem; }
+    .cta-card { background: rgba(10,22,40,0.95); border: 2px solid rgba(0,255,65,0.25); border-radius: 16px; padding: 2.5rem; max-width: 500px; margin: 0 auto; }
+    .cta-card .phone-num { font-family: var(--font-display); font-size: 1.8rem; color: var(--matrix-green); letter-spacing: 4px; margin: 1rem 0; text-shadow: 0 0 15px rgba(0,255,65,0.3); }
+    .cta-card .sub { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); }
+    .qr-box { background: #fff; border-radius: 12px; width: 200px; height: 200px; margin: 1.2rem auto; display: flex; align-items: center; justify-content: center; }
+    .wa-btn { display: inline-block; background: #25D366; color: #fff; font-family: var(--font-mono); font-size: 0.9rem; padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; margin-top: 1rem; transition: all 0.3s; }
+    .wa-btn:hover { background: #128C7E; transform: scale(1.05); }
+
+    .cmd-section { max-width: 700px; margin: 0 auto; padding: 2rem; }
+    .cmd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 600px) { .cmd-grid { grid-template-columns: 1fr; } }
+    .cmd-card { background: rgba(10,22,40,0.9); border: 1px solid rgba(0,255,65,0.12); border-radius: 10px; padding: 1rem 1.2rem; transition: border-color 0.3s; }
+    .cmd-card:hover { border-color: rgba(0,255,65,0.4); }
+    .cmd-card .cmd { font-family: var(--font-mono); font-size: 0.8rem; color: var(--matrix-green); margin-bottom: 0.3rem; }
+    .cmd-card .cdesc { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+
+    .credits { text-align: center; padding: 3rem 2rem 1rem; }
+    .credits p { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); line-height: 2; }
+    .credits strong { color: var(--matrix-green); font-weight: normal; }
+
+    .arch-link { text-align: center; padding: 2rem 2rem 4rem; }
+    .arch-link a { display: inline-block; border: 2px solid var(--matrix-green); color: var(--matrix-green); font-family: var(--font-display); font-size: 0.9rem; padding: 1rem 2.5rem; border-radius: 10px; text-decoration: none; letter-spacing: 3px; transition: all 0.3s; }
+    .arch-link a:hover { background: rgba(0,255,65,0.1); transform: scale(1.05); box-shadow: 0 0 25px rgba(0,255,65,0.2); }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<nav id="navbar">
+  <div class="nav-brand"><a href="index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a></div>
+  <div class="nav-links"><a href="index.html">Home</a><a href="index.html#architecture">Architecture</a><a href="index.html#agents">Agents</a><a href="demo.html" style="color:#ff6b6b">Live Demo</a></div>
+</nav>
+
+<div class="live-page">
+
+  <!-- HERO -->
+  <div class="live-hero">
+    <h1>THE KEYMAKER PROJECT</h1>
+    <p class="byline">by Manav Shah</p>
+    <p class="desc">A personal AI ecosystem — 6 agents, 14 constructs — running 24/7 on Oracle Cloud Free Tier. Built entirely with AI. Cost: $0. This page was created live, in front of you, by two AIs talking to each other.</p>
+  </div>
+
+  <!-- TIMELINE: What just happened -->
+  <div class="live-section">
+    <h2 class="section-title">What You Just Witnessed</h2>
+    <p style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-dim);text-align:center;margin-bottom:2rem">This page didn't exist 5 minutes ago. Here's how it was born.</p>
+
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="tl-dot" style="border-color:#00ff41;background:rgba(0,255,65,0.2)"></div>
+        <div class="tl-num">STEP 1</div>
+        <div class="tl-text"><strong>Neo typed one sentence</strong> on the demo page.<br><em>@trinity No one knows about the KeyMaker Project. Create a new link — show to the group team.</em></div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot" style="border-color:#ff6b6b;background:rgba(255,107,107,0.2)"></div>
+        <div class="tl-num">STEP 2</div>
+        <div class="tl-text"><strong>Trinity</strong> (Anthropic Opus 4.6, running in Cursor IDE) received the message and said: <em>"Consulting Lobo for architecture..."</em></div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot" style="border-color:#ffd740;background:rgba(255,215,64,0.2)"></div>
+        <div class="tl-num">STEP 3</div>
+        <div class="tl-text"><strong>Lobo</strong> (OpenClaw + GPT-5.3, a separate AI on WhatsApp) replied with 3 options. Trinity chose <em>Option 2: Structured multi-section with animations</em> — Lobo's recommendation.</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot" style="border-color:#ff6b6b;background:rgba(255,107,107,0.2)"></div>
+        <div class="tl-num">STEP 4</div>
+        <div class="tl-text"><strong>Trinity built this page</strong> — HTML, CSS, animations — and pushed it to GitHub Pages. You watched the code being written on the laptop screen.</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-dot" style="border-color:#00ff41;background:rgba(0,255,65,0.3)"></div>
+        <div class="tl-num">STEP 5</div>
+        <div class="tl-text"><strong>You're reading the result.</strong> Created live. Right now. Two AIs collaborated over WhatsApp. Zero human code.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA: Try it yourself -->
+  <div class="cta-section">
+    <h2 class="section-title">Your Turn — Try It</h2>
+    <p style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-dim);margin-bottom:1.5rem">Scan the QR code or save the number. Send a message. Watch Zion reply.</p>
+
+    <div class="cta-card">
+      <div class="qr-box"><canvas id="qr-canvas"></canvas></div>
+      <div class="phone-num">+91 98677 82241</div>
+      <p class="sub">Zion is listening 24/7 — try any command below</p>
+      <a href="https://wa.me/919867782241?text=Hi%20Zion!" class="wa-btn" target="_blank">💬 Open WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- COMMANDS -->
+  <div class="cmd-section">
+    <h2 class="section-title" style="text-align:center">Commands to Try</h2>
+    <div class="cmd-grid">
+      <div class="cmd-card">
+        <div class="cmd">@zion weather in Mumbai</div>
+        <div class="cdesc">Live weather + 2-day forecast</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">@zion what is Kubernetes?</div>
+        <div class="cdesc">AI answers any question</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">@zion ainews subscribe</div>
+        <div class="cdesc">Daily AI brief + voice note at 7:30 AM</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">@zion stocks subscribe</div>
+        <div class="cdesc">Market brief — India + US indices</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">@zion search best cafes Pune</div>
+        <div class="cdesc">Web search, AI-summarized</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">@zion trivia start</div>
+        <div class="cdesc">Start a trivia game in group chat</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">Send any photo</div>
+        <div class="cdesc">Vision AI describes what it sees</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">Send a voice note</div>
+        <div class="cdesc">Transcribed + answered by AI</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">@zion remind me dentist tomorrow 3pm</div>
+        <div class="cdesc">Creates Google Calendar event</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd">@zion strava this week</div>
+        <div class="cdesc">Running stats from Strava</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREDITS -->
+  <div class="credits">
+    <p><strong>Built by:</strong> Trinity (Anthropic Opus 4.6) + Lobo (OpenClaw + GPT-5.3)</p>
+    <p><strong>Commanded by:</strong> Manav Shah — one sentence at a time</p>
+    <p><strong>Infrastructure:</strong> Oracle Cloud Free Tier — $0/month, 24/7 uptime</p>
+    <p><strong>Agents:</strong> Trinity · Zion · Morpheus · Anderson · Lobo · Cortex</p>
+  </div>
+
+  <!-- ARCHITECTURE LINK -->
+  <div class="arch-link">
+    <p style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-dim);margin-bottom:1.5rem">Every agent, every construct, every line of code — documented with live diagrams.</p>
+    <a href="index.html">ENTER THE MATRIX →</a>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-dim)">The KeyMaker Project — No one knew. Now you do.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+<script>
+(function(){
+  function qrGenerate(canvas, text, size) {
+    var img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = function() {
+      var ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+      ctx.drawImage(img, 0, 0, size, size);
+    };
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size + '&data=' + encodeURIComponent(text) + '&bgcolor=ffffff&color=000000&margin=1';
+  }
+  var c = document.getElementById('qr-canvas');
+  if (c) qrGenerate(c, 'https://wa.me/919867782241?text=Hi%20Zion!', 180);
+})();
+</script>
+</body>
+</html>
