@@ -185,6 +185,28 @@
     </svg>
   </div>
 
+  <!-- SECTION: LIVE COMMAND BOX -->
+  <div class="try-section" style="padding-bottom:1rem">
+    <h2 class="section-title">Talk to Trinity — Live</h2>
+    <p class="section-desc" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-dim);text-align:center">Type a command below. It will appear on Neo's WhatsApp. Trinity will respond.</p>
+
+    <div style="max-width:700px;margin:1.5rem auto 0;background:rgba(10,22,40,0.9);border:2px solid rgba(0,255,65,0.3);border-radius:14px;padding:2rem;text-align:center">
+      <div style="display:flex;gap:0.8rem;align-items:center">
+        <input id="cmd-input" type="text" placeholder="@trinity No one knows about the KeyMaker Project..." 
+          style="flex:1;background:#0d1117;border:1.5px solid rgba(0,255,65,0.2);border-radius:8px;padding:0.9rem 1.2rem;font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.85rem;color:#00ff41;outline:none"
+          value="@trinity No one knows about the KeyMaker Project. Create a new link — show to the group team."
+        />
+        <button id="cmd-send" onclick="sendToTrinity()" 
+          style="background:#00ff41;color:#0d1117;border:none;border-radius:8px;padding:0.9rem 1.8rem;font-family:'Orbitron','JetBrains Mono',monospace;font-size:0.8rem;font-weight:bold;letter-spacing:1px;cursor:pointer;white-space:nowrap;transition:all 0.3s"
+          onmouseover="this.style.background='#33ff66';this.style.transform='scale(1.05)'" 
+          onmouseout="this.style.background='#00ff41';this.style.transform='scale(1)'"
+        >SEND ⚡</button>
+      </div>
+      <div id="cmd-status" style="margin-top:1rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:#8b949e;min-height:1.5rem"></div>
+      <div id="cmd-log" style="margin-top:0.8rem;text-align:left;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:#8b949e;max-height:200px;overflow-y:auto"></div>
+    </div>
+  </div>
+
   <!-- SECTION 2: The Story -->
   <div class="story-section">
     <h2 class="section-title">What Just Happened In This Meeting</h2>
@@ -306,10 +328,9 @@
 
 <script src="script.js"></script>
 <script>
-// QR Code generator (minimal, no dependencies)
+// QR Code generator
 (function(){
   function qrGenerate(canvas, text, size) {
-    // Using a simple QR code approach via Google Charts API rendered as image
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.onload = function() {
@@ -323,6 +344,70 @@
   const c = document.getElementById('qr-canvas');
   if (c) qrGenerate(c, 'https://wa.me/919867782241?text=Hi%20Zion!', 180);
 })();
+
+// Send command to Trinity via VM Bridge API
+function addLog(text, color) {
+  const log = document.getElementById('cmd-log');
+  const line = document.createElement('div');
+  line.style.color = color || '#8b949e';
+  line.style.padding = '0.2rem 0';
+  line.style.borderBottom = '1px solid rgba(255,255,255,0.03)';
+  line.textContent = `[${new Date().toLocaleTimeString()}] ${text}`;
+  log.appendChild(line);
+  log.scrollTop = log.scrollHeight;
+}
+
+async function sendToTrinity() {
+  const input = document.getElementById('cmd-input');
+  const status = document.getElementById('cmd-status');
+  const btn = document.getElementById('cmd-send');
+  const msg = input.value.trim();
+  
+  if (!msg) { status.textContent = 'Type a message first.'; return; }
+  
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
+  btn.style.background = '#ffd740';
+  status.innerHTML = '<span style="color:#ffd740">⚡ Sending to Neo\'s WhatsApp via Oracle Cloud VM...</span>';
+  addLog('Sending: ' + msg, '#00ff41');
+  
+  try {
+    const resp = await fetch('http://80.225.205.232:8080/api/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        recipient: '919867782241@s.whatsapp.net',
+        message: msg
+      })
+    });
+    
+    if (resp.ok) {
+      status.innerHTML = '<span style="color:#00ff41">✓ Message sent to Neo\'s WhatsApp! Check the phone.</span>';
+      addLog('Delivered to WhatsApp ✓', '#00ff41');
+      addLog('Trinity will pick it up → consult Lobo → reply on WhatsApp', '#ffd740');
+      addLog('Watch Neo\'s phone and laptop...', '#58a6ff');
+    } else {
+      throw new Error('Bridge returned ' + resp.status);
+    }
+  } catch (e) {
+    status.innerHTML = '<span style="color:#ff6b6b">Bridge not reachable from browser (CORS/network). Use the WhatsApp button instead ↓</span>';
+    addLog('Direct bridge call blocked (expected from browser). Use phone.', '#ff6b6b');
+    
+    // Fallback: open WhatsApp web link with the message pre-filled
+    const waUrl = `https://wa.me/919867782241?text=${encodeURIComponent(msg)}`;
+    status.innerHTML += `<br><a href="${waUrl}" target="_blank" style="color:#25D366;font-size:0.85rem">💬 Click here to send via WhatsApp instead →</a>`;
+    addLog('WhatsApp fallback link generated ↑', '#25D366');
+  }
+  
+  btn.disabled = false;
+  btn.textContent = 'SEND ⚡';
+  btn.style.background = '#00ff41';
+}
+
+// Allow Enter key to send
+document.getElementById('cmd-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') sendToTrinity();
+});
 </script>
 </body>
 </html>
