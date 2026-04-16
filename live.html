@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talk to Zion — The KeyMaker Project</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .live-page { position: relative; z-index: 1; min-height: 100vh; }
+
+    .live-hero { text-align: center; padding: 6rem 1.5rem 2rem; }
+    .live-hero-icon { font-size: 4rem; margin-bottom: 0.5rem; }
+    .live-hero h1 {
+      font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.5rem);
+      color: var(--matrix-green); letter-spacing: 4px; font-weight: 900;
+      text-shadow: 0 0 30px rgba(0,255,65,0.4);
+    }
+    .live-hero-sub {
+      font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold);
+      margin-top: 0.5rem;
+    }
+    .live-hero-desc {
+      font-family: var(--font-body); font-size: 1rem; color: var(--text-dim);
+      max-width: 600px; margin: 1.5rem auto 0; line-height: 1.8;
+    }
+
+    .zion-card {
+      max-width: 440px; margin: 2.5rem auto; background: rgba(10,22,40,0.95);
+      border: 2px solid rgba(0,255,65,0.3); border-radius: 18px; padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .zion-card h2 {
+      font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 3px;
+      color: var(--matrix-green); margin-bottom: 1.5rem;
+    }
+
+    .qr-wrap {
+      background: #fff; border-radius: 14px; width: 220px; height: 220px;
+      margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 30px rgba(0,255,65,0.15);
+    }
+    .qr-wrap canvas { width: 200px; height: 200px; }
+
+    .phone-display {
+      font-family: var(--font-display); font-size: 1.6rem; color: var(--matrix-green);
+      letter-spacing: 3px; margin: 0.5rem 0; text-shadow: 0 0 12px rgba(0,255,65,0.3);
+    }
+    .phone-hint {
+      font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);
+      margin-bottom: 1.2rem;
+    }
+
+    .wa-btn {
+      display: inline-block; background: #25D366; color: #fff;
+      font-family: var(--font-mono); font-size: 1rem; font-weight: bold;
+      padding: 0.9rem 2.5rem; border-radius: 10px; text-decoration: none;
+      transition: all 0.3s; letter-spacing: 1px;
+    }
+    .wa-btn:hover { background: #128C7E; transform: scale(1.05); }
+
+    .cmds-section { max-width: 700px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+    .cmds-section h2 {
+      font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 3px;
+      color: var(--accent-gold); text-align: center; margin-bottom: 1.5rem;
+    }
+
+    .cmd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 600px) { .cmd-grid { grid-template-columns: 1fr; } }
+
+    .cmd-card {
+      background: rgba(10,22,40,0.9); border: 1.5px solid rgba(0,255,65,0.1);
+      border-radius: 12px; padding: 1.2rem; transition: border-color 0.3s;
+    }
+    .cmd-card:hover { border-color: rgba(0,255,65,0.4); }
+    .cmd-card .cmd-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .cmd-card .cmd-text {
+      font-family: var(--font-mono); font-size: 0.82rem; color: var(--matrix-green);
+      margin-bottom: 0.3rem;
+    }
+    .cmd-card .cmd-what {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .caps-section {
+      max-width: 700px; margin: 0 auto; padding: 0 1.5rem 3rem; text-align: center;
+    }
+    .caps-section h2 {
+      font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 3px;
+      color: var(--matrix-green); margin-bottom: 1rem;
+    }
+    .caps-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+    .cap-tag {
+      font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim);
+      background: rgba(0,255,65,0.06); border: 1px solid rgba(0,255,65,0.12);
+      border-radius: 20px; padding: 0.4rem 1rem;
+    }
+
+    .live-footer {
+      text-align: center; padding: 2rem 1.5rem 4rem;
+      border-top: 1px solid rgba(0,255,65,0.08);
+    }
+    .live-footer p {
+      font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);
+      line-height: 1.8;
+    }
+    .live-footer a { color: var(--matrix-green); text-decoration: none; }
+    .live-footer a:hover { text-decoration: underline; }
+
+    .powered-row {
+      display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .powered-item {
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim);
+      text-align: center;
+    }
+    .powered-item span { display: block; font-size: 1.4rem; margin-bottom: 0.3rem; }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <a href="index.html" style="color:inherit;text-decoration:none">
+      <span class="key-icon">🔑</span> THE KEYMAKER PROJECT
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#agents">Agents</a>
+    <a href="demo.html">Demo</a>
+  </div>
+</nav>
+
+<div class="live-page">
+
+  <div class="live-hero">
+    <div class="live-hero-icon">🏛️</div>
+    <h1>TALK TO ZION</h1>
+    <p class="live-hero-sub">A real AI. On WhatsApp. Running right now.</p>
+    <p class="live-hero-desc">
+      Zion is a WhatsApp AI assistant built from scratch — running 24/7 on a free Oracle Cloud VM.
+      No app to install. No signup. Just scan the QR code and start chatting.
+    </p>
+  </div>
+
+  <!-- Main CTA: QR + WhatsApp -->
+  <div class="zion-card">
+    <h2>SCAN TO CHAT</h2>
+    <div class="qr-wrap">
+      <canvas id="qr-canvas"></canvas>
+    </div>
+    <div class="phone-display">+91 98677 82241</div>
+    <p class="phone-hint">WhatsApp — Zion replies instantly, 24/7</p>
+    <a href="https://wa.me/919867782241?text=Hi%20Zion!" class="wa-btn">Open WhatsApp</a>
+  </div>
+
+  <!-- Commands to Try -->
+  <div class="cmds-section">
+    <h2>THINGS TO TRY</h2>
+    <div class="cmd-grid">
+      <div class="cmd-card">
+        <div class="cmd-icon">🌤️</div>
+        <div class="cmd-text">@zion weather in Pune</div>
+        <div class="cmd-what">Live weather + 3-day forecast. Real API data, no hallucination.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-icon">🔍</div>
+        <div class="cmd-text">@zion search best cafes Pune</div>
+        <div class="cmd-what">Web search with AI-summarized results. Like asking Google a question.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-icon">🧠</div>
+        <div class="cmd-text">@zion what is quantum computing?</div>
+        <div class="cmd-what">Ask anything. Powered by Llama 3.3 70B via Groq.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-icon">🎯</div>
+        <div class="cmd-text">@zion trivia start</div>
+        <div class="cmd-what">Play a trivia game. Works in group chats too.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-icon">📸</div>
+        <div class="cmd-text">Send any image</div>
+        <div class="cmd-what">Zion sees it using Gemini Flash vision. Describes, translates, reads text.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-icon">🎤</div>
+        <div class="cmd-text">Send a voice note</div>
+        <div class="cmd-what">Transcribed and answered. Speak instead of type.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-icon">📰</div>
+        <div class="cmd-text">@zion ainews</div>
+        <div class="cmd-what">Today's AI/tech news brief. Curated daily at 8 AM.</div>
+      </div>
+      <div class="cmd-card">
+        <div class="cmd-icon">📖</div>
+        <div class="cmd-text">@zion word</div>
+        <div class="cmd-what">Word of the day with meaning, usage, and etymology.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What Zion Can Do -->
+  <div class="caps-section">
+    <h2>FULL CAPABILITIES</h2>
+    <div class="caps-grid">
+      <span class="cap-tag">Text chat (any language)</span>
+      <span class="cap-tag">Image analysis (vision AI)</span>
+      <span class="cap-tag">Voice notes (transcription)</span>
+      <span class="cap-tag">Web search</span>
+      <span class="cap-tag">Weather (global)</span>
+      <span class="cap-tag">News digest</span>
+      <span class="cap-tag">Stock market</span>
+      <span class="cap-tag">Trivia games</span>
+      <span class="cap-tag">Calendar events</span>
+      <span class="cap-tag">Link summarizer</span>
+      <span class="cap-tag">PDF reader</span>
+      <span class="cap-tag">Vocabulary builder</span>
+      <span class="cap-tag">Group chat support</span>
+      <span class="cap-tag">Fitness tracking</span>
+    </div>
+  </div>
+
+  <!-- Powered By -->
+  <div class="live-footer">
+    <div class="powered-row">
+      <div class="powered-item"><span>☁️</span>Oracle Cloud<br>Free Tier</div>
+      <div class="powered-item"><span>🤖</span>Llama 3.3 70B<br>via Groq</div>
+      <div class="powered-item"><span>💎</span>Gemini Flash<br>Vision AI</div>
+      <div class="powered-item"><span>💬</span>WhatsApp<br>Go Bridge</div>
+    </div>
+    <p style="margin-top:2rem">
+      Part of <a href="index.html">The KeyMaker Project</a> — a network of 6 AI agents running 24/7 for $0.
+    </p>
+    <p style="margin-top:0.5rem;font-size:0.7rem;color:#555">
+      Built by Manav Shah · Powered by Trinity (Opus 4.6)
+    </p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+<script>
+(function(){
+  function qrGenerate(canvas, text, size) {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = function() {
+      const ctx = canvas.getContext('2d');
+      canvas.width = size;
+      canvas.height = size;
+      ctx.drawImage(img, 0, 0, size, size);
+    };
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=' + size + 'x' + size + '&data=' + encodeURIComponent(text) + '&bgcolor=ffffff&color=000000&margin=1';
+  }
+  var c = document.getElementById('qr-canvas');
+  if (c) qrGenerate(c, 'https://wa.me/919867782241?text=Hi%20Zion!', 200);
+})();
+</script>
+</body>
+</html>
