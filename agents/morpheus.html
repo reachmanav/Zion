@@ -46,115 +46,81 @@
   <!-- SECTION 1: Real Conversation -->
   <div class="diagram-wrap">
     <h2 class="section-title">A Real Conversation</h2>
-    <p class="section-desc">Neo emails "@morpheus restart zion" — AND Morpheus runs MedTracker daily</p>
+    <p class="section-desc">One Morpheus — email commands + MedTracker brain + Neo replies to stop</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 640" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 560" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="ao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#fb923c" opacity="0.8"/></marker>
         <marker id="ag" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.8"/></marker>
+        <marker id="ap" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#f472b6" opacity="0.8"/></marker>
+        <marker id="ab" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#58a6ff" opacity="0.8"/></marker>
         <filter id="gl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
 
-      <!-- Neo's Email -->
-      <g transform="translate(20, 110)">
-        <rect width="150" height="120" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2.5"/>
-        <text x="75" y="28" class="svg-label" fill="#fb923c" font-size="18" text-anchor="middle">📧</text>
-        <text x="75" y="50" class="svg-title" fill="#fb923c" font-size="13" text-anchor="middle">NEO'S EMAIL</text>
-        <text x="75" y="70" class="svg-label" fill="#fb923c" font-size="11" text-anchor="middle">To: reachmanav</text>
-        <text x="75" y="86" class="svg-label" fill="#fb923c" font-size="11" text-anchor="middle">Subject: @morpheus</text>
-        <text x="75" y="106" class="svg-label" fill="#ffd740" font-size="11" text-anchor="middle">"restart zion"</text>
+      <!-- ═══ ONE MORPHEUS — CENTER ═══ -->
+      <circle cx="550" cy="260" r="105" fill="#0a1628" stroke="#fb923c" stroke-width="3" class="anim-sun"/>
+      <text x="550" y="220" class="svg-label" fill="#fb923c" font-size="24" text-anchor="middle">📧</text>
+      <text x="550" y="252" class="svg-title" fill="#fb923c" font-size="18" text-anchor="middle" letter-spacing="3" filter="url(#gl)">MORPHEUS</text>
+      <text x="550" y="278" class="svg-label" fill="#8b949e" font-size="11" text-anchor="middle">email commands + MedTracker brain</text>
+      <text x="550" y="296" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">execute · remind · reply</text>
+      <text x="550" y="314" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">Gmail IMAP in · SMTP out</text>
+
+      <!-- ═══ INPUT 1 (top-left): Neo's Email Command ═══ -->
+      <g transform="translate(20, 40)">
+        <rect width="170" height="110" rx="12" fill="#0a1628" stroke="#fb923c" stroke-width="2.5"/>
+        <text x="85" y="24" class="svg-label" fill="#fb923c" font-size="16" text-anchor="middle">📧</text>
+        <text x="85" y="44" class="svg-title" fill="#fb923c" font-size="12" text-anchor="middle">NEO'S EMAIL</text>
+        <text x="85" y="62" class="svg-label" fill="#fb923c" font-size="10" text-anchor="middle">Subject: @morpheus</text>
+        <text x="85" y="80" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">"restart zion"</text>
+        <text x="85" y="98" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">IMAP poll every 2 min</text>
       </g>
+      <path d="M195,95 Q350,95 450,190" fill="none" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
+      <text x="310" y="120" class="svg-label" fill="#fb923c" font-size="10" text-anchor="middle">@morpheus command</text>
 
-      <!-- Arrow: Email → Gmail -->
-      <line x1="180" y1="170" x2="280" y2="170" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
-
-      <!-- Gmail IMAP -->
-      <g transform="translate(288, 140)">
-        <rect width="120" height="60" rx="8" fill="#0a1628" stroke="#ff4444" stroke-width="1.5"/>
-        <text x="60" y="22" class="svg-label" fill="#ff4444" font-size="14" text-anchor="middle">📬 Gmail</text>
-        <text x="60" y="40" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">IMAP poll 2 min</text>
-        <text x="60" y="52" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">looks for @morpheus</text>
+      <!-- ═══ INPUT 2 (bottom-left): MedTracker Cron ═══ -->
+      <g transform="translate(20, 380)">
+        <rect width="170" height="100" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2.5"/>
+        <text x="85" y="24" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">⏰</text>
+        <text x="85" y="44" class="svg-title" fill="#ffd740" font-size="12" text-anchor="middle">CRON 8:30 AM</text>
+        <text x="85" y="64" class="svg-label" fill="#f472b6" font-size="10" text-anchor="middle">💊 medtracker_daily.py</text>
+        <text x="85" y="82" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">reads medicines.xlsx</text>
       </g>
+      <path d="M195,430 Q350,430 450,330" fill="none" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.15s" marker-end="url(#ao)"/>
+      <text x="300" y="415" class="svg-label" fill="#f472b6" font-size="10" text-anchor="middle">💊 refill calc</text>
 
-      <!-- Arrow: Gmail → Morpheus -->
-      <line x1="418" y1="170" x2="520" y2="170" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
-
-      <!-- MORPHEUS (center) -->
-      <circle cx="640" cy="180" r="95" fill="#0a1628" stroke="#fb923c" stroke-width="3" class="anim-sun"/>
-      <text x="640" y="152" class="svg-label" fill="#fb923c" font-size="22" text-anchor="middle">📧</text>
-      <text x="640" y="182" class="svg-title" fill="#fb923c" font-size="16" text-anchor="middle" letter-spacing="3" filter="url(#gl)">MORPHEUS</text>
-      <text x="640" y="206" class="svg-label" fill="#8b949e" font-size="11" text-anchor="middle">parse command</text>
-      <text x="640" y="224" class="svg-label" fill="#00ff41" font-size="11" text-anchor="middle">→ systemctl restart zion</text>
-      <text x="640" y="242" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">✓ verify is-active</text>
-
-      <!-- Arrow: Morpheus → Reply -->
-      <path d="M640,280 Q640,340 450,340 L180,280" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.5s" marker-end="url(#ag)"/>
-      <text x="400" y="360" class="svg-label" fill="#00ff41" font-size="12" text-anchor="middle">← SMTP reply: "Zion restarted — ACTIVE ✓"</text>
-
-      <!-- Also: WhatsApp -->
-      <g transform="translate(800, 120)">
-        <rect width="170" height="60" rx="8" fill="#0a1628" stroke="#00ff41" stroke-width="1.5"/>
-        <text x="85" y="22" class="svg-label" fill="#00ff41" font-size="12" text-anchor="middle">💬 Also WhatsApp</text>
-        <text x="85" y="42" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">"[Morpheus] Restarted</text>
-        <text x="85" y="54" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">zion.service — ACTIVE"</text>
+      <!-- ═══ OUTPUT 1 (top-right): WhatsApp ═══ -->
+      <g transform="translate(850, 50)">
+        <rect width="210" height="100" rx="10" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="105" y="24" class="svg-label" fill="#00ff41" font-size="14" text-anchor="middle">💬 WhatsApp</text>
+        <text x="105" y="46" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">[Morpheus] Restarted zion ✓</text>
+        <text x="105" y="64" class="svg-label" fill="#f472b6" font-size="10" text-anchor="middle">💊 Buy list → Neo + Puja</text>
+        <text x="105" y="82" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Bridge /api/send</text>
       </g>
-      <line x1="740" y1="160" x2="800" y2="150" stroke="#00ff41" stroke-width="1.5" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.3s"/>
+      <path d="M650,210 Q750,140 850,100" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.3s" marker-end="url(#ag)"/>
 
-      <!-- ═══ SECOND FLOW: MedTracker Daily (Morpheus brain) ═══ -->
-      <line x1="0" y1="420" x2="1100" y2="420" stroke="#f472b6" stroke-width="0.5" stroke-opacity="0.08"/>
-      <text x="550" y="445" class="svg-label" fill="#f472b6" font-size="12" text-anchor="middle" opacity="0.6">Morpheus is also the BRAIN behind MedTracker</text>
-
-      <!-- Cron 8:30 AM -->
-      <g transform="translate(40, 470)">
-        <rect width="130" height="70" rx="10" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
-        <text x="65" y="24" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">⏰</text>
-        <text x="65" y="42" class="svg-title" fill="#ffd740" font-size="11" text-anchor="middle">CRON 8:30 AM</text>
-        <text x="65" y="58" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">medtracker_daily.py</text>
+      <!-- ═══ OUTPUT 2 (right): Email + xlsx ═══ -->
+      <g transform="translate(850, 210)">
+        <rect width="210" height="100" rx="10" fill="#0a1628" stroke="#f472b6" stroke-width="2"/>
+        <text x="105" y="24" class="svg-label" fill="#f472b6" font-size="14" text-anchor="middle">📧 Email + 📊 xlsx</text>
+        <text x="105" y="46" class="svg-label" fill="#fb923c" font-size="10" text-anchor="middle">SMTP reply: "Zion ACTIVE ✓"</text>
+        <text x="105" y="64" class="svg-label" fill="#f472b6" font-size="10" text-anchor="middle">💊 [MedTracker] buy list</text>
+        <text x="105" y="82" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Excel attachment → Neo</text>
       </g>
+      <path d="M655,260 Q750,260 845,260" fill="none" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.4s" marker-end="url(#ap)"/>
 
-      <!-- Arrow: Cron → Morpheus Brain -->
-      <path d="M175,505 Q260,505 340,510" fill="none" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.1s" marker-end="url(#ao)"/>
-      <text x="260" y="498" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">reads medicines.xlsx</text>
-
-      <!-- Morpheus Brain (MedTracker) -->
-      <circle cx="450" cy="520" r="75" fill="#0a1628" stroke="#f472b6" stroke-width="2.5"/>
-      <text x="450" y="498" class="svg-label" fill="#f472b6" font-size="16" text-anchor="middle">💊</text>
-      <text x="450" y="518" class="svg-title" fill="#f472b6" font-size="11" text-anchor="middle">MORPHEUS</text>
-      <text x="450" y="536" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">calc refill dates</text>
-      <text x="450" y="552" class="svg-label" fill="#f472b6" font-size="9" text-anchor="middle">day 63+ → remind</text>
-
-      <!-- Arrow: Brain → WhatsApp -->
-      <path d="M530,505 Q590,480 640,480" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.3s" marker-end="url(#ag)"/>
-
-      <!-- WhatsApp delivery -->
-      <g transform="translate(645, 460)">
-        <rect width="160" height="50" rx="8" fill="#0a1628" stroke="#00ff41" stroke-width="1.5"/>
-        <text x="80" y="20" class="svg-label" fill="#00ff41" font-size="11" text-anchor="middle">💬 WhatsApp</text>
-        <text x="80" y="38" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Neo + Puja — buy list</text>
+      <!-- ═══ REPLY PATH: Neo replies "bought medicine" → stops all ═══ -->
+      <g transform="translate(810, 390)">
+        <rect width="250" height="100" rx="12" fill="#0a1628" stroke="#58a6ff" stroke-width="2" stroke-opacity="0.7"/>
+        <text x="125" y="22" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle">NEO REPLIES</text>
+        <text x="125" y="42" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">💬 WA: "bought medicine"</text>
+        <text x="125" y="58" class="svg-label" fill="#f472b6" font-size="10" text-anchor="middle">📧 Email: "bought medicine"</text>
+        <text x="125" y="78" class="svg-label" fill="#58a6ff" font-size="11" text-anchor="middle" font-weight="bold">→ Morpheus STOPS all reminders</text>
+        <text x="125" y="93" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">either channel works — cross-channel ✓</text>
       </g>
+      <path d="M810,440 Q720,400 655,340" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.6s" marker-end="url(#ab)"/>
+      <text x="720" y="380" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">confirm → DB</text>
 
-      <!-- Arrow: Brain → Email -->
-      <path d="M530,540 Q590,560 640,560" fill="none" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.4s" marker-end="url(#ao)"/>
-
-      <!-- Email delivery -->
-      <g transform="translate(645, 530)">
-        <rect width="160" height="55" rx="8" fill="#0a1628" stroke="#f472b6" stroke-width="1.5"/>
-        <text x="80" y="20" class="svg-label" fill="#f472b6" font-size="11" text-anchor="middle">📧 Email + 📊 xlsx</text>
-        <text x="80" y="38" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Neo — medicine buy list</text>
-        <text x="80" y="50" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">with Excel attachment</text>
-      </g>
-
-      <!-- Reply path: Email confirm → DB -->
-      <g transform="translate(870, 490)">
-        <rect width="180" height="72" rx="8" fill="#0a1628" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.6"/>
-        <text x="90" y="20" class="svg-label" fill="#58a6ff" font-size="10" text-anchor="middle">📩 Email Reply Poller</text>
-        <text x="90" y="38" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">every 10 min — checks</text>
-        <text x="90" y="52" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">"bought medicine" → DB</text>
-        <text x="90" y="65" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">stops ALL reminders ✓</text>
-      </g>
-      <path d="M808,565 Q840,555 870,540" fill="none" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.5s"/>
-
-      <text x="550" y="620" class="svg-label" fill="#f472b6" font-size="10" text-anchor="middle" opacity="0.4">[Morpheus][MedTracker] — tagged messages, cross-channel confirmation</text>
+      <text x="550" y="540" class="svg-label" fill="#fb923c" font-size="9" text-anchor="middle" opacity="0.15">☁️ Oracle Cloud VM — Morpheus runs 24/7</text>
     </svg>
   </div>
 
