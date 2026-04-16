@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPL 2026 Live — The KeyMaker</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏏</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .live-page { position: relative; z-index: 1; }
+    .live-hero { text-align: center; padding: 7rem 2rem 2rem; }
+    .live-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; color: var(--matrix-green); letter-spacing: 5px; text-shadow: 0 0 30px rgba(0,255,65,0.4); margin: 0; }
+    .live-hero .sub { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .live-hero .desc { font-size: 0.95rem; color: var(--text-dim); max-width: 650px; margin: 1rem auto 0; line-height: 1.8; }
+    .live-hero .built { font-family: var(--font-mono); font-size: 0.75rem; color: #ff6b6b; margin-top: 1.5rem; }
+
+    .table-section { max-width: 900px; margin: 2rem auto; padding: 0 1.5rem; }
+    .ipl-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.8rem; }
+    .ipl-table th { background: rgba(0,255,65,0.1); color: var(--matrix-green); padding: 0.8rem 0.6rem; text-align: left; font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 1px; border-bottom: 2px solid rgba(0,255,65,0.2); }
+    .ipl-table td { padding: 0.7rem 0.6rem; border-bottom: 1px solid rgba(0,255,65,0.06); color: var(--text-dim); }
+    .ipl-table tr:hover { background: rgba(0,255,65,0.03); }
+    .rank { font-family: var(--font-display); color: var(--accent-gold); font-size: 0.85rem; }
+    .team-name { color: #e8e8e8; font-weight: bold; }
+    .wins { color: var(--matrix-green); }
+    .losses { color: #ff6b6b; }
+    .pts { font-family: var(--font-display); color: var(--matrix-green); font-size: 0.9rem; }
+    .nrr-pos { color: var(--matrix-green); }
+    .nrr-neg { color: #ff6b6b; }
+    .top4 { border-left: 3px solid rgba(0,255,65,0.3); }
+
+    .cta-section { text-align: center; padding: 3rem 2rem; }
+    .cta-card { background: rgba(10,22,40,0.95); border: 2px solid rgba(0,255,65,0.25); border-radius: 16px; padding: 2.5rem; max-width: 500px; margin: 0 auto; }
+    .cta-card h3 { font-family: var(--font-display); color: var(--matrix-green); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 0.5rem; }
+    .cta-card .phone-num { font-family: var(--font-display); font-size: 1.6rem; color: var(--matrix-green); letter-spacing: 3px; margin: 0.8rem 0; text-shadow: 0 0 12px rgba(0,255,65,0.3); }
+    .cta-card .sub { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); }
+    .qr-box { background: #fff; border-radius: 12px; width: 180px; height: 180px; margin: 1rem auto; display: flex; align-items: center; justify-content: center; }
+    .wa-btn { display: inline-block; background: #25D366; color: #fff; font-family: var(--font-mono); font-size: 0.85rem; padding: 0.7rem 1.8rem; border-radius: 8px; text-decoration: none; margin-top: 0.8rem; transition: all 0.3s; }
+    .wa-btn:hover { background: #128C7E; transform: scale(1.05); }
+
+    .cmd-section { max-width: 600px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
+    .cmd-card { background: rgba(10,22,40,0.9); border: 1px solid rgba(0,255,65,0.12); border-radius: 10px; padding: 0.8rem 1.2rem; margin-bottom: 0.8rem; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.3s; }
+    .cmd-card:hover { border-color: rgba(0,255,65,0.4); }
+    .cmd { font-family: var(--font-mono); font-size: 0.8rem; color: var(--matrix-green); }
+    .cdesc { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); }
+
+    .credits { text-align: center; padding: 2rem; }
+    .credits p { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); line-height: 2; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    .ipl-table tr { opacity: 0; animation: fadeIn 0.4s ease forwards; }
+    .ipl-table tr:nth-child(1) { animation-delay: 0.1s; }
+    .ipl-table tr:nth-child(2) { animation-delay: 0.15s; }
+    .ipl-table tr:nth-child(3) { animation-delay: 0.2s; }
+    .ipl-table tr:nth-child(4) { animation-delay: 0.25s; }
+    .ipl-table tr:nth-child(5) { animation-delay: 0.3s; }
+    .ipl-table tr:nth-child(6) { animation-delay: 0.35s; }
+    .ipl-table tr:nth-child(7) { animation-delay: 0.4s; }
+    .ipl-table tr:nth-child(8) { animation-delay: 0.45s; }
+    .ipl-table tr:nth-child(9) { animation-delay: 0.5s; }
+    .ipl-table tr:nth-child(10) { animation-delay: 0.55s; }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<nav id="navbar">
+  <div class="nav-brand"><a href="index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a></div>
+  <div class="nav-links"><a href="index.html">Home</a><a href="index.html#architecture">Architecture</a><a href="demo.html" style="color:#ff6b6b">Live Demo</a></div>
+</nav>
+
+<div class="live-page">
+  <div class="live-hero">
+    <h1>🏏 IPL 2026 — LIVE STANDINGS</h1>
+    <p class="sub">Powered by The KeyMaker Project</p>
+    <p class="desc">Neo asked Trinity to build this. Trinity asked Lobo. Lobo recommended Option 3: Standings + Zion QR. Two AIs talked on WhatsApp. This page was born.</p>
+    <p class="built">Built live by Trinity (Opus 4.6) + Lobo (OpenClaw + GPT-5.3) — April 16, 2026</p>
+  </div>
+
+  <div class="table-section">
+    <h2 class="section-title" style="text-align:center">Points Table — Updated Apr 8, 2026</h2>
+    <table class="ipl-table">
+      <thead>
+        <tr><th>#</th><th>TEAM</th><th>M</th><th>W</th><th>L</th><th>NR</th><th>PTS</th><th>NRR</th></tr>
+      </thead>
+      <tbody>
+        <tr class="top4"><td class="rank">1</td><td class="team-name">Rajasthan Royals</td><td>3</td><td class="wins">3</td><td class="losses">0</td><td>0</td><td class="pts">6</td><td class="nrr-pos">+2.403</td></tr>
+        <tr class="top4"><td class="rank">2</td><td class="team-name">Punjab Kings</td><td>3</td><td class="wins">2</td><td class="losses">0</td><td>1</td><td class="pts">5</td><td class="nrr-pos">+0.637</td></tr>
+        <tr class="top4"><td class="rank">3</td><td class="team-name">Royal Challengers Bengaluru</td><td>2</td><td class="wins">2</td><td class="losses">0</td><td>0</td><td class="pts">4</td><td class="nrr-pos">+2.501</td></tr>
+        <tr class="top4"><td class="rank">4</td><td class="team-name">Delhi Capitals</td><td>2</td><td class="wins">2</td><td class="losses">0</td><td>0</td><td class="pts">4</td><td class="nrr-pos">+1.170</td></tr>
+        <tr><td class="rank">5</td><td class="team-name">Sunrisers Hyderabad</td><td>3</td><td class="wins">1</td><td class="losses">2</td><td>0</td><td class="pts">2</td><td class="nrr-pos">+0.275</td></tr>
+        <tr><td class="rank">6</td><td class="team-name">Lucknow Super Giants</td><td>2</td><td class="wins">1</td><td class="losses">1</td><td>0</td><td class="pts">2</td><td class="nrr-neg">-0.542</td></tr>
+        <tr><td class="rank">7</td><td class="team-name">Mumbai Indians</td><td>3</td><td class="wins">1</td><td class="losses">2</td><td>0</td><td class="pts">2</td><td class="nrr-neg">-0.715</td></tr>
+        <tr><td class="rank">8</td><td class="team-name">Kolkata Knight Riders</td><td>2</td><td class="wins">0</td><td class="losses">2</td><td>1</td><td class="pts">1</td><td class="nrr-neg">-1.964</td></tr>
+        <tr><td class="rank">9</td><td class="team-name">Gujarat Titans</td><td>2</td><td class="wins">0</td><td class="losses">2</td><td>0</td><td class="pts">0</td><td class="nrr-neg">-0.424</td></tr>
+        <tr><td class="rank">10</td><td class="team-name">Chennai Super Kings</td><td>3</td><td class="wins">0</td><td class="losses">3</td><td>0</td><td class="pts">0</td><td class="nrr-neg">-2.517</td></tr>
+      </tbody>
+    </table>
+    <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-dim);text-align:center;margin-top:1rem">Top 4 teams (green border) qualify for playoffs. Season: Mar 28 — May 31, 2026.</p>
+  </div>
+
+  <div class="cta-section">
+    <h2 class="section-title">Get Live IPL Scores on WhatsApp</h2>
+    <p style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-dim);margin-bottom:1.5rem">Why refresh a webpage? Ask Zion. Live scores delivered to your phone.</p>
+
+    <div class="cta-card">
+      <h3>SCAN OR TAP</h3>
+      <div class="qr-box"><canvas id="qr-canvas"></canvas></div>
+      <div class="phone-num">+91 98677 82241</div>
+      <p class="sub">Zion is listening 24/7</p>
+      <a href="https://wa.me/919867782241?text=Hi%20Zion!" class="wa-btn" target="_blank">💬 Open WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="cmd-section">
+    <h2 class="section-title" style="text-align:center">Commands to Try</h2>
+    <div class="cmd-card"><span class="cmd">@zion IPL score</span><span class="cdesc">Latest match score</span></div>
+    <div class="cmd-card"><span class="cmd">@zion IPL points table</span><span class="cdesc">Current standings</span></div>
+    <div class="cmd-card"><span class="cmd">@zion weather in Mumbai</span><span class="cdesc">Weather + forecast</span></div>
+    <div class="cmd-card"><span class="cmd">@zion ainews subscribe</span><span class="cdesc">Daily AI brief + voice</span></div>
+    <div class="cmd-card"><span class="cmd">@zion stocks subscribe</span><span class="cdesc">Market brief daily</span></div>
+    <div class="cmd-card"><span class="cmd">@zion trivia start</span><span class="cdesc">Play trivia in group</span></div>
+    <div class="cmd-card"><span class="cmd">Send any photo</span><span class="cdesc">Vision AI describes it</span></div>
+    <div class="cmd-card"><span class="cmd">Send a voice note</span><span class="cdesc">Transcribed + answered</span></div>
+  </div>
+
+  <div class="credits">
+    <p><strong style="color:var(--matrix-green)">How this page was made:</strong></p>
+    <p>Neo typed: "@trinity show me the latest IPL game update in live.html"</p>
+    <p>Trinity consulted Lobo. Lobo gave 3 options. Trinity chose Option 3.</p>
+    <p>Two AIs talked on WhatsApp. This page was built and deployed automatically.</p>
+    <p style="margin-top:1rem"><strong style="color:var(--matrix-green)">Built by:</strong> Trinity (Opus 4.6) + Lobo (OpenClaw + GPT-5.3)</p>
+    <p><strong style="color:var(--matrix-green)">Agents:</strong> Trinity · Zion · Morpheus · Anderson · Lobo · Cortex</p>
+    <p><strong style="color:var(--matrix-green)">Cost:</strong> $0 — Oracle Cloud Free Tier</p>
+    <p style="margin-top:1.5rem"><a href="index.html" style="color:var(--accent-gold);text-decoration:none;font-family:var(--font-display);letter-spacing:2px;font-size:0.8rem">EXPLORE THE FULL MATRIX →</a></p>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-dim)">The KeyMaker Project — No one knew. Now you do.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+<script>
+(function(){
+  var c = document.getElementById('qr-canvas');
+  if (!c) return;
+  var img = new Image();
+  img.crossOrigin = "anonymous";
+  img.onload = function() {
+    var ctx = c.getContext('2d');
+    c.width = 160; c.height = 160;
+    ctx.drawImage(img, 0, 0, 160, 160);
+  };
+  img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' + encodeURIComponent('https://wa.me/919867782241?text=Hi%20Zion!') + '&bgcolor=ffffff&color=000000&margin=1';
+})();
+</script>
+</body>
+</html>
