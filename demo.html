@@ -81,9 +81,8 @@
 
     <div style="max-width:750px;margin:1.5rem auto 0;background:rgba(10,22,40,0.95);border:2px solid rgba(0,255,65,0.4);border-radius:14px;padding:2rem;text-align:center">
       <div style="display:flex;gap:0.8rem;align-items:center">
-        <input id="cmd-input" type="text" placeholder="@trinity ..."
+        <input id="cmd-input" type="text" placeholder="@trinity build something amazing..."
           style="flex:1;background:#0d1117;border:1.5px solid rgba(0,255,65,0.3);border-radius:8px;padding:1rem 1.2rem;font-family:'JetBrains Mono','Fira Code',monospace;font-size:0.9rem;color:#00ff41;outline:none"
-          value="@trinity No one knows about the KeyMaker Project. Create a new link — show to the group team. I will ignore options."
         />
         <button id="cmd-send" onclick="sendToTrinity()"
           style="background:#00ff41;color:#0d1117;border:none;border-radius:8px;padding:1rem 2rem;font-family:'Orbitron','JetBrains Mono',monospace;font-size:0.85rem;font-weight:bold;letter-spacing:1px;cursor:pointer;white-space:nowrap;transition:all 0.3s"
@@ -360,13 +359,15 @@
 
 var progressSteps = [
   { text: 'Message sent to Neo\'s WhatsApp', color: '#00ff41', delay: 0 },
-  { text: 'Zion received it — routing to Trinity...', color: '#ffd740', delay: 8 },
-  { text: 'Trinity picked it up — reading the request...', color: '#ff6b6b', delay: 15 },
-  { text: 'Trinity consulting Lobo via WhatsApp...', color: '#ffd740', delay: 25 },
-  { text: 'Lobo thinking — architecture options...', color: '#ffd740', delay: 40 },
-  { text: 'Lobo replied with 3 options — Trinity auto-selecting best...', color: '#ffd740', delay: 70 },
-  { text: 'Trinity building live.html — HTML + CSS + SVG...', color: '#ff6b6b', delay: 90 },
-  { text: 'Pushing to GitHub Pages...', color: '#58a6ff', delay: 150 }
+  { text: 'Deleting old live.html — fresh start...', color: '#8b949e', delay: 2 },
+  { text: 'Zion received it — routing to Trinity...', color: '#ffd740', delay: 10 },
+  { text: 'Trinity picked it up — reading the request...', color: '#ff6b6b', delay: 20 },
+  { text: 'Trinity consulting Lobo via WhatsApp...', color: '#ffd740', delay: 30 },
+  { text: 'Lobo thinking — architecture options...', color: '#ffd740', delay: 50 },
+  { text: 'Lobo replied — Trinity selecting best option...', color: '#ffd740', delay: 80 },
+  { text: 'Trinity building live.html...', color: '#ff6b6b', delay: 100 },
+  { text: 'Pushing to GitHub Pages...', color: '#58a6ff', delay: 160 },
+  { text: 'Waiting for deployment...', color: '#8b949e', delay: 200 }
 ];
 var progressTimer = null;
 var progressStart = 0;

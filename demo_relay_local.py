@@ -1,10 +1,13 @@
 """
 Demo Relay — runs on Neo's laptop during live demo.
 
-Hit SEND on demo.html -> relay queues a @trinity task on VM
-AND sends the message to Neo's WhatsApp (shows on phone screen).
+SEND on demo.html -> relay does 3 things:
+  1. Deletes live.html from GitHub (fresh start)
+  2. Queues @trinity task on VM
+  3. Sends message to Neo's WhatsApp (audience sees it on phone)
 
-Zion sees the queued task -> routes to Trinity -> Lobo -> build -> deploy.
+Then Trinity (Opus) picks it up, talks to Lobo, builds live.html, pushes.
+demo.html polls for live.html and reveals the link when it appears.
 
 Start before the meeting:
     python demo_relay_local.py
@@ -21,6 +24,7 @@ VM = "opc@80.225.205.232"
 KEY = os.path.expanduser("~") + "\\.ssh\\oracle_cloud_nopass"
 CHAT_JID = "919867782241@s.whatsapp.net"
 SENDER = "919867782241"
+SITE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
 
 def ssh_run(command):
@@ -41,6 +45,31 @@ def scp_and_run(script_content):
     return ssh_run("python3 /tmp/demo_send.py")
 
 
+def delete_live_html():
+    """Delete live.html from GitHub so the poll starts fresh."""
+    live_path = os.path.join(SITE_DIR, "live.html")
+    if os.path.exists(live_path):
+        os.remove(live_path)
+        result = subprocess.run(
+            ["git", "add", "-A"],
+            capture_output=True, text=True, cwd=SITE_DIR
+        )
+        result = subprocess.run(
+            ["git", "commit", "-m", "Demo: remove live.html for fresh build"],
+            capture_output=True, text=True, cwd=SITE_DIR
+        )
+        result = subprocess.run(
+            ["git", "push"],
+            capture_output=True, text=True, cwd=SITE_DIR, timeout=30
+        )
+        if result.returncode == 0:
+            print("[RELAY] live.html deleted from GitHub")
+        else:
+            print("[RELAY] git push failed:", result.stderr)
+    else:
+        print("[RELAY] live.html already absent, skipping delete")
+
+
 class RelayHandler(http.server.BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
@@ -55,7 +84,11 @@ class RelayHandler(http.server.BaseHTTPRequestHandler):
         body = json.loads(self.rfile.read(length))
         message = body.get("message", "")
 
-        # 1. Queue @trinity task directly in VM SQLite
+        # Step 1: Delete live.html from GitHub (fresh start for poll)
+        print("[RELAY] Step 1: Deleting live.html from GitHub...")
+        delete_live_html()
+
+        # Step 2: Queue @trinity task on VM
         safe_msg = message.replace("'", "'\\''")
         queue_result = ssh_run(
             f"python3 /home/opc/PROJECT/ZION/trinity_queue.py add "
@@ -63,13 +96,13 @@ class RelayHandler(http.server.BaseHTTPRequestHandler):
         )
         if queue_result.returncode != 0:
             self._reply(False, "Queue failed: " + queue_result.stderr)
-            print("[RELAY] Queue FAILED:", queue_result.stderr)
+            print("[RELAY] Step 2 FAILED:", queue_result.stderr)
             return
 
         task_info = queue_result.stdout.strip()
-        print(f"[RELAY] Task queued: {task_info}")
+        print(f"[RELAY] Step 2: Task queued: {task_info}")
 
-        # 2. Send message to Neo's WhatsApp (shows on phone for audience)
+        # Step 3: Send message to Neo's WhatsApp (audience sees it)
         send_script = (
             "import urllib.request, json\n"
             f"data = json.dumps({{'recipient': {repr(CHAT_JID)}, 'message': {repr(message)}}}).encode()\n"
@@ -80,9 +113,9 @@ class RelayHandler(http.server.BaseHTTPRequestHandler):
         )
         wa_result = scp_and_run(send_script)
         if wa_result.returncode == 0:
-            print("[RELAY] WhatsApp message sent")
+            print("[RELAY] Step 3: WhatsApp message sent")
         else:
-            print("[RELAY] WhatsApp send failed (task still queued):", wa_result.stderr)
+            print("[RELAY] Step 3: WhatsApp failed (task still queued)")
 
         self._reply(True, task_info)
 
@@ -100,6 +133,6 @@ class RelayHandler(http.server.BaseHTTPRequestHandler):
 if __name__ == "__main__":
     server = http.server.HTTPServer(("127.0.0.1", PORT), RelayHandler)
     print(f"[RELAY] Demo relay on http://localhost:{PORT}")
-    print(f"[RELAY] Queues @trinity task + sends to WhatsApp")
-    print(f"[RELAY] Open demo.html -> SEND -> watch phone + laptop")
+    print("[RELAY] SEND flow: delete live.html -> queue task -> send WhatsApp")
+    print("[RELAY] Open demo.html -> type anything -> SEND")
     server.serve_forever()
