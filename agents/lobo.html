@@ -48,7 +48,7 @@
     <h2 class="section-title">Two AI Brains — Side by Side</h2>
     <p class="section-desc">Trinity (the builder) asks Lobo (the architect) — here's what's inside each</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 680" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 620" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="ao" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.8"/></marker>
         <marker id="ag" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.8"/></marker>
@@ -57,7 +57,7 @@
       </defs>
 
       <!-- ═══ LEFT: TRINITY ═══ -->
-      <rect x="30" y="30" width="460" height="420" rx="18" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5" stroke-opacity="0.6"/>
+      <rect x="30" y="30" width="460" height="355" rx="18" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5" stroke-opacity="0.6"/>
       <text x="260" y="66" class="svg-label" fill="#ff6b6b" font-size="24" text-anchor="middle">🔺</text>
       <text x="260" y="94" class="svg-title" fill="#ff6b6b" font-size="20" text-anchor="middle" letter-spacing="3" filter="url(#gl)">TRINITY</text>
       <text x="260" y="116" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">The Builder</text>
@@ -71,32 +71,23 @@
       <text x="70" y="204" class="svg-label" fill="#ff6b6b" font-size="11">📡 Interface</text>
       <text x="200" y="204" class="svg-label" fill="#8b949e" font-size="12">Cursor chat + tool calls</text>
 
-      <text x="70" y="230" class="svg-label" fill="#ff6b6b" font-size="11">🔧 Tools</text>
-      <text x="200" y="230" class="svg-label" fill="#8b949e" font-size="12">Shell, Read, Write, Grep, SSH</text>
+      <text x="70" y="230" class="svg-label" fill="#ff6b6b" font-size="11">💬 Channel</text>
+      <text x="200" y="230" class="svg-label" fill="#8b949e" font-size="12">Cursor IDE (laptop only)</text>
 
-      <text x="70" y="256" class="svg-label" fill="#ff6b6b" font-size="11">📂 Access</text>
-      <text x="200" y="256" class="svg-label" fill="#8b949e" font-size="12">Full filesystem + VM via SSH</text>
+      <text x="70" y="256" class="svg-label" fill="#ff6b6b" font-size="11">⏱️ Response</text>
+      <text x="200" y="256" class="svg-label" fill="#8b949e" font-size="12">Instant (seconds)</text>
 
-      <text x="70" y="282" class="svg-label" fill="#ff6b6b" font-size="11">💬 Channel</text>
-      <text x="200" y="282" class="svg-label" fill="#8b949e" font-size="12">Cursor IDE (laptop only)</text>
+      <text x="70" y="282" class="svg-label" fill="#ff6b6b" font-size="11">🧩 Session</text>
+      <text x="200" y="282" class="svg-label" fill="#8b949e" font-size="12">Neo types in Cursor → Trinity acts</text>
 
-      <text x="70" y="308" class="svg-label" fill="#ff6b6b" font-size="11">⏱️ Response</text>
-      <text x="200" y="308" class="svg-label" fill="#8b949e" font-size="12">Instant (seconds)</text>
+      <text x="70" y="308" class="svg-label" fill="#ff6b6b" font-size="11">📋 Memory</text>
+      <text x="200" y="308" class="svg-label" fill="#8b949e" font-size="12">.mdc rule files (persistent)</text>
 
-      <text x="70" y="334" class="svg-label" fill="#ff6b6b" font-size="11">🧩 Session</text>
-      <text x="200" y="334" class="svg-label" fill="#8b949e" font-size="12">Neo types in Cursor → Trinity acts</text>
-
-      <text x="70" y="360" class="svg-label" fill="#ff6b6b" font-size="11">📋 Memory</text>
-      <text x="200" y="360" class="svg-label" fill="#8b949e" font-size="12">.mdc rule files (persistent)</text>
-
-      <text x="70" y="386" class="svg-label" fill="#ff6b6b" font-size="11">⚡ Superpower</text>
-      <text x="200" y="386" class="svg-label" fill="#ffd740" font-size="12">Writes code, deploys, tests</text>
-
-      <line x1="60" y1="408" x2="470" y2="408" stroke="#ff6b6b" stroke-width="0.5" stroke-opacity="0.2"/>
-      <text x="260" y="432" class="svg-label" fill="#ff6b6b" font-size="10" text-anchor="middle" opacity="0.5">No orchestrator. Direct model → tools → action.</text>
+      <line x1="60" y1="340" x2="470" y2="340" stroke="#ff6b6b" stroke-width="0.5" stroke-opacity="0.2"/>
+      <text x="260" y="364" class="svg-label" fill="#ff6b6b" font-size="10" text-anchor="middle" opacity="0.5">No orchestrator. Direct model → tools → action.</text>
 
       <!-- ═══ RIGHT: LOBO ═══ -->
-      <rect x="610" y="30" width="460" height="420" rx="18" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.6"/>
+      <rect x="610" y="30" width="460" height="375" rx="18" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.6"/>
       <text x="840" y="66" class="svg-label" fill="#ffd740" font-size="24" text-anchor="middle">🐺</text>
       <text x="840" y="94" class="svg-title" fill="#ffd740" font-size="20" text-anchor="middle" letter-spacing="3" filter="url(#gl)">LOBO</text>
       <text x="840" y="116" class="svg-label" fill="#8b949e" font-size="12" text-anchor="middle">The Architect</text>
@@ -110,53 +101,47 @@
       <text x="650" y="204" class="svg-label" fill="#ffd740" font-size="11">📡 Interface</text>
       <text x="780" y="204" class="svg-label" fill="#8b949e" font-size="12">WhatsApp (inbound messages)</text>
 
-      <text x="650" y="230" class="svg-label" fill="#ffd740" font-size="11">🔧 Tools</text>
-      <text x="780" y="230" class="svg-label" fill="#8b949e" font-size="12">Session routing, channel adapters</text>
+      <text x="650" y="230" class="svg-label" fill="#ffd740" font-size="11">💬 Channel</text>
+      <text x="780" y="230" class="svg-label" fill="#8b949e" font-size="12">WhatsApp (+91 80500 20099)</text>
 
-      <text x="650" y="256" class="svg-label" fill="#ffd740" font-size="11">📂 Access</text>
-      <text x="780" y="256" class="svg-label" fill="#8b949e" font-size="12">Own knowledge + OpenClaw policies</text>
+      <text x="650" y="256" class="svg-label" fill="#ffd740" font-size="11">⏱️ Response</text>
+      <text x="780" y="256" class="svg-label" fill="#8b949e" font-size="12">1-3 minutes (thinks deeply)</text>
 
-      <text x="650" y="282" class="svg-label" fill="#ffd740" font-size="11">💬 Channel</text>
-      <text x="780" y="282" class="svg-label" fill="#8b949e" font-size="12">WhatsApp (+91 80500 20099)</text>
+      <text x="650" y="282" class="svg-label" fill="#ffd740" font-size="11">🧩 Session</text>
+      <text x="780" y="282" class="svg-label" fill="#8b949e" font-size="12">OpenClaw routes + manages context</text>
 
-      <text x="650" y="308" class="svg-label" fill="#ffd740" font-size="11">⏱️ Response</text>
-      <text x="780" y="308" class="svg-label" fill="#8b949e" font-size="12">1-3 minutes (thinks deeply)</text>
+      <text x="650" y="308" class="svg-label" fill="#ffd740" font-size="11">📋 Memory</text>
+      <text x="780" y="308" class="svg-label" fill="#8b949e" font-size="12">OpenClaw session state</text>
 
-      <text x="650" y="334" class="svg-label" fill="#ffd740" font-size="11">🧩 Session</text>
-      <text x="780" y="334" class="svg-label" fill="#8b949e" font-size="12">OpenClaw routes + manages context</text>
+      <text x="650" y="334" class="svg-label" fill="#ffd740" font-size="11">⚡ Superpower</text>
+      <text x="780" y="334" class="svg-label" fill="#ffd740" font-size="12">3 options with pros/cons — always</text>
 
-      <text x="650" y="360" class="svg-label" fill="#ffd740" font-size="11">📋 Memory</text>
-      <text x="780" y="360" class="svg-label" fill="#8b949e" font-size="12">OpenClaw session state</text>
-
-      <text x="650" y="386" class="svg-label" fill="#ffd740" font-size="11">⚡ Superpower</text>
-      <text x="780" y="386" class="svg-label" fill="#ffd740" font-size="12">3 options with pros/cons always</text>
-
-      <line x1="640" y1="408" x2="1050" y2="408" stroke="#ffd740" stroke-width="0.5" stroke-opacity="0.2"/>
-      <text x="840" y="432" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle" opacity="0.5">OpenClaw orchestrates sessions, tools, policies, cron.</text>
+      <line x1="640" y1="360" x2="1050" y2="360" stroke="#ffd740" stroke-width="0.5" stroke-opacity="0.2"/>
+      <text x="840" y="384" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle" opacity="0.5">OpenClaw orchestrates sessions, tools, policies, cron.</text>
 
       <!-- ═══ BRIDGE: ask_lobo.py connects them ═══ -->
-      <path d="M495,250 Q550,220 605,250" fill="none" stroke="#58a6ff" stroke-width="3" stroke-dasharray="10,5" class="anim-dash"/>
-      <path d="M605,280 Q550,310 495,280" fill="none" stroke="#00ff41" stroke-width="3" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.4s"/>
-      <rect x="520" y="240" width="60" height="28" rx="6" fill="#0a1628" stroke="#58a6ff" stroke-width="1.5"/>
-      <text x="550" y="259" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">SSH</text>
+      <path d="M495,220 Q550,190 605,220" fill="none" stroke="#58a6ff" stroke-width="3" stroke-dasharray="10,5" class="anim-dash"/>
+      <path d="M605,250 Q550,280 495,250" fill="none" stroke="#00ff41" stroke-width="3" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.4s"/>
+      <rect x="520" y="210" width="60" height="28" rx="6" fill="#0a1628" stroke="#58a6ff" stroke-width="1.5"/>
+      <text x="550" y="229" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">SSH</text>
 
       <!-- ═══ FLOW: How the consultation works ═══ -->
-      <rect x="30" y="490" width="1040" height="155" rx="14" fill="#0a1628" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.3"/>
-      <text x="550" y="518" class="svg-title" fill="#58a6ff" font-size="14" text-anchor="middle" letter-spacing="2">THE CONSULTATION FLOW</text>
+      <rect x="30" y="430" width="1040" height="155" rx="14" fill="#0a1628" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.3"/>
+      <text x="550" y="458" class="svg-title" fill="#58a6ff" font-size="14" text-anchor="middle" letter-spacing="2">THE CONSULTATION FLOW</text>
 
-      <text x="80" y="550" class="svg-label" fill="#ff6b6b" font-size="13">1.</text>
-      <text x="100" y="550" class="svg-label" fill="#8b949e" font-size="12">Trinity SSH → VM → runs ask_lobo.py</text>
+      <text x="80" y="490" class="svg-label" fill="#ff6b6b" font-size="13">1.</text>
+      <text x="100" y="490" class="svg-label" fill="#8b949e" font-size="12">Trinity SSH → VM → runs ask_lobo.py</text>
 
-      <text x="80" y="575" class="svg-label" fill="#ffd740" font-size="13">2.</text>
-      <text x="100" y="575" class="svg-label" fill="#8b949e" font-size="12">ask_lobo.py sends question to Lobo via WhatsApp Bridge</text>
+      <text x="80" y="515" class="svg-label" fill="#ffd740" font-size="13">2.</text>
+      <text x="100" y="515" class="svg-label" fill="#8b949e" font-size="12">ask_lobo.py sends question to Lobo via WhatsApp Bridge</text>
 
-      <text x="80" y="600" class="svg-label" fill="#ffd740" font-size="13">3.</text>
-      <text x="100" y="600" class="svg-label" fill="#8b949e" font-size="12">Lobo (OpenClaw + GPT-5.3) thinks 1-3 min → returns 3 options with pros/cons</text>
+      <text x="80" y="540" class="svg-label" fill="#ffd740" font-size="13">3.</text>
+      <text x="100" y="540" class="svg-label" fill="#8b949e" font-size="12">Lobo (OpenClaw + GPT-5.3) thinks 1-3 min → returns 3 options with pros/cons</text>
 
-      <text x="80" y="625" class="svg-label" fill="#00ff41" font-size="13">4.</text>
-      <text x="100" y="625" class="svg-label" fill="#8b949e" font-size="12">Trinity parses JSON → forwards to Neo on WhatsApp → Neo picks → Trinity builds</text>
+      <text x="80" y="565" class="svg-label" fill="#00ff41" font-size="13">4.</text>
+      <text x="100" y="565" class="svg-label" fill="#8b949e" font-size="12">Trinity parses JSON → forwards to Neo on WhatsApp → Neo picks → Trinity builds</text>
 
-      <text x="550" y="660" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle" opacity="0.3">⏱️ End-to-end: 1-3 min. Trinity polls every 10s. Two AI brains, one WhatsApp message apart.</text>
+      <text x="550" y="600" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle" opacity="0.3">⏱️ End-to-end: 1-3 min. Trinity polls every 10s. Two AI brains, one WhatsApp message apart.</text>
     </svg>
   </div>
 
