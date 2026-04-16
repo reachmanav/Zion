@@ -357,8 +357,8 @@
   if (c) qrGenerate(c, 'https://wa.me/919867782241?text=Hi%20Zion!', 180);
 })();
 
-// Send command to Trinity — opens WhatsApp with message pre-filled
-function sendToTrinity() {
+// Send command to Trinity via local relay → SSH → VM Bridge → WhatsApp
+async function sendToTrinity() {
   const input = document.getElementById('cmd-input');
   const status = document.getElementById('cmd-status');
   const btn = document.getElementById('cmd-send');
@@ -367,33 +367,53 @@ function sendToTrinity() {
 
   if (!msg) { status.textContent = 'Type a message first.'; return; }
 
-  // Log the action
   function addLog(text, color) {
     const line = document.createElement('div');
     line.style.color = color || '#8b949e';
     line.style.padding = '0.2rem 0';
     line.textContent = `[${new Date().toLocaleTimeString()}] ${text}`;
     log.appendChild(line);
+    log.scrollTop = log.scrollHeight;
   }
 
-  // Open WhatsApp with message pre-filled
-  const waUrl = `https://wa.me/919867782241?text=${encodeURIComponent(msg)}`;
-  window.open(waUrl, '_blank');
-
-  btn.textContent = 'SENT ✓';
+  btn.disabled = true;
+  btn.textContent = 'SENDING...';
   btn.style.background = '#ffd740';
-  status.innerHTML = '<span style="color:#00ff41">✓ WhatsApp opened — tap Send on your phone!</span>';
-  addLog('Message: ' + msg, '#00ff41');
-  addLog('WhatsApp opened → tap Send → Trinity receives it', '#ffd740');
-  addLog('Watch Neo\'s phone + laptop — the magic happens live', '#58a6ff');
+  status.innerHTML = '<span style="color:#ffd740">⚡ Sending to WhatsApp via Oracle Cloud VM...</span>';
+  addLog('Sending: ' + msg, '#00ff41');
 
-  // Start the countdown timer to reveal live.html
-  startCountdown();
+  try {
+    const resp = await fetch('http://localhost:8889/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        recipient: '919867782241@s.whatsapp.net',
+        message: msg
+      })
+    });
+    const data = await resp.json();
 
-  setTimeout(function() {
-    btn.textContent = 'SEND ⚡';
-    btn.style.background = '#00ff41';
-  }, 3000);
+    if (data.success) {
+      btn.textContent = 'SENT ✓';
+      btn.style.background = '#00ff41';
+      status.innerHTML = '<span style="color:#00ff41">✓ Message delivered to Neo\'s WhatsApp!</span>';
+      addLog('Delivered to WhatsApp ✓', '#00ff41');
+      addLog('Trinity will pick it up → consult Lobo → reply on WhatsApp', '#ffd740');
+      addLog('Watch Neo\'s phone + laptop — two AIs talking live...', '#58a6ff');
+      startCountdown();
+    } else {
+      throw new Error(data.error || 'Unknown error');
+    }
+  } catch (e) {
+    btn.textContent = 'RETRY ⚡';
+    btn.style.background = '#ff6b6b';
+    status.innerHTML = '<span style="color:#ff6b6b">Local relay not running. Start: python demo_relay_local.py</span>';
+    addLog('Error: ' + e.message, '#ff6b6b');
+    addLog('Make sure demo_relay_local.py is running on the laptop', '#ffd740');
+  }
+
+  btn.disabled = false;
+  setTimeout(function() { btn.textContent = 'SEND ⚡'; btn.style.background = '#00ff41'; }, 5000);
 }
 
 // 5-minute countdown → reveals the live showcase link
