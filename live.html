@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Builds — The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .live-page { max-width: 900px; margin: 0 auto; padding: 6rem 2rem 4rem; }
+    .live-hero { text-align: center; margin-bottom: 3rem; }
+    .live-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #00ff41;
+      text-shadow: 0 0 30px rgba(0,255,65,0.4);
+      letter-spacing: 4px;
+      margin-bottom: 0.8rem;
+    }
+    .live-hero .sub {
+      font-family: var(--font-display);
+      color: #ff6b6b;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .live-hero .desc {
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .builds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .build-card {
+      display: block;
+      background: rgba(10, 22, 40, 0.95);
+      border: 1.5px solid rgba(0,255,65,0.25);
+      border-radius: 14px;
+      padding: 1.8rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+    .build-card:hover {
+      border-color: #00ff41;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,255,65,0.15);
+    }
+    .build-card .icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .build-card .title {
+      font-family: var(--font-display);
+      color: #e6edf3;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .build-card .card-desc {
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .build-card .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+    }
+    .build-card .date { color: #8b949e; }
+    .build-card .lobo-tag {
+      background: rgba(0,255,65,0.1);
+      color: #00ff41;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.6rem;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+    .empty-state a { color: #00ff41; }
+    .how-section {
+      margin-top: 4rem;
+      padding: 2rem;
+      background: rgba(10, 22, 40, 0.6);
+      border: 1px solid rgba(0,255,65,0.15);
+      border-radius: 14px;
+      text-align: center;
+    }
+    .how-section h3 {
+      font-family: var(--font-display);
+      color: #ff6b6b;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .how-section p {
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+    .how-section code {
+      background: rgba(0,255,65,0.1);
+      color: #00ff41;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-rain"></canvas>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <span class="key-icon">🔑</span> THE KEYMAKER PROJECT
+  </div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#architecture">Architecture</a>
+    <a href="index.html#agents">Agents</a>
+    <a href="demo.html" style="color:#ff6b6b">🔴 Agent Live</a>
+  </div>
+</nav>
+
+<div class="live-page">
+  <div class="live-hero">
+    <h1>LIVE BUILDS</h1>
+    <p class="sub">Everything Trinity built — tested and deployed</p>
+    <p class="desc">Each link below was created by Neo saying one sentence. Trinity consulted Lobo, picked the best option, built it, tested it, and deployed. Every page is real.</p>
+  </div>
+
+  <div id="builds-container">
+    <div class="empty-state" id="empty-state">
+      <p>Loading builds...</p>
+    </div>
+  </div>
+
+  <div class="how-section">
+    <h3>HOW THIS WORKS</h3>
+    <p>Neo types a command on <a href="demo.html" style="color:#00ff41">demo.html</a> or WhatsApp.<br>
+    Trinity receives it. Consults Lobo (agent-to-agent). Gets 3 options.<br>
+    Picks the best. Builds the page. Tests it. Deploys here.<br>
+    Every card above = one sentence from Neo turned into a real page.</p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+fetch('projects.json?t=' + Date.now())
+  .then(function(r) { return r.json(); })
+  .then(function(projects) {
+    var container = document.getElementById('builds-container');
+    var empty = document.getElementById('empty-state');
+    if (!projects || projects.length === 0) {
+      empty.innerHTML = '<p>No builds yet. Send a command on <a href="demo.html">demo.html</a> to create one.</p>';
+      return;
+    }
+    empty.style.display = 'none';
+    var grid = document.createElement('div');
+    grid.className = 'builds-grid';
+    projects.slice().reverse().forEach(function(p, i) {
+      var card = document.createElement('a');
+      card.href = p.file;
+      card.className = 'build-card';
+      card.style.animationDelay = (i * 0.15) + 's';
+      card.innerHTML =
+        '<div class="icon">' + (p.icon || '📄') + '</div>' +
+        '<div class="title">' + p.title + '</div>' +
+        '<div class="card-desc">' + p.desc + '</div>' +
+        '<div class="meta">' +
+          '<span class="date">' + p.date + '</span>' +
+          (p.lobo_option ? '<span class="lobo-tag">Lobo: ' + p.lobo_option + '</span>' : '') +
+        '</div>';
+      grid.appendChild(card);
+    });
+    container.appendChild(grid);
+  })
+  .catch(function() {
+    document.getElementById('empty-state').innerHTML = '<p>Could not load builds.</p>';
+  });
+</script>
+</body>
+</html>
