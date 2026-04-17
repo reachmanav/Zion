@@ -147,99 +147,148 @@
   <!-- SECTION 2: REAL Agent-to-Agent Flow Diagram -->
   <div class="diagram-wrap">
     <h2 class="section-title">A Real Conversation — Agent to Agent</h2>
-    <p class="section-desc">N. Thoni asked Neo to upgrade DevOps news. Click each node to see what happened.</p>
+    <p class="section-desc">N. Thoni asked Neo to upgrade DevOps news. Click each node to see the real conversation.</p>
 
-    <svg class="d-svg" viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1400 500" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="aflow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#00ff41" opacity="0.7"/></marker>
-        <marker id="aflowr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ff6b6b" opacity="0.7"/></marker>
-        <marker id="aflowy" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ffd740" opacity="0.7"/></marker>
+        <marker id="ag" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#00ff41" opacity="0.7"/></marker>
+        <marker id="ar" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ff6b6b" opacity="0.7"/></marker>
+        <marker id="ay" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ffd740" opacity="0.7"/></marker>
+        <marker id="ab" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#58a6ff" opacity="0.7"/></marker>
       </defs>
 
-      <!-- 1. NEO PHONE -->
+      <!-- ==================== ROW 1: Neo → Trinity → Lobo ==================== -->
+
+      <!-- STEP 1: NEO PHONE -->
       <g class="flow-node" data-overlay="ov-neo" style="cursor:pointer">
-        <rect x="20" y="80" width="130" height="230" rx="20" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
-        <rect x="30" y="105" width="110" height="175" rx="4" fill="#0d2137" stroke="#00ff41" stroke-width="0.6" stroke-opacity="0.3"/>
-        <circle cx="85" cy="296" r="8" fill="none" stroke="#00ff41" stroke-width="0.6" stroke-opacity="0.3"/>
-        <rect x="60" y="88" width="50" height="4" rx="2" fill="#00ff41" fill-opacity="0.15"/>
-        <text x="40" y="130" class="svg-label" fill="#00ff41" font-size="8">N. Thoni says:</text>
-        <text x="40" y="145" class="svg-label" fill="#ffd740" font-size="7">"compromised npm</text>
-        <text x="40" y="157" class="svg-label" fill="#ffd740" font-size="7">axios package..."</text>
-        <text x="40" y="180" class="svg-label" fill="#00ff41" font-size="8">Neo replies:</text>
-        <text x="40" y="195" class="svg-label" fill="#c9d1d9" font-size="7">@trinity create</text>
-        <text x="40" y="207" class="svg-label" fill="#c9d1d9" font-size="7">DevOps brief</text>
-        <text x="40" y="219" class="svg-label" fill="#c9d1d9" font-size="7">subscription model</text>
-        <text x="85" y="65" class="svg-title" fill="#00ff41" font-size="16" text-anchor="middle" letter-spacing="2">📱 NEO</text>
-        <text x="85" y="330" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle" opacity="0.5">🔍 click</text>
+        <rect x="30" y="40" width="120" height="210" rx="18" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
+        <rect x="40" y="62" width="100" height="160" rx="4" fill="#0d2137" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.3"/>
+        <circle cx="90" cy="236" r="7" fill="none" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.3"/>
+        <rect x="68" y="48" width="44" height="3" rx="1.5" fill="#00ff41" fill-opacity="0.15"/>
+        <text x="50" y="85" class="svg-label" fill="#00ff41" font-size="8">N. Thoni:</text>
+        <text x="50" y="100" class="svg-label" fill="#ffd740" font-size="7">"compromised npm</text>
+        <text x="50" y="112" class="svg-label" fill="#ffd740" font-size="7">axios package..."</text>
+        <text x="50" y="135" class="svg-label" fill="#00ff41" font-size="8">Neo replies:</text>
+        <text x="50" y="150" class="svg-label" fill="#c9d1d9" font-size="7">@trinity create</text>
+        <text x="50" y="162" class="svg-label" fill="#c9d1d9" font-size="7">DevOps brief</text>
+        <text x="50" y="174" class="svg-label" fill="#c9d1d9" font-size="7">subscription model</text>
+        <text x="90" y="30" class="svg-title" fill="#00ff41" font-size="13" text-anchor="middle" letter-spacing="2">📱 NEO</text>
+        <text x="90" y="200" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle" opacity="0.5">🔍 click</text>
       </g>
 
-      <!-- Arrow: Neo → Trinity -->
-      <path d="M155,195 L230,195" fill="none" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#aflow)"/>
-      <text x="192" y="185" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">@trinity</text>
+      <!-- Arrow 1: Neo → Trinity -->
+      <line x1="155" y1="145" x2="225" y2="145" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
+      <text x="190" y="135" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">@trinity</text>
 
-      <!-- 2. TRINITY (triangle shape) -->
-      <g class="flow-node" data-overlay="ov-trinity" style="cursor:pointer">
-        <polygon points="310,60 240,230 380,230" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
-        <text x="310" y="130" class="svg-title" fill="#ff6b6b" font-size="14" text-anchor="middle" letter-spacing="2">🔺</text>
-        <text x="310" y="155" class="svg-title" fill="#ff6b6b" font-size="13" text-anchor="middle">TRINITY</text>
-        <text x="310" y="175" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">reads, grasps,</text>
-        <text x="310" y="188" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">consults Lobo</text>
-        <text x="310" y="215" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle" opacity="0.5">🔍 click</text>
+      <!-- STEP 2: TRINITY (triangle) — reads + sends to Lobo -->
+      <g class="flow-node" data-overlay="ov-trinity-ask" style="cursor:pointer">
+        <polygon points="310,35 235,210 385,210" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
+        <text x="310" y="100" class="svg-label" fill="#ff6b6b" font-size="22" text-anchor="middle">🔺</text>
+        <text x="310" y="130" class="svg-title" fill="#ff6b6b" font-size="13" text-anchor="middle">TRINITY</text>
+        <text x="310" y="150" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">reads, grasps</text>
+        <text x="310" y="165" class="svg-label" fill="#58a6ff" font-size="8" text-anchor="middle">asks Lobo</text>
+        <text x="310" y="195" class="svg-label" fill="#ff6b6b" font-size="8" text-anchor="middle" opacity="0.5">🔍 click</text>
       </g>
 
-      <!-- Arrow: Trinity → Lobo -->
-      <path d="M385,160 L470,160" fill="none" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#aflowy)"/>
-      <text x="427" y="148" class="svg-label" fill="#58a6ff" font-size="8" text-anchor="middle">SSH → ask_lobo</text>
+      <!-- Arrow 2: Trinity → Lobo -->
+      <line x1="390" y1="130" x2="470" y2="130" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ay)"/>
+      <text x="430" y="118" class="svg-label" fill="#58a6ff" font-size="8" text-anchor="middle">SSH → ask_lobo</text>
 
-      <!-- 3. LOBO (wolf/fox shape) -->
+      <!-- STEP 3: LOBO (fox/wolf with ears) -->
       <g class="flow-node" data-overlay="ov-lobo" style="cursor:pointer">
-        <ellipse cx="550" cy="160" rx="75" ry="65" fill="#0a1628" stroke="#ffd740" stroke-width="2.5"/>
-        <polygon points="495,115 480,65 510,100" fill="#0a1628" stroke="#ffd740" stroke-width="1.5"/>
-        <polygon points="605,115 620,65 590,100" fill="#0a1628" stroke="#ffd740" stroke-width="1.5"/>
-        <text x="550" y="140" class="svg-label" fill="#ffd740" font-size="28" text-anchor="middle">🐺</text>
-        <text x="550" y="170" class="svg-title" fill="#ffd740" font-size="13" text-anchor="middle">LOBO</text>
-        <text x="550" y="190" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">3 options</text>
-        <text x="550" y="210" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle" opacity="0.5">🔍 click</text>
+        <ellipse cx="555" cy="135" rx="75" ry="60" fill="#0a1628" stroke="#ffd740" stroke-width="2.5"/>
+        <polygon points="500,95 485,45 515,80" fill="#0a1628" stroke="#ffd740" stroke-width="1.5"/>
+        <polygon points="610,95 625,45 595,80" fill="#0a1628" stroke="#ffd740" stroke-width="1.5"/>
+        <text x="555" y="120" class="svg-label" fill="#ffd740" font-size="26" text-anchor="middle">🐺</text>
+        <text x="555" y="148" class="svg-title" fill="#ffd740" font-size="13" text-anchor="middle">LOBO</text>
+        <text x="555" y="167" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">thinks... 3 options</text>
+        <text x="555" y="185" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle" opacity="0.5">🔍 click</text>
       </g>
 
-      <!-- Arrow: Lobo → Neo (options) -->
-      <path d="M550,230 Q550,290 460,320 Q370,350 200,320 Q120,310 85,310" fill="none" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.3s" marker-end="url(#aflowy)"/>
-      <text x="350" y="360" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">3 options → Neo picks Option 1</text>
+      <!-- ==================== ROW 2: Lobo → Trinity → Neo → Trinity → Cloud ==================== -->
 
-      <!-- Arrow: Neo (option 1) → Trinity (build) -->
-      <path d="M155,310 Q200,380 350,380 Q430,380 700,300" fill="none" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.5s" marker-end="url(#aflow)"/>
-      <text x="400" y="400" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">Option 1 approved → build</text>
+      <!-- Arrow 3: Lobo → Trinity (returns options) — curves down -->
+      <path d="M555,200 Q555,280 440,310 Q400,320 385,320" fill="none" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ay)"/>
+      <text x="490" y="275" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">3 options</text>
 
-      <!-- 4. TRINITY BUILDS (code icon) -->
+      <!-- STEP 4: TRINITY (triangle again — formats options for Neo) -->
+      <g class="flow-node" data-overlay="ov-trinity-opts" style="cursor:pointer">
+        <polygon points="310,265 235,420 385,420" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
+        <text x="310" y="325" class="svg-label" fill="#ff6b6b" font-size="18" text-anchor="middle">🔺</text>
+        <text x="310" y="350" class="svg-title" fill="#ff6b6b" font-size="12" text-anchor="middle">TRINITY</text>
+        <text x="310" y="370" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">formats options</text>
+        <text x="310" y="385" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">sends to Neo</text>
+        <text x="310" y="410" class="svg-label" fill="#ff6b6b" font-size="8" text-anchor="middle" opacity="0.5">🔍 click</text>
+      </g>
+
+      <!-- Arrow 4: Trinity → Neo (sends options) -->
+      <path d="M232,355 L155,355" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ar)"/>
+      <text x="193" y="345" class="svg-label" fill="#ff6b6b" font-size="8" text-anchor="middle">options</text>
+
+      <!-- STEP 5: NEO picks (reuse phone but lower) -->
+      <g class="flow-node" data-overlay="ov-neo-pick" style="cursor:pointer">
+        <rect x="30" y="290" width="120" height="140" rx="18" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
+        <rect x="40" y="308" width="100" height="95" rx="4" fill="#0d2137" stroke="#00ff41" stroke-width="0.5" stroke-opacity="0.3"/>
+        <text x="90" y="280" class="svg-title" fill="#00ff41" font-size="12" text-anchor="middle">📱 NEO</text>
+        <text x="50" y="330" class="svg-label" fill="#00ff41" font-size="8">sees 3 options</text>
+        <text x="50" y="350" class="svg-label" fill="#ffd740" font-size="9">picks Option 1</text>
+        <text x="50" y="370" class="svg-label" fill="#c9d1d9" font-size="7">"@trinity Option 1"</text>
+        <text x="90" y="400" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle" opacity="0.5">🔍 click</text>
+      </g>
+
+      <!-- Arrow 5: Neo "Option 1" → Trinity (build) — long arrow to the right -->
+      <path d="M155,390 Q200,460 500,460 Q650,460 740,420" fill="none" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
+      <text x="450" y="478" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">Option 1 approved</text>
+
+      <!-- STEP 6: TRINITY CODES (triangle with code icon) -->
       <g class="flow-node" data-overlay="ov-build" style="cursor:pointer">
-        <rect x="700" y="60" width="150" height="120" rx="14" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
-        <text x="775" y="95" class="svg-label" fill="#ff6b6b" font-size="24" text-anchor="middle">💻</text>
-        <text x="775" y="120" class="svg-title" fill="#ff6b6b" font-size="12" text-anchor="middle">TRINITY BUILDS</text>
-        <text x="775" y="140" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">code → test → deploy</text>
-        <text x="775" y="165" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle" opacity="0.5">🔍 click</text>
+        <polygon points="810,265 740,420 880,420" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
+        <text x="810" y="320" class="svg-label" fill="#ff6b6b" font-size="20" text-anchor="middle">💻</text>
+        <text x="810" y="350" class="svg-title" fill="#ff6b6b" font-size="12" text-anchor="middle">TRINITY</text>
+        <text x="810" y="370" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">codes, tests</text>
+        <text x="810" y="385" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">deploys →</text>
+        <text x="810" y="410" class="svg-label" fill="#ff6b6b" font-size="8" text-anchor="middle" opacity="0.5">🔍 click</text>
       </g>
 
-      <!-- Arrow: Build → PROD -->
-      <path d="M855,120 L930,120" fill="none" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.7s" marker-end="url(#aflow)"/>
+      <!-- Arrow 6: Trinity → Cloud -->
+      <line x1="885" y1="350" x2="960" y2="280" stroke="#58a6ff" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ab)"/>
+      <text x="935" y="300" class="svg-label" fill="#58a6ff" font-size="8" text-anchor="middle">deploy</text>
 
-      <!-- 5. DEPLOYED (cron) -->
-      <g class="flow-node" data-overlay="ov-prod" style="cursor:pointer">
-        <rect x="935" y="50" width="240" height="150" rx="14" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
-        <text x="1055" y="85" class="svg-label" fill="#00ff41" font-size="18" text-anchor="middle">✅</text>
-        <text x="1055" y="108" class="svg-title" fill="#00ff41" font-size="13" text-anchor="middle" letter-spacing="1">DEPLOYED</text>
-        <text x="1055" y="128" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">Cron 6:45 AM daily</text>
-        <text x="1055" y="148" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">82 alerts from 5 sources</text>
-        <text x="1055" y="168" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Next morning: real brief</text>
-        <text x="1055" y="188" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle" opacity="0.5">🔍 click to see brief</text>
+      <!-- STEP 7: CLOUD (Oracle Cloud VM) -->
+      <g class="flow-node" data-overlay="ov-cloud" style="cursor:pointer">
+        <ellipse cx="1060" cy="180" rx="30" ry="20" fill="#0a1628" stroke="#58a6ff" stroke-width="1.5"/>
+        <ellipse cx="1095" cy="170" rx="35" ry="24" fill="#0a1628" stroke="#58a6ff" stroke-width="1.5"/>
+        <ellipse cx="1130" cy="180" rx="30" ry="20" fill="#0a1628" stroke="#58a6ff" stroke-width="1.5"/>
+        <rect x="1030" y="178" width="130" height="80" rx="14" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="1095" y="210" class="svg-title" fill="#58a6ff" font-size="11" text-anchor="middle">☁️ CLOUD</text>
+        <text x="1095" y="228" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">Oracle VM</text>
+        <text x="1095" y="243" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle">cron 6:45 AM</text>
+        <text x="1095" y="270" class="svg-label" fill="#58a6ff" font-size="8" text-anchor="middle" opacity="0.5">🔍 click</text>
       </g>
 
-      <!-- Timeline bar -->
-      <rect x="20" y="390" width="1160" height="25" rx="6" fill="#0a1628" stroke="#58a6ff" stroke-width="0.8" stroke-opacity="0.2"/>
-      <text x="85" y="407" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">3:19 PM</text>
-      <text x="310" y="407" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">3:44 PM</text>
-      <text x="550" y="407" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">3:45 PM</text>
-      <text x="775" y="407" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">5:04 PM</text>
-      <text x="1055" y="407" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">6:45 AM next day</text>
+      <!-- Arrow 7: Cloud → Neo (brief delivered) -->
+      <path d="M1030,260 Q900,350 600,400 Q350,440 155,430" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ag)"/>
+      <text x="700" y="415" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">next morning → DevOps Security Brief</text>
+
+      <!-- STEP 8: NEO RECEIVES BRIEF (small phone bottom-left) -->
+      <g class="flow-node" data-overlay="ov-brief" style="cursor:pointer">
+        <rect x="30" y="435" width="120" height="55" rx="14" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
+        <text x="90" y="460" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">📱 5 CVEs</text>
+        <text x="90" y="478" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle" opacity="0.5">🔍 see brief</text>
+      </g>
+
+      <!-- Dotted connecting lines between same-agent nodes -->
+      <line x1="90" y1="255" x2="90" y2="287" stroke="#00ff41" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.3"/>
+      <line x1="90" y1="432" x2="90" y2="435" stroke="#00ff41" stroke-width="1" stroke-dasharray="3,3" stroke-opacity="0.3"/>
+
+      <!-- Step numbers -->
+      <circle cx="175" cy="145" r="10" fill="#0d1117" stroke="#00ff41" stroke-width="1"/><text x="175" y="149" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">1</text>
+      <circle cx="425" cy="130" r="10" fill="#0d1117" stroke="#ffd740" stroke-width="1"/><text x="425" y="134" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">2</text>
+      <circle cx="490" cy="290" r="10" fill="#0d1117" stroke="#ffd740" stroke-width="1"/><text x="490" y="294" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">3</text>
+      <circle cx="195" cy="355" r="10" fill="#0d1117" stroke="#ff6b6b" stroke-width="1"/><text x="195" y="359" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">4</text>
+      <circle cx="500" cy="460" r="10" fill="#0d1117" stroke="#00ff41" stroke-width="1"/><text x="500" y="464" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">5</text>
+      <circle cx="930" cy="310" r="10" fill="#0d1117" stroke="#58a6ff" stroke-width="1"/><text x="930" y="314" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">6</text>
+      <circle cx="850" cy="400" r="10" fill="#0d1117" stroke="#00ff41" stroke-width="1"/><text x="850" y="404" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">7</text>
     </svg>
   </div>
 
@@ -248,30 +297,30 @@
 
   <div class="node-overlay" id="ov-neo">
     <span class="ov-close">✕</span>
-    <div class="ov-title" style="color:#00ff41">📱 NEO's WhatsApp</div>
-    <div class="chat-msg chat-neo"><div class="chat-sender">N. Thoni → Neo — 3:19 PM</div>
-    <div class="chat-text">"Manav, stop sending news about devops and ai. I want news like today there was compromised npm proxy axios package"</div></div>
-    <div class="chat-msg chat-neo"><div class="chat-sender">Neo → Trinity — 3:19 PM</div>
-    <div class="chat-text">@trinity — can you create a DevOps brief subscription model? Current news is too high-level. Need detailed security alerts — CVEs, supply chain attacks, specific packages. npm is just an example.</div></div>
+    <div class="ov-title" style="color:#00ff41">📱 Step 1 — NEO's WhatsApp</div>
+    <div class="chat-msg chat-neo"><div class="chat-sender">N. Thoni → Neo</div>
+    <div class="chat-text">"Manav, there was a compromised npm proxy axios package — stop sending generic DevOps/AI news. I want THIS kind of news."</div></div>
+    <div class="chat-msg chat-neo"><div class="chat-sender">Neo → @trinity</div>
+    <div class="chat-text">@trinity can you create a DevOps brief subscription model? Current news is too high-level. Need detailed security alerts — CVEs, supply chain attacks, specific package names. npm axios is just an example.</div></div>
   </div>
 
-  <div class="node-overlay" id="ov-trinity">
+  <div class="node-overlay" id="ov-trinity-ask">
     <span class="ov-close">✕</span>
-    <div class="ov-title" style="color:#ff6b6b">🔺 TRINITY → LOBO</div>
-    <div class="chat-msg chat-trinity"><div class="chat-sender">[Trinity] — 3:44 PM</div>
-    <div class="chat-text">Received. Consulting Lobo on architecture...</div></div>
-    <div class="chat-msg chat-trinity-to-lobo"><div class="chat-sender">[Zion → Lobo] — 3:44 PM</div>
-    <div class="chat-text">Neo wants to upgrade DevOps news. Problem: too high-level. Need ACTIONABLE security alerts — specific CVEs, affected npm/PyPI packages, versions, mitigation steps. Like the compromised axios proxy incident.<br><br>How should we update the pipeline to:<br>1) Curate detailed security incidents + breaking DevOps news<br>2) Include CVE IDs, affected versions, fix versions<br>3) Make it actionable — what to patch, what to check<br><br>Give 3 architecture options.</div></div>
+    <div class="ov-title" style="color:#ff6b6b">🔺 Step 2 — TRINITY Consults LOBO</div>
+    <div class="chat-msg chat-trinity"><div class="chat-sender">[Trinity] — receives, understands</div>
+    <div class="chat-text">Received. Neo wants to upgrade DevOps news — needs actionable security alerts, not generic summaries. Consulting Lobo for architecture options...</div></div>
+    <div class="chat-msg chat-trinity-to-lobo"><div class="chat-sender">[Trinity → Lobo] via SSH → ask_lobo.py</div>
+    <div class="chat-text">Neo wants to upgrade the DevOps news construct. Problem: news is too high-level. A team member wants ACTIONABLE security/incident news — specific CVEs, compromised packages (like npm axios proxy), supply chain attacks, zero-days.<br><br>How should we update the pipeline to:<br>1) Curate detailed security incidents + breaking DevOps news<br>2) Include CVE IDs, affected packages, versions, mitigation steps<br>3) Make it actionable for developers — what to patch, what to check<br><br>Give 3 architecture options.</div></div>
   </div>
 
   <div class="node-overlay" id="ov-lobo" style="width:460px">
     <span class="ov-close">✕</span>
-    <div class="ov-title" style="color:#ffd740">🐺 LOBO's RESPONSE</div>
-    <div class="chat-msg chat-lobo"><div class="chat-sender">[Lobo] — 3:45 PM</div>
+    <div class="ov-title" style="color:#ffd740">🐺 Step 3 — LOBO Responds to TRINITY</div>
+    <div class="chat-msg chat-lobo"><div class="chat-sender">[Lobo] → Trinity</div>
     <div class="chat-text">
     <strong style="color:#00ff41">Option 1: Security-First Feed Pipeline</strong> (recommended)<br>
-    Sources: CISA KEV, NVD CVE, GitHub Security Advisories, npm/PyPI, Snyk<br>
-    Classifier: only active incidents, exploitable vulns, supply-chain attacks<br>
+    Sources: CISA KEV, NVD CVE, GitHub Security Advisories, npm/PyPI advisories, Snyk<br>
+    Classifier: only active incidents, exploitable vulns, supply-chain issues<br>
     Output: CVE ID, package, affected versions, fix version, exploit status, patch action<br>
     <span style="color:#00ff41">Pros: high signal, actionable</span> | <span style="color:#ff6b6b">Cons: more source integration</span><br><br>
     <strong style="color:#ffd740">Option 2: Two-Stage Enrichment Pipeline</strong><br>
@@ -280,26 +329,49 @@
     <span style="color:#00ff41">Pros: better depth</span> | <span style="color:#ff6b6b">Cons: slightly slower</span><br><br>
     <strong style="color:#58a6ff">Option 3: Risk-Scored Alerting</strong><br>
     Score by CVSS + exploit-in-wild + package popularity<br>
-    Top risk → daily, rest → weekly digest<br>
-    <span style="color:#00ff41">Pros: avoids noise</span> | <span style="color:#ff6b6b">Cons: needs scoring tuning</span><br><br>
-    <strong>Output per alert:</strong> Incident, Impact, CVE/package/version, Action, Sources</div></div>
+    Top risk → daily brief; rest → weekly digest<br>
+    <span style="color:#00ff41">Pros: avoids noise</span> | <span style="color:#ff6b6b">Cons: needs scoring tuning</span></div></div>
+  </div>
+
+  <div class="node-overlay" id="ov-trinity-opts">
+    <span class="ov-close">✕</span>
+    <div class="ov-title" style="color:#ff6b6b">🔺 Step 4 — TRINITY Sends Options to NEO</div>
+    <div class="chat-msg chat-trinity"><div class="chat-sender">[Trinity] → Neo (WhatsApp)</div>
+    <div class="chat-text"><strong>DevOps News Upgrade — Lobo gave 3 options:</strong><br><br>
+    <strong style="color:#00ff41">Option 1: Security-First Feed Pipeline</strong> (recommended)<br>CISA KEV, NVD CVE, GitHub Advisories, npm/PyPI, Snyk<br><br>
+    <strong style="color:#ffd740">Option 2: Two-Stage Enrichment</strong><br>Collect → Enrich → "What devs should do today"<br><br>
+    <strong style="color:#58a6ff">Option 3: Risk-Scored Alerting</strong><br>Score by CVSS + exploit status, daily vs weekly<br><br>
+    Reply: @trinity Option 1, 2, or 3</div></div>
+  </div>
+
+  <div class="node-overlay" id="ov-neo-pick">
+    <span class="ov-close">✕</span>
+    <div class="ov-title" style="color:#00ff41">📱 Step 5 — NEO Picks Option 1</div>
+    <div class="chat-msg chat-neo"><div class="chat-sender">Neo</div>
+    <div class="chat-text">@trinity — Option 1</div></div>
+    <div style="text-align:center;padding:0.5rem;font-family:var(--font-display);color:#00ff41;font-size:0.75rem;letter-spacing:2px">→ Trinity starts building immediately</div>
   </div>
 
   <div class="node-overlay" id="ov-build">
     <span class="ov-close">✕</span>
-    <div class="ov-title" style="color:#ff6b6b">💻 TRINITY BUILDS</div>
-    <div class="chat-msg chat-neo"><div class="chat-sender">Neo — 5:03 PM</div>
-    <div class="chat-text">@trinity — Option 1</div></div>
-    <div class="chat-msg chat-trinity"><div class="chat-sender">[Trinity] — 5:04 PM</div>
-    <div class="chat-text">Option 1 approved! Security-First Feed Pipeline. Implementing now — pulling from CISA KEV, NVD/CVE, GitHub Advisories, npm/PyPI, Snyk. Each alert: CVE ID, severity, package, fix version, action.</div></div>
-    <div class="chat-msg chat-trinity" style="border-color:rgba(0,255,65,0.5)"><div class="chat-sender">[Trinity] — 5:15 PM ✅ DEPLOYED</div>
-    <div class="chat-text"><strong>DevOps News UPGRADED!</strong><br>OLD: Generic headlines → NEW: Security-first from 5 sources<br>82 alerts scanned (was 25). CVE IDs, severity, fix versions included.<br><span style="color:#8b949e">Cron 6:45AM IST. Tomorrow = new format.</span></div></div>
+    <div class="ov-title" style="color:#ff6b6b">💻 Step 6 — TRINITY Codes + Deploys</div>
+    <div class="chat-msg chat-trinity"><div class="chat-sender">[Trinity] implementing</div>
+    <div class="chat-text">Option 1 approved! Security-First Feed Pipeline.<br>Pulling from: CISA KEV, NVD/CVE, GitHub Advisories, npm/PyPI, Snyk.<br>Each alert: CVE ID, severity, affected package, fix version, action.</div></div>
+    <div class="chat-msg chat-trinity" style="border-color:rgba(0,255,65,0.5)"><div class="chat-sender">[Trinity] ✅ DEPLOYED to Cloud</div>
+    <div class="chat-text"><strong>DevOps News UPGRADED!</strong><br>OLD: Generic DevOps headlines<br>NEW: Security-first alerts from 5 sources<br>82 alerts scanned (was ~25). CVE IDs, severity, fix versions.<br><span style="color:#8b949e">Cron 6:45AM IST daily. Tomorrow = new format.</span></div></div>
   </div>
 
-  <div class="node-overlay" id="ov-prod" style="width:460px">
+  <div class="node-overlay" id="ov-cloud">
     <span class="ov-close">✕</span>
-    <div class="ov-title" style="color:#00ff41">📋 NEXT MORNING — DevOps Security Brief</div>
-    <div class="chat-msg chat-result"><div class="chat-sender">6:45 AM — 04 Apr 2026</div>
+    <div class="ov-title" style="color:#58a6ff">☁️ Oracle Cloud VM</div>
+    <div class="chat-msg" style="background:rgba(88,166,255,0.04);border:1px solid rgba(88,166,255,0.2)"><div class="chat-sender" style="color:#58a6ff">Infrastructure</div>
+    <div class="chat-text">Ampere A1 — 4 OCPU, 24GB RAM<br>IP: 80.225.205.232<br><br><strong style="color:#ffd740">Cron job:</strong> 6:45 AM IST daily<br>Runs devops_news.py → scans 5 sources → builds brief → sends via WhatsApp Bridge<br><br><strong style="color:#00ff41">Sources:</strong> CISA KEV, NVD CVE Feed, GitHub Security Advisories, npm/PyPI advisories, Snyk vulnerability DB</div></div>
+  </div>
+
+  <div class="node-overlay" id="ov-brief" style="width:460px">
+    <span class="ov-close">✕</span>
+    <div class="ov-title" style="color:#00ff41">📱 Step 7 — Next Morning Brief</div>
+    <div class="chat-msg chat-result"><div class="chat-sender">DevOps Security Brief — 04 Apr 2026 — 6:45 AM</div>
     <div class="chat-text">
     <strong>1) CVE-2026-33105 Azure Kubernetes Privilege Escalation</strong><br>
     Severity: <span style="color:#ff6b6b">CRITICAL (CVSS 10.0)</span> | Impact: Azure Kubernetes Service<br>
