@@ -519,78 +519,51 @@
   </div>
 
   <div class="chat-msg" style="background:rgba(255,215,64,0.06);border-color:rgba(255,215,64,0.25)">
-    <div class="chat-sender" style="color:#ffd740">Example: You search "Formula 1 race"</div>
+    <div class="chat-sender" style="color:#ffd740">The question: "@neo how does F1 pit stop work?"</div>
     <div style="color:#c9d1d9">
-    None of these documents contain the words "Formula 1" — but watch what happens:<br><br>
+    ChromaDB searches 349K chunks for meaning. No doc says "F1 pit stop" — but these are the closest matches:<br><br>
     <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.75rem;margin:0.5rem 0">
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:6px 8px;color:#c084fc">📄 "Vehicle maintenance for high-performance cars..."</td>
-        <td style="padding:6px 8px;color:#00ff41;text-align:right;white-space:nowrap">0.78</td>
-      </tr>
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
         <td style="padding:6px 8px;color:#c084fc">📄 "The automobile engine burns fuel at 15,000 RPM..."</td>
         <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.71</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:6px 8px;color:#c084fc">📄 "Sedan and SUV aerodynamic wind tunnel tests..."</td>
-        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.58</td>
+        <td style="padding:6px 8px;color:#c084fc">📄 "Aerodynamic wind tunnel testing for racing..."</td>
+        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.65</td>
       </tr>
       <tr>
-        <td style="padding:6px 8px;color:#8b949e">📄 "Kitchen appliance energy efficiency ratings..."</td>
-        <td style="padding:6px 8px;color:#ff6b6b;text-align:right;white-space:nowrap">0.09</td>
+        <td style="padding:6px 8px;color:#c084fc">📄 "Vehicle maintenance procedures..."</td>
+        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.58</td>
       </tr>
     </table>
-    <br>None of these contain "Formula 1" — but the AI sees the <strong style="color:#00ff41">semantic connection</strong>: high-performance cars, engines at 15K RPM, aerodynamics. Scores aren't perfect (it's not a direct mention) but the <strong style="color:#c084fc">right documents surface</strong>. <strong style="color:#ff6b6b">"Kitchen appliance"?</strong> 0.09 — dead last.
+    <br>These are <strong style="color:#ff6b6b">related to racing</strong> but none actually explain pit stops. GPT-4.1 stitches them together and gets:<br><br>
+    <em style="color:#ff6b6b">😐 Answer #1: "F1 is related to automobile engines and aerodynamic design..."</em><br><br>
+    <strong style="color:#ff6b6b">Garbled. Didn't answer the question.</strong>
     </div>
   </div>
 
-  <div class="chat-msg" style="background:rgba(255,107,107,0.06);border-color:rgba(255,107,107,0.25)">
-    <div class="chat-sender" style="color:#ff6b6b">😐 Problem — GPT gets these chunks and gives a thin answer</div>
-    <div style="color:#c9d1d9">With only 0.78 and 0.71 scores, GPT-4.1 gets <strong style="color:#ff6b6b">vague, indirect chunks</strong>. None of them are actually ABOUT F1 pit stops. GPT stitches together a generic answer:<br><br>
-    <em style="color:#8b949e">"A pit stop is when a race car stops. The crew changes the tyres..."</em><br><br>
-    <strong style="color:#ff6b6b">Not good enough.</strong> The team member walks away unimpressed.
-    </div>
-  </div>
-
-  <div style="text-align:center;padding:0.5rem;margin:0.2rem 0"><span style="font-family:var(--font-display);font-size:0.7rem;color:#ffd740;letter-spacing:2px;background:rgba(255,215,64,0.1);padding:4px 14px;border-radius:20px">⚡ THE ENRICH — Trinity steps in</span></div>
-
-  <div class="chat-msg" style="background:rgba(0,255,65,0.06);border-color:rgba(0,255,65,0.25)">
-    <div class="chat-sender" style="color:#00ff41">🔺 Trinity (Opus 4.6) reads the FULL source docs</div>
-    <div style="color:#c9d1d9">Trinity sees "F1 pit stop" was asked 4 times with weak answers. She reads:<br><br>
-    📄 F1_Technical_Regulations.pdf — all 80 pages<br>
-    📊 Pit_Stop_Crew_Roles.xlsx — every crew position<br>
-    📽️ Race_Strategy.pptx — slide by slide<br><br>
-    Writes a <strong style="color:#00ff41">deep, complete explanation</strong> → saves it back into ChromaDB as an enriched chunk.
-    </div>
-  </div>
+  <div style="text-align:center;padding:0.5rem;margin:0.2rem 0"><span style="font-family:var(--font-display);font-size:0.7rem;color:#ffd740;letter-spacing:2px;background:rgba(255,215,64,0.1);padding:4px 14px;border-radius:20px">⚡ Trinity enriches → uploads back to ChromaDB</span></div>
 
   <div class="chat-msg" style="background:rgba(192,132,252,0.08);border-color:rgba(192,132,252,0.3)">
-    <div class="chat-sender" style="color:#c084fc">🔮 AFTER Enrich — same search, new scores</div>
+    <div class="chat-sender" style="color:#c084fc">🔮 Same question AFTER Enrich — new scores</div>
     <div style="color:#c9d1d9">
-    Now search "Formula 1 race" again:<br><br>
+    Trinity wrote a deep explanation and loaded it into ChromaDB. Now:<br><br>
     <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.75rem;margin:0.5rem 0">
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:6px 8px;color:#00ff41">💎 <strong>"F1 pit stop: 20 crew, 4 tyres in 1.8s..."</strong></td>
+        <td style="padding:6px 8px;color:#00ff41">💎 <strong>"F1 pit stop: 20 crew, 4 tyres in 1.8s, gun at 10K RPM..."</strong></td>
         <td style="padding:6px 8px;color:#00ff41;text-align:right;white-space:nowrap"><strong>0.94</strong></td>
       </tr>
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:6px 8px;color:#c084fc">📄 "Vehicle maintenance for high-performance cars..."</td>
-        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.78</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
         <td style="padding:6px 8px;color:#c084fc">📄 "The automobile engine burns fuel at 15,000 RPM..."</td>
         <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.71</td>
       </tr>
+      <tr>
+        <td style="padding:6px 8px;color:#c084fc">📄 "Aerodynamic wind tunnel testing..."</td>
+        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.65</td>
+      </tr>
     </table>
-    The <strong style="color:#00ff41">enriched doc jumps to #1 at 0.94</strong> — it's scored 1.2× higher because Trinity wrote it specifically about this topic. GPT-4.1 now gets a <strong>perfect source</strong> to build its answer from.
-    </div>
-  </div>
-
-  <div class="chat-msg" style="background:rgba(0,255,65,0.08);border-color:rgba(0,255,65,0.35)">
-    <div class="chat-sender" style="color:#00ff41">🎯 Now GPT gives a great answer</div>
-    <div style="color:#c9d1d9">
-    <em style="color:#00ff41">"An F1 pit stop uses 20 crew who change 4 tyres in under 2 seconds. Each wheel has 3 crew — pneumatic gun at 10,000 RPM, one removes, one fits. Refuelling banned since 2010. World record: 1.80s (Red Bull, 2019)..."</em><br><br>
-    <strong style="color:#00ff41">Same model. Same question. Better source material = better answer.</strong>
+    <br>The <strong style="color:#00ff41">enriched doc is now #1 at 0.94</strong>. GPT gets the perfect source and gives:<br><br>
+    <em style="color:#00ff41">🎯 Answer #1 (fixed): "20 crew, 4 tyres in 1.8 seconds. Pneumatic gun at 10,000 RPM..."</em>
     </div>
   </div>
 
