@@ -47,6 +47,17 @@
     @keyframes phoneZoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
     .phone-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 999; }
     .phone-backdrop.show { display: block; }
+    .flow-node { cursor: pointer; }
+    .flow-node:hover { filter: drop-shadow(0 0 12px rgba(244,114,182,0.4)); }
+    .node-overlay { display:none; position:fixed; top:5vh; left:20px; z-index:1000; background:#0a1628; border:3px solid #f472b6; border-radius:20px; padding:1.5rem; box-shadow:0 0 60px rgba(244,114,182,0.3); max-height:88vh; overflow-y:auto; width:440px; scrollbar-width:thin; scrollbar-color:#f472b6 #0a1628; }
+    .node-overlay.show { display:block; animation:phoneZoomIn 0.35s ease forwards; }
+    .ov-close { position:absolute; top:10px; right:16px; color:#ff6b6b; font-size:1.3rem; cursor:pointer; font-family:var(--font-display); z-index:1001; }
+    .ov-title { font-family:var(--font-display); font-size:1.1rem; text-align:center; letter-spacing:2px; margin-bottom:1rem; }
+    .med-table { width:100%; border-collapse:collapse; font-family:'JetBrains Mono',monospace; font-size:0.75rem; }
+    .med-table th { text-align:left; padding:0.4rem 0.6rem; color:#f472b6; border-bottom:1px solid rgba(244,114,182,0.3); font-size:0.7rem; letter-spacing:1px; }
+    .med-table td { padding:0.35rem 0.6rem; color:#c9d1d9; border-bottom:1px solid rgba(255,255,255,0.04); }
+    .med-table .cat { color:#ffd740; font-weight:bold; font-size:0.75rem; padding:0.6rem 0.6rem 0.3rem; }
+    .med-table .strips { color:#00ff41; font-weight:bold; }
     @keyframes dash-flow { to { stroke-dashoffset: -20; } }
     @keyframes sun-breathe { 0%,100% { filter: drop-shadow(0 0 8px rgba(244,114,182,0.15)); } 50% { filter: drop-shadow(0 0 20px rgba(244,114,182,0.35)); } }
     .anim-dash { animation: dash-flow 1s linear infinite; }
@@ -142,12 +153,12 @@
 
       <path d="M970,75 Q1025,75 1045,90" fill="none" stroke="#ffd740" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ao)"/>
 
-      <g transform="translate(1035, 80)">
+      <g transform="translate(1035, 80)" class="flow-node" data-overlay="ov-xlsx">
         <rect width="195" height="80" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
         <text x="97" y="22" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle">📊 medicines.xlsx</text>
         <text x="97" y="42" class="svg-label" fill="#58a6ff" font-size="10" text-anchor="middle">12 medicines · dosage rows</text>
         <text x="97" y="58" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">kidney transplant + diabetes</text>
-        <text x="97" y="74" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">strips needed · refill calc</text>
+        <text x="97" y="74" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">🔍 click to see medicines</text>
       </g>
 
       <path d="M1132,165 Q1132,200 1095,220" fill="none" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.15s" marker-end="url(#ao)"/>
@@ -171,12 +182,12 @@
 
       <path d="M1005,340 Q955,380 895,395" fill="none" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.3s" marker-end="url(#am)"/>
 
-      <g transform="translate(695, 375)">
+      <g transform="translate(695, 375)" class="flow-node" data-overlay="ov-xlsx">
         <rect width="200" height="72" rx="10" fill="#0a1628" stroke="#f472b6" stroke-width="2"/>
         <text x="100" y="20" class="svg-label" fill="#f472b6" font-size="12" text-anchor="middle">📧 Email + 📊 .xlsx</text>
         <text x="100" y="38" class="svg-label" fill="#f472b6" font-size="9" text-anchor="middle">[MedTracker] Buy medicine</text>
         <text x="100" y="52" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">for Puja Shah — 12 items</text>
-        <text x="100" y="66" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">Excel attached · SMTP send</text>
+        <text x="100" y="66" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">🔍 click to see medicines</text>
       </g>
 
       <path d="M695,410 Q525,440 350,370" fill="none" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.45s" marker-end="url(#am)"/>
@@ -291,6 +302,42 @@
     </div>
   </footer>
 </div>
+<div class="node-overlay" id="ov-xlsx">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#f472b6">📊 medicines.xlsx — Puja Shah</div>
+  <div style="text-align:center;color:#8b949e;font-family:var(--font-mono);font-size:0.75rem;margin-bottom:1rem">
+    3-month cycle (93 days) · Kidney transplant + Diabetes<br>
+    <span style="color:#ffd740">This is the real spreadsheet that Morpheus reads every morning</span>
+  </div>
+  <table class="med-table">
+    <tr><td colspan="3" class="cat">💊 Kidney Transplant</td></tr>
+    <tr><th>#</th><th>Medicine</th><th>Strips (3 mo)</th></tr>
+    <tr><td>1</td><td>Tacrolimus 1mg</td><td class="strips">19 strips</td></tr>
+    <tr><td>2</td><td>Mycophenolate 500mg</td><td class="strips">28 strips</td></tr>
+    <tr><td>3</td><td>Prednisolone 5mg</td><td class="strips">10 strips</td></tr>
+    <tr><td>4</td><td>Omeprazole 20mg</td><td class="strips">10 strips</td></tr>
+    <tr><td>5</td><td>Vitamin D3 60K</td><td class="strips">3 strips</td></tr>
+    <tr><td>6</td><td>Calcium 500mg</td><td class="strips">19 strips</td></tr>
+    <tr><td>7</td><td>Iron (Ferrous Ascorbate)</td><td class="strips">10 strips</td></tr>
+    <tr><td>8</td><td>Bactrim DS (Mon/Wed/Fri)</td><td class="strips">4 strips</td></tr>
+    <tr><td>9</td><td>Diltiazem 30mg</td><td class="strips">19 strips</td></tr>
+    <tr><td colspan="3" class="cat">💉 Diabetes</td></tr>
+    <tr><td>10</td><td>Metformin 500mg</td><td class="strips">19 strips</td></tr>
+    <tr><td>11</td><td>Glimepiride 1mg</td><td class="strips">10 strips</td></tr>
+    <tr><td>12</td><td>Vildagliptin 50mg</td><td class="strips">10 strips</td></tr>
+  </table>
+  <div style="margin-top:1rem;padding:0.8rem;border-radius:10px;background:rgba(255,215,64,0.05);border:1px solid rgba(255,215,64,0.2);font-family:var(--font-mono);font-size:0.75rem">
+    <div style="color:#ffd740;font-weight:bold;margin-bottom:0.4rem">How it works:</div>
+    <div style="color:#c9d1d9;line-height:1.7">
+      Morpheus reads this Excel every morning at <strong style="color:#f472b6">8:30 AM</strong><br>
+      Calculates strips needed for 93-day cycle<br>
+      When day 63+ → sends <strong style="color:#00ff41">WhatsApp reminder</strong> to Neo + Puja<br>
+      Sends <strong style="color:#f472b6">email with this Excel attached</strong> to Neo<br>
+      Reply "bought medicine" on either channel → stops all reminders
+    </div>
+  </div>
+</div>
+
 <div class="phone-backdrop" id="phone-backdrop"></div>
 <div class="phone-overlay" id="phone-overlay">
   <span class="close-btn" id="phone-close">✕</span>
@@ -317,17 +364,40 @@
 <script>
 (function(){
   var phone = document.querySelector('.phone-group');
-  var overlay = document.getElementById('phone-overlay');
+  var phoneOv = document.getElementById('phone-overlay');
   var backdrop = document.getElementById('phone-backdrop');
   var closeBtn = document.getElementById('phone-close');
-  if (!phone || !overlay) return;
-  function openPhone() { overlay.classList.add('show'); backdrop.classList.add('show'); }
-  function closePhone() { overlay.classList.remove('show'); backdrop.classList.remove('show'); }
-  phone.addEventListener('click', openPhone);
-  phone.addEventListener('mouseenter', openPhone);
-  backdrop.addEventListener('click', closePhone);
-  closeBtn.addEventListener('click', closePhone);
-  overlay.addEventListener('mouseleave', closePhone);
+  var currentNodeOv = null;
+
+  function closeAll() {
+    if (phoneOv) phoneOv.classList.remove('show');
+    if (currentNodeOv) currentNodeOv.classList.remove('show');
+    backdrop.classList.remove('show');
+    currentNodeOv = null;
+  }
+
+  if (phone && phoneOv) {
+    phone.addEventListener('click', function(){ closeAll(); phoneOv.classList.add('show'); backdrop.classList.add('show'); });
+    phone.addEventListener('mouseenter', function(){ closeAll(); phoneOv.classList.add('show'); backdrop.classList.add('show'); });
+    closeBtn.addEventListener('click', closeAll);
+    phoneOv.addEventListener('mouseleave', closeAll);
+  }
+
+  document.querySelectorAll('.flow-node').forEach(function(n){
+    n.addEventListener('click', function(e){
+      e.stopPropagation();
+      closeAll();
+      var ov = document.getElementById(n.getAttribute('data-overlay'));
+      if (!ov) return;
+      ov.classList.add('show');
+      backdrop.classList.add('show');
+      currentNodeOv = ov;
+    });
+  });
+
+  backdrop.addEventListener('click', closeAll);
+  document.querySelectorAll('.ov-close').forEach(function(btn){ btn.addEventListener('click', closeAll); });
+  document.querySelectorAll('.node-overlay').forEach(function(ov){ ov.addEventListener('mouseleave', closeAll); });
 })();
 </script>
 </body>
