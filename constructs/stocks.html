@@ -16,10 +16,30 @@
     .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
     .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
     .d-svg { width: 100%; max-width: 1100px; height: auto; margin: 0 auto; display: block; }
-    .phone-group { transition: transform 0.4s ease, filter 0.4s ease; transform-origin: 190px 350px; cursor: zoom-in; }
-    .phone-group:hover { transform: scale(1.8) translate(120px, -40px); filter: drop-shadow(0 0 40px rgba(0,255,65,0.3)); z-index: 10; }
-    .phone-hint { transition: opacity 0.3s ease; }
-    .phone-group:hover ~ .phone-hint { opacity: 0; }
+    .phone-group { cursor: zoom-in; transition: opacity 0.3s ease; }
+    .phone-overlay {
+      display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      z-index: 1000; background: #0a1628; border: 3px solid #00ff41; border-radius: 30px;
+      padding: 2rem 1.5rem; box-shadow: 0 0 80px rgba(0,255,65,0.3), 0 0 200px rgba(0,0,0,0.8);
+      max-height: 90vh; overflow-y: auto; width: 380px;
+    }
+    .phone-overlay.show { display: block; animation: phoneZoomIn 0.35s ease forwards; }
+    .phone-overlay .msg { margin-bottom: 1rem; padding: 1rem; border-radius: 12px; font-family: 'JetBrains Mono', monospace; }
+    .phone-overlay .msg-cmd { background: rgba(0,255,65,0.08); border: 1px solid rgba(0,255,65,0.3); }
+    .phone-overlay .msg-ack { background: rgba(0,255,65,0.04); border: 1px solid rgba(0,255,65,0.15); }
+    .phone-overlay .msg-brief { background: rgba(255,215,64,0.05); border: 1px solid rgba(255,215,64,0.3); }
+    .phone-overlay .msg-cmd span, .phone-overlay .msg-ack span { color: #00ff41; }
+    .phone-overlay .msg-brief span { color: #ffd740; }
+    .phone-overlay .msg-brief .dim { color: #8b949e; }
+    .phone-overlay .time { color: #8b949e; font-size: 0.7rem; text-align: right; margin-top: 0.4rem; }
+    .phone-overlay .close-btn {
+      position: absolute; top: 10px; right: 16px; color: #ff6b6b; font-size: 1.5rem;
+      cursor: pointer; font-family: var(--font-display); z-index: 1001;
+    }
+    .phone-overlay .title { color: #00ff41; font-family: var(--font-display); font-size: 1.2rem; text-align: center; letter-spacing: 3px; margin-bottom: 1.5rem; }
+    @keyframes phoneZoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+    .phone-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 999; }
+    .phone-backdrop.show { display: block; }
     @keyframes dash-flow { to { stroke-dashoffset: -20; } }
     @keyframes sun-breathe { 0%,100% { filter: drop-shadow(0 0 8px rgba(0,255,65,0.15)); } 50% { filter: drop-shadow(0 0 20px rgba(0,255,65,0.35)); } }
     .anim-dash { animation: dash-flow 1s linear infinite; }
@@ -251,6 +271,56 @@
     </div>
   </footer>
 </div>
+<!-- Phone zoom overlay (click/hover on phone in SVG opens this) -->
+<div class="phone-backdrop" id="phone-backdrop"></div>
+<div class="phone-overlay" id="phone-overlay">
+  <span class="close-btn" id="phone-close">✕</span>
+  <div class="title">NEO's PHONE</div>
+  <div class="msg msg-cmd">
+    <span style="font-size:1rem;font-weight:bold">@zion stock subscription</span>
+    <div class="time">8:02 PM ✓✓</div>
+  </div>
+  <div class="msg msg-ack">
+    <span style="font-size:0.95rem">[Zion] ✅ Subscribed to Stock Brief!</span>
+    <div class="time">8:02 PM ✓✓</div>
+  </div>
+  <div class="msg msg-brief">
+    <span style="font-size:1rem;font-weight:bold">[Zion] 📈 Market Brief — 16 Apr 2026</span><br><br>
+    <span style="font-size:0.95rem">India: Nifty 22,450 (+1.2%)</span><br>
+    <span style="font-size:0.95rem">Sensex 73,800 (+0.9%)</span><br>
+    <span style="font-size:0.95rem">Top: HDFC +3.2%, TCS +2.1%</span><br><br>
+    <span style="font-size:0.95rem">US: S&amp;P 5,200 (+0.8%)</span><br>
+    <span style="font-size:0.95rem">Dow 38,900 (+0.6%)</span><br><br>
+    <span style="font-size:0.95rem">Analyst picks: Buy INFY, Hold RIL</span><br>
+    <span class="dim" style="font-size:0.85rem">+ macro news from RSS</span>
+    <div class="time">6:15 AM ✓✓</div>
+  </div>
+</div>
+
 <script src="../script.js"></script>
+<script>
+(function(){
+  var phone = document.querySelector('.phone-group');
+  var overlay = document.getElementById('phone-overlay');
+  var backdrop = document.getElementById('phone-backdrop');
+  var closeBtn = document.getElementById('phone-close');
+  if (!phone || !overlay) return;
+
+  function openPhone() {
+    overlay.classList.add('show');
+    backdrop.classList.add('show');
+  }
+  function closePhone() {
+    overlay.classList.remove('show');
+    backdrop.classList.remove('show');
+  }
+
+  phone.addEventListener('click', openPhone);
+  phone.addEventListener('mouseenter', openPhone);
+  backdrop.addEventListener('click', closePhone);
+  closeBtn.addEventListener('click', closePhone);
+  overlay.addEventListener('mouseleave', closePhone);
+})();
+</script>
 </body>
 </html>
