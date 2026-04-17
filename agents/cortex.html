@@ -216,7 +216,7 @@
       <text x="870" y="724" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">🔍 Reads question_log</text>
       <text x="870" y="748" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">📊 Finds weak topics</text>
       <text x="870" y="772" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">✍️ Writes enrichments</text>
-      <text x="870" y="800" class="svg-label" fill="#00ff41" font-size="12" text-anchor="middle" opacity="0.5">🔍 click to learn more</text>
+      <text x="870" y="800" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle" style="cursor:pointer">⚡ click — before &amp; after</text>
       </g>
 
       <!-- 5. INTERFACES -->
@@ -461,23 +461,23 @@
     None of these documents contain the words "Formula 1" — but watch what happens:<br><br>
     <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.75rem;margin:0.5rem 0">
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:6px 8px;color:#c084fc">📄 "The automobile engine burns fuel at 15,000 RPM..."</td>
-        <td style="padding:6px 8px;color:#00ff41;text-align:right;white-space:nowrap">0.92</td>
+        <td style="padding:6px 8px;color:#c084fc">📄 "Vehicle maintenance for high-performance cars..."</td>
+        <td style="padding:6px 8px;color:#00ff41;text-align:right;white-space:nowrap">0.78</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:6px 8px;color:#c084fc">📄 "Vehicle maintenance for high-performance cars..."</td>
-        <td style="padding:6px 8px;color:#00ff41;text-align:right;white-space:nowrap">0.89</td>
+        <td style="padding:6px 8px;color:#c084fc">📄 "The automobile engine burns fuel at 15,000 RPM..."</td>
+        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.71</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
         <td style="padding:6px 8px;color:#c084fc">📄 "Sedan and SUV aerodynamic wind tunnel tests..."</td>
-        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.85</td>
+        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.58</td>
       </tr>
       <tr>
         <td style="padding:6px 8px;color:#8b949e">📄 "Kitchen appliance energy efficiency ratings..."</td>
-        <td style="padding:6px 8px;color:#ff6b6b;text-align:right;white-space:nowrap">0.12</td>
+        <td style="padding:6px 8px;color:#ff6b6b;text-align:right;white-space:nowrap">0.09</td>
       </tr>
     </table>
-    <br>The AI <strong style="color:#00ff41">understands the connection</strong>: F1 = engines, vehicles, aerodynamics, high-performance maintenance. It found all of these without a single keyword match. <strong style="color:#ff6b6b">"Kitchen appliance"?</strong> Nowhere close — completely different world.
+    <br>None of these contain "Formula 1" — but the AI sees the <strong style="color:#00ff41">semantic connection</strong>: high-performance cars, engines at 15K RPM, aerodynamics. Scores aren't perfect (it's not a direct mention) but the <strong style="color:#c084fc">right documents surface</strong>. <strong style="color:#ff6b6b">"Kitchen appliance"?</strong> 0.09 — dead last.
     </div>
   </div>
 
