@@ -402,14 +402,30 @@ function startProgress() {
     setTimeout(function() { addStep(step.text, step.color); }, step.delay * 1000);
   });
 
-  // Poll for live.html every 5 seconds (same-origin — no CORS issues)
+  // First fetch live.html to get the current content hash (so we detect when it CHANGES)
+  window._oldLiveHash = null;
+  fetch('live.html?t=' + Date.now()).then(function(r) {
+    if (r.ok) return r.text(); else return '';
+  }).then(function(txt) {
+    window._oldLiveHash = txt.length + '-' + txt.slice(0, 200);
+  }).catch(function() { window._oldLiveHash = 'MISSING'; });
+
+  // Poll every 8 seconds — only trigger deployDone when content CHANGES from what it was before
   liveCheckInterval = setInterval(function() {
     fetch('live.html?t=' + Date.now())
       .then(function(r) {
-        if (r.ok) { deployDone(); }
+        if (!r.ok) return;
+        return r.text();
+      })
+      .then(function(txt) {
+        if (!txt) return;
+        var newHash = txt.length + '-' + txt.slice(0, 200);
+        if (window._oldLiveHash && newHash !== window._oldLiveHash) {
+          deployDone();
+        }
       })
       .catch(function() { /* not ready yet */ });
-  }, 5000);
+  }, 8000);
 }
 
 function deployDone() {
