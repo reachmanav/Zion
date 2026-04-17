@@ -123,6 +123,12 @@
 
       <text x="690" y="334" class="svg-label" fill="#ffd740" font-size="11" text-anchor="middle" opacity="0.4">OpenClaw orchestrates sessions, tools, policies.</text>
 
+      <!-- ⚡ FLASH icon — click to learn why Lobo matters -->
+      <g class="flow-node" data-overlay="ov-why-lobo" style="cursor:pointer">
+        <circle cx="855" cy="45" r="16" fill="#0a1628" stroke="#ffd740" stroke-width="1.5"/>
+        <text x="855" y="52" font-size="18" text-anchor="middle">⚡</text>
+      </g>
+
       <!-- ═══ BRIDGE: SSH connects them ═══ -->
       <path d="M405,180 Q450,155 495,180" fill="none" stroke="#58a6ff" stroke-width="3" stroke-dasharray="10,5" class="anim-dash"/>
       <path d="M495,210 Q450,235 405,210" fill="none" stroke="#00ff41" stroke-width="3" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.4s"/>
@@ -294,6 +300,43 @@
 
   <!-- OVERLAYS for each node -->
   <div class="node-backdrop" id="node-backdrop"></div>
+
+  <div class="node-overlay" id="ov-why-lobo" style="width:460px">
+    <span class="ov-close">✕</span>
+    <div class="ov-title" style="color:#ffd740">⚡ Why Lobo? Why not just Trinity?</div>
+
+    <div class="chat-msg" style="background:rgba(255,215,64,0.04);border-color:rgba(255,215,64,0.2)">
+    <div class="chat-sender" style="color:#ff6b6b">The honest answer</div>
+    <div class="chat-text">Trinity (Opus 4.6) can code, debug, deploy — all by herself. She's fast.<br><br>But <strong style="color:#ffd740">fast doesn't mean smart</strong>. When you say "build X", Trinity's instinct is to start coding. Lobo forces a pause:<br><br><em style="color:#ffd740">"Wait — here are 3 ways to do this, with tradeoffs."</em><br><br>It's like being a good developer vs having a <strong>senior architect review your design BEFORE you write a single line</strong>.</div></div>
+
+    <div class="chat-msg" style="background:rgba(88,166,255,0.04);border-color:rgba(88,166,255,0.2)">
+    <div class="chat-sender" style="color:#58a6ff">What makes OpenClaw different</div>
+    <div class="chat-text">
+    <strong style="color:#ffd740">Regular AI</strong> = stateless. Each conversation starts fresh.<br><br>
+    <strong style="color:#00ff41">OpenClaw gives Lobo:</strong><br>
+    <strong>Session memory</strong> — remembers past decisions across conversations<br>
+    <strong>Policy engine</strong> — "always 3 options, always pros/cons" is baked in, can't be skipped<br>
+    <strong>Channel adapters</strong> — works over WhatsApp, Slack, API — same brain, any channel<br>
+    <strong>Tool routing</strong> — can plug into code analysis, security scans, cost estimators</div></div>
+
+    <div class="chat-msg" style="background:rgba(0,255,65,0.04);border-color:rgba(0,255,65,0.2)">
+    <div class="chat-sender" style="color:#00ff41">The 3 Options — every single time</div>
+    <div class="chat-text">
+    <strong style="color:#00ff41">Option 1:</strong> The fast/cheap way — might break later<br>
+    <strong style="color:#ffd740">Option 2:</strong> The balanced way — recommended<br>
+    <strong style="color:#58a6ff">Option 3:</strong> The enterprise way — bulletproof but heavy<br><br>
+    Each with pros and cons. <strong>Neo picks</strong>. That's the Construct Protocol.</div></div>
+
+    <div class="chat-msg" style="background:rgba(255,107,107,0.04);border-color:rgba(255,107,107,0.2)">
+    <div class="chat-sender" style="color:#ff6b6b">Think of it like a real company</div>
+    <div class="chat-text">
+    <strong style="color:#00ff41">Neo</strong> = the CEO. Says what he wants.<br>
+    <strong style="color:#ff6b6b">Trinity</strong> = the lead developer. Understands, codes, ships.<br>
+    <strong style="color:#ffd740">Lobo</strong> = the external architect consultant. Reviews the blueprint before a single line is written.<br><br>
+    You don't HAVE to use Lobo. But when you do, the result is <strong style="color:#ffd740">architecturally sound</strong> — not just "works today" but "works in 6 months when data doubles."</div></div>
+
+    <div style="text-align:center;padding:0.8rem;font-family:var(--font-mono);color:#8b949e;font-size:0.7rem">Your AI agents don't just execute blindly. They consult each other before building. That's rare.</div>
+  </div>
 
   <div class="node-overlay" id="ov-neo">
     <span class="ov-close">✕</span>
