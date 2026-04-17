@@ -21,7 +21,8 @@
       display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
       z-index: 1000; background: #0a1628; border: 3px solid #00ff41; border-radius: 30px;
       padding: 2rem 1.5rem; box-shadow: 0 0 80px rgba(0,255,65,0.3), 0 0 200px rgba(0,0,0,0.8);
-      max-height: 90vh; overflow-y: auto; width: 380px;
+      max-height: 88vh; overflow-y: auto; width: 420px;
+      scrollbar-width: thin; scrollbar-color: #00ff41 #0a1628;
     }
     .phone-overlay.show { display: block; animation: phoneZoomIn 0.35s ease forwards; }
     .phone-overlay .msg { margin-bottom: 1rem; padding: 1rem; border-radius: 12px; font-family: 'JetBrains Mono', monospace; }
@@ -37,6 +38,12 @@
       cursor: pointer; font-family: var(--font-display); z-index: 1001;
     }
     .phone-overlay .title { color: #00ff41; font-family: var(--font-display); font-size: 1.2rem; text-align: center; letter-spacing: 3px; margin-bottom: 1.5rem; }
+    .phone-overlay .section-head { color: #ffd740; font-size: 0.95rem; font-weight: bold; margin: 1rem 0 0.4rem; font-family: var(--font-display); letter-spacing: 1px; }
+    .phone-overlay .sub-head { color: #58a6ff; font-size: 0.85rem; font-weight: bold; margin: 0.7rem 0 0.2rem; }
+    .phone-overlay .stock-line { color: #e6edf3; font-size: 0.85rem; line-height: 1.6; }
+    .phone-overlay .stock-line .green { color: #00ff41; }
+    .phone-overlay .stock-line .red { color: #ff6b6b; }
+    .phone-overlay .news-line { color: #8b949e; font-size: 0.8rem; line-height: 1.7; padding-left: 0.3rem; }
     @keyframes phoneZoomIn { from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
     .phone-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 999; }
     .phone-backdrop.show { display: block; }
@@ -91,30 +98,33 @@
         <circle cx="175" cy="592" r="14" fill="none" stroke="#00ff41" stroke-width="1" stroke-opacity="0.3"/>
         <rect x="120" y="20" width="110" height="7" rx="3.5" fill="#00ff41" fill-opacity="0.15"/>
 
-        <!-- MSG 1: Neo command -->
-        <rect x="26" y="60" width="298" height="50" rx="12" fill="#00ff41" fill-opacity="0.07" stroke="#00ff41" stroke-width="0.8" stroke-opacity="0.3"/>
-        <text x="36" y="82" class="svg-label" fill="#00ff41" font-size="14" font-weight="bold">@zion stock subscription</text>
-        <text x="310" y="100" class="svg-label" fill="#8b949e" font-size="10" text-anchor="end">8:02 PM ✓✓</text>
+        <!-- MSG: Real Stock Brief -->
+        <rect x="26" y="60" width="298" height="460" rx="12" fill="#ffd740" fill-opacity="0.04" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.3"/>
+        <text x="36" y="84" class="svg-label" fill="#ffd740" font-size="13" font-weight="bold">Daily Stock Brief — 17 Apr 2026</text>
+        <text x="36" y="106" class="svg-label" fill="#ffd740" font-size="11" font-weight="bold">Market Snapshot</text>
+        <text x="36" y="124" class="svg-label" fill="#ff6b6b" font-size="11">🔴 SENSEX: 77,989 (-0.16%)</text>
+        <text x="36" y="142" class="svg-label" fill="#ff6b6b" font-size="11">🔴 NIFTY 50: 24,197 (-0.14%)</text>
+        <text x="36" y="160" class="svg-label" fill="#00ff41" font-size="11">🟢 S&amp;P 500: 7,041 (+1.06%)</text>
+        <text x="36" y="178" class="svg-label" fill="#00ff41" font-size="11">🟢 NASDAQ: 24,103 (+1.96%)</text>
+        <text x="36" y="196" class="svg-label" fill="#00ff41" font-size="11">🟢 Dow Jones: 48,579 (+0.09%)</text>
+        <text x="36" y="222" class="svg-label" fill="#ffd740" font-size="11" font-weight="bold">Top Movers</text>
+        <text x="36" y="240" class="svg-label" fill="#58a6ff" font-size="10">India Gainers:</text>
+        <text x="36" y="256" class="svg-label" fill="#00ff41" font-size="10">Adani +2.8%, L&amp;T +1.1%, Infy +1.1%</text>
+        <text x="36" y="274" class="svg-label" fill="#58a6ff" font-size="10">India Losers:</text>
+        <text x="36" y="290" class="svg-label" fill="#ff6b6b" font-size="10">HDFC -1.8%, ONGC -1.7%, Titan -1.3%</text>
+        <text x="36" y="310" class="svg-label" fill="#58a6ff" font-size="10">US Gainers:</text>
+        <text x="36" y="326" class="svg-label" fill="#00ff41" font-size="10">AMD +9.1%, MSFT +6.9%, TSLA +6.8%</text>
+        <text x="36" y="346" class="svg-label" fill="#58a6ff" font-size="10">US Losers:</text>
+        <text x="36" y="362" class="svg-label" fill="#ff6b6b" font-size="10">Merck -3.8%, J&amp;J -2.3%, Lilly -2.0%</text>
+        <text x="36" y="390" class="svg-label" fill="#ffd740" font-size="11" font-weight="bold">🇮🇳 India News + 🇺🇸 US News</text>
+        <text x="36" y="408" class="svg-label" fill="#8b949e" font-size="10">Reliance ESOP, HDFC earnings...</text>
+        <text x="36" y="424" class="svg-label" fill="#8b949e" font-size="10">S&amp;P record highs, Nvidia AI...</text>
+        <text x="36" y="446" class="svg-label" fill="#8b949e" font-size="10">+ analyst views, broker picks</text>
+        <text x="36" y="470" class="svg-label" fill="#ffd740" font-size="10" opacity="0.5">scroll for full brief...</text>
+        <text x="310" y="510" class="svg-label" fill="#8b949e" font-size="10" text-anchor="end">6:15 AM ✓✓</text>
 
-        <!-- MSG 2: Zion confirm -->
-        <rect x="26" y="118" width="298" height="42" rx="10" fill="#00ff41" fill-opacity="0.04" stroke="#00ff41" stroke-width="0.6" stroke-opacity="0.2"/>
-        <text x="36" y="144" class="svg-label" fill="#00ff41" font-size="13">[Zion] ✅ Subscribed to Stock Brief!</text>
-        <text x="310" y="154" class="svg-label" fill="#8b949e" font-size="10" text-anchor="end">8:02 PM ✓✓</text>
-
-        <!-- MSG 3: Morning brief -->
-        <rect x="26" y="170" width="298" height="340" rx="12" fill="#ffd740" fill-opacity="0.04" stroke="#ffd740" stroke-width="0.8" stroke-opacity="0.3"/>
-        <text x="36" y="196" class="svg-label" fill="#ffd740" font-size="14" font-weight="bold">[Zion] 📈 Market Brief — 16 Apr 2026</text>
-        <text x="36" y="224" class="svg-label" fill="#ffd740" font-size="13">India: Nifty 22,450 (+1.2%)</text>
-        <text x="36" y="248" class="svg-label" fill="#ffd740" font-size="13">Sensex 73,800 (+0.9%)</text>
-        <text x="36" y="272" class="svg-label" fill="#ffd740" font-size="13">Top: HDFC +3.2%, TCS +2.1%</text>
-        <text x="36" y="300" class="svg-label" fill="#ffd740" font-size="13">US: S&amp;P 5,200 (+0.8%)</text>
-        <text x="36" y="324" class="svg-label" fill="#ffd740" font-size="13">Dow 38,900 (+0.6%)</text>
-        <text x="36" y="352" class="svg-label" fill="#ffd740" font-size="13">Analyst picks: Buy INFY, Hold RIL</text>
-        <text x="36" y="380" class="svg-label" fill="#8b949e" font-size="12">+ macro news from RSS</text>
-        <text x="310" y="500" class="svg-label" fill="#8b949e" font-size="10" text-anchor="end">6:15 AM ✓✓</text>
-
-        <!-- Hover hint -->
-        <text x="175" y="540" class="svg-label phone-hint" fill="#00ff41" font-size="11" text-anchor="middle" opacity="0.4">🔍 hover to zoom</text>
+        <!-- Hover/click hint -->
+        <text x="175" y="540" class="svg-label phone-hint" fill="#00ff41" font-size="12" text-anchor="middle" opacity="0.5">🔍 click to read full brief</text>
 
         <text x="175" y="-2" class="svg-title" fill="#00ff41" font-size="24" text-anchor="middle" letter-spacing="4" filter="url(#gl)">NEO</text>
         <text x="175" y="652" class="svg-label" fill="#8b949e" font-size="13" text-anchor="middle">📱 6:15 AM — lock screen</text>
@@ -275,25 +285,64 @@
 <div class="phone-backdrop" id="phone-backdrop"></div>
 <div class="phone-overlay" id="phone-overlay">
   <span class="close-btn" id="phone-close">✕</span>
-  <div class="title">NEO's PHONE</div>
-  <div class="msg msg-cmd">
-    <span style="font-size:1rem;font-weight:bold">@zion stock subscription</span>
-    <div class="time">8:02 PM ✓✓</div>
-  </div>
-  <div class="msg msg-ack">
-    <span style="font-size:0.95rem">[Zion] ✅ Subscribed to Stock Brief!</span>
-    <div class="time">8:02 PM ✓✓</div>
-  </div>
-  <div class="msg msg-brief">
-    <span style="font-size:1rem;font-weight:bold">[Zion] 📈 Market Brief — 16 Apr 2026</span><br><br>
-    <span style="font-size:0.95rem">India: Nifty 22,450 (+1.2%)</span><br>
-    <span style="font-size:0.95rem">Sensex 73,800 (+0.9%)</span><br>
-    <span style="font-size:0.95rem">Top: HDFC +3.2%, TCS +2.1%</span><br><br>
-    <span style="font-size:0.95rem">US: S&amp;P 5,200 (+0.8%)</span><br>
-    <span style="font-size:0.95rem">Dow 38,900 (+0.6%)</span><br><br>
-    <span style="font-size:0.95rem">Analyst picks: Buy INFY, Hold RIL</span><br>
-    <span class="dim" style="font-size:0.85rem">+ macro news from RSS</span>
-    <div class="time">6:15 AM ✓✓</div>
+  <div class="title">📈 STOCK BRIEF</div>
+  <div class="msg msg-brief" style="border-color:rgba(255,215,64,0.4)">
+    <span style="font-size:1.05rem;font-weight:bold;color:#ffd740">Daily Stock Brief — 17 Apr 2026, Friday</span>
+
+    <div class="section-head">Market Snapshot</div>
+    <div class="stock-line"><span class="red">🔴</span> SENSEX: 77,989 (-0.16%)</div>
+    <div class="stock-line"><span class="red">🔴</span> NIFTY 50: 24,197 (-0.14%)</div>
+    <div class="stock-line"><span class="green">🟢</span> S&amp;P 500: 7,041 (+1.06%)</div>
+    <div class="stock-line"><span class="green">🟢</span> NASDAQ: 24,103 (+1.96%)</div>
+    <div class="stock-line"><span class="green">🟢</span> Dow Jones: 48,579 (+0.09%)</div>
+
+    <div class="section-head">Top Movers</div>
+    <div class="sub-head">India Top Gainers</div>
+    <div class="stock-line">* Adani Enterprises <span class="green">+2.8%</span>, Conglomerate</div>
+    <div class="stock-line">* L&amp;T <span class="green">+1.1%</span>, Infra</div>
+    <div class="stock-line">* Infosys <span class="green">+1.1%</span>, IT</div>
+    <div class="sub-head">India Top Losers</div>
+    <div class="stock-line">* HDFC Bank <span class="red">-1.8%</span>, Banking</div>
+    <div class="stock-line">* ONGC <span class="red">-1.7%</span>, Energy</div>
+    <div class="stock-line">* Titan <span class="red">-1.3%</span>, Consumer</div>
+    <div class="sub-head">US Top Gainers</div>
+    <div class="stock-line">* AMD <span class="green">+9.1%</span>, Semiconductors</div>
+    <div class="stock-line">* Microsoft <span class="green">+6.9%</span>, Tech</div>
+    <div class="stock-line">* Tesla <span class="green">+6.8%</span>, EV/Auto</div>
+    <div class="sub-head">US Top Losers</div>
+    <div class="stock-line">* Merck <span class="red">-3.8%</span>, Pharma</div>
+    <div class="stock-line">* J&amp;J <span class="red">-2.3%</span>, Healthcare</div>
+    <div class="stock-line">* Eli Lilly <span class="red">-2.0%</span>, Pharma</div>
+
+    <div class="section-head">🇮🇳 India Stocks — Latest News</div>
+    <div class="news-line">* Reliance Industries allots shares under ESOP.</div>
+    <div class="news-line">* HDFC Bank rises ahead of earnings.</div>
+    <div class="news-line">* TCS faces scrutiny over Nashik case.</div>
+    <div class="news-line">* Infosys trades amid harassment allegations.</div>
+    <div class="news-line">* Adani Power gains over 4%.</div>
+    <div class="news-line">* Sensex, Nifty end lower.</div>
+
+    <div class="sub-head">Analyst / Broker Views</div>
+    <div class="news-line">* ET expects HDFC Bank growth.</div>
+    <div class="news-line">* TipRanks views Reliance positively.</div>
+    <div class="news-line">* IBD sees IT sector crash.</div>
+    <div class="news-line">* Motley Fool likes HDFC Bank.</div>
+
+    <div class="section-head">🇺🇸 US Stocks — Latest News</div>
+    <div class="news-line">* S&amp;P 500, Nasdaq hit record highs.</div>
+    <div class="news-line">* US stocks open slightly higher.</div>
+    <div class="news-line">* Wall Street waits for Iran clues.</div>
+    <div class="news-line">* Nvidia debuts AI models.</div>
+    <div class="news-line">* Apple stock sees pre-earnings twist.</div>
+    <div class="news-line">* Tesla Cybertruck sales inflated.</div>
+
+    <div class="sub-head">Analyst / Broker Views</div>
+    <div class="news-line">* IBD likes Microsoft stock.</div>
+    <div class="news-line">* TipRanks views MSFT positively.</div>
+    <div class="news-line">* CNBC sees Nvidia growth.</div>
+    <div class="news-line">* Yahoo Finance likes Apple stock.</div>
+
+    <div class="time" style="margin-top:1rem">6:15 AM ✓✓</div>
   </div>
 </div>
 
