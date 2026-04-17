@@ -426,36 +426,37 @@
   </div>
 
   <div class="chat-msg" style="background:rgba(255,215,64,0.06);border-color:rgba(255,215,64,0.25)">
-    <div class="chat-sender" style="color:#ffd740">Example: Why "car" finds "automobile"</div>
+    <div class="chat-sender" style="color:#ffd740">Example: You search "Formula 1 race"</div>
     <div style="color:#c9d1d9">
-    You search: <strong style="color:#4ecdc4">"car"</strong><br><br>
+    None of these documents contain the words "Formula 1" — but watch what happens:<br><br>
     <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.75rem;margin:0.5rem 0">
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:4px 8px;color:#c084fc">📄 "The automobile engine..."</td>
-        <td style="padding:4px 8px;color:#00ff41;text-align:right">0.92 match</td>
+        <td style="padding:6px 8px;color:#c084fc">📄 "The automobile engine burns fuel at 15,000 RPM..."</td>
+        <td style="padding:6px 8px;color:#00ff41;text-align:right;white-space:nowrap">0.92</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:4px 8px;color:#c084fc">📄 "Vehicle maintenance..."</td>
-        <td style="padding:4px 8px;color:#00ff41;text-align:right">0.89 match</td>
+        <td style="padding:6px 8px;color:#c084fc">📄 "Vehicle maintenance for high-performance cars..."</td>
+        <td style="padding:6px 8px;color:#00ff41;text-align:right;white-space:nowrap">0.89</td>
       </tr>
       <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-        <td style="padding:4px 8px;color:#c084fc">📄 "Sedan and SUV models..."</td>
-        <td style="padding:4px 8px;color:#ffd740;text-align:right">0.85 match</td>
+        <td style="padding:6px 8px;color:#c084fc">📄 "Sedan and SUV aerodynamic wind tunnel tests..."</td>
+        <td style="padding:6px 8px;color:#ffd740;text-align:right;white-space:nowrap">0.85</td>
       </tr>
       <tr>
-        <td style="padding:4px 8px;color:#8b949e">📄 "Kitchen appliance guide..."</td>
-        <td style="padding:4px 8px;color:#ff6b6b;text-align:right">0.12 match</td>
+        <td style="padding:6px 8px;color:#8b949e">📄 "Kitchen appliance energy efficiency ratings..."</td>
+        <td style="padding:6px 8px;color:#ff6b6b;text-align:right;white-space:nowrap">0.12</td>
       </tr>
     </table>
-    <br>None of these documents contain the word "car" — but the AI understands they're <strong style="color:#00ff41">about the same thing</strong>. A keyword search would find <strong style="color:#ff6b6b">zero results</strong>.
+    <br>The AI <strong style="color:#00ff41">understands the connection</strong>: F1 = engines, vehicles, aerodynamics, high-performance maintenance. It found all of these without a single keyword match. <strong style="color:#ff6b6b">"Kitchen appliance"?</strong> Nowhere close — completely different world.
     </div>
   </div>
 
   <div class="chat-msg" style="background:rgba(0,255,65,0.04);border-color:rgba(0,255,65,0.15)">
-    <div class="chat-sender" style="color:#00ff41">Real Cortex example</div>
-    <div style="color:#c9d1d9">Someone asks: <strong style="color:#ffd740">"@neo what is the KYC verification flow?"</strong><br><br>
-    ChromaDB finds chunks mentioning "identity check", "customer onboarding", "document validation" — even though those docs never use the exact phrase "KYC verification flow."<br><br>
-    <span style="color:#8b949e">Model: bge-small-en-v1.5 · 384 dimensions · ONNX runtime · runs locally (no cloud API needed)</span>
+    <div class="chat-sender" style="color:#00ff41">Same principle, real Cortex use</div>
+    <div style="color:#c9d1d9">A team member asks: <strong style="color:#ffd740">"@neo what is the KYC verification flow?"</strong><br><br>
+    ChromaDB finds docs about <strong style="color:#c084fc">"identity check"</strong>, <strong style="color:#c084fc">"customer onboarding"</strong>, <strong style="color:#c084fc">"document validation"</strong> — none use the exact phrase "KYC verification flow", but they're all <strong style="color:#00ff41">about the same thing</strong>.<br><br>
+    Same magic. Different domain.<br><br>
+    <span style="color:#8b949e">Model: bge-small-en-v1.5 · 384 dimensions · ONNX runtime · runs locally (no cloud API)</span>
     </div>
   </div>
 </div>
