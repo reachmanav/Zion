@@ -61,10 +61,8 @@
         <marker id="ab" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#58a6ff" opacity="0.7"/></marker>
         <filter id="gl"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
         <filter id="gl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <clipPath id="clip-circle-2006"><circle cx="120" cy="42" r="30"/></clipPath>
-        <clipPath id="clip-circle-gift"><circle cx="110" cy="55" r="42"/></clipPath>
-        <clipPath id="clip-circle-crash"><circle cx="130" cy="42" r="30"/></clipPath>
-        <clipPath id="clip-circle-lobo"><circle cx="50" cy="45" r="35"/></clipPath>
+        <clipPath id="clip-bar-2006"><rect x="5" y="10" width="80" height="80" rx="8"/></clipPath>
+        <clipPath id="clip-bar-gift"><rect x="15" y="10" width="200" height="90" rx="8"/></clipPath>
       </defs>
 
       <!-- ═══════════════════════════════════════════
@@ -78,13 +76,10 @@
       <!-- ══ NODE 1: 2006 — LOBO + ZION (top of left loop) ══ -->
       <g transform="translate(140, 20)">
         <rect width="240" height="100" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
-        <!-- Hershey's photo as circular thumbnail -->
-        <image href="img/hersheys.jpg" x="5" y="10" width="80" height="80" clip-path="url(#clip-circle-2006)" opacity="0.85" preserveAspectRatio="xMidYMid slice"/>
-        <circle cx="45" cy="50" r="30" fill="none" stroke="#ffd740" stroke-width="1.5" opacity="0.6"/>
-        <text x="90" y="18" class="svg-label" fill="#ffd740" font-size="22">🐺</text>
-        <text x="115" y="18" class="svg-label" fill="#00ff41" font-size="22">⬡</text>
-        <text x="165" y="40" class="svg-title" fill="#ffd740" font-size="12" text-anchor="middle" letter-spacing="2">2006</text>
-        <text x="165" y="56" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">software engineered</text>
+        <text x="35" y="35" class="svg-label" fill="#ffd740" font-size="28">🐺</text>
+        <text x="65" y="35" class="svg-label" fill="#00ff41" font-size="28">⬡</text>
+        <text x="165" y="35" class="svg-title" fill="#ffd740" font-size="14" text-anchor="middle" letter-spacing="2">2006</text>
+        <text x="165" y="55" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">software engineered</text>
         <text x="165" y="72" class="svg-label" fill="#c084fc" font-size="8" text-anchor="middle">same college · same batch</text>
         <text x="165" y="88" class="svg-label" fill="#8b949e" font-size="7" text-anchor="middle">Mumbai</text>
       </g>
@@ -93,17 +88,19 @@
       <path d="M260,125 Q200,180 160,240" fill="none" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.2s" marker-end="url(#ay)"/>
       <text x="185" y="185" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">4 years</text>
 
-      <!-- ══ NODE 2: 19-APR-2010 — THE GIFT + HERSHEY'S PIC (center-left) ══ -->
+      <!-- ══ NODE 2: 19-APR-2010 — HERSHEY'S BAR ONLY (center-left) ══ -->
       <g transform="translate(30, 240)">
         <rect width="230" height="170" rx="12" fill="#0a1628" stroke="#c084fc" stroke-width="2"/>
-        <!-- Hershey's photo — the main pic -->
-        <image href="img/hersheys.jpg" x="10" y="8" width="210" height="95" clip-path="url(#clip-circle-gift)" opacity="0.9" preserveAspectRatio="xMidYMid slice"/>
-        <rect x="10" y="8" width="210" height="95" rx="8" fill="none" stroke="#c084fc" stroke-width="1" opacity="0.4"/>
-        <text x="115" y="122" class="svg-title" fill="#c084fc" font-size="11" text-anchor="middle" letter-spacing="1">19-APR-2010</text>
-        <text x="115" y="138" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">03:15 AM</text>
-        <text x="80" y="158" class="svg-label" fill="#c084fc" font-size="16">🍫</text>
-        <text x="105" y="158" class="svg-label" fill="#c084fc" font-size="16">🎁</text>
-        <text x="130" y="158" class="svg-label" fill="#c084fc" font-size="16">🔌</text>
+        <!-- Hershey's photo — CROPPED to show ONLY the chocolate bar, no faces -->
+        <svg x="15" y="8" width="200" height="90" viewBox="230 340 560 270">
+          <image href="img/hersheys.jpg" x="0" y="0" width="1024" height="768" preserveAspectRatio="xMidYMid slice"/>
+        </svg>
+        <rect x="15" y="8" width="200" height="90" rx="8" fill="none" stroke="#c084fc" stroke-width="1.5" opacity="0.5"/>
+        <text x="115" y="118" class="svg-title" fill="#c084fc" font-size="12" text-anchor="middle" letter-spacing="1">19-APR-2010</text>
+        <text x="115" y="136" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">03:15 AM</text>
+        <text x="78" y="160" class="svg-label" fill="#c084fc" font-size="18">🍫</text>
+        <text x="105" y="160" class="svg-label" fill="#c084fc" font-size="18">🎁</text>
+        <text x="132" y="160" class="svg-label" fill="#c084fc" font-size="18">🔌</text>
       </g>
 
       <!-- Arrow 2 → 3 (curves down) -->
