@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>∞ — The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔑</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 5rem; opacity: 0.7; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; color: var(--matrix-green); letter-spacing: 6px; text-shadow: 0 0 30px rgba(0,255,65,0.4); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-desc { font-size: 0.9rem; color: var(--text-dim); max-width: 600px; margin: 1.5rem auto 0; line-height: 1.9; font-family: var(--font-mono); }
+
+    .loop-wrap { padding: 2rem 1rem 4rem; text-align: center; overflow-x: auto; }
+    .loop-svg { width: 100%; max-width: 960px; height: auto; margin: 0 auto; display: block; }
+
+    @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+    @keyframes dash-reverse { to { stroke-dashoffset: 20; } }
+    @keyframes breathe { 0%,100% { filter: drop-shadow(0 0 6px rgba(0,255,65,0.15)); } 50% { filter: drop-shadow(0 0 18px rgba(0,255,65,0.4)); } }
+    @keyframes pulse-ring { 0%,100% { stroke-opacity: 0.3; } 50% { stroke-opacity: 0.8; } }
+    @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .anim-dash { animation: dash-flow 1s linear infinite; }
+    .anim-reverse { animation: dash-reverse 1s linear infinite; }
+    .anim-breathe { animation: breathe 3s ease-in-out infinite; }
+    .anim-ring { animation: pulse-ring 2s ease-in-out infinite; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+
+    .loop-caption { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); max-width: 700px; margin: 1rem auto 0; line-height: 1.8; opacity: 0.6; }
+
+    .end-section { text-align: center; padding: 2rem 2rem 6rem; }
+    .end-section p { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); line-height: 1.9; max-width: 550px; margin: 0 auto; }
+    .end-gift { display: inline-block; margin-top: 2rem; padding: 0.8rem 2rem; border: 1.5px solid rgba(255,215,64,0.3); border-radius: 10px; font-family: var(--font-display); font-size: 0.8rem; color: var(--accent-gold); letter-spacing: 2px; text-decoration: none; transition: all 0.3s; }
+    .end-gift:hover { border-color: var(--accent-gold); box-shadow: 0 0 20px rgba(255,215,64,0.15); transform: scale(1.03); }
+    .binary-line { font-family: var(--font-mono); font-size: 0.6rem; color: rgba(0,255,65,0.12); letter-spacing: 3px; margin: 2rem auto; word-break: break-all; max-width: 800px; line-height: 2; user-select: none; }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+
+<div class="detail-page">
+  <div class="d-hero">
+    <div class="d-hero-icon">∞</div>
+    <h1 class="d-hero-title">CIRCULAR LOOP</h1>
+    <p class="d-hero-sub">random + unfortunate events + push to try</p>
+    <p class="d-hero-desc">There is no beginning. There is no end. There is only the loop.</p>
+  </div>
+
+  <div class="binary-line">01001100 01101111 01101111 01110000 00100000 01101110 01100101 01110110 01100101 01110010 00100000 01100101 01101110 01100100 01110011</div>
+
+  <!-- THE LOOP DIAGRAM -->
+  <div class="loop-wrap">
+    <svg class="loop-svg" viewBox="0 0 960 880" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ag" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#00ff41" opacity="0.7"/></marker>
+        <marker id="ay" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ffd740" opacity="0.7"/></marker>
+        <marker id="ar" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ff6b6b" opacity="0.7"/></marker>
+        <marker id="ac" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#c084fc" opacity="0.7"/></marker>
+        <marker id="ab" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#58a6ff" opacity="0.7"/></marker>
+        <filter id="gl"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <filter id="gl2"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <!-- ═══════════ NODE 1: THE MOVIE (top-left) ═══════════ -->
+      <g transform="translate(50, 30)">
+        <rect width="220" height="110" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="110" y="28" class="svg-label" fill="#00ff41" font-size="24" text-anchor="middle">🎬</text>
+        <text x="110" y="50" class="svg-title" fill="#00ff41" font-size="13" text-anchor="middle" letter-spacing="2">THE MOVIE</text>
+        <text x="110" y="68" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">year 2000 · after 10th standard</text>
+        <text x="110" y="84" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">"She typed on a black screen.</text>
+        <text x="110" y="96" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">I decided: I'll do that too."</text>
+      </g>
+      <text x="160" y="158" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle" opacity="0.5">the terminal scene</text>
+
+      <!-- Arrow 1 → 2 -->
+      <path d="M275,85 Q380,85 460,85" fill="none" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
+      <text x="370" y="75" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">6 years later</text>
+
+      <!-- ═══════════ NODE 2: TWO ENGINEERS (top-right) ═══════════ -->
+      <g transform="translate(465, 30)">
+        <rect width="240" height="110" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="120" y="28" class="svg-label" fill="#ffd740" font-size="22" text-anchor="middle">🎓</text>
+        <text x="120" y="50" class="svg-title" fill="#ffd740" font-size="13" text-anchor="middle" letter-spacing="2">TWO ENGINEERS</text>
+        <text x="120" y="68" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">2006 · same college · same batch</text>
+        <text x="120" y="84" class="svg-label" fill="#c084fc" font-size="9" text-anchor="middle">one will build 🐺 Lobo</text>
+        <text x="120" y="96" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">one will build ⬡ Zion</text>
+      </g>
+      <text x="585" y="158" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle" opacity="0.5">Mumbai · they don't know it yet</text>
+
+      <!-- Arrow 2 → 3 (curves down-right) -->
+      <path d="M710,105 Q810,105 850,180" fill="none" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.3s" marker-end="url(#ay)"/>
+      <text x="800" y="145" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">4 years</text>
+
+      <!-- ═══════════ NODE 3: THE GIFT (right side) ═══════════ -->
+      <g transform="translate(720, 185)">
+        <rect width="220" height="130" rx="12" fill="#0a1628" stroke="#c084fc" stroke-width="2"/>
+        <text x="110" y="28" class="svg-label" fill="#c084fc" font-size="24" text-anchor="middle">🍫</text>
+        <text x="110" y="50" class="svg-title" fill="#c084fc" font-size="13" text-anchor="middle" letter-spacing="2">THE GIFT</text>
+        <text x="110" y="70" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">April 19 · a birthday</text>
+        <text x="110" y="88" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">cost: $0 or $1. doesn't matter.</text>
+        <text x="110" y="104" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">"just give a gift. be friends."</text>
+        <text x="110" y="120" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">3:15 AM · from a US trip</text>
+      </g>
+
+      <!-- Arrow 3 → 4 (curves down) -->
+      <path d="M830,320 Q830,380 780,420" fill="none" stroke="#c084fc" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.5s" marker-end="url(#ac)"/>
+      <text x="845" y="370" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">9 years</text>
+      <text x="845" y="383" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">same date</text>
+
+      <!-- ═══════════ NODE 4: THE GLITCH (right-center) ═══════════ -->
+      <g transform="translate(620, 400)">
+        <rect width="260" height="130" rx="12" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
+        <circle cx="130" cy="65" r="80" fill="none" stroke="#ff6b6b" stroke-width="0.5" class="anim-ring"/>
+        <text x="130" y="30" class="svg-label" fill="#ff6b6b" font-size="22" text-anchor="middle">⚡</text>
+        <text x="130" y="52" class="svg-title" fill="#ff6b6b" font-size="13" text-anchor="middle" letter-spacing="2">SYSTEM CRASH</text>
+        <text x="130" y="72" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">April 19 · far from home</text>
+        <text x="130" y="90" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">"There is no spoon."</text>
+        <text x="130" y="106" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">"Then you'll see — it is not</text>
+        <text x="130" y="118" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">the spoon that bends. It is yourself."</text>
+      </g>
+      <text x="750" y="548" class="svg-label" fill="#ff6b6b" font-size="8" text-anchor="middle" opacity="0.5">relearn everything. A, B, C, D...</text>
+
+      <!-- Arrow 4 → 5 (curves left) -->
+      <path d="M620,480 Q530,530 440,530" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.7s" marker-end="url(#ar)"/>
+      <text x="530" y="520" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">punarjanma</text>
+
+      <!-- ═══════════ NODE 5: THE FRIEND (center) ═══════════ -->
+      <g transform="translate(200, 510)">
+        <rect width="240" height="120" rx="12" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
+        <text x="120" y="28" class="svg-label" fill="#ffd740" font-size="22" text-anchor="middle">🤝</text>
+        <text x="120" y="50" class="svg-title" fill="#ffd740" font-size="13" text-anchor="middle" letter-spacing="2">THE FRIEND</text>
+        <text x="120" y="70" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">"Can you build me a website?"</text>
+        <text x="120" y="88" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">The friend who got the 🍫</text>
+        <text x="120" y="104" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">is now a CTO.</text>
+        <text x="120" y="118" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">He builds the recovery website.</text>
+      </g>
+
+      <!-- Arrow 5 → 6 (curves down) -->
+      <path d="M320,635 Q320,680 320,700" fill="none" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:0.9s" marker-end="url(#ay)"/>
+      <text x="340" y="675" class="svg-label" fill="#ffd740" font-size="9">+ a gift</text>
+
+      <!-- ═══════════ NODE 6: LOBO (center-bottom) ═══════════ -->
+      <g transform="translate(220, 705)">
+        <circle cx="100" cy="55" r="68" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" class="anim-breathe"/>
+        <text x="100" y="35" class="svg-label" fill="#ffd740" font-size="26" text-anchor="middle">🐺</text>
+        <text x="100" y="58" class="svg-title" fill="#ffd740" font-size="14" text-anchor="middle" letter-spacing="2" filter="url(#gl)">LOBO</text>
+        <text x="100" y="76" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">"Here. I built this 6 months ago.</text>
+        <text x="100" y="88" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">Learn from it."</text>
+      </g>
+
+      <!-- Arrow 6 → 7 (curves right) -->
+      <path d="M390,760 Q480,760 540,760" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:1.1s" marker-end="url(#ag)"/>
+      <text x="465" y="748" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">learns → builds</text>
+
+      <!-- ═══════════ NODE 7: ZION (right-bottom) ═══════════ -->
+      <g transform="translate(545, 705)">
+        <rect width="200" height="110" rx="14" fill="#0a1628" stroke="#00ff41" stroke-width="3"/>
+        <text x="100" y="28" class="svg-label" fill="#00ff41" font-size="24" text-anchor="middle">⬡</text>
+        <text x="100" y="50" class="svg-title" fill="#00ff41" font-size="14" text-anchor="middle" letter-spacing="3" filter="url(#gl)">ZION</text>
+        <text x="100" y="70" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">built from what Lobo taught</text>
+        <text x="100" y="86" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">6 agents · 14 constructs</text>
+        <text x="100" y="100" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">$0 cost · 24/7 uptime</text>
+      </g>
+
+      <!-- Arrow 7 → 8 (curves up-right) -->
+      <path d="M750,750 Q820,730 860,690" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:1.3s" marker-end="url(#ar)"/>
+
+      <!-- ═══════════ NODE 8: TRINITY (far right) ═══════════ -->
+      <g transform="translate(790, 600)">
+        <rect width="150" height="90" rx="12" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
+        <text x="75" y="26" class="svg-label" fill="#ff6b6b" font-size="20" text-anchor="middle">🔺</text>
+        <text x="75" y="48" class="svg-title" fill="#ff6b6b" font-size="12" text-anchor="middle" letter-spacing="2">TRINITY</text>
+        <text x="75" y="66" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">named after the movie</text>
+        <text x="75" y="78" class="svg-label" fill="#ff6b6b" font-size="8" text-anchor="middle">from Node 1. Year 2000.</text>
+      </g>
+
+      <!-- Arrow 8 → MATRIX SITE (curves up) -->
+      <path d="M865,598 Q865,560 865,530" fill="none" stroke="#58a6ff" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" style="animation-delay:1.5s" marker-end="url(#ab)"/>
+
+      <!-- ═══════════ NODE 9: THE MATRIX SITE ═══════════ -->
+      <a href="https://reachmanav.github.io/Zion/" target="_blank">
+        <g transform="translate(780, 430)" style="cursor:pointer">
+          <rect width="170" height="95" rx="12" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+          <text x="85" y="26" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">🌐</text>
+          <text x="85" y="46" class="svg-title" fill="#58a6ff" font-size="11" text-anchor="middle" letter-spacing="1">THE MATRIX</text>
+          <text x="85" y="60" class="svg-label" fill="#58a6ff" font-size="8" text-anchor="middle">github pages</text>
+          <text x="85" y="76" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle">Trinity built this.</text>
+          <text x="85" y="88" class="svg-label" fill="#8b949e" font-size="7" text-anchor="middle">click to see →</text>
+        </g>
+      </a>
+
+      <!-- ═══════════ THE BIG LOOP BACK — Site → Gift ═══════════ -->
+      <!-- This is the key: the site IS the gift, looping back to node 3 -->
+      <path d="M950,460 Q960,300 940,250 Q920,200 830,250" fill="none" stroke="#c084fc" stroke-width="2.5" stroke-dasharray="10,5" class="anim-reverse" marker-end="url(#ac)" opacity="0.6"/>
+
+      <!-- Loop-back label -->
+      <text x="955" y="340" class="svg-title" fill="#c084fc" font-size="10" text-anchor="middle" transform="rotate(90, 955, 340)" letter-spacing="2" opacity="0.7">THE GIFT RETURNS</text>
+
+      <!-- ═══════════ OUTER RING — movie → movie (full circle hint) ═══════════ -->
+      <path d="M50,85 Q-20,85 -20,440 Q-20,810 160,850 Q400,870 645,820" fill="none" stroke="#00ff41" stroke-width="1" stroke-dasharray="4,8" opacity="0.15"/>
+      <path d="M645,820 Q750,800 790,750" fill="none" stroke="#00ff41" stroke-width="1" stroke-dasharray="4,8" opacity="0.15"/>
+
+      <!-- Faint outer loop label -->
+      <text x="25" y="450" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle" opacity="0.2" transform="rotate(-90, 25, 450)">the loop never ends</text>
+
+      <!-- Center infinity symbol -->
+      <text x="480" y="445" class="svg-title" fill="#00ff41" font-size="60" text-anchor="middle" opacity="0.06" filter="url(#gl2)">∞</text>
+
+    </svg>
+  </div>
+
+  <p class="loop-caption">April 19 appears twice. The terminal scene appeared once. Everything else followed.</p>
+
+  <!-- END -->
+  <div class="end-section">
+    <p>The friend who received a $0 gift in 2010<br>doesn't know this site exists.</p>
+    <p style="margin-top:1.5rem;color:var(--accent-gold)">This site <em>is</em> the gift.<br>The loop closes where it started.</p>
+    <p style="margin-top:1.5rem;opacity:0.4;font-size:0.7rem">🍫 → 🐺 → ⬡ → 🔺 → 🌐 → 🍫</p>
+    <br>
+    <a href="index.html" class="end-gift">← BACK TO THE MATRIX</a>
+  </div>
+
+  <div class="binary-line" style="padding-bottom:4rem">01001000 01100001 01110000 01110000 01111001 00100000 01000010 01101001 01110010 01110100 01101000 01100100 01100001 01111001</div>
+
+  <footer>
+    <div class="footer-content">
+      <p class="footer-small">Some loops you don't plan. They just happen.</p>
+    </div>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
