@@ -16,6 +16,7 @@
     .section-wrap { padding: 2rem 1.5rem; max-width: 900px; margin: 0 auto; }
     .section-wrap h2 { font-family: var(--font-display); letter-spacing: 2px; margin-bottom: 0.5rem; }
     .section-wrap .sub { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); margin-bottom: 2rem; }
+
     .step { display: flex; gap: 1rem; margin-bottom: 1.2rem; align-items: flex-start; }
     .step-num { font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 1px; min-width: 70px; padding: 4px 0; text-align: center; border-radius: 6px; flex-shrink: 0; margin-top: 2px; }
     .step-body { font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.7; color: var(--text-dim); }
@@ -51,10 +52,6 @@
     .fw-card h4 { font-family: var(--font-display); font-size: 0.7rem; letter-spacing: 1px; color: #58a6ff; margin-bottom: 0.4rem; }
     .fw-card p { font-family: var(--font-mono); font-size: 0.72rem; color: #8b949e; line-height: 1.5; margin: 0; }
 
-    .timeline-line { width: 2px; height: 20px; margin: 0 auto; }
-    .path-a .timeline-line { background: rgba(255,107,107,0.2); }
-    .path-b .timeline-line { background: rgba(0,255,65,0.15); }
-
     @keyframes pulse-red { 0%,100% { box-shadow: 0 0 0 0 rgba(255,107,107,0); } 50% { box-shadow: 0 0 12px 4px rgba(255,107,107,0.15); } }
     @keyframes pulse-green { 0%,100% { box-shadow: 0 0 0 0 rgba(0,255,65,0); } 50% { box-shadow: 0 0 12px 4px rgba(0,255,65,0.15); } }
     .path-a { animation: pulse-red 4s ease infinite; border-radius: 16px; padding: 1.5rem; border: 1px solid rgba(255,107,107,0.1); margin-bottom: 1rem; }
@@ -70,6 +67,18 @@
     .anim-rev { animation: dash-reverse 0.8s linear infinite; }
     .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
     .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+    .flow-node { cursor: pointer; }
+    .flow-node:hover { filter: drop-shadow(0 0 15px rgba(255,107,107,0.5)); }
+    .flow-node-g:hover { filter: drop-shadow(0 0 15px rgba(0,255,65,0.5)); }
+
+    .node-backdrop { display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.75); z-index:999; }
+    .node-backdrop.show { display:block; }
+    .node-overlay { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.8); z-index:1000; background:#0a1628; border-radius:20px; padding:1.8rem; max-height:85vh; overflow-y:auto; width:440px; scrollbar-width:thin; scrollbar-color:#00ff41 #0a1628; opacity:0; }
+    .node-overlay.show { display:block; opacity:1; transform:translate(-50%,-50%) scale(1); transition: transform 0.25s ease, opacity 0.25s ease; }
+    .ov-close { position:absolute; top:10px; right:16px; color:#ff6b6b; font-size:1.3rem; cursor:pointer; font-family:var(--font-display); z-index:1001; }
+    .ov-title { font-family:var(--font-display); font-size:1rem; text-align:center; letter-spacing:2px; margin-bottom:1rem; }
+    .chat-msg { padding:0.7rem 1rem; border-radius:10px; margin-bottom:0.7rem; font-family:'JetBrains Mono',monospace; font-size:0.78rem; line-height:1.7; border:1px solid rgba(255,255,255,0.06); }
+    .chat-sender { font-family:var(--font-display); font-size:0.65rem; letter-spacing:1px; margin-bottom:0.3rem; opacity:0.7; }
   </style>
 </head>
 <body>
@@ -92,85 +101,95 @@
     <p class="d-hero-desc">Everyone thinks the AI model is the magic. It isn't. The model is a brilliant amnesiac — it forgets everything between sessions. The real power comes from what wraps around it.</p>
   </div>
 
-  <!-- ═══════ ARCHITECTURE DIAGRAM: PATH A ═══════ -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PATH A DIAGRAM: Human → AI Model → Deploy → Fail loop -->
+  <!-- ═══════════════════════════════════════════════════════ -->
   <div class="diagram-wrap">
     <h2 style="color:#ff6b6b">PATH A — AI Model Alone</h2>
-    <p class="sub">Stateless. No memory. Every session starts from zero.</p>
+    <p class="sub">Stateless. No memory. Every session starts from zero. Click any node.</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <marker id="ar" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ff6b6b" opacity="0.8"/></marker>
         <marker id="ag" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#00ff41" opacity="0.8"/></marker>
         <marker id="ao" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ffd740" opacity="0.8"/></marker>
         <marker id="ab" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#58a6ff" opacity="0.8"/></marker>
+        <marker id="ax" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><path d="M0,0 L10,3.5 L0,7" fill="#ff4444" opacity="0.8"/></marker>
         <filter id="gl"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
 
       <!-- HUMAN -->
-      <g transform="translate(40, 140)">
-        <circle cx="50" cy="50" r="48" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
-        <text x="50" y="38" class="svg-label" fill="#00ff41" font-size="28" text-anchor="middle">👤</text>
-        <text x="50" y="64" class="svg-title" fill="#00ff41" font-size="11" text-anchor="middle" letter-spacing="2">HUMAN</text>
-        <text x="50" y="80" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">"build this"</text>
+      <g transform="translate(30, 140)" class="flow-node" data-overlay="ov-a-human">
+        <circle cx="55" cy="55" r="52" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
+        <text x="55" y="40" class="svg-label" fill="#00ff41" font-size="28" text-anchor="middle">👤</text>
+        <text x="55" y="66" class="svg-title" fill="#00ff41" font-size="11" text-anchor="middle" letter-spacing="2">HUMAN</text>
+        <text x="55" y="82" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">"build this"</text>
+        <text x="55" y="96" class="svg-label" fill="#00ff41" font-size="7" text-anchor="middle" opacity="0.5">click</text>
       </g>
 
       <!-- Arrow: Human → AI Model -->
-      <line x1="145" y1="190" x2="245" y2="190" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
-      <text x="195" y="178" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">task</text>
+      <line x1="142" y1="195" x2="235" y2="195" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
+      <text x="188" y="183" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">task</text>
 
-      <!-- AI MODEL (big center) -->
-      <g transform="translate(255, 120)">
-        <rect width="200" height="140" rx="16" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
-        <text x="100" y="30" class="svg-label" fill="#ff6b6b" font-size="24" text-anchor="middle">🧠</text>
-        <text x="100" y="55" class="svg-title" fill="#ff6b6b" font-size="14" text-anchor="middle" letter-spacing="2" filter="url(#gl)">AI MODEL</text>
-        <text x="100" y="75" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">Opus 4.6</text>
-        <text x="100" y="95" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Stateless</text>
-        <text x="100" y="110" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">No memory across sessions</text>
-        <text x="100" y="128" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">reads context files each time</text>
+      <!-- AI MODEL -->
+      <g transform="translate(245, 130)" class="flow-node" data-overlay="ov-a-model">
+        <rect width="190" height="130" rx="16" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
+        <text x="95" y="28" class="svg-label" fill="#ff6b6b" font-size="24" text-anchor="middle">🧠</text>
+        <text x="95" y="52" class="svg-title" fill="#ff6b6b" font-size="13" text-anchor="middle" letter-spacing="2" filter="url(#gl)">AI MODEL</text>
+        <text x="95" y="72" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">Opus 4.6</text>
+        <text x="95" y="90" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">Stateless · No memory</text>
+        <text x="95" y="108" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">guesses API, format, edge cases</text>
+        <text x="95" y="122" class="svg-label" fill="#ff6b6b" font-size="7" text-anchor="middle" opacity="0.5">click</text>
       </g>
 
       <!-- Arrow: AI → Deploy -->
-      <line x1="465" y1="190" x2="575" y2="190" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ar)"/>
-      <text x="520" y="178" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">code</text>
+      <line x1="445" y1="195" x2="545" y2="195" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ar)"/>
+      <text x="495" y="183" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">code</text>
 
       <!-- DEPLOY -->
-      <g transform="translate(585, 150)">
+      <g transform="translate(555, 155)" class="flow-node" data-overlay="ov-a-deploy">
         <rect width="120" height="80" rx="10" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
         <text x="60" y="24" class="svg-label" fill="#ffd740" font-size="18" text-anchor="middle">🚀</text>
         <text x="60" y="44" class="svg-title" fill="#ffd740" font-size="11" text-anchor="middle" letter-spacing="1">DEPLOY</text>
-        <text x="60" y="62" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">"Done."</text>
+        <text x="60" y="62" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle">"Done!"</text>
+        <text x="60" y="74" class="svg-label" fill="#ffd740" font-size="7" text-anchor="middle" opacity="0.5">click</text>
       </g>
 
-      <!-- Arrow: Deploy → Bug -->
-      <line x1="715" y1="190" x2="795" y2="190" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ao)"/>
+      <!-- Arrow: Deploy → FAIL -->
+      <line x1="685" y1="195" x2="775" y2="195" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ax)"/>
 
-      <!-- BUG -->
-      <g transform="translate(805, 140)">
-        <rect width="130" height="100" rx="12" fill="#0a1628" stroke="#ff4444" stroke-width="2.5"/>
-        <text x="65" y="26" class="svg-label" fill="#ff4444" font-size="22" text-anchor="middle">🐛</text>
-        <text x="65" y="48" class="svg-title" fill="#ff4444" font-size="12" text-anchor="middle" letter-spacing="1">BUG</text>
-        <text x="65" y="65" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">human finds it</text>
-        <text x="65" y="80" class="svg-label" fill="#ff6b6b" font-size="8" text-anchor="middle">"it's broken"</text>
-        <text x="65" y="95" class="svg-label" fill="#ff4444" font-size="8" text-anchor="middle">× 5 times</text>
+      <!-- FAIL / BUG -->
+      <g transform="translate(785, 135)" class="flow-node" data-overlay="ov-a-bug">
+        <rect width="140" height="120" rx="12" fill="#0a1628" stroke="#ff4444" stroke-width="2.5"/>
+        <text x="70" y="28" class="svg-label" fill="#ff4444" font-size="24" text-anchor="middle">💥</text>
+        <text x="70" y="50" class="svg-title" fill="#ff4444" font-size="12" text-anchor="middle" letter-spacing="1">FAILS</text>
+        <text x="70" y="68" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">human finds the bug</text>
+        <text x="70" y="82" class="svg-label" fill="#ff6b6b" font-size="8" text-anchor="middle">"it's broken again"</text>
+        <text x="70" y="100" class="svg-label" fill="#ff4444" font-size="9" text-anchor="middle" font-weight="bold">× 5 times</text>
+        <text x="70" y="114" class="svg-label" fill="#ff4444" font-size="7" text-anchor="middle" opacity="0.5">click for details</text>
       </g>
 
-      <!-- LOOP ARROW: Bug → back to AI Model (the chaotic loop) -->
-      <path d="M870,250 Q870,340 645,360 Q420,380 355,270" fill="none" stroke="#ff4444" stroke-width="2.5" stroke-dasharray="10,5" class="anim-rev" marker-end="url(#ar)"/>
-      <text x="640" y="375" class="svg-label" fill="#ff4444" font-size="10" text-anchor="middle" font-weight="bold">fix → deploy → bug → fix → deploy → bug...</text>
+      <!-- LOOP: Fail → back to Human (big red loop) -->
+      <path d="M855,265 Q855,390 550,420 Q250,440 85,260" fill="none" stroke="#ff4444" stroke-width="3" stroke-dasharray="12,6" class="anim-rev" marker-end="url(#ax)"/>
+      <text x="490" y="435" class="svg-label" fill="#ff4444" font-size="11" text-anchor="middle" font-weight="bold">HUMAN reports bug → AI Model tries again → Deploy → Fails again...</text>
 
-      <!-- VULNERABILITY (floating, late) -->
-      <g transform="translate(820, 20)">
-        <rect width="240" height="70" rx="10" fill="rgba(255,68,68,0.08)" stroke="#ff4444" stroke-width="1.5" stroke-dasharray="6,3"/>
-        <text x="120" y="22" class="svg-label" fill="#ff4444" font-size="10" text-anchor="middle" font-weight="bold">⚠️ 2 WEEKS LATER</text>
-        <text x="120" y="40" class="svg-label" fill="#ff4444" font-size="9" text-anchor="middle">CVE-2026-1847 found</text>
-        <text x="120" y="55" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">AI didn't know — it has no memory</text>
+      <!-- Arrow label: back to human -->
+      <text x="180" y="380" class="svg-label" fill="#ff4444" font-size="9" text-anchor="middle">"it's still broken"</text>
+
+      <!-- VULNERABILITY (floating) -->
+      <g transform="translate(795, 10)" class="flow-node" data-overlay="ov-a-cve">
+        <rect width="260" height="70" rx="10" fill="rgba(255,68,68,0.08)" stroke="#ff4444" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <text x="130" y="22" class="svg-label" fill="#ff4444" font-size="10" text-anchor="middle" font-weight="bold">⚠️ 2 WEEKS LATER</text>
+        <text x="130" y="40" class="svg-label" fill="#ff4444" font-size="9" text-anchor="middle">CVE-2026-1847 discovered</text>
+        <text x="130" y="55" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">AI had no memory of security advisories</text>
+        <text x="130" y="66" class="svg-label" fill="#ff4444" font-size="7" text-anchor="middle" opacity="0.5">click</text>
       </g>
 
-      <!-- Deploy counter -->
-      <g transform="translate(40, 350)">
-        <rect width="220" height="50" rx="10" fill="rgba(255,107,107,0.06)" stroke="rgba(255,107,107,0.2)" stroke-width="1"/>
-        <text x="110" y="22" class="svg-title" fill="#ff6b6b" font-size="11" text-anchor="middle" letter-spacing="1">TOTAL</text>
-        <text x="110" y="40" class="svg-label" fill="#ff6b6b" font-size="10" text-anchor="middle">6 deploys · 5 bugs · 1 CVE</text>
+      <!-- TOTAL -->
+      <g transform="translate(30, 400)">
+        <rect width="240" height="55" rx="10" fill="rgba(255,107,107,0.06)" stroke="rgba(255,107,107,0.2)" stroke-width="1"/>
+        <text x="120" y="22" class="svg-title" fill="#ff6b6b" font-size="12" text-anchor="middle" letter-spacing="1">RESULT</text>
+        <text x="120" y="42" class="svg-label" fill="#ff6b6b" font-size="11" text-anchor="middle">6 deploys · 5 bugs · 1 CVE</text>
       </g>
     </svg>
   </div>
@@ -178,114 +197,102 @@
   <!-- ═══════ VS ═══════ -->
   <div class="versus"><span>VS</span></div>
 
-  <!-- ═══════ ARCHITECTURE DIAGRAM: PATH B ═══════ -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- PATH B DIAGRAM: Human → Orchestration → AI Model → Deploy ✓  -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
   <div class="diagram-wrap">
     <h2 style="color:#00ff41">PATH B — AI + Orchestration Framework</h2>
-    <p class="sub">Same AI model. But with persistent memory + architecture advisor in the loop.</p>
+    <p class="sub">Human talks to the framework FIRST. Framework hands to AI Model with full context. Click any node.</p>
 
-    <svg class="d-svg" viewBox="0 0 1100 460" xmlns="http://www.w3.org/2000/svg">
+    <svg class="d-svg" viewBox="0 0 1100 440" xmlns="http://www.w3.org/2000/svg">
 
       <!-- HUMAN -->
-      <g transform="translate(40, 160)">
-        <circle cx="50" cy="50" r="48" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
-        <text x="50" y="38" class="svg-label" fill="#00ff41" font-size="28" text-anchor="middle">👤</text>
-        <text x="50" y="64" class="svg-title" fill="#00ff41" font-size="11" text-anchor="middle" letter-spacing="2">HUMAN</text>
-        <text x="50" y="80" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">"build this"</text>
+      <g transform="translate(30, 130)" class="flow-node flow-node-g" data-overlay="ov-b-human">
+        <circle cx="55" cy="55" r="52" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
+        <text x="55" y="40" class="svg-label" fill="#00ff41" font-size="28" text-anchor="middle">👤</text>
+        <text x="55" y="66" class="svg-title" fill="#00ff41" font-size="11" text-anchor="middle" letter-spacing="2">HUMAN</text>
+        <text x="55" y="82" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">"build this"</text>
+        <text x="55" y="96" class="svg-label" fill="#00ff41" font-size="7" text-anchor="middle" opacity="0.5">click</text>
       </g>
 
-      <!-- Arrow: Human → AI Model -->
-      <line x1="145" y1="210" x2="235" y2="210" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
-      <text x="190" y="198" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">task</text>
+      <!-- Arrow: Human → ORCHESTRATION (directly!) -->
+      <line x1="142" y1="185" x2="235" y2="185" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ab)"/>
+      <text x="188" y="173" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">directly</text>
 
-      <!-- AI MODEL -->
-      <g transform="translate(245, 145)">
-        <rect width="170" height="130" rx="16" fill="#0a1628" stroke="#ff6b6b" stroke-width="2.5"/>
-        <text x="85" y="28" class="svg-label" fill="#ff6b6b" font-size="24" text-anchor="middle">🧠</text>
-        <text x="85" y="52" class="svg-title" fill="#ff6b6b" font-size="13" text-anchor="middle" letter-spacing="2" filter="url(#gl)">AI MODEL</text>
-        <text x="85" y="72" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle">Opus 4.6</text>
-        <text x="85" y="90" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">Still stateless</text>
-        <text x="85" y="105" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">But now has a partner ↓</text>
+      <!-- ORCHESTRATION FRAMEWORK (big, first stop) -->
+      <g transform="translate(245, 100)" class="flow-node flow-node-g" data-overlay="ov-b-framework">
+        <rect width="250" height="170" rx="16" fill="#0a1628" stroke="#58a6ff" stroke-width="3"/>
+        <text x="125" y="28" class="svg-label" fill="#58a6ff" font-size="20" text-anchor="middle">🧩</text>
+        <text x="125" y="52" class="svg-title" fill="#58a6ff" font-size="11" text-anchor="middle" letter-spacing="2" filter="url(#gl)">ORCHESTRATION</text>
+        <text x="125" y="68" class="svg-title" fill="#58a6ff" font-size="11" text-anchor="middle" letter-spacing="2">FRAMEWORK</text>
+        <text x="125" y="88" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">✓ Persistent memory</text>
+        <text x="125" y="104" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">✓ API knowledge</text>
+        <text x="125" y="120" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">✓ Past failures</text>
+        <text x="125" y="136" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">✓ Security (CVEs)</text>
+        <text x="125" y="152" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle">CrewAI · LangGraph · AutoGen · OpenClaw</text>
+        <text x="125" y="164" class="svg-label" fill="#58a6ff" font-size="7" text-anchor="middle" opacity="0.5">click</text>
       </g>
 
-      <!-- Arrow: AI Model → Framework (ask) -->
-      <path d="M330,285 Q330,340 460,350" fill="none" stroke="#58a6ff" stroke-width="2.5" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ab)"/>
-      <text x="370" y="335" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">asks</text>
+      <!-- Arrow: Orchestration → AI Model (with context) -->
+      <line x1="505" y1="185" x2="595" y2="185" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
+      <text x="550" y="173" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">context + guardrails</text>
 
-      <!-- ORCHESTRATION FRAMEWORK (big, center-bottom) -->
-      <g transform="translate(470, 300)">
-        <rect width="280" height="140" rx="16" fill="#0a1628" stroke="#58a6ff" stroke-width="3"/>
-        <text x="140" y="28" class="svg-label" fill="#58a6ff" font-size="18" text-anchor="middle">🧩</text>
-        <text x="140" y="52" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle" letter-spacing="2" filter="url(#gl)">ORCHESTRATION FRAMEWORK</text>
-        <text x="140" y="72" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">✓ Persistent memory</text>
-        <text x="140" y="88" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">✓ Past failures &amp; API knowledge</text>
-        <text x="140" y="104" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">✓ Security advisories (CVEs)</text>
-        <text x="140" y="120" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">✓ Architecture patterns</text>
-        <text x="140" y="135" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle">CrewAI · LangGraph · AutoGen · OpenClaw</text>
+      <!-- AI MODEL (receives context) -->
+      <g transform="translate(605, 140)" class="flow-node flow-node-g" data-overlay="ov-b-model">
+        <rect width="155" height="90" rx="14" fill="#0a1628" stroke="#ff6b6b" stroke-width="2"/>
+        <text x="77" y="24" class="svg-label" fill="#ff6b6b" font-size="20" text-anchor="middle">🧠</text>
+        <text x="77" y="44" class="svg-title" fill="#ff6b6b" font-size="11" text-anchor="middle" letter-spacing="2">AI MODEL</text>
+        <text x="77" y="60" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle">Opus 4.6</text>
+        <text x="77" y="76" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">Now has full context</text>
+        <text x="77" y="86" class="svg-label" fill="#ff6b6b" font-size="7" text-anchor="middle" opacity="0.5">click</text>
       </g>
 
-      <!-- Arrow: Framework → AI Model (returns context) -->
-      <path d="M470,340 Q400,310 380,285" fill="none" stroke="#00ff41" stroke-width="2.5" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
-      <text x="400" y="300" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">context +</text>
-      <text x="400" y="312" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">guardrails</text>
+      <!-- Arrow: AI → Deploy -->
+      <line x1="770" y1="185" x2="845" y2="185" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ag)"/>
+      <text x="808" y="173" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">code</text>
 
-      <!-- Arrow: AI Model → Code (with context this time) -->
-      <line x1="425" y1="210" x2="555" y2="210" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ar)"/>
-      <text x="490" y="198" class="svg-label" fill="#ff6b6b" font-size="9" text-anchor="middle">informed code</text>
-
-      <!-- TEST -->
-      <g transform="translate(565, 170)">
-        <rect width="130" height="80" rx="10" fill="#0a1628" stroke="#ffd740" stroke-width="2"/>
-        <text x="65" y="22" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">🧪</text>
-        <text x="65" y="42" class="svg-title" fill="#ffd740" font-size="11" text-anchor="middle" letter-spacing="1">TEST</text>
-        <text x="65" y="58" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">7 scenarios</text>
-        <text x="65" y="72" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">All pass ✓</text>
-      </g>
-
-      <!-- Arrow: Framework → Test (test checklist) -->
-      <path d="M680,300 Q660,270 660,258" fill="none" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="6,3" class="anim-dash" marker-end="url(#ab)"/>
-      <text x="700" y="280" class="svg-label" fill="#58a6ff" font-size="7" text-anchor="middle">test checklist</text>
-
-      <!-- Arrow: Test → Deploy -->
-      <line x1="705" y1="210" x2="795" y2="210" stroke="#ffd740" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#ao)"/>
-
-      <!-- DEPLOY -->
-      <g transform="translate(805, 160)">
-        <rect width="130" height="100" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
+      <!-- DEPLOY + SUCCESS -->
+      <g transform="translate(855, 130)" class="flow-node flow-node-g" data-overlay="ov-b-deploy">
+        <rect width="130" height="110" rx="14" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
         <text x="65" y="26" class="svg-label" fill="#00ff41" font-size="22" text-anchor="middle">🚀</text>
         <text x="65" y="48" class="svg-title" fill="#00ff41" font-size="12" text-anchor="middle" letter-spacing="1">DEPLOY</text>
-        <text x="65" y="68" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">Works.</text>
-        <text x="65" y="82" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">Secure.</text>
-        <text x="65" y="96" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">Done.</text>
+        <text x="65" y="66" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">Works ✓</text>
+        <text x="65" y="80" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">Secure ✓</text>
+        <text x="65" y="94" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">1st try ✓</text>
+        <text x="65" y="106" class="svg-label" fill="#00ff41" font-size="7" text-anchor="middle" opacity="0.5">click</text>
       </g>
 
-      <!-- NO LOOP — clean arrow to success -->
-      <g transform="translate(950, 170)">
-        <circle cx="35" cy="45" r="33" fill="rgba(0,255,65,0.06)" stroke="#00ff41" stroke-width="2"/>
-        <text x="35" y="40" class="svg-label" fill="#00ff41" font-size="22" text-anchor="middle">✅</text>
-        <text x="35" y="60" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">1st try</text>
+      <!-- SUCCESS checkmark -->
+      <g transform="translate(1000, 155)">
+        <circle cx="35" cy="35" r="33" fill="rgba(0,255,65,0.06)" stroke="#00ff41" stroke-width="2"/>
+        <text x="35" y="32" class="svg-label" fill="#00ff41" font-size="28" text-anchor="middle">✅</text>
+        <text x="35" y="55" class="svg-label" fill="#00ff41" font-size="8" text-anchor="middle">Done</text>
       </g>
 
-      <!-- CVE shield -->
-      <g transform="translate(810, 310)">
-        <rect width="200" height="60" rx="10" fill="rgba(0,255,65,0.04)" stroke="rgba(0,255,65,0.2)" stroke-width="1"/>
-        <text x="100" y="22" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">🛡️ CVE-2026-1847</text>
-        <text x="100" y="40" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">Flagged BEFORE coding</text>
-        <text x="100" y="54" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">Framework remembered it</text>
+      <!-- Vulnerability check arrow from Framework down -->
+      <path d="M370,280 Q370,340 500,340" fill="none" stroke="#00ff41" stroke-width="1.5" stroke-dasharray="6,3" class="anim-dash" marker-end="url(#ag)"/>
+
+      <!-- CVE Shield -->
+      <g transform="translate(510, 310)">
+        <rect width="280" height="65" rx="10" fill="rgba(0,255,65,0.04)" stroke="rgba(0,255,65,0.25)" stroke-width="1.5"/>
+        <text x="140" y="20" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle" font-weight="bold">🛡️ "Was vulnerability check done?"</text>
+        <text x="140" y="38" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">CVE-2026-1847 flagged BEFORE coding</text>
+        <text x="140" y="54" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">Framework has persistent security memory</text>
       </g>
 
-      <!-- Deploy counter -->
-      <g transform="translate(40, 380)">
-        <rect width="220" height="50" rx="10" fill="rgba(0,255,65,0.06)" stroke="rgba(0,255,65,0.2)" stroke-width="1"/>
-        <text x="110" y="22" class="svg-title" fill="#00ff41" font-size="11" text-anchor="middle" letter-spacing="1">TOTAL</text>
-        <text x="110" y="40" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">1 deploy · 0 bugs · 0 CVE</text>
+      <!-- TOTAL -->
+      <g transform="translate(30, 370)">
+        <rect width="240" height="55" rx="10" fill="rgba(0,255,65,0.06)" stroke="rgba(0,255,65,0.2)" stroke-width="1"/>
+        <text x="120" y="22" class="svg-title" fill="#00ff41" font-size="12" text-anchor="middle" letter-spacing="1">RESULT</text>
+        <text x="120" y="42" class="svg-label" fill="#00ff41" font-size="11" text-anchor="middle">1 deploy · 0 bugs · 0 CVE</text>
       </g>
 
-      <!-- Key insight text -->
-      <text x="550" y="30" class="svg-label" fill="#ffd740" font-size="11" text-anchor="middle" font-weight="bold">Same Opus 4.6 brain — but the framework provides memory, context, and security awareness</text>
+      <!-- Key text -->
+      <text x="550" y="28" class="svg-label" fill="#ffd740" font-size="11" text-anchor="middle" font-weight="bold">Human talks to the framework FIRST — not the AI model directly</text>
     </svg>
   </div>
 
-  <!-- ═══════ THE TASK ═══════ -->
+  <!-- ═══════ THE TASK EXAMPLE ═══════ -->
   <div class="section-wrap">
     <div class="insight-box" style="text-align:center">
       <h3>THE TASK — A REAL EXAMPLE</h3>
@@ -293,113 +300,84 @@
     </div>
   </div>
 
-  <!-- ═══════ PATH A: AI ALONE ═══════ -->
+  <!-- ═══════ PATH A TEXT ═══════ -->
   <div class="section-wrap">
-    <h2 style="color:#ff6b6b">PATH A — AI Model Alone</h2>
+    <h2 style="color:#ff6b6b">PATH A — What Happens</h2>
     <p class="sub">Opus 4.6 · stateless · no persistent memory · starts fresh every session</p>
 
     <div class="path-a">
-
       <div class="step">
         <div class="step-num">NEO</div>
         <div class="step-body"><strong>"Build a cheap flight finder. Budget in, cheapest destination out."</strong></div>
       </div>
-
       <div class="step">
-        <div class="step-num">TRINITY</div>
-        <div class="step-body">"Got it." <em>Writes Python script. Uses Skyscanner API. Deploys to cloud.</em> <span class="ok">"Done."</span></div>
+        <div class="step-num">AI MODEL</div>
+        <div class="step-body">"Got it." <em>Writes Python script. Uses Skyscanner API. Deploys.</em> <span class="ok">"Done."</span></div>
       </div>
-
       <div class="step">
         <div class="step-num">TEST</div>
-        <div class="step-body"><strong>$300 from Mumbai</strong> → <span class="bug">ERROR. Skyscanner API needs a paid plan.</span> Trinity assumed it was free.</div>
+        <div class="step-body"><strong>$300 from Mumbai</strong> → <span class="bug">ERROR. Skyscanner API needs a paid plan.</span> AI assumed it was free.</div>
       </div>
-
       <div class="deploy-counter">DEPLOY #2 — switch to Amadeus API (free tier)</div>
-
       <div class="step">
         <div class="step-num">TEST</div>
-        <div class="step-body"><strong>$300 from Mumbai</strong> → London $280. <span class="bug">That's one-way.</span> Neo meant round trip.</div>
+        <div class="step-body"><strong>$300 from Mumbai</strong> → London $280. <span class="bug">That's one-way.</span> Human meant round trip.</div>
       </div>
-
       <div class="deploy-counter">DEPLOY #3 — fix to round-trip</div>
-
       <div class="step">
         <div class="step-num">TEST</div>
         <div class="step-body"><strong>$300 from Mumbai</strong> → 47 results. <span class="bug">Unsorted. No dates. No airlines.</span></div>
       </div>
-
       <div class="deploy-counter">DEPLOY #4 — add sorting, dates, airline names</div>
-
       <div class="step">
         <div class="step-num">TEST</div>
-        <div class="step-body"><strong>$300 from Mumbai</strong> → Shows flights for February 2027. <span class="bug">Neo meant within 30 days.</span></div>
+        <div class="step-body"><strong>$300 from Mumbai</strong> → Shows flights for February 2027. <span class="bug">Human meant within 30 days.</span></div>
       </div>
-
       <div class="deploy-counter">DEPLOY #5 — add 30-day window</div>
-
-      <div class="step">
-        <div class="step-num">NEO</div>
-        <div class="step-body"><strong>"Finally works. Ship it."</strong></div>
-      </div>
-
       <div class="step">
         <div class="step-num" style="background:rgba(255,68,68,0.15);color:#ff4444;border-color:rgba(255,68,68,0.3)">2 WEEKS LATER</div>
-        <div class="step-body"><strong>Someone asks:</strong> "Did you check for the latest Amadeus API vulnerability?"<br>
-        Trinity: <span class="fix">"Good point — let me check..."</span><br>
-        <span class="vuln">CVE-2026-1847 — OAuth token leak in Amadeus SDK v3.2.</span> The app has been shipping user tokens in plain text for 2 weeks.</div>
+        <div class="step-body"><span class="vuln">CVE-2026-1847 — OAuth token leak in Amadeus SDK v3.2.</span> The app shipped user tokens in plain text for 2 weeks. AI had no idea.</div>
       </div>
-
       <div class="deploy-counter" style="background:rgba(255,68,68,0.08);border-color:rgba(255,68,68,0.3);color:#ff4444">DEPLOY #6 — emergency security patch</div>
-
       <div class="step">
         <div class="step-num">TOTAL</div>
-        <div class="step-body"><span class="bug">6 deploys. 5 bugs. 1 security vulnerability. Every single issue found by the human.</span><br><em>The AI was fast. The AI was smart. The AI just didn't remember anything.</em></div>
+        <div class="step-body"><span class="bug">6 deploys. 5 bugs. 1 security vulnerability. Every issue found by the human.</span></div>
       </div>
-
     </div>
   </div>
 
-  <!-- ═══════ PATH B: AI + FRAMEWORK ═══════ -->
+  <!-- ═══════ PATH B TEXT ═══════ -->
   <div class="section-wrap">
-    <h2 style="color:#00ff41">PATH B — AI + Orchestration Framework</h2>
-    <p class="sub">Same Opus 4.6 · but wrapped with persistent memory + architecture advisor</p>
+    <h2 style="color:#00ff41">PATH B — What Happens</h2>
+    <p class="sub">Same Opus 4.6 · but human talks to the orchestration framework first</p>
 
     <div class="path-b">
-
       <div class="step">
-        <div class="step-num">NEO</div>
-        <div class="step-body"><strong>"Build a cheap flight finder. Before you code — ask the framework."</strong></div>
+        <div class="step-num">HUMAN</div>
+        <div class="step-body"><strong>"Build a cheap flight finder."</strong> → sends to orchestration framework (not the AI model).</div>
       </div>
-
-      <div class="step">
-        <div class="step-num">TRINITY</div>
-        <div class="step-body"><em>Sends the task + full project context to the AI orchestration framework.</em></div>
-      </div>
-
       <div class="step">
         <div class="step-num" style="background:rgba(88,166,255,0.1);color:#58a6ff;border-color:rgba(88,166,255,0.25)">FRAMEWORK</div>
-        <div class="step-body"><em>Has persistent memory. Knows past failures, past APIs, past security advisories.</em><br><br>
-        <span class="ok">Returns immediately:</span><br>
+        <div class="step-body"><em>Has persistent memory. Returns immediately:</em><br>
         <strong>1.</strong> Skyscanner is paid — use <strong>Amadeus free tier</strong> (500 calls/month).<br>
-        <strong>2.</strong> Always default to <strong>round-trip</strong>, <strong>30-day window</strong>, <strong>top 5 sorted by price</strong>.<br>
+        <strong>2.</strong> Default: <strong>round-trip</strong>, <strong>30-day window</strong>, <strong>top 5 sorted by price</strong>.<br>
         <strong>3.</strong> <span class="vuln">Amadeus SDK v3.2 has CVE-2026-1847</span> — use v3.3+ or raw REST API.<br>
         <strong>4.</strong> Edge cases: empty budget, no results, API timeout, currency mismatch.<br>
-        <strong>5.</strong> Test checklist: 7 scenarios to verify before deploy.</div>
+        <strong>5.</strong> Test checklist: 7 scenarios.</div>
       </div>
-
       <div class="step">
-        <div class="step-num">TRINITY</div>
-        <div class="step-body"><em>Implements with all guardrails built in. Runs all 7 test cases.</em> <span class="ok">All pass.</span></div>
+        <div class="step-num">AI MODEL</div>
+        <div class="step-body"><em>Framework hands the task to the AI model with full context.</em> AI implements with all guardrails. Runs 7 tests. <span class="ok">All pass.</span></div>
       </div>
-
+      <div class="step">
+        <div class="step-num" style="background:rgba(88,166,255,0.1);color:#58a6ff;border-color:rgba(88,166,255,0.25)">FRAMEWORK</div>
+        <div class="step-body"><strong>"Was vulnerability check done?"</strong> → <span class="ok">Yes, CVE-2026-1847 patched. SDK v3.3.</span> Approved for deploy.</div>
+      </div>
       <div class="deploy-counter">DEPLOY #1 — works. secure. done.</div>
-
       <div class="step">
         <div class="step-num">TOTAL</div>
-        <div class="step-body"><span class="ok">1 deploy. 0 bugs. 0 vulnerabilities. The framework caught everything before a single line of code was written.</span></div>
+        <div class="step-body"><span class="ok">1 deploy. 0 bugs. 0 vulnerabilities.</span></div>
       </div>
-
     </div>
   </div>
 
@@ -407,88 +385,40 @@
   <div class="section-wrap">
     <h2 style="color:#ffd740">The Difference</h2>
     <p class="sub">Same AI brain. Different outcomes.</p>
-
     <table class="compare-table">
-      <tr>
-        <th style="color:#8b949e"></th>
-        <th class="col-a">AI ALONE</th>
-        <th class="col-b">AI + FRAMEWORK</th>
-      </tr>
-      <tr>
-        <td>Intelligence</td>
-        <td class="col-a">Opus 4.6</td>
-        <td class="col-b">Opus 4.6 (same)</td>
-      </tr>
-      <tr>
-        <td>Memory</td>
-        <td class="col-a">Stateless — amnesia every session</td>
-        <td class="col-b">Persistent — remembers everything</td>
-      </tr>
-      <tr>
-        <td>Deploys</td>
-        <td class="col-a">6</td>
-        <td class="col-b">1</td>
-      </tr>
-      <tr>
-        <td>Bugs found by human</td>
-        <td class="col-a">5</td>
-        <td class="col-b">0</td>
-      </tr>
-      <tr>
-        <td>Security issues</td>
-        <td class="col-a">1 (found 2 weeks late)</td>
-        <td class="col-b">0 (flagged before coding)</td>
-      </tr>
-      <tr>
-        <td>Who catches issues</td>
-        <td class="col-a">The human (reactive)</td>
-        <td class="col-b">The framework (proactive)</td>
-      </tr>
+      <tr><th style="color:#8b949e"></th><th class="col-a">AI ALONE</th><th class="col-b">AI + FRAMEWORK</th></tr>
+      <tr><td>Intelligence</td><td class="col-a">Opus 4.6</td><td class="col-b">Opus 4.6 (same)</td></tr>
+      <tr><td>Memory</td><td class="col-a">Stateless — amnesia</td><td class="col-b">Persistent — remembers</td></tr>
+      <tr><td>Who gets the task first</td><td class="col-a">AI Model (directly)</td><td class="col-b">Framework (then AI)</td></tr>
+      <tr><td>Deploys</td><td class="col-a">6</td><td class="col-b">1</td></tr>
+      <tr><td>Bugs found by human</td><td class="col-a">5</td><td class="col-b">0</td></tr>
+      <tr><td>Security check</td><td class="col-a">2 weeks late</td><td class="col-b">Before coding</td></tr>
     </table>
   </div>
 
-  <!-- ═══════ THE INSIGHT ═══════ -->
+  <!-- ═══════ INSIGHT ═══════ -->
   <div class="section-wrap">
     <div class="insight-box">
       <h3>THE REAL INSIGHT</h3>
       <p>The AI model isn't the bottleneck. <strong style="color:#ff6b6b">Memory is.</strong><br><br>
-      Opus 4.6 is one of the smartest AI models on Earth. But it's <strong style="color:#ff6b6b">stateless</strong> — every conversation starts from zero. It reads context files to "remember," like reading your own diary every morning because you have amnesia.<br><br>
-      An orchestration framework adds <strong style="color:#00ff41">persistent memory</strong>, <strong style="color:#00ff41">architecture awareness</strong>, and <strong style="color:#00ff41">security knowledge</strong> across sessions. The AI doesn't get smarter — it gets <strong style="color:#ffd740">context</strong>. And context is everything.</p>
+      Opus 4.6 is one of the smartest AI models on Earth. But it's <strong style="color:#ff6b6b">stateless</strong> — every conversation starts from zero.<br><br>
+      An orchestration framework adds <strong style="color:#00ff41">persistent memory</strong>, <strong style="color:#00ff41">architecture awareness</strong>, and <strong style="color:#00ff41">security knowledge</strong>. The AI doesn't get smarter — it gets <strong style="color:#ffd740">context</strong>.</p>
     </div>
 
     <h2 style="color:#58a6ff;margin-top:3rem">Orchestration Frameworks</h2>
     <p class="sub">The layer that turns a stateless genius into a reliable engineer</p>
-
     <div class="framework-list">
-      <div class="fw-card">
-        <h4>CREWAI</h4>
-        <p>Multi-agent framework. Define "crews" of AI agents with roles, goals, and shared memory.</p>
-      </div>
-      <div class="fw-card">
-        <h4>LANGGRAPH</h4>
-        <p>Stateful agent graphs. Build complex workflows with persistent state across steps.</p>
-      </div>
-      <div class="fw-card">
-        <h4>AUTOGEN</h4>
-        <p>Microsoft's multi-agent conversations. Agents debate, review, and iterate with shared history.</p>
-      </div>
-      <div class="fw-card">
-        <h4>OPENAI ASSISTANTS</h4>
-        <p>Persistent threads + file search + code interpreter. Memory per conversation thread.</p>
-      </div>
-      <div class="fw-card">
-        <h4>OPENCLAW</h4>
-        <p>Custom orchestration layer. Full architecture memory, security awareness, multi-agent coordination.</p>
-      </div>
-      <div class="fw-card">
-        <h4>CURSOR + .MDC FILES</h4>
-        <p>What this project uses today. Rules files as "memory" — good, but manual. The first step toward orchestration.</p>
-      </div>
+      <div class="fw-card"><h4>CREWAI</h4><p>Multi-agent framework. Define "crews" of AI agents with roles, goals, and shared memory.</p></div>
+      <div class="fw-card"><h4>LANGGRAPH</h4><p>Stateful agent graphs. Build complex workflows with persistent state across steps.</p></div>
+      <div class="fw-card"><h4>AUTOGEN</h4><p>Microsoft's multi-agent conversations. Agents debate, review, and iterate with shared history.</p></div>
+      <div class="fw-card"><h4>OPENAI ASSISTANTS</h4><p>Persistent threads + file search + code interpreter. Memory per conversation thread.</p></div>
+      <div class="fw-card"><h4>OPENCLAW</h4><p>Custom orchestration layer. Full architecture memory, security awareness, multi-agent coordination.</p></div>
+      <div class="fw-card"><h4>CURSOR + .MDC FILES</h4><p>What this project uses today. Rules files as "memory" — good, but manual. The first step.</p></div>
     </div>
 
     <div class="insight-box" style="border-color:rgba(0,255,65,0.2);background:rgba(0,255,65,0.03)">
       <h3 style="color:#00ff41">THE BOTTOM LINE</h3>
-      <p>Your friends think: <strong style="color:#ff6b6b">"Opus 4.6 = perfect AI, just tell it what to do."</strong><br><br>
+      <p>People think: <strong style="color:#ff6b6b">"Opus 4.6 = perfect AI, just tell it what to do."</strong><br><br>
       The truth: <strong style="color:#00ff41">Opus 4.6 + orchestration framework = perfect.</strong><br>
       Opus 4.6 alone = brilliant but amnesiac.<br><br>
       <span style="color:#ffd740">The model is the engine. The framework is the driver. You need both.</span></p>
@@ -503,6 +433,170 @@
   </footer>
 </div>
 
+<!-- ═══════ OVERLAYS (click popups) ═══════ -->
+<div class="node-backdrop" id="node-backdrop"></div>
+
+<!-- PATH A overlays -->
+<div class="node-overlay" id="ov-a-human" style="border:3px solid #00ff41;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#00ff41">👤 THE HUMAN</div>
+  <div class="chat-msg" style="background:rgba(0,255,65,0.06);border-color:rgba(0,255,65,0.2)">
+    <div style="color:#c9d1d9">The human has an idea: <strong style="color:#ffd740">"Build me a cheap flight finder."</strong><br><br>
+    They open Cursor, type the task, and send it <strong style="color:#ff6b6b">directly to the AI model</strong>.<br><br>
+    No planning. No architecture review. No memory of past projects. Just: <em style="color:#8b949e">"here, build this."</em><br><br>
+    <span style="color:#ff6b6b">Every bug that follows? The human has to find it themselves.</span></div>
+  </div>
+</div>
+
+<div class="node-overlay" id="ov-a-model" style="border:3px solid #ff6b6b;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#ff6b6b">🧠 AI MODEL — STATELESS</div>
+  <div class="chat-msg" style="background:rgba(255,107,107,0.06);border-color:rgba(255,107,107,0.2)">
+    <div style="color:#c9d1d9">
+    <strong style="color:#ff6b6b">The problem:</strong> The AI model starts every session from scratch. It doesn't know:<br><br>
+    • Which APIs are free vs paid<br>
+    • What format the human expects (one-way? round-trip?)<br>
+    • What edge cases to handle<br>
+    • What security vulnerabilities exist right now<br><br>
+    It <em style="color:#8b949e">guesses</em> based on patterns. Smart guesses — but still guesses.<br><br>
+    <strong style="color:#ffd740">It reads .mdc files to "remember"</strong> — like reading your own diary every morning because you have amnesia. Better than nothing, but not real memory.</div>
+  </div>
+</div>
+
+<div class="node-overlay" id="ov-a-deploy" style="border:3px solid #ffd740;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#ffd740">🚀 DEPLOY — "DONE!"</div>
+  <div class="chat-msg" style="background:rgba(255,215,64,0.06);border-color:rgba(255,215,64,0.2)">
+    <div style="color:#c9d1d9">The AI says <strong style="color:#ffd740">"Done!"</strong> — and it genuinely thinks it's done.<br><br>
+    It doesn't know what it doesn't know. It deployed with:<br><br>
+    <span style="color:#ff6b6b">• Skyscanner API (paid, not free)</span><br>
+    <span style="color:#ff6b6b">• One-way flights (human wanted round-trip)</span><br>
+    <span style="color:#ff6b6b">• No sorting, no dates, no airline names</span><br>
+    <span style="color:#ff6b6b">• No date window (shows flights months away)</span><br>
+    <span style="color:#ff6b6b">• Vulnerable SDK version</span><br><br>
+    Five problems. Zero awareness. The human finds each one, one at a time.</div>
+  </div>
+</div>
+
+<div class="node-overlay" id="ov-a-bug" style="border:3px solid #ff4444;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#ff4444">💥 THE FAILURE LOOP</div>
+  <div class="chat-msg" style="background:rgba(255,68,68,0.06);border-color:rgba(255,68,68,0.2)">
+    <div class="chat-sender" style="color:#ff4444">Bug #1</div>
+    <div style="color:#c9d1d9"><span style="color:#ff6b6b">Skyscanner API returns 403.</span> Needs paid plan. AI assumed free.</div>
+  </div>
+  <div class="chat-msg" style="background:rgba(255,68,68,0.06);border-color:rgba(255,68,68,0.2)">
+    <div class="chat-sender" style="color:#ff4444">Bug #2</div>
+    <div style="color:#c9d1d9"><span style="color:#ff6b6b">London $280 — that's one-way.</span> Human meant round trip. AI didn't ask.</div>
+  </div>
+  <div class="chat-msg" style="background:rgba(255,68,68,0.06);border-color:rgba(255,68,68,0.2)">
+    <div class="chat-sender" style="color:#ff4444">Bug #3</div>
+    <div style="color:#c9d1d9"><span style="color:#ff6b6b">47 unsorted results.</span> No dates, no airline names. Unusable output.</div>
+  </div>
+  <div class="chat-msg" style="background:rgba(255,68,68,0.06);border-color:rgba(255,68,68,0.2)">
+    <div class="chat-sender" style="color:#ff4444">Bug #4</div>
+    <div style="color:#c9d1d9"><span style="color:#ff6b6b">Shows flights for February 2027.</span> Human meant within 30 days.</div>
+  </div>
+  <div class="chat-msg" style="background:rgba(255,68,68,0.06);border-color:rgba(255,68,68,0.2)">
+    <div class="chat-sender" style="color:#ff4444">Bug #5</div>
+    <div style="color:#c9d1d9"><span style="color:#ff6b6b">Empty budget crashes the app.</span> No input validation at all.</div>
+  </div>
+  <div style="text-align:center;padding:0.6rem;font-family:var(--font-mono);color:#ff4444;font-size:0.8rem">
+    Each bug: human finds it → reports → AI fixes → redeploys → next bug
+  </div>
+</div>
+
+<div class="node-overlay" id="ov-a-cve" style="border:3px solid #ff4444;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#ff4444">⚠️ CVE-2026-1847</div>
+  <div class="chat-msg" style="background:rgba(255,68,68,0.08);border-color:rgba(255,68,68,0.25)">
+    <div style="color:#c9d1d9">
+    <strong style="color:#ff4444">2 weeks after deploy</strong>, someone asks: "Did you check for vulnerabilities?"<br><br>
+    The AI says: <em style="color:#ffd740">"Good point — let me check..."</em><br><br>
+    <strong style="color:#ff4444">CVE-2026-1847</strong> — OAuth token leak in Amadeus SDK v3.2. The app has been shipping user tokens in plain text for 14 days.<br><br>
+    <span style="color:#8b949e">The AI didn't know because it has <strong style="color:#ff6b6b">no persistent memory</strong> of security advisories. Each session starts fresh. It only knows what you tell it right now.</span></div>
+  </div>
+</div>
+
+<!-- PATH B overlays -->
+<div class="node-overlay" id="ov-b-human" style="border:3px solid #00ff41;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#00ff41">👤 THE HUMAN — PATH B</div>
+  <div class="chat-msg" style="background:rgba(0,255,65,0.06);border-color:rgba(0,255,65,0.2)">
+    <div style="color:#c9d1d9">Same human. Same idea: <strong style="color:#ffd740">"Build me a cheap flight finder."</strong><br><br>
+    But this time they send it to the <strong style="color:#58a6ff">orchestration framework first</strong> — not directly to the AI model.<br><br>
+    The framework has memory. It remembers past projects, past API failures, past security issues. It plans before code happens.</div>
+  </div>
+</div>
+
+<div class="node-overlay" id="ov-b-framework" style="border:3px solid #58a6ff;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#58a6ff">🧩 ORCHESTRATION FRAMEWORK</div>
+  <div class="chat-msg" style="background:rgba(88,166,255,0.06);border-color:rgba(88,166,255,0.2)">
+    <div style="color:#c9d1d9">
+    The framework receives the task and <strong style="color:#00ff41">checks its persistent memory</strong>:<br><br>
+    <strong style="color:#00ff41">✓ API knowledge:</strong> "Skyscanner is paid. Use Amadeus free tier."<br>
+    <strong style="color:#00ff41">✓ Past failures:</strong> "Last flight project forgot round-trip. Default it."<br>
+    <strong style="color:#00ff41">✓ Output format:</strong> "Sort by price, show dates + airlines, top 5."<br>
+    <strong style="color:#00ff41">✓ Security:</strong> <span style="color:#ff4444">"CVE-2026-1847 in SDK v3.2 — use v3.3+."</span><br>
+    <strong style="color:#00ff41">✓ Edge cases:</strong> "Empty budget, no results, API timeout."<br>
+    <strong style="color:#00ff41">✓ Test plan:</strong> "7 scenarios to verify."<br><br>
+    <span style="color:#ffd740">Then hands all of this to the AI model as context.</span><br><br>
+    <span style="color:#8b949e">This is what frameworks like CrewAI, LangGraph, AutoGen, and OpenClaw do — they wrap the AI model with memory and structure.</span></div>
+  </div>
+</div>
+
+<div class="node-overlay" id="ov-b-model" style="border:3px solid #ff6b6b;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#ff6b6b">🧠 AI MODEL — WITH CONTEXT</div>
+  <div class="chat-msg" style="background:rgba(255,107,107,0.06);border-color:rgba(255,107,107,0.2)">
+    <div style="color:#c9d1d9">
+    <strong style="color:#00ff41">Same Opus 4.6.</strong> Same intelligence. Same stateless brain.<br><br>
+    But now it received the task <strong>with full context</strong> from the framework:<br><br>
+    • Use Amadeus API (not Skyscanner)<br>
+    • Round-trip, 30-day window, top 5<br>
+    • SDK v3.3+ (CVE patched)<br>
+    • Handle empty budget, API timeout<br>
+    • 7 test scenarios to pass<br><br>
+    <span style="color:#ffd740">It writes the code right the first time — not because it's smarter, but because it has the right information.</span></div>
+  </div>
+</div>
+
+<div class="node-overlay" id="ov-b-deploy" style="border:3px solid #00ff41;">
+  <span class="ov-close">✕</span>
+  <div class="ov-title" style="color:#00ff41">🚀 DEPLOY — 1ST TRY</div>
+  <div class="chat-msg" style="background:rgba(0,255,65,0.06);border-color:rgba(0,255,65,0.2)">
+    <div style="color:#c9d1d9">
+    <strong style="color:#00ff41">1 deploy. Works. Secure.</strong><br><br>
+    ✅ Amadeus free tier (not paid Skyscanner)<br>
+    ✅ Round-trip results by default<br>
+    ✅ Sorted by price, top 5, with dates + airlines<br>
+    ✅ 30-day window<br>
+    ✅ SDK v3.3 (CVE-2026-1847 patched)<br>
+    ✅ Edge cases handled<br>
+    ✅ All 7 test scenarios passed<br><br>
+    <span style="color:#ffd740">The framework asked "Was vulnerability check done?" before approving deploy.</span><br><br>
+    <span style="color:#8b949e">Same AI model. Same intelligence. But with context, it gets it right the first time.</span></div>
+  </div>
+</div>
+
 <script src="script.js"></script>
+<script>
+(function(){
+  var backdrop = document.getElementById('node-backdrop');
+  var currentOv = null;
+  function closeOv(){ if(currentOv) currentOv.classList.remove('show'); backdrop.classList.remove('show'); currentOv=null; }
+  document.querySelectorAll('.flow-node').forEach(function(n){
+    n.addEventListener('click', function(e){
+      e.stopPropagation(); closeOv();
+      var ov = document.getElementById(n.getAttribute('data-overlay'));
+      if(!ov) return;
+      ov.classList.add('show'); backdrop.classList.add('show'); currentOv=ov;
+    });
+  });
+  backdrop.addEventListener('click', closeOv);
+  document.querySelectorAll('.ov-close').forEach(function(b){ b.addEventListener('click', closeOv); });
+})();
+</script>
 </body>
 </html>
