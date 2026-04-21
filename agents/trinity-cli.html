@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRINITY-CLI — Claude Pro on VM | The Matrix</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔻</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    :root { --cli-accent: #fb923c; --cli-deep: #e0772a; }
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 3.5rem; filter: drop-shadow(0 0 14px rgba(251,146,60,0.4)); }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: var(--cli-accent); letter-spacing: 5px; text-shadow: 0 0 20px rgba(251,146,60,0.4); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 700px; margin: 1rem auto 0; line-height: 1.8; }
+    .d-hero-kin { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-top: 1rem; }
+    .d-hero-kin a { color: #ff6b6b; text-decoration: none; border-bottom: 1px dashed #ff6b6b; }
+    .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
+    .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; max-width: 800px; margin-left:auto; margin-right:auto; }
+    .d-svg { width: 100%; max-width: 1150px; height: auto; margin: 0 auto; display: block; }
+    @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+    @keyframes pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+    @keyframes sun-breathe { 0%,100% { filter: drop-shadow(0 0 10px rgba(251,146,60,0.2)); } 50% { filter: drop-shadow(0 0 22px rgba(251,146,60,0.5)); } }
+    .anim-dash { animation: dash-flow 1s linear infinite; }
+    .anim-sun  { animation: sun-breathe 3s ease-in-out infinite; }
+    .anim-pulse { animation: pulse 2s ease-in-out infinite; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+    .stack-section { padding: 2rem 2rem 3rem; max-width: 840px; margin: 0 auto; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(251,146,60,0.08); padding: 0.6rem 0; }
+    .stack-label { font-family: var(--font-display); font-size: 0.65rem; color: var(--cli-accent); letter-spacing: 1px; min-width: 130px; }
+    .stack-value { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); }
+    .cmp-section { padding: 2rem 1rem 4rem; max-width: 1000px; margin: 0 auto; }
+    .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem; }
+    .cmp-card { background: #0a1628; border: 2px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.3rem; }
+    .cmp-card.trinity { border-color: rgba(255,107,107,0.4); }
+    .cmp-card.cli { border-color: rgba(251,146,60,0.5); }
+    .cmp-card h3 { font-family: var(--font-display); letter-spacing: 2px; margin: 0 0 0.8rem; font-size: 1rem; }
+    .cmp-card.trinity h3 { color: #ff6b6b; }
+    .cmp-card.cli h3 { color: var(--cli-accent); }
+    .cmp-card ul { list-style: none; padding: 0; margin: 0; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); line-height: 1.9; }
+    .cmp-card li:before { content: "▸ "; color: currentColor; opacity: 0.5; }
+    @media (max-width: 720px) { .cmp-grid { grid-template-columns: 1fr; } }
+    .hb-section { max-width: 950px; margin: 0 auto; padding: 1rem 1.5rem 3rem; }
+    .hb-title { font-family: var(--font-display); color: var(--cli-accent); letter-spacing: 2px; font-size: 0.95rem; text-align: center; margin-bottom: 1rem; }
+    .code-block { background: #050b18; border: 1px solid rgba(251,146,60,0.2); border-radius: 8px; padding: 1rem 1.2rem; font-family: var(--font-mono); font-size: 0.75rem; color: #c9d1d9; line-height: 1.8; white-space: pre; overflow-x: auto; }
+    .code-block .k { color: #ff6b6b; }
+    .code-block .g { color: var(--matrix-green, #00ff41); }
+    .code-block .y { color: var(--accent-gold, #ffd740); }
+    .code-block .o { color: var(--cli-accent); }
+    .code-block .m { color: #8b949e; }
+    .test-sect { max-width: 820px; margin: 0 auto 5rem; padding: 0 1.5rem; }
+    .test-msg { background: rgba(0,255,65,0.04); border-left: 3px solid #00ff41; padding: 0.7rem 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: #c9d1d9; margin: 0.5rem 0; border-radius: 0 8px 8px 0; }
+    .test-reply { background: rgba(251,146,60,0.06); border-left: 3px solid var(--cli-accent); padding: 0.7rem 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: #c9d1d9; margin: 0.5rem 0; border-radius: 0 8px 8px 0; }
+    .test-reply.red { background: rgba(255,107,107,0.06); border-left-color: #ff6b6b; }
+  </style>
+</head>
+<body>
+<canvas id="matrix-rain"></canvas>
+<nav id="navbar">
+  <div class="nav-brand"><a href="../index.html" style="color:inherit;text-decoration:none"><span class="key-icon">🔑</span> THE KEYMAKER PROJECT</a></div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#architecture">Architecture</a>
+    <a href="../index.html#agents">Agents</a>
+    <a href="trinity.html">Trinity</a>
+  </div>
+</nav>
+
+<div class="detail-page">
+
+  <!-- HERO -->
+  <div class="d-hero">
+    <div class="d-hero-icon">🔻</div>
+    <h1 class="d-hero-title">TRINITY-CLI</h1>
+    <p class="d-hero-sub">The Sibling Brain — Claude Pro running on the VM</p>
+    <p class="d-hero-desc">
+      When Neo's laptop is off, Trinity-CLI answers. Same Claude family, different machine.
+      Runs <code style="color:var(--cli-accent)">claude -p</code> on the Oracle VM with a
+      concatenated <code style="color:var(--cli-accent)">CLAUDE.md</code> of all
+      <code>.cursor/rules/*.mdc</code> files, so it shares memory with Trinity-Cursor.
+      Zion auto-routes between the two — Neo just sends <code>@trinity</code> from WhatsApp and gets an answer,
+      no matter where.
+    </p>
+    <p class="d-hero-kin">kin of <a href="trinity.html">🔺 TRINITY (Cursor + Opus 4.6)</a></p>
+  </div>
+
+  <!-- SECTION 1: Routing Architecture -->
+  <div class="diagram-wrap">
+    <h2 class="section-title" style="color:var(--cli-accent)">The Routing</h2>
+    <p class="section-desc">
+      Zion sees the prefix and checks the laptop heartbeat. Two siblings, one task queue,
+      one reply to WhatsApp. A single 45-second heartbeat window decides the route.
+    </p>
+
+    <svg class="d-svg" viewBox="0 0 1150 720" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar-r" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ff6b6b" opacity="0.85"/></marker>
+        <marker id="ar-g" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#00ff41" opacity="0.85"/></marker>
+        <marker id="ar-o" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#fb923c" opacity="0.9"/></marker>
+        <marker id="ar-y" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ffd740" opacity="0.85"/></marker>
+        <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <radialGradient id="cli-sun" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fb923c" stop-opacity="0.25"/><stop offset="100%" stop-color="#fb923c" stop-opacity="0.01"/></radialGradient>
+        <radialGradient id="trinity-sun" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff6b6b" stop-opacity="0.22"/><stop offset="100%" stop-color="#ff6b6b" stop-opacity="0.01"/></radialGradient>
+      </defs>
+
+      <!-- Neo's phone -->
+      <g transform="translate(20, 280)">
+        <rect width="130" height="180" rx="18" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
+        <rect x="10" y="28" width="110" height="120" rx="5" fill="#0d2137" stroke="#00ff41" stroke-width="0.6" stroke-opacity="0.3"/>
+        <text x="65" y="-14" class="svg-title" fill="#00ff41" font-size="14" text-anchor="middle" letter-spacing="3" filter="url(#glow)">NEO</text>
+        <text x="65" y="55" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">@trinity ...</text>
+        <text x="65" y="74" class="svg-label" fill="var(--cli-accent)" fill="#fb923c" font-size="9" text-anchor="middle">@trinity-cli ...</text>
+        <text x="65" y="108" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle" opacity="0.8">one prefix</text>
+        <text x="65" y="122" class="svg-label" fill="#ffd740" font-size="8" text-anchor="middle" opacity="0.8">one reply</text>
+        <text x="65" y="202" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">📱 WhatsApp</text>
+      </g>
+
+      <!-- Arrow: Phone → Zion -->
+      <line x1="160" y1="370" x2="245" y2="370" stroke="#00ff41" stroke-width="2" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ar-g)"/>
+
+      <!-- Zion (the router) -->
+      <g transform="translate(250, 320)">
+        <rect width="170" height="120" rx="12" fill="#0a1628" stroke="#00ff41" stroke-width="2.5"/>
+        <text x="85" y="22" class="svg-title" fill="#00ff41" font-size="13" text-anchor="middle" letter-spacing="2">🏛️ ZION</text>
+        <text x="85" y="40" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">(VM — router)</text>
+        <line x1="14" y1="50" x2="156" y2="50" stroke="#00ff41" stroke-width="0.6" stroke-opacity="0.25"/>
+        <text x="85" y="68" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">1. parse prefix</text>
+        <text x="85" y="84" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">2. queue task</text>
+        <text x="85" y="100" class="svg-label" fill="#00ff41" font-size="9" text-anchor="middle">3. ack [Trinity] ✓</text>
+        <text x="85" y="116" class="svg-label" fill="#ffd740" font-size="9" text-anchor="middle" opacity="0.85">4. route →</text>
+      </g>
+
+      <!-- Arrow: Zion → Decision -->
+      <line x1="420" y1="380" x2="495" y2="380" stroke="#ffd740" stroke-width="2" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ar-y)"/>
+
+      <!-- Decision diamond -->
+      <g transform="translate(500, 320)">
+        <path d="M90,0 L180,60 L90,120 L0,60 Z" fill="#0a1628" stroke="#ffd740" stroke-width="2.5"/>
+        <text x="90" y="50" class="svg-label" fill="#ffd740" font-size="10" text-anchor="middle" font-weight="bold">prefix?</text>
+        <text x="90" y="68" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">heartbeat?</text>
+        <text x="90" y="86" class="svg-label" fill="#8b949e" font-size="8" text-anchor="middle">&lt;45s old</text>
+        <text x="90" y="140" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">_trinity_is_online()</text>
+      </g>
+
+      <!-- Branch 1: @trinity-cli -> VM CLI -->
+      <path d="M590,340 Q770,230 900,180" fill="none" stroke="#fb923c" stroke-width="3" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#ar-o)"/>
+      <text x="735" y="225" class="svg-label" fill="#fb923c" font-size="11" text-anchor="middle" font-weight="bold">@trinity-cli  → always CLI</text>
+
+      <!-- Branch 2: @trinity fresh -> laptop -->
+      <path d="M590,380 Q730,400 870,405" fill="none" stroke="#ff6b6b" stroke-width="3" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.25s" marker-end="url(#ar-r)"/>
+      <text x="730" y="388" class="svg-label" fill="#ff6b6b" font-size="11" text-anchor="middle" font-weight="bold">@trinity + laptop fresh → laptop Opus</text>
+
+      <!-- Branch 3: @trinity stale -> VM CLI -->
+      <path d="M590,430 Q750,560 895,590" fill="none" stroke="#fb923c" stroke-width="3" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:0.5s" marker-end="url(#ar-o)"/>
+      <text x="725" y="570" class="svg-label" fill="#fb923c" font-size="11" text-anchor="middle" font-weight="bold">@trinity + laptop stale → CLI fallback</text>
+
+      <!-- LAPTOP OPUS (Trinity-Cursor) -->
+      <circle cx="965" cy="405" r="85" fill="url(#trinity-sun)" stroke="#ff6b6b" stroke-width="3" class="anim-sun"/>
+      <text x="965" y="380" class="svg-label" fill="#ff6b6b" font-size="22" text-anchor="middle">🔺</text>
+      <text x="965" y="408" class="svg-title" fill="#ff6b6b" font-size="13" text-anchor="middle" letter-spacing="2" filter="url(#glow)">TRINITY</text>
+      <text x="965" y="425" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Cursor + Opus 4.6</text>
+      <text x="965" y="442" class="svg-label" fill="#8b949e" font-size="8.5" text-anchor="middle">trinity_agent.py</text>
+      <text x="965" y="457" class="svg-label" fill="#ffd740" font-size="8.5" text-anchor="middle">(reads .mdc rules)</text>
+
+      <!-- VM CLI -->
+      <circle cx="990" cy="170" r="80" fill="url(#cli-sun)" stroke="#fb923c" stroke-width="3" class="anim-sun" style="animation-delay:0.8s"/>
+      <text x="990" y="148" class="svg-label" fill="#fb923c" font-size="20" text-anchor="middle">🔻</text>
+      <text x="990" y="174" class="svg-title" fill="#fb923c" font-size="12" text-anchor="middle" letter-spacing="1" filter="url(#glow)">TRINITY-CLI</text>
+      <text x="990" y="191" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">Claude Pro on VM</text>
+      <text x="990" y="207" class="svg-label" fill="#8b949e" font-size="8.5" text-anchor="middle">claude -p (cwd=ZION)</text>
+      <text x="990" y="222" class="svg-label" fill="#ffd740" font-size="8.5" text-anchor="middle">reads CLAUDE.md</text>
+
+      <!-- VM CLI ALT location (fallback) -->
+      <circle cx="965" cy="600" r="75" fill="url(#cli-sun)" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="6,4" class="anim-pulse"/>
+      <text x="965" y="580" class="svg-label" fill="#fb923c" font-size="18" text-anchor="middle">🔻</text>
+      <text x="965" y="606" class="svg-title" fill="#fb923c" font-size="11" text-anchor="middle" letter-spacing="1">TRINITY-CLI</text>
+      <text x="965" y="622" class="svg-label" fill="#8b949e" font-size="8.5" text-anchor="middle">(same binary)</text>
+      <text x="965" y="638" class="svg-label" fill="#8b949e" font-size="8.5" text-anchor="middle">reply: [Trinity]</text>
+
+      <!-- Reply arrows back to phone -->
+      <path d="M895,430 Q500,650 150,430" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:1s" marker-end="url(#ar-r)" opacity="0.8"/>
+      <text x="340" y="660" class="svg-label" fill="#ff6b6b" font-size="10" text-anchor="middle">[Trinity] ...</text>
+
+      <path d="M905,180 Q450,80 150,340" fill="none" stroke="#fb923c" stroke-width="2" stroke-dasharray="10,5" class="anim-dash" style="animation-delay:1.2s" marker-end="url(#ar-o)" opacity="0.85"/>
+      <text x="460" y="70" class="svg-label" fill="#fb923c" font-size="10" text-anchor="middle">[Trinity-CLI] ...</text>
+
+      <!-- Shared DB -->
+      <g transform="translate(220, 510)">
+        <rect width="260" height="90" rx="12" fill="#0a1628" stroke="#58a6ff" stroke-width="2" stroke-dasharray="5,4"/>
+        <text x="130" y="22" class="svg-title" fill="#58a6ff" font-size="11" text-anchor="middle" letter-spacing="2">💾 SHARED DB (VM)</text>
+        <text x="130" y="40" class="svg-label" fill="#8b949e" font-size="9" text-anchor="middle">zion_data.db · trinity_tasks</text>
+        <text x="130" y="58" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">claimed_by: cursor-laptop / trinity-cli</text>
+        <text x="130" y="74" class="svg-label" fill="#58a6ff" font-size="9" text-anchor="middle">trinity_workers · last_seen (45s window)</text>
+      </g>
+      <line x1="350" y1="510" x2="350" y2="440" stroke="#58a6ff" stroke-width="1.5" stroke-opacity="0.35" stroke-dasharray="4,3"/>
+    </svg>
+  </div>
+
+  <!-- SECTION 2: Side-by-side compare -->
+  <div class="cmp-section">
+    <h2 class="section-title" style="color:var(--cli-accent)">Trinity vs Trinity-CLI</h2>
+    <p class="section-desc" style="text-align:center">Same family, different powers.</p>
+
+    <div class="cmp-grid">
+      <div class="cmp-card trinity">
+        <h3>🔺 TRINITY (Laptop)</h3>
+        <ul>
+          <li>Cursor IDE + Claude Opus 4.6</li>
+          <li>Full agentic power — writes files, deploys, tests</li>
+          <li>Consults Lobo automatically on build tasks</li>
+          <li>Reads <code>trinity_inbox.json</code>, <code>.mdc</code> rules natively</li>
+          <li>Requires Neo's laptop online + <code>trinity_agent.py</code> connected</li>
+          <li>Reply: <span style="color:#ff6b6b">[Trinity]</span></li>
+          <li>Used for: everything complex</li>
+        </ul>
+      </div>
+
+      <div class="cmp-card cli">
+        <h3>🔻 TRINITY-CLI (VM)</h3>
+        <ul>
+          <li>Claude Pro via <code>claude -p</code> on Oracle VM</li>
+          <li>Read-only phase 1 — answers questions, explains code</li>
+          <li>Does NOT deploy, write files, or restart services</li>
+          <li>Reads <code>CLAUDE.md</code> (built from same .mdc files)</li>
+          <li>Always available — VM is 24/7 on free tier</li>
+          <li>Reply: <span style="color:var(--cli-accent)">[Trinity-CLI]</span> (explicit) or <span style="color:#ff6b6b">[Trinity]</span> (fallback)</li>
+          <li>Used for: Q&A when laptop is off, explicit CLI tests</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Heartbeat + claim lock code -->
+  <div class="hb-section">
+    <div class="hb-title">Heartbeat & Claim Lock (no double-reply)</div>
+    <div class="code-block"><span class="m"># trinity_ws.py — VM side, on every WebSocket HEARTBEAT from laptop</span>
+<span class="g">def</span> update_heartbeat(worker_id):
+    conn.execute(
+      <span class="y">"INSERT INTO trinity_workers (worker_id, worker_type, last_seen, status) "</span>
+      <span class="y">"VALUES (?, 'cursor', ?, 'online') "</span>
+      <span class="y">"ON CONFLICT(worker_id) DO UPDATE SET last_seen=?, status='online'"</span>,
+      (worker_id, now, now))
+
+<span class="m"># trinity_queue.py — the liveness check Zion uses</span>
+<span class="g">def</span> is_online():
+    last = row[<span class="y">'last_seen'</span>]
+    <span class="k">return</span> (utcnow() - last).total_seconds() &lt; <span class="o">HEARTBEAT_TIMEOUT</span>  <span class="m"># 45s</span>
+
+<span class="m"># trinity_cli_runner.py — atomic claim lock, prevents double-reply</span>
+<span class="g">def</span> claim_as_cli(task_id):
+    cur = db.execute(
+      <span class="y">"UPDATE trinity_tasks "</span>
+      <span class="y">"SET claimed_by='trinity-cli', status='claimed' "</span>
+      <span class="y">"WHERE task_id=? AND (claimed_by IS NULL OR claimed_by='')"</span>,
+      (task_id,))
+    <span class="k">return</span> cur.rowcount &gt; 0   <span class="m"># True = we got it, False = laptop beat us</span></div>
+  </div>
+
+  <!-- SECTION 4: Live test examples -->
+  <div class="test-sect">
+    <h2 class="section-title" style="color:var(--cli-accent); text-align:center">Live tests (21-Apr-2026)</h2>
+    <p class="section-desc" style="text-align:center">Three messages actually sent through the system.</p>
+
+    <div style="margin: 1rem 0">
+      <div class="test-msg">Neo → @trinity-cli E2E test: reply in 5 words confirming you are Trinity-CLI on VM</div>
+      <div class="test-reply">[Trinity-CLI] VM-based Trinity-CLI is operational here.</div>
+    </div>
+
+    <div style="margin: 1rem 0">
+      <div class="test-msg">Neo → @trinity reply in 4 words acknowledging fallback routing works</div>
+      <div class="test-reply red">[Trinity] CLI fallback routing confirmed.  <span style="color:#8b949e">← laptop offline, CLI answered as [Trinity]</span></div>
+    </div>
+
+    <div style="margin: 1rem 0">
+      <div class="test-msg">Neo → @trinity-cli are you in VM or laptop?</div>
+      <div class="test-reply">[Trinity-CLI] I'm on the VM (Oracle Cloud, 80.225.205.232).</div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: Tech stack -->
+  <div class="stack-section">
+    <h2 class="section-title" style="color:var(--cli-accent)">Tech Stack</h2>
+    <div>
+      <div class="stack-row"><span class="stack-label">AI Model</span><span class="stack-value">Anthropic Claude Sonnet/Opus (Claude Pro subscription — reachmanav@gmail.com)</span></div>
+      <div class="stack-row"><span class="stack-label">Runtime</span><span class="stack-value">@anthropic-ai/claude-code CLI on Oracle VM (Node.js)</span></div>
+      <div class="stack-row"><span class="stack-label">Auth</span><span class="stack-value">OAuth on laptop → .credentials.json scp'd to VM</span></div>
+      <div class="stack-row"><span class="stack-label">Memory</span><span class="stack-value">CLAUDE.md (52 KB) auto-built from 4 .mdc files</span></div>
+      <div class="stack-row"><span class="stack-label">Runner</span><span class="stack-value">trinity_cli_runner.py — claim task → claude -p → reply</span></div>
+      <div class="stack-row"><span class="stack-label">Router</span><span class="stack-value">zion.py handle_trinity_command + _trinity_dispatch_cli()</span></div>
+      <div class="stack-row"><span class="stack-label">Liveness</span><span class="stack-value">trinity_workers.last_seen, 45s heartbeat window</span></div>
+      <div class="stack-row"><span class="stack-label">Claim lock</span><span class="stack-value">trinity_tasks.claimed_by (atomic UPDATE)</span></div>
+      <div class="stack-row"><span class="stack-label">Sync</span><span class="stack-value">sync_mdc_to_vm.ps1 — scp .mdc → rebuild CLAUDE.md</span></div>
+      <div class="stack-row"><span class="stack-label">Platform</span><span class="stack-value">Oracle Cloud Ampere A1 (4 OCPU, 24 GB RAM) — 80.225.205.232</span></div>
+      <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">Claude Pro subscription (Neo's existing) + $0 VM (Always Free)</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p><a href="../index.html" style="color:var(--matrix-green);text-decoration:none">← Back to The Matrix</a> &nbsp;·&nbsp; <a href="trinity.html" style="color:#ff6b6b;text-decoration:none">🔺 See Trinity (laptop)</a></p>
+      <p class="footer-small">TRINITY-CLI — The VM sibling that never sleeps</p>
+    </div>
+  </footer>
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>
