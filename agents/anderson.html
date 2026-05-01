@@ -109,6 +109,89 @@
     </svg>
   </div>
 
+  <!-- SECTION 1b: Trinity-CLI Failure Detection (NEW) -->
+  <div class="diagram-wrap">
+    <h2 class="section-title">A Real Alert — Trinity-CLI Edition</h2>
+    <p class="section-desc">Trinity-CLI task fails or hangs — Anderson catches it within 5 min and alerts Neo</p>
+
+    <svg class="d-svg" viewBox="0 0 1100 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="apc" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#c084fc" opacity="0.8"/></marker>
+        <marker id="arc" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#ff4444" opacity="0.8"/></marker>
+        <marker id="abc" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto"><path d="M0,0 L12,4 L0,8" fill="#58a6ff" opacity="0.8"/></marker>
+        <filter id="glc"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+
+      <!-- Step 1: Neo sends @trinity-cli message -->
+      <g transform="translate(20, 50)">
+        <rect width="170" height="80" rx="10" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="85" y="24" class="svg-label" fill="#00ff41" font-size="16" text-anchor="middle">📱</text>
+        <text x="85" y="44" class="svg-title" fill="#00ff41" font-size="12" text-anchor="middle">NEO (WhatsApp)</text>
+        <text x="85" y="62" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">@trinity-cli loop test</text>
+      </g>
+
+      <!-- Arrow: Neo → CLI runner -->
+      <line x1="200" y1="90" x2="290" y2="90" stroke="#00ff41" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#apc)"/>
+
+      <!-- Step 2: trinity_cli_runner -->
+      <g transform="translate(300, 50)">
+        <rect width="200" height="80" rx="10" fill="#0a1628" stroke="#fb923c" stroke-width="2"/>
+        <text x="100" y="22" class="svg-title" fill="#fb923c" font-size="12" text-anchor="middle">🔻 TRINITY-CLI</text>
+        <text x="100" y="42" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">claude -p "..." (Opus 4.7)</text>
+        <text x="100" y="62" class="svg-label" fill="#ff4444" font-size="11" text-anchor="middle">⚠️ multi-turn loop impossible</text>
+      </g>
+
+      <!-- Arrow: runner → DB (status=failed) -->
+      <line x1="400" y1="140" x2="400" y2="200" stroke="#ff4444" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#arc)"/>
+      <text x="500" y="175" class="svg-label" fill="#ff4444" font-size="11" text-anchor="middle">writes status='failed'</text>
+
+      <!-- Step 3: trinity_tasks DB -->
+      <g transform="translate(280, 210)">
+        <rect width="240" height="60" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
+        <text x="120" y="22" class="svg-title" fill="#58a6ff" font-size="12" text-anchor="middle">🗄️ trinity_tasks (SQLite)</text>
+        <text x="120" y="44" class="svg-label" fill="#ff4444" font-size="11" text-anchor="middle">#391ea62a → status='failed'</text>
+      </g>
+
+      <!-- Arrow: DB ← Anderson reads -->
+      <line x1="540" y1="240" x2="650" y2="240" stroke="#58a6ff" stroke-width="2" stroke-dasharray="8,4" class="anim-dash" marker-end="url(#abc)"/>
+      <text x="595" y="232" class="svg-label" fill="#58a6ff" font-size="11" text-anchor="middle">reads</text>
+
+      <!-- Step 4: Anderson -->
+      <g transform="translate(660, 175)">
+        <rect width="200" height="130" rx="10" fill="#0a1628" stroke="#c084fc" stroke-width="2.5" class="anim-sun"/>
+        <text x="100" y="28" class="svg-label" fill="#c084fc" font-size="20" text-anchor="middle">🕵️</text>
+        <text x="100" y="52" class="svg-title" fill="#c084fc" font-size="13" text-anchor="middle" filter="url(#glc)">ANDERSON</text>
+        <text x="100" y="72" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">health.py — every 5 min</text>
+        <text x="100" y="92" class="svg-label" fill="#c084fc" font-size="10" text-anchor="middle">check_trinity_cli_</text>
+        <text x="100" y="106" class="svg-label" fill="#c084fc" font-size="10" text-anchor="middle">failed_tasks()</text>
+        <text x="100" y="124" class="svg-label" fill="#ff4444" font-size="11" text-anchor="middle">🚨 1 failed + 1 stale</text>
+      </g>
+
+      <!-- Arrow: Anderson → WhatsApp Alert -->
+      <line x1="870" y1="240" x2="950" y2="240" stroke="#ff4444" stroke-width="2.5" stroke-dasharray="10,5" class="anim-dash" marker-end="url(#arc)"/>
+
+      <!-- Step 5: WhatsApp alert -->
+      <g transform="translate(900, 175)">
+        <rect width="190" height="130" rx="10" fill="#0a1628" stroke="#ff4444" stroke-width="2"/>
+        <text x="95" y="22" class="svg-title" fill="#ff4444" font-size="11" text-anchor="middle">📱 WHATSAPP ALERT</text>
+        <text x="95" y="48" class="svg-label" fill="#ff4444" font-size="11" text-anchor="middle">🚨 [Anderson]</text>
+        <text x="95" y="66" class="svg-label" fill="#ff4444" font-size="10" text-anchor="middle">Trinity-CLI failed task</text>
+        <text x="95" y="82" class="svg-label" fill="#8b949e" font-size="10" text-anchor="middle">#391ea62a</text>
+        <text x="95" y="100" class="svg-label" fill="#fb923c" font-size="10" text-anchor="middle">+ 1 stale claim &gt; 5 min</text>
+        <text x="95" y="118" class="svg-label" fill="#00ff41" font-size="10" text-anchor="middle">→ Neo investigates</text>
+      </g>
+
+      <!-- Detection types row -->
+      <g transform="translate(70, 350)">
+        <text x="0" y="0" class="svg-title" fill="#c084fc" font-size="12">DETECTION TYPES:</text>
+        <text x="170" y="0" class="svg-label" fill="#ff4444" font-size="11">❌ status='failed' (last 24h)</text>
+        <text x="430" y="0" class="svg-label" fill="#fb923c" font-size="11">⏰ status='claimed' &amp; claimed_at &gt; 5 min ago (stale/hung)</text>
+        <text x="170" y="22" class="svg-label" fill="#8b949e" font-size="10">runner crashed / Opus errored</text>
+        <text x="430" y="22" class="svg-label" fill="#8b949e" font-size="10">runner picked it up but never marked done — likely hung</text>
+      </g>
+    </svg>
+  </div>
+
   <!-- SECTION 2: Internals -->
   <div class="diagram-wrap">
     <h2 class="section-title">Everything Anderson Monitors</h2>
@@ -145,10 +228,11 @@
       <circle cx="900" cy="160" r="115" fill="#0a1628" stroke="#ffd740" stroke-width="2.5" stroke-opacity="0.5"/>
       <text x="900" y="85" class="svg-title" fill="#ffd740" font-size="20" text-anchor="middle" letter-spacing="2">SERVICES</text>
       <text x="900" y="115" class="svg-label" fill="#8b949e" font-size="14" text-anchor="middle">systemd watchdog</text>
-      <text x="900" y="148" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">🏛️ zion.service</text>
-      <text x="900" y="172" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">📡 whatsapp-bridge</text>
-      <text x="900" y="196" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">🔺 trinity-ws.service</text>
-      <text x="900" y="220" class="svg-label" fill="#ffd740" font-size="16" text-anchor="middle">📅 zion-calendar</text>
+      <text x="900" y="142" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">🏛️ zion.service</text>
+      <text x="900" y="164" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">📡 whatsapp-bridge</text>
+      <text x="900" y="186" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">🔺 trinity-ws.service</text>
+      <text x="900" y="208" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">📅 zion-calendar</text>
+      <text x="900" y="232" class="svg-label" fill="#ffd740" font-size="15" text-anchor="middle">🔻 trinity-cli tasks</text>
 
       <!-- 3. ACTIONS (right) -->
       <circle cx="900" cy="420" r="105" fill="#0a1628" stroke="#00ff41" stroke-width="2.5" stroke-opacity="0.5"/>
@@ -192,8 +276,9 @@
     <div>
       <div class="stack-row"><span class="stack-label">Runtime</span><span class="stack-value">Python 3 — cron triggered</span></div>
       <div class="stack-row"><span class="stack-label">Schedule</span><span class="stack-value">Every 5 minutes (cron)</span></div>
-      <div class="stack-row"><span class="stack-label">Checks</span><span class="stack-value">CPU, RAM, disk, systemd services, TCP ports</span></div>
+      <div class="stack-row"><span class="stack-label">Checks</span><span class="stack-value">CPU, RAM, disk, systemd services, TCP ports, Trinity-CLI failed/stale tasks</span></div>
       <div class="stack-row"><span class="stack-label">Actions</span><span class="stack-value">Auto-restart, WhatsApp alerts, log to SQLite</span></div>
+      <div class="stack-row"><span class="stack-label">CLI Watcher</span><span class="stack-value">check_trinity_cli_failed_tasks() — detects status='failed' (24h) + stale 'claimed' (&gt;5 min)</span></div>
       <div class="stack-row"><span class="stack-label">Database</span><span class="stack-value">health_history.db (incident history)</span></div>
       <div class="stack-row"><span class="stack-label">Key File</span><span class="stack-value">AgentAnderson/health.py</span></div>
       <div class="stack-row"><span class="stack-label">Cost</span><span class="stack-value">$0 — cron + Python + systemd</span></div>
