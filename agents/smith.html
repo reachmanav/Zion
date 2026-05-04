@@ -10,14 +10,20 @@
     .detail-page { position: relative; z-index: 1; }
     .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
     .d-hero-icon { font-size: 3.5rem; }
-    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #58a6ff; letter-spacing: 5px; text-shadow: 0 0 20px rgba(88,166,255,0.4); }
-    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-gold); margin-top: 0.5rem; }
+    .d-hero-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: #58a6ff; letter-spacing: 5px; text-shadow: 0 0 22px rgba(88,166,255,0.45); }
+    .d-hero-sub { font-family: var(--font-mono); font-size: 1rem; color: #58a6ff; margin-top: 0.5rem; opacity:0.95; }
     .d-hero-desc { font-size: 1rem; color: var(--text-dim); max-width: 750px; margin: 1rem auto 0; line-height: 1.8; }
     .diagram-wrap { padding: 3rem 1rem; text-align: center; overflow-x: auto; }
     .diagram-wrap .section-desc { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1.5rem; }
     .d-svg { width: 100%; max-width: 1100px; height: auto; margin: 0 auto; display: block; }
     .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
     .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; }
+
+    .clickable-node { cursor: zoom-in; transition: filter 0.2s ease; }
+    .clickable-node:hover { filter: drop-shadow(0 0 18px rgba(88,166,255,0.55)); }
+    .click-pulse { animation: pulse-ring 2s ease-in-out infinite; }
+    @keyframes pulse-ring { 0%,100% { stroke-opacity: 0.45; } 50% { stroke-opacity: 0.95; } }
+
     @keyframes clone { 0%,100% { opacity: 1; transform: translateY(0); } 50% { opacity: 0.7; transform: translateY(-3px); } }
     .anim-clone-1 { animation: clone 2.5s ease-in-out infinite; animation-delay: 0s; }
     .anim-clone-2 { animation: clone 2.5s ease-in-out infinite; animation-delay: 0.6s; }
@@ -25,6 +31,37 @@
     .anim-clone-4 { animation: clone 2.5s ease-in-out infinite; animation-delay: 1.8s; }
     @keyframes dash-flow { to { stroke-dashoffset: -20; } }
     .anim-dash { animation: dash-flow 1s linear infinite; }
+
+    .smith-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); z-index: 999; }
+    .smith-backdrop.show { display: block; }
+    .smith-overlay {
+      display: none; position: fixed; top: 5vh; left: 20px;
+      z-index: 1000; background: #0a1628; border: 3px solid #58a6ff; border-radius: 24px;
+      padding: 1.8rem 1.4rem; box-shadow: 0 0 80px rgba(88,166,255,0.35), 0 0 200px rgba(0,0,0,0.85);
+      max-height: 88vh; overflow-y: auto; width: 420px;
+      scrollbar-width: thin; scrollbar-color: #58a6ff #0a1628;
+    }
+    .smith-overlay.show { display: block; animation: zoomIn 0.35s ease forwards; }
+    @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+    .smith-overlay .close-btn { position: absolute; top: 10px; right: 16px; color: #ff6b6b; font-size: 1.5rem; cursor: pointer; font-family: var(--font-display); z-index: 1001; }
+    .smith-overlay .ov-title { color: #58a6ff; font-family: var(--font-display); font-size: 1.1rem; text-align: center; letter-spacing: 2px; margin-bottom: 1rem; }
+    .smith-overlay .ov-sub { color: #ffd740; font-family: var(--font-mono); font-size: 0.78rem; text-align: center; margin-bottom: 1.2rem; opacity: 0.85; }
+    .smith-overlay .msg { padding: 0.85rem 1rem; border-radius: 12px; margin-bottom: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.6; border: 1px solid rgba(255,255,255,0.06); }
+    .smith-overlay .msg-user { background: rgba(0,255,65,0.05); border-color: rgba(0,255,65,0.25); }
+    .smith-overlay .msg-user .who { color: #00ff41; font-weight: 700; font-size: 0.72rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .smith-overlay .msg-user .text { color: #c9d1d9; }
+    .smith-overlay .msg-trinity { background: rgba(255,107,107,0.05); border-color: rgba(255,107,107,0.3); }
+    .smith-overlay .msg-trinity .who { color: #ff6b6b; font-weight: 700; font-size: 0.72rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .smith-overlay .msg-trinity .text { color: #ffb3b3; }
+    .smith-overlay .msg-smith { background: rgba(88,166,255,0.06); border-color: rgba(88,166,255,0.3); }
+    .smith-overlay .msg-smith .who { color: #58a6ff; font-weight: 700; font-size: 0.72rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .smith-overlay .msg-smith .text { color: #b3d9ff; }
+    .smith-overlay .msg-merged { background: rgba(0,255,65,0.07); border-color: rgba(0,255,65,0.35); }
+    .smith-overlay .msg-merged .who { color: #00ff41; font-weight: 700; font-size: 0.72rem; letter-spacing: 1px; margin-bottom: 0.4rem; }
+    .smith-overlay .msg-merged .text { color: #b6f7c1; white-space: pre-wrap; }
+    .smith-overlay .ov-foot { color: #8b949e; font-size: 0.72rem; text-align: center; margin-top: 1rem; padding-top: 0.8rem; border-top: 1px dashed rgba(88,166,255,0.2); font-family: var(--font-mono); }
+    .smith-overlay .ov-rule { color: #ffd740; font-family: var(--font-mono); font-size: 0.72rem; padding: 0.5rem 0.8rem; background: rgba(255,215,64,0.05); border: 1px solid rgba(255,215,64,0.15); border-radius: 8px; margin-bottom: 0.7rem; }
+
     .examples-section { padding: 2rem 1.5rem; max-width: 1100px; margin: 0 auto; }
     .examples-section h2 { font-family: var(--font-display); font-size: 1.6rem; color: #58a6ff; letter-spacing: 3px; margin-bottom: 1.5rem; text-align: center; }
     .ex-grid { display: grid; grid-template-columns: 1fr; gap: 0.7rem; }
@@ -57,35 +94,37 @@
     <div class="d-hero-icon">🕴️</div>
     <div class="d-hero-title">SMITH</div>
     <div class="d-hero-sub">The Replicator — One brain becomes many. Parallel sub-agents for one task.</div>
-    <p class="d-hero-desc">Trinity (or Trinity-CLI) gets a big task. Instead of doing it sequentially, Trinity spawns multiple Smith sub-agents in parallel — each does one piece. Results merge back. What took 2 minutes now takes 30 seconds. Just like Smith cloning himself in The Matrix — but fighting bigger problems, not Neo.</p>
+    <p class="d-hero-desc">Trinity (or Trinity-CLI) gets a big task. Instead of doing it sequentially, it spawns multiple Smith sub-agents in parallel — each does one piece. Results merge back. What took 2 minutes now takes 30 seconds. Click any node below to see a real WhatsApp scenario at that step.</p>
   </div>
 
   <div class="diagram-wrap">
-    <p class="section-desc">// HOW SMITH WORKS — Trinity splits a task, Smiths run in parallel, results merge //</p>
+    <h2 class="section-title">A Real Conversation</h2>
+    <p class="section-desc">// click any node — see the real-life parallel scenario at that checkpoint //</p>
     <svg class="d-svg" viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <marker id="arr-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-          <path d="M0,0 L0,6 L9,3 z" fill="#58a6ff"/>
-        </marker>
-        <marker id="arr-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-          <path d="M0,0 L0,6 L9,3 z" fill="#00ff41"/>
-        </marker>
+        <marker id="arr-blue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#58a6ff"/></marker>
+        <marker id="arr-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#00ff41"/></marker>
       </defs>
 
-      <!-- Neo box -->
-      <rect x="40" y="200" width="180" height="80" rx="10" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
-      <text x="130" y="230" text-anchor="middle" class="svg-title" font-size="14" fill="#00ff41">NEO</text>
-      <text x="130" y="252" text-anchor="middle" class="svg-label" font-size="10" fill="#c9d1d9">"@trinity smith</text>
-      <text x="130" y="266" text-anchor="middle" class="svg-label" font-size="10" fill="#c9d1d9">[task1, task2, task3]"</text>
+      <!-- NEO -->
+      <g class="clickable-node" data-node="neo">
+        <rect x="40" y="200" width="180" height="80" rx="10" fill="#0a1628" stroke="#00ff41" stroke-width="2" class="click-pulse"/>
+        <text x="130" y="230" text-anchor="middle" class="svg-title" font-size="14" fill="#00ff41">NEO</text>
+        <text x="130" y="252" text-anchor="middle" class="svg-label" font-size="10" fill="#c9d1d9">"@trinity smith</text>
+        <text x="130" y="266" text-anchor="middle" class="svg-label" font-size="10" fill="#c9d1d9">[task1; task2; task3]"</text>
+        <text x="130" y="295" text-anchor="middle" class="svg-label" font-size="9" fill="#00ff41" opacity="0.75">🔍 click</text>
+      </g>
 
-      <!-- arrow -->
       <line x1="220" y1="240" x2="290" y2="240" stroke="#ffd740" stroke-width="2" marker-end="url(#arr-blue)"/>
 
-      <!-- Trinity boss -->
-      <rect x="290" y="200" width="170" height="80" rx="10" fill="#1a0a14" stroke="#ff6b6b" stroke-width="2.5"/>
-      <text x="375" y="222" text-anchor="middle" font-size="20">🔺</text>
-      <text x="375" y="245" text-anchor="middle" class="svg-title" font-size="12" fill="#ff6b6b">TRINITY</text>
-      <text x="375" y="262" text-anchor="middle" class="svg-label" font-size="9" fill="#c9d1d9">splits task → spawns Smiths</text>
+      <!-- TRINITY (orchestrator) -->
+      <g class="clickable-node" data-node="trinity">
+        <rect x="290" y="200" width="170" height="80" rx="10" fill="#1a0a14" stroke="#ff6b6b" stroke-width="2.5"/>
+        <text x="375" y="222" text-anchor="middle" font-size="20">🔺</text>
+        <text x="375" y="245" text-anchor="middle" class="svg-title" font-size="12" fill="#ff6b6b">TRINITY</text>
+        <text x="375" y="262" text-anchor="middle" class="svg-label" font-size="9" fill="#c9d1d9">splits → spawns Smiths</text>
+        <text x="375" y="295" text-anchor="middle" class="svg-label" font-size="9" fill="#ff6b6b" opacity="0.75">🔍 click</text>
+      </g>
 
       <!-- 4 fan-out arrows -->
       <line x1="460" y1="240" x2="600" y2="80" stroke="#58a6ff" stroke-width="2" marker-end="url(#arr-blue)" stroke-dasharray="6 4" class="anim-dash"/>
@@ -93,26 +132,29 @@
       <line x1="460" y1="240" x2="600" y2="280" stroke="#58a6ff" stroke-width="2" marker-end="url(#arr-blue)" stroke-dasharray="6 4" class="anim-dash"/>
       <line x1="460" y1="240" x2="600" y2="380" stroke="#58a6ff" stroke-width="2" marker-end="url(#arr-blue)" stroke-dasharray="6 4" class="anim-dash"/>
 
-      <!-- 4 Smiths -->
-      <g class="anim-clone-1">
+      <!-- SMITH 1 -->
+      <g class="clickable-node anim-clone-1" data-node="smith1">
         <rect x="600" y="40" width="180" height="80" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
         <text x="690" y="65" text-anchor="middle" font-size="18">🕴️</text>
         <text x="690" y="85" text-anchor="middle" class="svg-title" font-size="11" fill="#58a6ff">SMITH-1</text>
         <text x="690" y="103" text-anchor="middle" class="svg-label" font-size="9" fill="#c9d1d9">flights search</text>
       </g>
-      <g class="anim-clone-2">
+      <!-- SMITH 2 -->
+      <g class="clickable-node anim-clone-2" data-node="smith2">
         <rect x="600" y="140" width="180" height="80" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
         <text x="690" y="165" text-anchor="middle" font-size="18">🕴️</text>
         <text x="690" y="185" text-anchor="middle" class="svg-title" font-size="11" fill="#58a6ff">SMITH-2</text>
         <text x="690" y="203" text-anchor="middle" class="svg-label" font-size="9" fill="#c9d1d9">hotels search</text>
       </g>
-      <g class="anim-clone-3">
+      <!-- SMITH 3 -->
+      <g class="clickable-node anim-clone-3" data-node="smith3">
         <rect x="600" y="240" width="180" height="80" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
         <text x="690" y="265" text-anchor="middle" font-size="18">🕴️</text>
         <text x="690" y="285" text-anchor="middle" class="svg-title" font-size="11" fill="#58a6ff">SMITH-3</text>
         <text x="690" y="303" text-anchor="middle" class="svg-label" font-size="9" fill="#c9d1d9">weather forecast</text>
       </g>
-      <g class="anim-clone-4">
+      <!-- SMITH 4 -->
+      <g class="clickable-node anim-clone-4" data-node="smith4">
         <rect x="600" y="340" width="180" height="80" rx="10" fill="#0a1628" stroke="#58a6ff" stroke-width="2"/>
         <text x="690" y="365" text-anchor="middle" font-size="18">🕴️</text>
         <text x="690" y="385" text-anchor="middle" class="svg-title" font-size="11" fill="#58a6ff">SMITH-4</text>
@@ -125,12 +167,16 @@
       <line x1="780" y1="280" x2="920" y2="245" stroke="#00ff41" stroke-width="2" marker-end="url(#arr-green)" stroke-dasharray="6 4" class="anim-dash"/>
       <line x1="780" y1="380" x2="920" y2="255" stroke="#00ff41" stroke-width="2" marker-end="url(#arr-green)" stroke-dasharray="6 4" class="anim-dash"/>
 
-      <!-- Merge box -->
-      <rect x="920" y="200" width="160" height="80" rx="10" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
-      <text x="1000" y="222" text-anchor="middle" font-size="18">📦</text>
-      <text x="1000" y="245" text-anchor="middle" class="svg-title" font-size="11" fill="#00ff41">MERGED</text>
-      <text x="1000" y="262" text-anchor="middle" class="svg-label" font-size="9" fill="#c9d1d9">trip plan reply</text>
+      <!-- MERGED -->
+      <g class="clickable-node" data-node="merged">
+        <rect x="920" y="200" width="160" height="80" rx="10" fill="#0a1628" stroke="#00ff41" stroke-width="2"/>
+        <text x="1000" y="222" text-anchor="middle" font-size="18">📦</text>
+        <text x="1000" y="245" text-anchor="middle" class="svg-title" font-size="11" fill="#00ff41">MERGED</text>
+        <text x="1000" y="262" text-anchor="middle" class="svg-label" font-size="9" fill="#c9d1d9">trip plan reply</text>
+        <text x="1000" y="295" text-anchor="middle" class="svg-label" font-size="9" fill="#00ff41" opacity="0.75">🔍 click</text>
+      </g>
     </svg>
+    <p class="section-desc" style="margin-top:1rem">// 🔍 click any glowing node to read the real WhatsApp scenario //</p>
   </div>
 
   <section class="examples-section">
@@ -165,7 +211,116 @@
   </section>
 </div>
 
+<!-- Click overlays -->
+<div class="smith-backdrop" id="smith-backdrop"></div>
+<div class="smith-overlay" id="smith-overlay">
+  <span class="close-btn" id="smith-close">✕</span>
+  <div id="smith-ov-body"></div>
+</div>
+
 <script>
+const SCENARIOS = {
+  neo: {
+    title: "🟢 NEO — sender",
+    sub: "real-life: Neo asks Trinity to do a big multi-part task",
+    rule: "💡 Smith is invoked with brackets: tasks separated by semicolons. Each one becomes one parallel Smith.",
+    msgs: [
+      { type: "user", who: "Neo (WhatsApp)", text: "@trinity smith [search cheapest Delhi→Goa flights May 10; best beach hotels under 5k/night; Goa weather May 10-12; top 5 restaurants North Goa]" },
+      { type: "user", who: "Neo (alternative form)", text: "@trinity-cli smith [check zion service; check bridge service; check trinity-ws service]" }
+    ],
+    foot: "One natural-language brackets list → many sub-tasks. Neo doesn't need to think about parallelism."
+  },
+  trinity: {
+    title: "🔺 TRINITY — orchestrator",
+    sub: "real-life: Trinity reads the brackets, splits the work, fans out",
+    rule: "💡 Trinity (Opus) parses the task list, picks the best worker model per task (usually Groq for speed), spawns them all at once via asyncio.gather().",
+    msgs: [
+      { type: "user", who: "Neo", text: "@trinity smith [flights; hotels; weather; restaurants] for Goa May 10-12" },
+      { type: "trinity", who: "[Trinity] (internal log)", text: "Detected 4 sub-tasks. Spawning 4 Smiths in parallel via Groq. Estimated time: 30s." },
+      { type: "trinity", who: "[Trinity → Neo]", text: "📦 Smith swarm spawned (4 workers). Compiling your Goa plan..." }
+    ],
+    foot: "Trinity is the boss. It never does the sub-work — it delegates and merges."
+  },
+  smith1: {
+    title: "🕴️ SMITH-1 — flights worker",
+    sub: "real-life: one parallel sub-agent doing flights only",
+    rule: "💡 Each Smith is a single Groq call with a tight, scoped prompt. No cross-talk between Smiths — they don't even know each other exist.",
+    msgs: [
+      { type: "trinity", who: "Trinity → Smith-1 (prompt)", text: "Find cheapest Delhi→Goa flight on May 10, 2026. One-line summary." },
+      { type: "smith", who: "[Smith-1 reply]", text: "✈️ IndiGo 6E-783 Delhi→Goa, May 10, 06:15 AM, ₹4,820 (cheapest)" }
+    ],
+    foot: "12-second Groq call. Returns a single fact. Smith-1 dies after this."
+  },
+  smith2: {
+    title: "🕴️ SMITH-2 — hotels worker",
+    sub: "real-life: parallel sub-agent doing hotels only",
+    rule: "💡 Smith-2 runs at the SAME TIME as Smith-1, 3, 4. Doesn't wait. Doesn't depend on them.",
+    msgs: [
+      { type: "trinity", who: "Trinity → Smith-2 (prompt)", text: "Top 3 beach hotels in North Goa under ₹5000/night, May 10-12, 2026. One line each." },
+      { type: "smith", who: "[Smith-2 reply]", text: "🏨 Top 3:\n1. Banyan Soul (Anjuna) ₹3,200\n2. Coco Shambhala (Vagator) ₹4,800\n3. Bambolim Beach Resort ₹4,500" }
+    ],
+    foot: "Runs concurrently with Smith-1. Total wall time = max(Smith-1, Smith-2, ...), not sum."
+  },
+  smith3: {
+    title: "🕴️ SMITH-3 — weather worker",
+    sub: "real-life: parallel sub-agent doing weather only",
+    rule: "💡 Different sub-task type but same pattern. Could route to OpenWeather API if Trinity decides API > LLM.",
+    msgs: [
+      { type: "trinity", who: "Trinity → Smith-3 (prompt)", text: "Goa weather forecast May 10-12, 2026. Temp range + rain risk per day." },
+      { type: "smith", who: "[Smith-3 reply]", text: "🌤️ Goa May 10-12:\n• May 10: 27-32°C, 0% rain\n• May 11: 28-33°C, 10% rain (evening)\n• May 12: 27-31°C, 0% rain" }
+    ],
+    foot: "Same 12-15 second window as the other Smiths. Pure parallel."
+  },
+  smith4: {
+    title: "🕴️ SMITH-4 — restaurants worker",
+    sub: "real-life: parallel sub-agent doing restaurants only",
+    rule: "💡 If 1 Smith fails (network blip, rate limit), Trinity reports partial — the other 3 still arrive. No whole-task crash.",
+    msgs: [
+      { type: "trinity", who: "Trinity → Smith-4 (prompt)", text: "Top 5 restaurants in North Goa with great seafood. One line each, with area." },
+      { type: "smith", who: "[Smith-4 reply]", text: "🍤 Top 5:\n1. Thalassa (Vagator) — Greek + sunset\n2. Antares (Vagator) — modern Indian\n3. Pousada by the Beach (Calangute)\n4. Britto's (Baga) — beach shack classic\n5. Fisherman's Wharf (Cavelossim)" }
+    ],
+    foot: "All 4 Smiths return within 30 seconds. Trinity now has all the puzzle pieces."
+  },
+  merged: {
+    title: "📦 MERGED — final reply to Neo",
+    sub: "real-life: Trinity (Opus) stitches Smith outputs into one clean message",
+    rule: "💡 The merge step is where Opus shines — formats nicely, removes duplicates, picks the best bits, sends ONE message to Neo's WhatsApp.",
+    msgs: [
+      { type: "merged", who: "[Trinity → Neo]", text: "🌴 GOA TRIP PLAN — May 10-12\n\n✈️ FLIGHT\nIndiGo 6E-783 Delhi→Goa, May 10 06:15 AM, ₹4,820\n\n🏨 HOTEL\nBanyan Soul, Anjuna — ₹3,200/night (best value)\n\n🌤️ WEATHER\n27-33°C, mostly clear, light rain May 11 evening only\n\n🍤 EAT\n• Thalassa (Vagator) — Greek + sunset\n• Britto's (Baga) — beach shack vibes\n\n💰 Est. total: ₹14k-18k for 3 days" }
+    ],
+    foot: "What took 2 minutes sequentially → done in 30 seconds. Neo gets ONE clean message, not 4 raw dumps."
+  }
+};
+
+const overlay = document.getElementById('smith-overlay');
+const backdrop = document.getElementById('smith-backdrop');
+const body = document.getElementById('smith-ov-body');
+const close = document.getElementById('smith-close');
+
+function renderScenario(key) {
+  const s = SCENARIOS[key];
+  if (!s) return;
+  let html = `<div class="ov-title">${s.title}</div>`;
+  html += `<div class="ov-sub">${s.sub}</div>`;
+  if (s.rule) html += `<div class="ov-rule">${s.rule}</div>`;
+  s.msgs.forEach(m => {
+    html += `<div class="msg msg-${m.type}"><div class="who">${m.who}</div><div class="text">${m.text.replace(/\n/g, '<br>')}</div></div>`;
+  });
+  if (s.foot) html += `<div class="ov-foot">${s.foot}</div>`;
+  body.innerHTML = html;
+  overlay.classList.add('show');
+  backdrop.classList.add('show');
+}
+
+document.querySelectorAll('.clickable-node').forEach(n => {
+  n.addEventListener('click', () => renderScenario(n.dataset.node));
+});
+function hide() { overlay.classList.remove('show'); backdrop.classList.remove('show'); }
+close.addEventListener('click', hide);
+backdrop.addEventListener('click', hide);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+
+// matrix rain
 const c = document.getElementById('matrix-rain');
 const ctx = c.getContext('2d');
 function R() { c.width = innerWidth; c.height = innerHeight; }
