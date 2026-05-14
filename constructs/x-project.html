@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- =============================================================== -->
+  <!-- SEO & Discovery                                                  -->
+  <!-- =============================================================== -->
+  <title>X-Project · The Construct Pattern — Manav Shah</title>
+  <meta name="description" content="X-Project is the first instance of The Construct — an NDA-bound, model-agnostic AI pattern for deeply private personal projects. Two-party access, on-disk memory, swappable AI backend (Claude / OpenAI / Gemini / local), audited every call. Built by Manav Shah (reachmanav).">
+  <meta name="keywords" content="The Construct, X-Project, NDA AI, private AI, model-agnostic AI, agentic AI, Claude, OpenAI, Gemini, personal AI architecture, two-party AI, audited AI, Manav Shah, reachmanav, sealed AI construct, AI architecture pattern">
+  <meta name="author" content="Manav Shah (reachmanav)">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#64ffda">
+  <link rel="canonical" href="https://reachmanav.github.io/Zion/constructs/x-project.html">
+
+  <!-- Open Graph (WhatsApp / LinkedIn / Facebook link previews) -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="The Matrix — KeyMaker">
+  <meta property="og:title" content="X-Project · The Construct Pattern">
+  <meta property="og:description" content="A sealed-box demo of The Construct: an NDA-bound, model-agnostic AI pattern. Architecture is public — the subject stays private by design.">
+  <meta property="og:url" content="https://reachmanav.github.io/Zion/constructs/x-project.html">
+  <meta property="og:image" content="https://reachmanav.github.io/Zion/og-x-project.png">
+  <meta property="og:image:alt" content="X-Project sealed box — The Construct pattern architecture">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:author" content="Manav Shah">
+  <meta property="article:section" content="Architecture">
+  <meta property="article:tag" content="The Construct">
+  <meta property="article:tag" content="Model-Agnostic AI">
+  <meta property="article:tag" content="NDA AI">
+  <meta property="article:tag" content="Private AI">
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="X-Project · The Construct Pattern">
+  <meta name="twitter:description" content="An NDA-bound, model-agnostic AI pattern. Architecture public, subject sealed by design.">
+  <meta name="twitter:image" content="https://reachmanav.github.io/Zion/og-x-project.png">
+
+  <!-- Structured data: TechArticle + reference to Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "X-Project · The Construct Pattern",
+    "description": "An NDA-bound, model-agnostic AI construct pattern. Two-party access, on-disk memory, swappable backend, audited every call.",
+    "image": "https://reachmanav.github.io/Zion/og-x-project.png",
+    "datePublished": "2026-05-14",
+    "author": {
+      "@type": "Person",
+      "name": "Manav Shah",
+      "alternateName": "reachmanav",
+      "url": "https://reachmanav.github.io/Zion/",
+      "sameAs": ["https://github.com/reachmanav"]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "The Matrix — KeyMaker",
+      "url": "https://reachmanav.github.io/Zion/"
+    },
+    "about": [
+      "The Construct pattern",
+      "Model-agnostic AI architecture",
+      "Private AI for personal projects",
+      "NDA-bound AI systems",
+      "Two-party AI access"
+    ],
+    "keywords": "The Construct, X-Project, NDA AI, model-agnostic, private AI, Claude, OpenAI, Gemini, agentic AI"
+  }
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* ---------- Page chrome ---------- */
+    .detail-page { position: relative; z-index: 1; }
+    .d-hero { text-align: center; padding: 8rem 2rem 2rem; }
+    .d-hero-icon { font-size: 3.5rem; filter: drop-shadow(0 0 18px rgba(100,255,218,0.45)); }
+    .d-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: #64ffda;
+      letter-spacing: 8px;
+      text-shadow: 0 0 24px rgba(100,255,218,0.4);
+    }
+    .d-hero-sub {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      color: #64ffda;
+      margin-top: 0.5rem;
+      opacity: 0.85;
+      letter-spacing: 3px;
+    }
+    .d-hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 720px;
+      margin: 1.5rem auto 0;
+      line-height: 1.85;
+    }
+    .d-hero-desc strong { color: #64ffda; }
+
+    /* ---------- Sealed-box badge ---------- */
+    .sealed-badge {
+      display: inline-flex; gap: 0.6rem; align-items: center;
+      margin-top: 1.2rem; padding: 0.4rem 1rem;
+      border: 1px solid #64ffda; border-radius: 999px;
+      font-family: var(--font-mono); font-size: 0.75rem;
+      color: #64ffda; letter-spacing: 2px;
+      background: rgba(100,255,218,0.05);
+      animation: seal-pulse 3s ease-in-out infinite;
+    }
+    @keyframes seal-pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(100,255,218,0.4); }
+      50%     { box-shadow: 0 0 0 8px rgba(100,255,218,0); }
+    }
+
+    /* ---------- Section headers ---------- */
+    .section-block { padding: 4rem 2rem 1rem; max-width: 1200px; margin: 0 auto; }
+    .section-num {
+      font-family: var(--font-display);
+      font-size: 0.7rem; color: #64ffda; letter-spacing: 4px; opacity: 0.7;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: #e6edf3; font-weight: 800; letter-spacing: 3px;
+      margin: 0.3rem 0 0.4rem;
+    }
+    .section-lede {
+      font-family: var(--font-mono); font-size: 0.9rem;
+      color: var(--text-dim); max-width: 800px; line-height: 1.7;
+    }
+
+    /* ---------- SVG containers ---------- */
+    .diagram-wrap { padding: 2.5rem 1rem; text-align: center; overflow-x: auto; }
+    .d-svg { width: 100%; max-width: 1080px; height: auto; margin: 0 auto; display: block; }
+    .svg-label { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+    .svg-title { font-family: 'Orbitron', 'JetBrains Mono', monospace; letter-spacing: 2px; }
+
+    /* ---------- Pillar grid ---------- */
+    .pillars {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem; margin: 2rem auto 0; max-width: 1080px;
+    }
+    .pillar {
+      border: 1px solid rgba(100,255,218,0.25);
+      border-radius: 12px; padding: 1.2rem;
+      background: linear-gradient(180deg, rgba(100,255,218,0.04), transparent);
+    }
+    .pillar-icon { font-size: 1.6rem; }
+    .pillar-name {
+      font-family: var(--font-display); color: #64ffda;
+      font-size: 0.85rem; letter-spacing: 3px; margin-top: 0.4rem;
+    }
+    .pillar-desc {
+      font-family: var(--font-mono); font-size: 0.78rem;
+      color: var(--text-dim); margin-top: 0.4rem; line-height: 1.6;
+    }
+
+    /* ---------- Stack table ---------- */
+    .stack-section { padding: 2rem 2rem 6rem; max-width: 800px; margin: 0 auto; }
+    .stack-row { display: flex; border-bottom: 1px solid rgba(100,255,218,0.1); padding: 0.7rem 0; }
+    .stack-label {
+      font-family: var(--font-display); font-size: 0.7rem;
+      color: #64ffda; letter-spacing: 2px; min-width: 140px;
+    }
+    .stack-value { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); }
+
+    /* ---------- Footer note ---------- */
+    .footer-note {
+      text-align: center; padding: 3rem 2rem 6rem;
+      font-family: var(--font-mono); font-size: 0.78rem;
+      color: var(--text-dim); opacity: 0.8;
+      max-width: 720px; margin: 0 auto;
+    }
+    .footer-note strong { color: #64ffda; }
+
+    /* ---------- Cinematic effects ---------- */
+    .anim-dash { stroke-dasharray: 6 6; animation: dash 1.6s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -24; } }
+    .anim-glow { filter: drop-shadow(0 0 12px rgba(100,255,218,0.5)); }
+  </style>
+</head>
+<body>
+
+<canvas id="matrix-rain"></canvas>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <a href="../index.html" style="color:inherit;text-decoration:none">
+      <span class="key-icon">🔑</span> THE KEYMAKER PROJECT
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="../index.html#agents">Agents</a>
+    <a href="../index.html#projects">Constructs</a>
+    <a href="../demo.html" style="color:#ff6b6b">🔴 Agent Live</a>
+  </div>
+</nav>
+
+<main class="detail-page">
+
+  <!-- ===================================================== HERO -->
+  <section class="d-hero">
+    <div class="d-hero-icon">🛡️🅧</div>
+    <h1 class="d-hero-title">X-PROJECT</h1>
+    <p class="d-hero-sub">// THE CONSTRUCT — INSTANCE Ⅰ //</p>
+    <p class="d-hero-desc">
+      An NDA-bound, model-agnostic AI construct for a deeply personal,
+      private project. <strong>What X is</strong> stays inside the box —
+      and that is the entire point of this page. What you can see is the
+      <strong>shape of the box</strong>: how memory is held, who can
+      reach in, how the AI is kept replaceable, and how nothing leaks.
+    </p>
+    <div class="sealed-badge">
+      <span>●</span> SEALED · CONTENTS REDACTED BY DESIGN
+    </div>
+  </section>
+
+  <!-- ===================================================== 01 · SEALED BOX -->
+  <section class="section-block">
+    <div class="section-num">01 — THE SEALED BOX</div>
+    <h2 class="section-title">YOU SEE THE SHAPE. NOT THE CONTENTS.</h2>
+    <p class="section-lede">
+      X-Project handles real, private subject matter for two authorised
+      humans. The construct is designed so even Trinity's own logs, even
+      the WhatsApp router, even the cloud VM that hosts it — none of
+      them can leak the substance. The visible parts are the agreement,
+      the architecture, and the audit trail. Everything else is encrypted
+      under operational discipline.
+    </p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 1080 460" class="d-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bxGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0f3a3a"/>
+            <stop offset="1" stop-color="#06181c"/>
+          </linearGradient>
+          <filter id="bxGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="10" stroke="#64ffda" stroke-width="0.6" opacity="0.18"/>
+          </pattern>
+        </defs>
+
+        <!-- Outer box -->
+        <rect x="270" y="60" width="540" height="340" rx="14"
+              fill="url(#bxGrad)" stroke="#64ffda" stroke-width="2" filter="url(#bxGlow)"/>
+        <rect x="270" y="60" width="540" height="340" rx="14" fill="url(#hatch)"/>
+
+        <!-- Lock icon -->
+        <g transform="translate(525,100)" class="anim-glow">
+          <path d="M0,12 L30,12 L30,38 L0,38 Z" fill="#64ffda"/>
+          <path d="M6,12 L6,4 a9,9 0 0 1 18,0 L24,12" fill="none" stroke="#64ffda" stroke-width="3"/>
+          <circle cx="15" cy="25" r="3" fill="#06181c"/>
+          <rect x="14" y="25" width="2" height="8" fill="#06181c"/>
+        </g>
+
+        <text x="540" y="180" text-anchor="middle" class="svg-title" fill="#64ffda" font-size="38">X-PROJECT</text>
+        <text x="540" y="205" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="12">SUBJECT · MEMORY · DECISIONS</text>
+        <text x="540" y="225" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11" opacity="0.6">▓▓▓▓▓▓▓▓▓ REDACTED ▓▓▓▓▓▓▓▓▓</text>
+        <text x="540" y="245" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11" opacity="0.6">▓▓▓▓ NOT SHARED PUBLICLY ▓▓▓▓</text>
+        <text x="540" y="265" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11" opacity="0.6">▓▓▓▓▓▓▓▓▓ REDACTED ▓▓▓▓▓▓▓▓▓</text>
+
+        <!-- 2 keys outside -->
+        <g transform="translate(140,210)">
+          <circle r="34" fill="#0a1628" stroke="#64ffda" stroke-width="2"/>
+          <text y="6" text-anchor="middle" font-size="28">👤</text>
+          <text y="58" text-anchor="middle" class="svg-label" fill="#64ffda" font-size="13" letter-spacing="2">KEY · A</text>
+          <text y="74" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="10">authorised</text>
+        </g>
+        <g transform="translate(940,210)">
+          <circle r="34" fill="#0a1628" stroke="#64ffda" stroke-width="2"/>
+          <text y="6" text-anchor="middle" font-size="28">👤</text>
+          <text y="58" text-anchor="middle" class="svg-label" fill="#64ffda" font-size="13" letter-spacing="2">KEY · B</text>
+          <text y="74" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="10">authorised</text>
+        </g>
+
+        <!-- Lines from keys to box -->
+        <line x1="180" y1="210" x2="270" y2="210" stroke="#64ffda" stroke-width="1.5" class="anim-dash"/>
+        <line x1="900" y1="210" x2="810" y2="210" stroke="#64ffda" stroke-width="1.5" class="anim-dash"/>
+
+        <!-- Rejected outsiders -->
+        <g transform="translate(140,380)" opacity="0.55">
+          <circle r="22" fill="#1a0d0d" stroke="#ff6b6b" stroke-width="2"/>
+          <text y="6" text-anchor="middle" font-size="18">✖</text>
+        </g>
+        <text x="180" y="385" class="svg-label" fill="#ff6b6b" font-size="11">group chats · refused</text>
+
+        <g transform="translate(940,380)" opacity="0.55">
+          <circle r="22" fill="#1a0d0d" stroke="#ff6b6b" stroke-width="2"/>
+          <text y="6" text-anchor="middle" font-size="18">✖</text>
+        </g>
+        <text x="900" y="385" class="svg-label" fill="#ff6b6b" font-size="11" text-anchor="end">other senders · refused</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===================================================== 02 · MEMORY -->
+  <section class="section-block">
+    <div class="section-num">02 — MEMORY LIVES ON DISK, NOT IN THE MODEL</div>
+    <h2 class="section-title">THE BRAIN IS A FOLDER OF MARKDOWN.</h2>
+    <p class="section-lede">
+      Most AI tools forget you between sessions. The Construct doesn't.
+      Every relevant fact about X-Project is written down in plain text
+      and read back at the start of every conversation. The AI model is
+      a temporary worker; the memory is the real product.
+    </p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 1080 360" class="d-svg" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="memGlow"><feGaussianBlur stdDeviation="4"/></filter>
+        </defs>
+
+        <!-- Disk -->
+        <g transform="translate(60,80)">
+          <rect x="0" y="0" width="380" height="200" rx="10"
+                fill="#0a1628" stroke="#64ffda" stroke-width="1.5"/>
+          <text x="190" y="28" text-anchor="middle" class="svg-title" fill="#64ffda" font-size="14">
+            DISK · /Construct/notes
+          </text>
+          <line x1="20" y1="44" x2="360" y2="44" stroke="#64ffda" opacity="0.3"/>
+
+          <text x="20" y="72" class="svg-label" fill="#e6edf3" font-size="12">📜 NDA.txt</text>
+          <text x="200" y="72" class="svg-label" fill="#8b949e" font-size="11">the agreement</text>
+
+          <text x="20" y="100" class="svg-label" fill="#e6edf3" font-size="12">🧠 history.md</text>
+          <text x="200" y="100" class="svg-label" fill="#8b949e" font-size="11">persistent memory</text>
+
+          <text x="20" y="128" class="svg-label" fill="#e6edf3" font-size="12">📑 INDEX.md</text>
+          <text x="200" y="128" class="svg-label" fill="#8b949e" font-size="11">source manifest</text>
+
+          <text x="20" y="156" class="svg-label" fill="#e6edf3" font-size="12">📂 docs/</text>
+          <text x="200" y="156" class="svg-label" fill="#8b949e" font-size="11">▓▓▓ redacted ▓▓▓</text>
+
+          <text x="20" y="184" class="svg-label" fill="#e6edf3" font-size="12">📅 plans/week-N.md</text>
+          <text x="200" y="184" class="svg-label" fill="#8b949e" font-size="11">current cycle</text>
+        </g>
+
+        <!-- Arrow -->
+        <g transform="translate(450,180)">
+          <line x1="0" y1="0" x2="120" y2="0" stroke="#64ffda" stroke-width="2" class="anim-dash"/>
+          <polygon points="120,-7 134,0 120,7" fill="#64ffda"/>
+          <text x="60" y="-12" text-anchor="middle" class="svg-label" fill="#64ffda" font-size="11">read at start of every chat</text>
+        </g>
+
+        <!-- AI -->
+        <g transform="translate(620,80)">
+          <rect x="0" y="0" width="380" height="200" rx="10"
+                fill="#0a1628" stroke="#ff79c6" stroke-width="1.5"/>
+          <text x="190" y="28" text-anchor="middle" class="svg-title" fill="#ff79c6" font-size="14">
+            AI MODEL · TEMPORARY
+          </text>
+          <line x1="20" y1="44" x2="360" y2="44" stroke="#ff79c6" opacity="0.3"/>
+
+          <text x="190" y="78" text-anchor="middle" class="svg-label" fill="#e6edf3" font-size="14">
+            "I just woke up.
+          </text>
+          <text x="190" y="100" text-anchor="middle" class="svg-label" fill="#e6edf3" font-size="14">
+            Let me read what I knew yesterday."
+          </text>
+
+          <text x="190" y="148" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11">⟶ reads disk ⟶ answers ⟶ forgets</text>
+          <text x="190" y="170" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11">tomorrow: a different model, same memory</text>
+        </g>
+
+        <text x="540" y="330" text-anchor="middle" class="svg-label" fill="#64ffda" font-size="12" opacity="0.8">
+          memory survives every model swap · the construct outlives any single vendor
+        </text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===================================================== 03 · CHANNELS -->
+  <section class="section-block">
+    <div class="section-num">03 — TWO HUMANS · FOUR DOORS · ONE BRAIN</div>
+    <h2 class="section-title">EQUAL ACCESS. PRIVATE PATHS.</h2>
+    <p class="section-lede">
+      Each authorised human has their own way in — on their own device,
+      in their own language, with their own tone of reply. Nothing
+      routes through shared infrastructure that could see the contents.
+      The router knows the envelope; never the letter.
+    </p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 1080 420" class="d-svg" xmlns="http://www.w3.org/2000/svg">
+        <!-- 4 doors -->
+        <g transform="translate(80,80)">
+          <rect width="180" height="80" rx="10" fill="#0a1628" stroke="#64ffda" stroke-width="1.5"/>
+          <text x="90" y="34" text-anchor="middle" class="svg-title" fill="#64ffda" font-size="13">DOOR · 1</text>
+          <text x="90" y="55" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11">Person A · WhatsApp DM</text>
+        </g>
+        <g transform="translate(280,80)">
+          <rect width="180" height="80" rx="10" fill="#0a1628" stroke="#64ffda" stroke-width="1.5"/>
+          <text x="90" y="34" text-anchor="middle" class="svg-title" fill="#64ffda" font-size="13">DOOR · 2</text>
+          <text x="90" y="55" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11">Person A · Web (SSO)</text>
+        </g>
+        <g transform="translate(620,80)">
+          <rect width="180" height="80" rx="10" fill="#0a1628" stroke="#64ffda" stroke-width="1.5"/>
+          <text x="90" y="34" text-anchor="middle" class="svg-title" fill="#64ffda" font-size="13">DOOR · 3</text>
+          <text x="90" y="55" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11">Person B · WhatsApp DM</text>
+        </g>
+        <g transform="translate(820,80)">
+          <rect width="180" height="80" rx="10" fill="#0a1628" stroke="#64ffda" stroke-width="1.5"/>
+          <text x="90" y="34" text-anchor="middle" class="svg-title" fill="#64ffda" font-size="13">DOOR · 4</text>
+          <text x="90" y="55" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11">Person B · Web (SSO)</text>
+        </g>
+
+        <!-- Lines down to gate -->
+        <line x1="170" y1="160" x2="540" y2="220" stroke="#64ffda" stroke-width="1.2" class="anim-dash"/>
+        <line x1="370" y1="160" x2="540" y2="220" stroke="#64ffda" stroke-width="1.2" class="anim-dash"/>
+        <line x1="710" y1="160" x2="540" y2="220" stroke="#64ffda" stroke-width="1.2" class="anim-dash"/>
+        <line x1="910" y1="160" x2="540" y2="220" stroke="#64ffda" stroke-width="1.2" class="anim-dash"/>
+
+        <!-- NDA Gate -->
+        <g transform="translate(380,220)">
+          <rect width="320" height="80" rx="10" fill="#0f3a3a" stroke="#64ffda" stroke-width="2"/>
+          <text x="160" y="34" text-anchor="middle" class="svg-title" fill="#64ffda" font-size="14">NDA GATE · run_model.py</text>
+          <text x="160" y="55" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="11">verify identity · refuse groups · audit</text>
+          <text x="160" y="70" text-anchor="middle" class="svg-label" fill="#8b949e" font-size="10" opacity="0.7">defense in depth · code + prompt rules</text>
+        </g>
+
+        <!-- Down to AI -->
+        <line x1="540" y1="300" x2="540" y2="340" stroke="#64ffda" stroke-width="2" class="anim-dash"/>
+        <polygon points="533,340 547,340 540,354" fill="#64ffda"/>
+
+        <g transform="translate(440,360)">
+          <rect width="200" height="40" rx="8" fill="#0a1628" stroke="#ff79c6" stroke-width="1.5"/>
+          <text x="100" y="26" text-anchor="middle" class="svg-title" fill="#ff79c6" font-size="13">AI MODEL (swappable)</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===================================================== 04 · MODEL AGNOSTIC -->
+  <section class="section-block">
+    <div class="section-num">04 — MODEL-AGNOSTIC BY DESIGN</div>
+    <h2 class="section-title">CLAUDE TODAY. SOMETHING ELSE TOMORROW. SAME CONSTRUCT.</h2>
+    <p class="section-lede">
+      The Construct does not marry one AI vendor. Today the brain is
+      Claude. Tomorrow it can be OpenAI's GPT, Google's Gemini, or a
+      local model running offline. One environment variable swap — and
+      the memory, the NDA, the channels, the audit log all carry forward
+      unchanged. Vendor lock-in is for products, not for personal
+      infrastructure.
+    </p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🧠</div>
+        <div class="pillar-name">CLAUDE · TODAY</div>
+        <div class="pillar-desc">Anthropic API · no training on input · default backend.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🤖</div>
+        <div class="pillar-name">OPENAI · READY</div>
+        <div class="pillar-desc">GPT-class · API-only · opt-out from training. One env var.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">✨</div>
+        <div class="pillar-name">GEMINI · READY</div>
+        <div class="pillar-desc">Google API · no consumer-app routing · enterprise terms.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🪐</div>
+        <div class="pillar-name">LOCAL · OFFLINE</div>
+        <div class="pillar-desc">Ollama / llama.cpp · zero vendor exposure when needed.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== 05 · AUDIT -->
+  <section class="section-block">
+    <div class="section-num">05 — EVERY CALL IS AUDITED, NEVER REPLAYED</div>
+    <h2 class="section-title">TRUST, BUT TRACE.</h2>
+    <p class="section-lede">
+      Each Construct invocation writes one signed JSON line to a local
+      audit log: <em>who asked, from where, which model, when, was it
+      allowed</em>. The questions and answers themselves stay encrypted
+      under operational discipline; the audit trail proves what
+      happened without exposing what was said.
+    </p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 1080 220" class="d-svg" xmlns="http://www.w3.org/2000/svg">
+        <rect x="60" y="40" width="960" height="140" rx="10" fill="#0a1628" stroke="#64ffda" stroke-width="1.2"/>
+        <text x="90" y="74" class="svg-label" fill="#64ffda" font-size="12">[audit.log]</text>
+        <text x="90" y="100" class="svg-label" fill="#e6edf3" font-size="12">
+          {"ts":"2026-05-14T07:11Z","asker":"Person A","via":"WhatsApp DM","event":"invoked","model":"claude","ok":true}
+        </text>
+        <text x="90" y="124" class="svg-label" fill="#e6edf3" font-size="12">
+          {"ts":"2026-05-14T07:18Z","asker":"unknown","via":"group chat","event":"refused","reason":"NDA: DM-only"}
+        </text>
+        <text x="90" y="148" class="svg-label" fill="#e6edf3" font-size="12">
+          {"ts":"2026-05-14T08:02Z","asker":"Person B","via":"Web SSO","event":"invoked","model":"claude","ok":true}
+        </text>
+        <text x="90" y="172" class="svg-label" fill="#8b949e" font-size="11" opacity="0.7">
+          content of questions/answers: ▓▓▓ never logged ▓▓▓ stays inside the NDA folder
+        </text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===================================================== 06 · STACK -->
+  <section class="section-block">
+    <div class="section-num">06 — THE STACK (NO SUBJECT DETAILS)</div>
+    <h2 class="section-title">WHAT THE CONSTRUCT IS MADE OF.</h2>
+    <div class="stack-section">
+      <div class="stack-row"><span class="stack-label">PATTERN</span><span class="stack-value">NDA-bound, two-party, multi-channel, model-agnostic, audited</span></div>
+      <div class="stack-row"><span class="stack-label">MEMORY</span><span class="stack-value">Plain markdown on disk · gitignored · portable across hosts</span></div>
+      <div class="stack-row"><span class="stack-label">INGRESS</span><span class="stack-value">WhatsApp DM (each person) · Web w/ Google SSO (each person)</span></div>
+      <div class="stack-row"><span class="stack-label">GATE</span><span class="stack-value">run_model.py — identity check + group-chat refusal + audit</span></div>
+      <div class="stack-row"><span class="stack-label">AI BACKEND</span><span class="stack-value">Claude · OpenAI · Gemini · Ollama — selected by env var, swappable</span></div>
+      <div class="stack-row"><span class="stack-label">HOSTING</span><span class="stack-value">Personal cloud VM · cron-driven sync · no third-party SaaS</span></div>
+      <div class="stack-row"><span class="stack-label">DATA SOURCE</span><span class="stack-value">Private Google Drive folder · service-account scoped to one folder</span></div>
+      <div class="stack-row"><span class="stack-label">AUDIT</span><span class="stack-value">JSON-lines log · sender/chat/model/result · zero content leakage</span></div>
+      <div class="stack-row"><span class="stack-label">NDA</span><span class="stack-value">Signed agreement file · enforced in code AND in prompt · defense in depth</span></div>
+      <div class="stack-row"><span class="stack-label">VISIBILITY</span><span class="stack-value">Architecture: public. Subject: never.</span></div>
+    </div>
+  </section>
+
+  <!-- ===================================================== FOOTER -->
+  <section class="footer-note">
+    <p>
+      <strong>X-PROJECT</strong> is the first instance of a reusable pattern called
+      <strong>The Construct</strong>. The pattern is the product. The subject of
+      any given Construct is its owner's private matter — and the whole point of
+      the pattern is that it stays that way.
+    </p>
+    <p style="margin-top:1rem; opacity:0.7;">
+      Want the same shape for your own private project? The pattern is open.
+      The subject is yours.
+    </p>
+  </section>
+
+</main>
+
+<script>
+// Matrix-rain background (same minimal style as other pages)
+const canvas = document.getElementById('matrix-rain');
+const ctx = canvas.getContext('2d');
+function fit() { canvas.width = innerWidth; canvas.height = innerHeight; }
+fit(); addEventListener('resize', fit);
+const cols = () => Math.floor(canvas.width / 18);
+let drops = new Array(cols()).fill(1);
+const chars = 'アァカサタナハマヤラワABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+function rain() {
+  ctx.fillStyle = 'rgba(6, 24, 28, 0.07)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#64ffda';
+  ctx.font = '14px JetBrains Mono';
+  for (let i = 0; i < drops.length; i++) {
+    const c = chars[Math.floor(Math.random() * chars.length)];
+    ctx.fillText(c, i * 18, drops[i] * 18);
+    if (drops[i] * 18 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(rain, 60);
+</script>
+
+</body>
+</html>

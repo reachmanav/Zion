@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://reachmanav.github.io/Zion/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- The Construct showcase (public-safe) -->
+  <url>
+    <loc>https://reachmanav.github.io/Zion/constructs/x-project.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Top-level views -->
+  <url><loc>https://reachmanav.github.io/Zion/orchestration.html</loc><priority>0.8</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/circularloop.html</loc><priority>0.7</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/demo.html</loc><priority>0.7</priority></url>
+
+  <!-- Agents (public architecture, no personal data) -->
+  <url><loc>https://reachmanav.github.io/Zion/agents/trinity.html</loc><priority>0.8</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/agents/trinity-cli.html</loc><priority>0.8</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/agents/zion.html</loc><priority>0.8</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/agents/anderson.html</loc><priority>0.7</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/agents/lobo.html</loc><priority>0.7</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/agents/smith.html</loc><priority>0.7</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/agents/nemo.html</loc><priority>0.7</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/agents/cortex.html</loc><priority>0.7</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/agents/bridge.html</loc><priority>0.7</priority></url>
+
+  <!-- Constructs (public-safe ones only) -->
+  <url><loc>https://reachmanav.github.io/Zion/constructs/calendar.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/contacts.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/devops.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/news.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/stocks.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/strava.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/trivia.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/weather.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/word.html</loc><priority>0.6</priority></url>
+  <url><loc>https://reachmanav.github.io/Zion/constructs/dad.html</loc><priority>0.6</priority></url>
+
+  <!--
+    DELIBERATELY EXCLUDED from sitemap (privacy / NDA):
+      - constructs/med.html        (mentions Puja / medical)
+      - constructs/fitbit.html     (mentions Puja by name)
+      - constructs/vacation.html   (mentions Puja by name)
+      - constructs/theater.html    (mentions Puja by name)
+      - agents/morpheus.html       (mentions Puja by name)
+    These pages will still exist on the site, but Google is NOT being
+    invited to index them until they are scrubbed.
+  -->
+
+</urlset>

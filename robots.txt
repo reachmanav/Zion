@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap location (helps Google find every page)
+Sitemap: https://reachmanav.github.io/Zion/sitemap.xml
